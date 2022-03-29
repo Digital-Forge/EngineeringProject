@@ -7,8 +7,6 @@ namespace XYZEngineeringProject.Infrastructure
     public class Context : IdentityDbContext
     {
         public DbSet<AppUser> AppUsers { get; set; }
-
-
         
         public Context(DbContextOptions options) : base(options)
         {

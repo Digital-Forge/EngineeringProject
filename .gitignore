@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/XYZEngineeringProject/XYZEngineeringProject.Test/Properties/launchSettings.json
+/SSMS-Setup-ENU.exe
+/SQL2019-SSEI-Dev.exe
+/SQL2019-SSEI-Expr.exe

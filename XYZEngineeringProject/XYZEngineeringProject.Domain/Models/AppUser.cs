@@ -13,8 +13,8 @@ namespace XYZEngineeringProject.Domain.Models
         public int PESEL { get; set; }
         public int PositionId { get; set; }
         public Positions Position { get; set; }
-
         public IList<UsersToDepartments> UsersToDepartments { get; set; }
+        public Address Address { get; set; }
 
     }
 }

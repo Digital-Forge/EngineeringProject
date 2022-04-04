@@ -12,5 +12,6 @@ namespace XYZEngineeringProject.Domain.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public Address Address { get; set; }
+        public IList<UsersClientsGroups> UsersClientsGroups { get; set; }
     }
 }

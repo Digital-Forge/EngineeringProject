@@ -13,7 +13,7 @@ namespace XYZEngineeringProject.Domain.Models
         public string AddressPost { get; set; }
         public string AddressHome { get; set; }
         public int AddressOfAppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public AppUser User { get; set; }
 
     }
 }

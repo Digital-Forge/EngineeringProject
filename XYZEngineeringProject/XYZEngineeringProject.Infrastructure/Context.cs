@@ -21,7 +21,7 @@ namespace XYZEngineeringProject.Infrastructure
             //////////////////////////////////////// one to one
             builder.Entity<AppUser>()
                 .HasOne<Address>( u => u.Address)
-                .WithOne(ad => ad.AppUser)
+                .WithOne(ad => ad.User)
                 .HasForeignKey<Address>( ad => ad.AddressOfAppUserId);
 
             ////////////////////////////////////////  many to one 
@@ -32,6 +32,7 @@ namespace XYZEngineeringProject.Infrastructure
 
             //////////////////////////////////////// many to many
             builder.Entity<UsersToDepartments>().HasKey( utd => new { utd.AppUserId , utd.DepartmentId });
+            builder.Entity<UsersClientsGroups>().HasKey( ucg => new {ucg.AppUserId, ucg.ClientId, ucg.GroupId });
 
         }
     }

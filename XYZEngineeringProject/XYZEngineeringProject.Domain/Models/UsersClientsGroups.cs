@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class UsersToDepartments
+    public class UsersClientsGroups
     {
         public int AppUserId { get; set; }
         public AppUser User { get; set; }
-        public int DepartmentId { get; set; }
-        public Departments Departments { get; set; }
+        public int ClientId { get; set; }
+        public Clients Client { get; set; }
+        public int GroupId { get; set; }
+        public Groups Group { get; set; }
+
     }
 }

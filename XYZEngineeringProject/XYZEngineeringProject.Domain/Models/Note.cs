@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class Departments
+    public class Note
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int? IdDepartmentUp { get; set; }
+        public string Title { get; set; }
+        public NoteStatus NoteStatus { get; set; }
+        public DateTime Date { get; set; }
+        public IList<NoteToUser> NoteToUsers { get; set; }
 
-        public IList<UsersToDepartments>? UsersToDepartments { get; set; }
+
     }
 }

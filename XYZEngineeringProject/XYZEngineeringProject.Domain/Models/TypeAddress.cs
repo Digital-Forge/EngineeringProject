@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class TypeAddress
+    public enum TypeAddress
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        PostAddress, Email, Phone, Name 
     }
 }

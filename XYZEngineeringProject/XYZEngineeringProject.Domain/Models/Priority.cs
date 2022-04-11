@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class Positions
+    public enum Priority
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public IList<UsersToPositions> UsersToPositions { get; set; }
+        No, Low, Medium, High, Done
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class Positions
+    public class ClientsData
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public IList<UsersToPositions> UsersToPositions { get; set; }
+        public string Title { get; set; }
+        public string Data { get; set; }
+        public Clients? Client { get; set; }
     }
 }

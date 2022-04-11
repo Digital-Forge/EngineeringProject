@@ -9,7 +9,7 @@ namespace XYZEngineeringProject.Domain.Models
     public class ClientsAdresses
     {
         public int Id { get; set; }
-        public TypeAddress TypeAddress { get; set; }
+        public TypeAddress? TypeAddress { get; set; }
         public string Data { get; set; }
     }
 }

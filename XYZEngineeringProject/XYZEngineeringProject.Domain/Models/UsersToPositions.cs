@@ -8,9 +8,12 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class UsersToPositions
     {
+        //relations
+
         public string UserId { get; set; }
         public AppUser User { get; set; }
-        public int PositionId { get; set; }
-        public Positions Position { get; set; }
+
+        public Guid PositionId { get; set; }
+        public Position Position { get; set; }
     }
 }

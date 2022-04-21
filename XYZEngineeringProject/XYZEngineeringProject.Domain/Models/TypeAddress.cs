@@ -8,6 +8,9 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public enum TypeAddress
     {
-        PostAddress, Email, Phone, Name 
+        PostAddress, 
+        Email, 
+        Phone, 
+        Name 
     }
 }

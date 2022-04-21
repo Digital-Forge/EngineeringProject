@@ -8,9 +8,12 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class UsersToDepartments
     {
+        //relations
+
         public string UserId { get; set; }
         public AppUser User { get; set; }
-        public int DepartmentId { get; set; }
-        public Departments Departments { get; set; }
+
+        public Guid DepartmentId { get; set; }
+        public Department Departments { get; set; }
     }
 }

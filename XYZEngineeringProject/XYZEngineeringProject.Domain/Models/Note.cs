@@ -12,7 +12,10 @@ namespace XYZEngineeringProject.Domain.Models
         public string Title { get; set; }
         public NoteStatus NoteStatus { get; set; }
         public DateTime Date { get; set; }
-        public IList<NoteToUser> NoteToUsers { get; set; }
+
+        //relations
+
+        public IList<NoteToUser>? NoteToUsers { get; set; }
 
 
     }

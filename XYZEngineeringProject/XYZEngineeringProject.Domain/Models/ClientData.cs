@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class ClientsAdresses
+    public class ClientData
     {
-        public int Id { get; set; }
-        public TypeAddress? TypeAddress { get; set; }
+        public Guid Id { get; set; }
+        public string Title { get; set; }
         public string Data { get; set; }
+
+        //relations
+
+        public Guid? ClientId { get; set; }
+        public Client? Client { get; set; }
     }
 }

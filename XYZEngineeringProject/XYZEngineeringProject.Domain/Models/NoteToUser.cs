@@ -8,9 +8,11 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class NoteToUser
     {
+        //relations
+
         public string UserId { get; set; }
         public AppUser User { get; set; }
-        public int NoteId { get; set; }
+        public Guid NoteId { get; set; }
         public Note Note { get; set; }
     }
 }

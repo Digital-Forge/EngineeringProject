@@ -8,6 +8,10 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public enum Priority
     {
-        No, Low, Medium, High, Done
+        No, 
+        Low, 
+        Medium, 
+        High, 
+        Done
     }
 }

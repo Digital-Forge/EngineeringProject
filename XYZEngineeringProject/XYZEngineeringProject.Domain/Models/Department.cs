@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class Positions
+    public class Department
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
-        public IList<UsersToPositions> UsersToPositions { get; set; }
+
+        //relations
+
+        public Guid? IdDepartmentUp { get; set; }
+
+        public ICollection<UsersToDepartments>? UsersToDepartments { get; set; }
     }
 }

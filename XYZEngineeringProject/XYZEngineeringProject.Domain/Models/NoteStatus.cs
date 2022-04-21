@@ -8,6 +8,8 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public enum NoteStatus
     {
-        Future, Now, Archive
+        Future, 
+        Now, 
+        Archive
     }
 }

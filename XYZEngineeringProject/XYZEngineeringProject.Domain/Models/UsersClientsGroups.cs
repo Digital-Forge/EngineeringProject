@@ -8,12 +8,16 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class UsersClientsGroups
     {
+        //relations
+
         public string UserId { get; set; }
         public AppUser User { get; set; }
-        public int ClientId { get; set; }
-        public Clients Client { get; set; }
-        public int? GroupId { get; set; }
-        public Groups? Group { get; set; }
+
+        public Guid ClientId { get; set; }
+        public Client Client { get; set; }
+
+        public Guid? GroupId { get; set; }
+        public Group? Group { get; set; }
 
     }
 }

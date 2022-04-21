@@ -8,11 +8,14 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class Address
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int Phone { get; set; }
         public string AddressPost { get; set; }
         public string AddressHome { get; set; }
-        public int? AddressOfAppUserId { get; set; }
+
+        //relations
+
+        public string? AppUserId { get; set; }
         public AppUser? User { get; set; }
 
     }

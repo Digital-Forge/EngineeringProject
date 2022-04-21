@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class Clients
+    public class Position
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
-        public Address? Address { get; set; }
-        public IList<UsersClientsGroups>? UsersClientsGroups { get; set; }
+
+        //relations
+
+        public IList<UsersToPositions>? UsersToPositions { get; set; }
     }
 }

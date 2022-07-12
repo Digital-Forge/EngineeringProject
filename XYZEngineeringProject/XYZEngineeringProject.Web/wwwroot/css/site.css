@@ -153,9 +153,8 @@ img.user-image {
 }
 
 .container {
-    width: calc(100vw - var(--menu-width));
-    margin: 0 0 0 57px;
-    padding: 0;
+    display:flex;
+    justify-content:center;
 }
 
 @media (max-width: 575px) {

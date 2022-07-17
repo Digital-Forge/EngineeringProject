@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.EntityUtils;
 
 namespace XYZEngineeringProject.Infrastructure
 {
@@ -16,10 +17,11 @@ namespace XYZEngineeringProject.Infrastructure
         public DbSet<Note> Note { get; set; }
         public DbSet<NoteToUser> NoteToUser { get; set; }
         public DbSet<Position> Positions { get; set; }
-        public DbSet<Domain.Models.Task> Tasks { get; set; }
-        public DbSet<UsersClientsGroups> UsersClientsGroups { get; set; }
+        public DbSet<UserTask> Tasks { get; set; }
+        public DbSet<UsersToClientsGroups> UsersClientsGroups { get; set; }
         public DbSet<UsersToDepartments> UsersToDepartments { get; set; }
         public DbSet<UsersToPositions> UsersToPositions { get; set; }
+        public DbSet<LogicCompany> LogicCompanies { get; set; }
         public Context(DbContextOptions options) : base(options)
         {
         }
@@ -40,25 +42,25 @@ namespace XYZEngineeringProject.Infrastructure
                 .HasForeignKey( u => u.UserId);
 
             //////////////////////////////////////// Tasks many to one ListOfTasks
-            builder.Entity<Domain.Models.Task>()
+            builder.Entity<Domain.Models.UserTask>()
                 .HasOne<ListOfTasks>(u => u.ListOfTasks)
                 .WithMany(u => u.Task)
                 .HasForeignKey(u => u.ListOfTasksId);
 
             //////////////////////////////////////// Tasks many to one AppUser
-            builder.Entity<Domain.Models.Task>()
+            builder.Entity<Domain.Models.UserTask>()
                 .HasOne<AppUser>( u => u.AssignerUser)
                 .WithMany( u => u.AsignerTasks)
                 .HasForeignKey( u => u.AssignerUserId);
 
             //////////////////////////////////////// Tasks many to one AppUser
-            builder.Entity<Domain.Models.Task>()
+            builder.Entity<Domain.Models.UserTask>()
                 .HasOne<AppUser>(u => u.AssigneeUser)
                 .WithMany(u => u.AsigneeTasks)
                 .HasForeignKey(u => u.AssigneeUserId);
 
             //////////////////////////////////////// UsersClientsGroups many to one Groups
-            builder.Entity<UsersClientsGroups>()
+            builder.Entity<UsersToClientsGroups>()
                 .HasOne<Group>(s => s.Group)
                 .WithMany(g => g.UsersClientsGroups)
                 .HasForeignKey(s => s.GroupId);
@@ -69,15 +71,27 @@ namespace XYZEngineeringProject.Infrastructure
                 .WithMany(g => g.ClientAdresses)
                 .HasForeignKey(s => s.ClientId);
 
+            //////////////////////////////////////// AppUser many to one LogicCompany
+            builder.Entity<AppUser>()
+                .HasOne<LogicCompany>(s => s.Company)
+                .WithMany(g => g.AppUsers)
+                .HasForeignKey(s => s.CompanyId);
+
+            //////////////////////////////////////// Client many to one LogicCompany
+            builder.Entity<Client>()
+                .HasOne<LogicCompany>(s => s.Company)
+                .WithMany(g => g.Clients)
+                .HasForeignKey(s => s.CompanyId);
+
             //////////////////////////////////////// Client many to many AppUser (UsersClientsGroups)
-            builder.Entity<UsersClientsGroups>().HasKey( x => new {x.UserId, x.ClientId });
+            builder.Entity<UsersToClientsGroups>().HasKey( x => new {x.UserId, x.ClientId });
             
-            builder.Entity<UsersClientsGroups>()
+            builder.Entity<UsersToClientsGroups>()
                 .HasOne<Client>(s => s.Client)
                 .WithMany( s => s.UsersClientsGroups)
                 .HasForeignKey( s => s.ClientId);
             
-            builder.Entity<UsersClientsGroups>()
+            builder.Entity<UsersToClientsGroups>()
                 .HasOne<AppUser>(s => s.User)
                 .WithMany(s => s.UsersClientsGroups)
                 .HasForeignKey(s => s.UserId);
@@ -121,6 +135,71 @@ namespace XYZEngineeringProject.Infrastructure
                 .WithMany( u => u.NoteToUsers)
                 .HasForeignKey( u => u.NoteId);
 
+        }
+
+        public override int SaveChanges()
+        {
+            softDataCheckChanges();
+            return base.SaveChanges();
+        }
+
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            softDataCheckChanges();
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            softDataCheckChanges();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            softDataCheckChanges();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        public int SaveChangesHard()
+        {
+            softDataCheckChanges(true);
+            return base.SaveChanges();
+        }
+
+        private void softDataCheckChanges(bool hardMode = false)
+        {
+            foreach (var entry in ChangeTracker.Entries<ISoftDataEntity>())
+            {
+                if (entry.Entity.UseStatus == UseStatusEntity.SolidConst && !hardMode)
+                {
+                    entry.State = EntityState.Unchanged;
+                }
+
+                switch (entry.State)
+                {
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    case EntityState.Deleted:
+                        entry.Entity.UpdateDate = DateTime.Now;
+                        entry.Entity.UseStatus = UseStatusEntity.Delete;
+                        entry.State = hardMode ? EntityState.Deleted : EntityState.Modified;
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.UpdateDate = DateTime.Now;
+                        entry.Entity.UseStatus = UseStatusEntity.Update;
+                        break;
+                    case EntityState.Added:
+                        entry.Entity.CreateDate = DateTime.Now;
+                        entry.Entity.UpdateDate = DateTime.Now;
+                        entry.Entity.UseStatus = UseStatusEntity.Create;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

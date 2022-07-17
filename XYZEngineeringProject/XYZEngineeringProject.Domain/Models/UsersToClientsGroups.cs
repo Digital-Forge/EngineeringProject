@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class UsersClientsGroups
+    public class UsersToClientsGroups
     {
         //relations
 

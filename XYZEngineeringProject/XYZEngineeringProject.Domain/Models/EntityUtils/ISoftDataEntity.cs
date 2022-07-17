@@ -3,28 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XYZEngineeringProject.Domain.Models.EntityUtils;
 
-namespace XYZEngineeringProject.Domain.Models
+namespace XYZEngineeringProject.Domain.Models.EntityUtils
 {
-    public class ListOfTasks : ISoftDataEntity
+    public interface ISoftDataEntity
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-
-        //relations
-
-        public string? UserId { get; set; }
-        public AppUser? User { get; set; }
-
-        public ICollection<UserTask>? Task { get; set; }
-
-        // ISoftDataEntity
+        // Data modyfication 
         public Guid CreateBy { get; set; }
         public DateTime CreateDate { get; set; }
         public Guid? UpdateBy { get; set; }
         public DateTime? UpdateDate { get; set; }
+
+        // SoftDelete
         public UseStatusEntity UseStatus { get; set; }
+
+        // Date per logic instance
         public Guid CompanyId { get; set; }
+
     }
 }

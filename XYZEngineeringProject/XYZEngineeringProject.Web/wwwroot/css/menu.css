@@ -1,0 +1,107 @@
+﻿:root { 
+    --menu-icon-height: 2.5em;
+    --menu-icon-height-hover: 3em;
+    --menu-icon-width: 2.5em;
+    --menu-icon-width-hover: 3em;      
+    --menu-icon-margin: 0.5em;    
+    --menu-icon-margin-hover: 0.25em;
+    --menu-user-image-margin: 0.25em;    
+    --menu-user-image-margin-hover: 0.125em;
+    --menu-width: 57px;
+    --menu-item-icon: rgb(197, 197, 197);
+    --menu-item-icon-focused: rgb(119, 119, 119);
+    --icon-opacity: 0.7;
+   /* --calendar-theme: rgb(233, 19, 12);
+    --clients-theme: rgb(28, 113, 192);
+    --leaves-theme: rgb(22, 100, 39);
+    --announcements-theme: rgb(23, 33, 172);
+    --documents-theme: rgb(224, 163, 31);
+    --chat-theme: rgb(136, 206, 211);
+    --settings-theme: rgb(34, 34, 34);*/
+}
+
+
+@media (max-width: 575px), (max-height: 730px) /*small screen menu display */ {
+    #menu {
+        display: none;
+        visibility: hidden;
+    }
+
+    #menu-shortcut {
+        width: 60px;
+        height: 60px;
+        display: flow;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media (min-width: 576px) and (min-height: 731px) /*large screen menu display */ {
+    #menu {
+        display: inline;
+        position: absolute;
+        height: 100vh;
+        width: 60px;
+        border-right: 1px solid gray;
+        padding: 10px 0;
+    }
+
+    #menu-shortcut {
+        display: none;
+    }
+}
+
+.nav-link.menu-item {
+    position: relative;
+    font-size: 50px;
+    height: 1em;
+    width: 1em;
+    padding: 0px 0px;
+    margin: 0.2em 0.1em;
+    /* background-color: lightcoral; */
+}
+
+.menu-item > img {
+    position: absolute;
+    height: 0.8em;
+    width: 0.8em;
+    margin: 0.1em;
+    align-content: center;
+    vertical-align: middle;
+}
+
+.menu-item > img:hover {
+    height: 0.9em;
+    width: 0.9em;
+    margin: 0.06em;
+}
+
+.menu-item > i {
+    position: absolute;
+    line-height: 0.7em;
+    font-size: 0.7em;
+    margin: 0.2em;
+    text-align: center;
+    vertical-align: middle;
+    color: var(--menu-item-icon);
+}
+
+.menu-item > i:hover {
+    line-height: 0.8em;
+    font-size: 0.8em;
+    margin: 0.1em;
+    color: var(--menu-item-icon-focused);
+}
+
+.user-details {
+    font-size: medium;
+    text-align: left;
+    position: fixed;
+    top: 15px;
+    left: 60px;
+    width: 150px;
+    height: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 3;
+}

@@ -8,17 +8,17 @@
     @*@if (SignInManager.IsSignedIn(User))
     {*@
 
-       
-        <span onmouseover="ShowUserDetails()" onmouseleave="HideUserDetails()">     
-            <img class="user-image" src="~/img/default-user-picture.png"/>
-                <div id="user-details" class="user-details shadow-center bg-white hidden">
-                    <!--TODO: stanowisko, dane, wyloguj-->
-                    Shrek<br>
-                    <i>Ogre</i>
-                    <hr>
-                    Logout
-                </div>
-        </span>
+    <img onmouseover="ShowUserDetails()" onmouseleave="HideUserDetails()" class="user-image" src="~/img/default-user-picture.png"/>
+        <div id="user-details" class="user-details shadow-center bg-white hidden">
+            <!--TODO: stanowisko, dane, wyloguj-->
+            Imię Nazwisko<br>
+            <i>Stanowisko</i>
+            <hr class="mt-1 mb-1">
+            Log out <br>
+            Option 2 <br>
+            Option 3
+        </div>
+
 
 
 

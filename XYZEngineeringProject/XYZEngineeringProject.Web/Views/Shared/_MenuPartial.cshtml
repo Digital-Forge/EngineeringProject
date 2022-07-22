@@ -3,6 +3,7 @@
 
 @{
     string[,] menuItems = {
+                { "task", "<i class=\"bi bi-stickies-fill\"></i>"} ,
                 { "calendar", "<i class=\"bi bi-calendar-week-fill\"></i>" },
                 { "clients", "<i class=\"bi bi-people-fill clients\"></i>" },
                 { "requests", "<i class=\"bi bi-door-open-fill\"></i>" },
@@ -13,28 +14,22 @@
             };
 }
 
-<div class="menu-part d-inline vertical-align-top">
+<div class="vertical-align-top">
     <partial name="_LogoPartial" />
-</div>
 
-<div class="menu-part d-inline vertical-align-middle">
     @{
         for (int i = 0; i < menuItems.GetLength(0) - 1; i++)
         {
-            <a class="nav-link menu-item" asp-area="" asp-controller="" asp-action="">
-                <abbr title=@menuItems[i,0]>                   
-                        @Html.Raw(menuItems[i,1])
-                </abbr>
+            <a class="nav-link menu-item @menuItems[i, 0]" asp-area="" asp-controller="@menuItems[i,1].ToUpper" asp-action="">         
+                @Html.Raw(menuItems[i,1])
             </a>
         }
     }    
 </div>
-<div class="menu-part d-inline vertical-align-bottom">
+<div class="vertical-align-bottom">
     @{
     <a class="nav-link menu-item" asp-area="" asp-controller="Home" asp-action="Privacy">
-         <abbr title=@menuItems[menuItems.GetLength(0)-1,0]>                   
-                @Html.Raw(menuItems[menuItems.GetLength(0)-1,1])
-        </abbr>
+        @Html.Raw(menuItems[menuItems.GetLength(0)-1,1])
     </a>
     }
 </div>

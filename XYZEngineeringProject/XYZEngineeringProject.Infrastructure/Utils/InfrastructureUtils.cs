@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.EntityUtils;
 
 namespace XYZEngineeringProject.Infrastructure.Utils
 {
@@ -15,13 +16,11 @@ namespace XYZEngineeringProject.Infrastructure.Utils
     {
         private readonly Context _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly UserManager<AppUser> _userManager;
 
-        public InfrastructureUtils(Context context, IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
+        public InfrastructureUtils(Context context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
-            _userManager = userManager;
         }
 
         public string? GetUserIdFormHttpContext()
@@ -39,6 +38,37 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             }
             return null;
         }
+        
+        public AppUser? GetUserFormHttpContext()
+        {
+            var claimsIdentity = _httpContextAccessor?.HttpContext?.User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
+            {
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
+                if (userIdClaim != null)
+                {
+                    return _context.AppUsers.Where(x => x.Id == userIdClaim.Value).FirstOrDefault();
+                }
+            }
+            return null;
+        }
+
+        public LogicCompany? GetCompany()
+        {
+            var claimsIdentity = _httpContextAccessor?.HttpContext?.User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
+            {
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    return _context.AppUsers.Where(x => x.Id == userIdClaim.Value).FirstOrDefault()?.Company;
+                }
+            }
+            return null;
+        }
     }
 }

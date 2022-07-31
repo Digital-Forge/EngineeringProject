@@ -7,6 +7,8 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 {
     public class Context : IdentityDbContext
     {
+        private readonly InfrastructureUtils _infrastructureUtils;
+
         // entry
         public DbSet<Address> UserAddresses { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
@@ -27,8 +29,9 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         //logger
         public DbSet<Log> Logs { get; set; }
 
-        public Context(DbContextOptions options) : base(options)
+        public Context(DbContextOptions options, InfrastructureUtils infrastructureUtils) : base(options)
         {
+            _infrastructureUtils = infrastructureUtils;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -174,6 +177,8 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 
         private void softDataCheckChanges(bool hardMode = false)
         {
+            var currentUser = _infrastructureUtils?.GetUserFormHttpContext();
+
             foreach (var entry in ChangeTracker.Entries<ISoftDataEntity>())
             {
                 if (entry.Entity.UseStatus == UseStatusEntity.SolidConst && !hardMode)
@@ -189,16 +194,21 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                         break;
                     case EntityState.Deleted:
                         entry.Entity.UpdateDate = DateTime.Now;
+                        entry.Entity.UpdateBy = currentUser?.UserId;
                         entry.Entity.UseStatus = UseStatusEntity.Delete;
                         entry.State = hardMode ? EntityState.Deleted : EntityState.Modified;
                         break;
                     case EntityState.Modified:
                         entry.Entity.UpdateDate = DateTime.Now;
+                        entry.Entity.UpdateBy = currentUser?.UserId;
                         entry.Entity.UseStatus = UseStatusEntity.Update;
                         break;
                     case EntityState.Added:
                         entry.Entity.CreateDate = DateTime.Now;
                         entry.Entity.UpdateDate = DateTime.Now;
+                        entry.Entity.CreateBy = currentUser?.UserId ?? Guid.Empty;
+                        entry.Entity.UpdateBy = currentUser?.UserId;
+                        entry.Entity.CompanyId = currentUser?.CompanyId ?? entry.Entity.CompanyId;
                         entry.Entity.UseStatus = UseStatusEntity.Create;
                         break;
                     default:

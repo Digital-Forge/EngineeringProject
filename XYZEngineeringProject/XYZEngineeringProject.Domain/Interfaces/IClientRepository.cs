@@ -9,11 +9,16 @@ namespace XYZEngineeringProject.Domain.Interfaces
 {
     public interface IClientRepository
     {
-        public Guid Add(Client client);
-        public bool Remove(Client client);
-        public bool Remove(Guid clientById);
-        public bool Update(Client client);
-        public Client GetClientById(Guid clientId);
-        public IQueryable<Client> GetAll();
+        Guid Add(Client client);
+        bool Remove(Client client);
+        bool Remove(Guid clientById);
+        bool __RemoveHard(Client client);
+        bool __RemoveHard(Guid clientById);
+        bool Update(Client client);
+        Client? GetClientById(Guid clientId);
+        IQueryable<Client> GetClientByIdAsQuerable(Guid clientId);
+        IQueryable<Client> GetAll();
+        IQueryable<Client>? GetClientByCompany();
+        IQueryable<Client>? GetClientByCompany(Guid companyId);
     }
 }

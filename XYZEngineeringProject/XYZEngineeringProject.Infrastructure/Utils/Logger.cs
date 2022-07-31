@@ -12,13 +12,15 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             _context = context;
         }
 
-        public void Log(Source source, string info)
+        public void Log(Source source, InfoType infoType, string info)
         {
             _context.Logs.Add(new Domain.Models.EntityUtils.Log 
             {
-                Info = info,
                 Source = source.ToString(),
-                UserId = _infrastructureUtils.GetUserIdFormHttpContext()
+                InfoType = infoType.ToString(),
+                Info = info,
+                UserId = _infrastructureUtils.GetUserIdFormHttpContext(),
+                DataStamp = DateTime.Now
             });
 
             _context.SaveChanges();
@@ -30,6 +32,13 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             Controller,
             Service,
             Repository
+        }
+
+        public enum InfoType 
+        {
+            Info,
+            Error,
+            Warning
         }
     }
 }

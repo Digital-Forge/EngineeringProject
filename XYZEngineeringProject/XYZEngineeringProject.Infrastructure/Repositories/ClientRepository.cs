@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,18 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Infrastructure.Repositories
 {
     public class ClientRepository : IClientRepository
     {
         private readonly Context _context;
-        private readonly IActionContextAccessor _actionContextAccessor;
+        private readonly InfrastructureUtils _infrastructureUtils;
 
-        public ClientRepository(Context context, IActionContextAccessor actionContextAccessor)
+        public ClientRepository(Context context, InfrastructureUtils infrastructureUtils)
         {
             _context = context;
-            _actionContextAccessor = actionContextAccessor;
+            _infrastructureUtils = infrastructureUtils;
         }
 
         public Guid Add(Client client)

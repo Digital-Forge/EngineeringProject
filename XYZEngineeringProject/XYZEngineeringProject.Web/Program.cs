@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using XYZEngineeringProject.Domain.Models;
-using XYZEngineeringProject.Infrastructure;
 using XYZEngineeringProject.Application;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +19,6 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
 
 builder.Services.AddControllersWithViews()
     .AddFluentValidation(fv => fv.DisableDataAnnotationsValidation = true);
-
-builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 // DependencyInjection
 builder.Services.AddApplication();

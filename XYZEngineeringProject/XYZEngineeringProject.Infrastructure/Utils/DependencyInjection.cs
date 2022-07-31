@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Infrastructure.Repositories;
 
-namespace XYZEngineeringProject.Infrastructure
+namespace XYZEngineeringProject.Infrastructure.Utils
 {
     public static class DependencyInjection
     {
@@ -20,7 +20,11 @@ namespace XYZEngineeringProject.Infrastructure
             services.AddTransient<IPositionRepository, PositionRepository>();
             services.AddTransient<ITaskRepository, TaskRepository>();
             //services.AddTransient<I, >();
-            
+
+            //Other
+            services.AddHttpContextAccessor();
+            services.AddTransient<InfrastructureUtils>();
+
             return services;
         }
     }

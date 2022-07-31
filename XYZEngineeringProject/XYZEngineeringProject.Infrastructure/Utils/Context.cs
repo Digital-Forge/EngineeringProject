@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using XYZEngineeringProject.Domain.Models;
 using XYZEngineeringProject.Domain.Models.EntityUtils;
 
-namespace XYZEngineeringProject.Infrastructure
+namespace XYZEngineeringProject.Infrastructure.Utils
 {
     public class Context : IdentityDbContext
     {
+        // entry
         public DbSet<Address> UserAddresses { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Client> Clients { get; set; }
@@ -22,6 +23,10 @@ namespace XYZEngineeringProject.Infrastructure
         public DbSet<UsersToDepartments> UsersToDepartments { get; set; }
         public DbSet<UsersToPositions> UsersToPositions { get; set; }
         public DbSet<LogicCompany> LogicCompanies { get; set; }
+
+        //logger
+        public DbSet<Log> Logs { get; set; }
+
         public Context(DbContextOptions options) : base(options)
         {
         }
@@ -31,109 +36,109 @@ namespace XYZEngineeringProject.Infrastructure
             base.OnModelCreating(builder);
             //////////////////////////////////////// AppUser one to one Address
             builder.Entity<AppUser>()
-                .HasOne<Address>( u => u.Address)
+                .HasOne(u => u.Address)
                 .WithOne(ad => ad.User)
-                .HasForeignKey<Address>( ad => ad.AppUserId);
+                .HasForeignKey<Address>(ad => ad.AppUserId);
 
             //////////////////////////////////////// ListOfTasks many to one AppUser
             builder.Entity<ListOfTasks>()
-                .HasOne<AppUser>(u => u.User)
-                .WithMany( u => u.ListTasks)
-                .HasForeignKey( u => u.UserId);
+                .HasOne(u => u.User)
+                .WithMany(u => u.ListTasks)
+                .HasForeignKey(u => u.UserId);
 
             //////////////////////////////////////// Tasks many to one ListOfTasks
-            builder.Entity<Domain.Models.UserTask>()
-                .HasOne<ListOfTasks>(u => u.ListOfTasks)
+            builder.Entity<UserTask>()
+                .HasOne(u => u.ListOfTasks)
                 .WithMany(u => u.Task)
                 .HasForeignKey(u => u.ListOfTasksId);
 
             //////////////////////////////////////// Tasks many to one AppUser
-            builder.Entity<Domain.Models.UserTask>()
-                .HasOne<AppUser>( u => u.AssignerUser)
-                .WithMany( u => u.AsignerTasks)
-                .HasForeignKey( u => u.AssignerUserId);
+            builder.Entity<UserTask>()
+                .HasOne(u => u.AssignerUser)
+                .WithMany(u => u.AsignerTasks)
+                .HasForeignKey(u => u.AssignerUserId);
 
             //////////////////////////////////////// Tasks many to one AppUser
-            builder.Entity<Domain.Models.UserTask>()
-                .HasOne<AppUser>(u => u.AssigneeUser)
+            builder.Entity<UserTask>()
+                .HasOne(u => u.AssigneeUser)
                 .WithMany(u => u.AsigneeTasks)
                 .HasForeignKey(u => u.AssigneeUserId);
 
             //////////////////////////////////////// UsersClientsGroups many to one Groups
             builder.Entity<UsersToClientsGroups>()
-                .HasOne<Group>(s => s.Group)
+                .HasOne(s => s.Group)
                 .WithMany(g => g.UsersClientsGroups)
                 .HasForeignKey(s => s.GroupId);
 
             //////////////////////////////////////// ClientsAddress many to one Client
             builder.Entity<ClientAdress>()
-                .HasOne<Client>(s => s.Client)
+                .HasOne(s => s.Client)
                 .WithMany(g => g.ClientAdresses)
                 .HasForeignKey(s => s.ClientId);
 
             //////////////////////////////////////// AppUser many to one LogicCompany
             builder.Entity<AppUser>()
-                .HasOne<LogicCompany>(s => s.Company)
+                .HasOne(s => s.Company)
                 .WithMany(g => g.AppUsers)
                 .HasForeignKey(s => s.CompanyId);
 
             //////////////////////////////////////// Client many to one LogicCompany
             builder.Entity<Client>()
-                .HasOne<LogicCompany>(s => s.Company)
+                .HasOne(s => s.Company)
                 .WithMany(g => g.Clients)
                 .HasForeignKey(s => s.CompanyId);
 
             //////////////////////////////////////// Client many to many AppUser (UsersClientsGroups)
-            builder.Entity<UsersToClientsGroups>().HasKey( x => new {x.UserId, x.ClientId });
-            
+            builder.Entity<UsersToClientsGroups>().HasKey(x => new { x.UserId, x.ClientId });
+
             builder.Entity<UsersToClientsGroups>()
-                .HasOne<Client>(s => s.Client)
-                .WithMany( s => s.UsersClientsGroups)
-                .HasForeignKey( s => s.ClientId);
-            
+                .HasOne(s => s.Client)
+                .WithMany(s => s.UsersClientsGroups)
+                .HasForeignKey(s => s.ClientId);
+
             builder.Entity<UsersToClientsGroups>()
-                .HasOne<AppUser>(s => s.User)
+                .HasOne(s => s.User)
                 .WithMany(s => s.UsersClientsGroups)
                 .HasForeignKey(s => s.UserId);
 
             //////////////////////////////////////// AppUser many to many Departments (UsersToDepartments)
-            builder.Entity<UsersToDepartments>().HasKey( x => new { x.UserId , x.DepartmentId });
-                        
+            builder.Entity<UsersToDepartments>().HasKey(x => new { x.UserId, x.DepartmentId });
+
             builder.Entity<UsersToDepartments>()
-                .HasOne<AppUser>(s => s.User)
+                .HasOne(s => s.User)
                 .WithMany(s => s.UsersToDepartments)
                 .HasForeignKey(s => s.UserId);
-            
+
             builder.Entity<UsersToDepartments>()
-                .HasOne<Department>( s => s.Departments)
-                .WithMany( s => s.UsersToDepartments)
-                .HasForeignKey( s=> s.DepartmentId);
+                .HasOne(s => s.Departments)
+                .WithMany(s => s.UsersToDepartments)
+                .HasForeignKey(s => s.DepartmentId);
 
             //////////////////////////////////////// AppUser many to many Positions (UsersToPositions)
-            builder.Entity<UsersToPositions>().HasKey( x => new {x.UserId, x.PositionId});
-                        
+            builder.Entity<UsersToPositions>().HasKey(x => new { x.UserId, x.PositionId });
+
             builder.Entity<UsersToPositions>()
-                .HasOne<AppUser>( u => u.User)
-                .WithMany( u => u.UsersToPositions)
-                .HasForeignKey( u => u.UserId);
-                        
+                .HasOne(u => u.User)
+                .WithMany(u => u.UsersToPositions)
+                .HasForeignKey(u => u.UserId);
+
             builder.Entity<UsersToPositions>()
-                .HasOne<Position>( u => u.Position)
-                .WithMany( u => u.UsersToPositions)
-                .HasForeignKey( u => u.PositionId);
+                .HasOne(u => u.Position)
+                .WithMany(u => u.UsersToPositions)
+                .HasForeignKey(u => u.PositionId);
 
             //////////////////////////////////////// AppUser many to many Note (NoteToUser)
-            builder.Entity<NoteToUser>().HasKey( x => new {x.UserId, x.NoteId });
-                    
+            builder.Entity<NoteToUser>().HasKey(x => new { x.UserId, x.NoteId });
+
             builder.Entity<NoteToUser>()
-                .HasOne<AppUser>( u => u.User)
-                .WithMany( u => u.NoteToUser)
-                .HasForeignKey( u => u.UserId);
-                        
+                .HasOne(u => u.User)
+                .WithMany(u => u.NoteToUser)
+                .HasForeignKey(u => u.UserId);
+
             builder.Entity<NoteToUser>()
-                .HasOne<Note>( u => u.Note)
-                .WithMany( u => u.NoteToUsers)
-                .HasForeignKey( u => u.NoteId);
+                .HasOne(u => u.Note)
+                .WithMany(u => u.NoteToUsers)
+                .HasForeignKey(u => u.NoteId);
 
         }
 

@@ -4,10 +4,193 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Infrastructure.Repositories
 {
     public class DepartmentRepository : IDepartmentRepository
     {
+        private readonly Context _context;
+        private readonly InfrastructureUtils _infrastructureUtils;
+        private readonly Logger _logger;
+
+        public DepartmentRepository(Context context, InfrastructureUtils infrastructureUtils, Logger logger)
+        {
+            _context = context;
+            _infrastructureUtils = infrastructureUtils;
+            _logger = logger;
+        }
+
+        public Guid Add(Department department)
+        {
+            _context.Departments.Add(department);
+            _context.SaveChanges();
+
+            _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add department - {department.Id}");
+            return department.Id;
+        }
+
+        public IQueryable<Department> GetAll()
+        {
+            var currentUser = _infrastructureUtils.GetUserFormHttpContext();
+
+            if (currentUser?.Company == null)
+                return _context.Departments
+                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
+            else
+                return _context.Departments
+                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                    .Where(x => x.CompanyId == currentUser.CompanyId);
+        }
+
+        public IQueryable<Department>? GetDepartmentByCompany()
+        {
+            var companyId = _infrastructureUtils.GetCompany()?.Id;
+
+            if (companyId == null) return null;
+
+            return _context.Departments
+                .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                .Where(x => x.CompanyId == companyId);
+        }
+
+        public IQueryable<Department>? GetDepartmentByCompany(Guid companyId)
+        {
+            return _context.Departments
+                 .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                 .Where(x => x.CompanyId == companyId);
+        }
+
+        public Department? GetDepartmentById(Guid departmentId)
+        {
+            return _context.Departments
+                .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                .FirstOrDefault(x => x.Id == departmentId);
+        }
+
+        public IQueryable<Department> GetDepartmentByIdAsQuerable(Guid departmentId)
+        {
+            return _context.Departments
+                .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                .Where(x => x.Id == departmentId);
+        }
+
+        public bool Remove(Department department)
+        {
+            if (department == null)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove null department");
+                return false;
+            }
+
+            try
+            {
+                _context.Departments.Remove(department);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Remove department - {department.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed remove department - {department.Id} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool Remove(Guid departmentById)
+        {
+            if (departmentById == Guid.Empty)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove department by empty guid");
+                return false;
+            }
+
+            try
+            {
+                var buff = GetDepartmentById(departmentById);
+                if (buff == null)
+                {
+                    _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove department, who don't exist or deleted");
+                    return false;
+                }
+
+                _context.Departments.Remove(buff);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Remove department - {buff?.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed remove department - {departmentById} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool Update(Department department)
+        {
+            if (department == null)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying update null department");
+                return false;
+            }
+
+            try
+            {
+                _context.Departments.Update(department);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Update department - {department.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed update department - {department.Id} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool __RemoveHard(Department department)
+        {
+            try
+            {
+                _context.Departments.Remove(department);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Hard remove department - {department.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed hard remove department - {department.Id} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool __RemoveHard(Guid departmentById)
+        {
+            try
+            {
+                var buff = _context.Departments.FirstOrDefault(x => x.Id == departmentById);
+                if (buff == null)
+                {
+                    _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying hard remove department, who don't exist");
+                    return false;
+                }
+
+                _context.Departments.Remove(buff);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Hard remove department - {buff?.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed hard remove department - {departmentById} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
     }
 }

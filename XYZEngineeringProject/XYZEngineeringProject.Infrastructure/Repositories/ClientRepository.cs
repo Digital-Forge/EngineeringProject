@@ -26,7 +26,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.Clients.Add(client);
             _context.SaveChanges();
 
-            _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add clients - {client.Id}");
+            _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add client - {client.Id}");
             return client.Id;
         }
 
@@ -125,7 +125,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed remove client - {clientById} - [{e.Message}]");
                 return false;
             }
-            return true; ;
+            return true;
         }
 
         public bool Update(Client client)
@@ -189,7 +189,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed hard remove client - {clientById} - [{e.Message}]");
                 return false;
             }
-            return true; ;
+            return true;
         }
     }
 }

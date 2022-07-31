@@ -9,7 +9,7 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class Note : ISoftDataEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public NoteStatus NoteStatus { get; set; }
         public DateTime Date { get; set; }

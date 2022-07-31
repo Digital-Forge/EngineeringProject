@@ -13,6 +13,11 @@ namespace XYZEngineeringProject.Infrastructure.Utils
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            //Other
+            services.AddHttpContextAccessor();
+            services.AddTransient<InfrastructureUtils>();
+
+            // Dependency Injection
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<IDepartmentRepository, DepartmentRepository>();
@@ -21,9 +26,6 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             services.AddTransient<ITaskRepository, TaskRepository>();
             //services.AddTransient<I, >();
 
-            //Other
-            services.AddHttpContextAccessor();
-            services.AddTransient<InfrastructureUtils>();
 
             return services;
         }

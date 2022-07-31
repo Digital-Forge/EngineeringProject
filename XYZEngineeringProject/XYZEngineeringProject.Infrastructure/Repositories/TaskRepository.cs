@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Infrastructure.Repositories
 {

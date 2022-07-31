@@ -15,7 +15,8 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         {
             //Other
             services.AddHttpContextAccessor();
-            services.AddTransient<InfrastructureUtils>();
+            services.AddTransient<Logger>();
+            //services.AddTransient<InfrastructureUtils>(); // Circular Dependency Injection Error
 
             // Dependency Injection
             services.AddTransient<IUserRepository, UserRepository>();

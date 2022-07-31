@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using XYZEngineeringProject.Domain.Models;
 using XYZEngineeringProject.Domain.Models.EntityUtils;
@@ -29,9 +30,9 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         //logger
         public DbSet<Log> Logs { get; set; }
 
-        public Context(DbContextOptions options, InfrastructureUtils infrastructureUtils) : base(options)
+        public Context(DbContextOptions options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
-            _infrastructureUtils = infrastructureUtils;
+            _infrastructureUtils = new InfrastructureUtils(this, httpContextAccessor);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

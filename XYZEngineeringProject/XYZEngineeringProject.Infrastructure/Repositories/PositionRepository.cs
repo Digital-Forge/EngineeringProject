@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,10 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         private readonly InfrastructureUtils _infrastructureUtils;
         private readonly Logger _logger;
 
-        public PositionRepository(Context context, InfrastructureUtils infrastructureUtils, Logger logger)
+        public PositionRepository(Context context, IHttpContextAccessor httpContextAccessor, Logger logger)
         {
             _context = context;
-            _infrastructureUtils = infrastructureUtils;
+            _infrastructureUtils = new InfrastructureUtils(context, httpContextAccessor);
             _logger = logger;
         }
 

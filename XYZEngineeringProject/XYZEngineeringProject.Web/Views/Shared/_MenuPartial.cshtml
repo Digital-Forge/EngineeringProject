@@ -20,7 +20,7 @@
     @{
         for (int i = 0; i < menuItems.GetLength(0) - 1; i++)
         {
-            <a class="nav-link menu-item @menuItems[i, 0]" asp-area="" asp-controller="@menuItems[i,1].ToUpper" asp-action="">         
+            <a class="nav-link menu-item @menuItems[i, 0]" asp-area="" asp-controller="@menuItems[i,1].ToUpper()" asp-action="">         
                 @Html.Raw(menuItems[i,1])
             </a>
         }

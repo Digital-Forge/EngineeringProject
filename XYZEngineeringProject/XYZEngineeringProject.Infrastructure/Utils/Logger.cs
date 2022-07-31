@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Http;
+
 namespace XYZEngineeringProject.Infrastructure.Utils
 {
     public class Logger
@@ -6,9 +8,9 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         private readonly InfrastructureUtils _infrastructureUtils;
         private readonly Context _context;
 
-        public Logger(InfrastructureUtils infrastructureUtils, Context context)
+        public Logger(IHttpContextAccessor httpContextAccessor, Context context)
         {
-            _infrastructureUtils = infrastructureUtils;
+            _infrastructureUtils = new InfrastructureUtils(context, httpContextAccessor);
             _context = context;
         }
 

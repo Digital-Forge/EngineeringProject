@@ -13,6 +13,9 @@ namespace XYZEngineeringProject.Application.ViewModels
         public DateTime Deadline { get; set; }
         public Priority Priority { get; set; }
         public string Title { get; set; }
+
+        public string AssigneeUserId { get; set; }
+
         public string Description { get; set; }
 
         public Guid? ListOfTasksId { get; set; }

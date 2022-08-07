@@ -17,7 +17,8 @@ namespace XYZEngineeringProject.Domain.Interfaces
         bool Update(UserTask task);
         UserTask? GetTaskById(Guid taskId);
         IQueryable<UserTask> GetTaskByIdAsQuerable(Guid taskId);
-        IQueryable<UserTask> GetAll();
+        IQueryable<UserTask>? GetAll();
+        IQueryable<UserTask> _GetEveryOne();
         IQueryable<UserTask>? GetTaskByCompany();
         IQueryable<UserTask>? GetTaskByCompany(Guid companyId);
     }

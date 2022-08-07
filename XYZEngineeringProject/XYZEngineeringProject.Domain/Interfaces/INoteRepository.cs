@@ -17,7 +17,8 @@ namespace XYZEngineeringProject.Domain.Interfaces
         bool Update(Note note);
         Note? GetNoteById(Guid noteId);
         IQueryable<Note> GetNoteByIdAsQuerable(Guid noteId);
-        IQueryable<Note> GetAll();
+        IQueryable<Note>? GetAll();
+        IQueryable<Note> _GetEveryOne();
         IQueryable<Note>? GetNoteByCompany();
         IQueryable<Note>? GetNoteByCompany(Guid companyId);
     }

@@ -32,13 +32,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return department.Id;
         }
 
-        public IQueryable<Department> GetAll()
+        public IQueryable<Department>? GetAll()
         {
             var currentUser = _infrastructureUtils.GetUserFormHttpContext();
 
             if (currentUser?.Company == null)
-                return _context.Departments
-                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
+                return null;
             else
                 return _context.Departments
                     .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
@@ -151,6 +150,11 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 return false;
             }
             return true;
+        }
+
+        public IQueryable<Department> _GetEveryOne()
+        {
+            return _context.Departments;
         }
 
         public bool __RemoveHard(Department department)

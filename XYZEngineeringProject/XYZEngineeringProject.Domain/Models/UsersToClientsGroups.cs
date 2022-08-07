@@ -11,13 +11,13 @@ namespace XYZEngineeringProject.Domain.Models
         //relations
 
         public string UserId { get; set; }
-        public AppUser User { get; set; }
+        public virtual AppUser User { get; set; }
 
         public Guid ClientId { get; set; }
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
 
         public Guid? GroupId { get; set; }
-        public Group? Group { get; set; }
+        public virtual Group Group { get; set; }
 
     }
 }

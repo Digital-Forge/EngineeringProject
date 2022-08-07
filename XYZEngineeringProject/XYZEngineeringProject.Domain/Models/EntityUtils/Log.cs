@@ -8,6 +8,7 @@ namespace XYZEngineeringProject.Domain.Models.EntityUtils
 {
     public class Log
     {
+        public Guid Id { get; set; }
         public string Info { get; set; }
         public string InfoType { get; set; }
         public string Source { get; set; }

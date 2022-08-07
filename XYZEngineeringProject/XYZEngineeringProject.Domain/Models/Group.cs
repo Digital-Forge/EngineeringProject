@@ -14,8 +14,7 @@ namespace XYZEngineeringProject.Domain.Models
         public string Description { get; set; }
 
         //relations
-
-        public IList<UsersToClientsGroups>? UsersClientsGroups { get; set; }
+        public virtual IList<UsersToClientsGroups> UsersToClientsGroups { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

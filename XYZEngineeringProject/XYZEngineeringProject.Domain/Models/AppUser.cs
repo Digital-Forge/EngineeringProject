@@ -11,7 +11,7 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class AppUser : IdentityUser, ISoftDataEntity
     {
-        [Key]
+        
         public Guid UserId { get; set; }
         public override string Id { get => UserId.ToString(); set => UserId = new Guid(value); }
 
@@ -21,24 +21,24 @@ namespace XYZEngineeringProject.Domain.Models
         //relations
 
         public Guid? PositionId { get; set; }
-        public Position? Position { get; set; }
+        public Position Position { get; set; }
 
         public Guid? AddressId { get; set; }
-        public Address? Address { get; set; }
+        public Address Address { get; set; }
 
-        public ICollection<UsersToDepartments>? UsersToDepartments { get; set; }
+        public virtual ICollection<UsersToDepartments> UsersToDepartments { get; set; }
 
-        public ICollection<UsersToClientsGroups>? UsersClientsGroups { get; set; }
+        public virtual ICollection<UsersToClientsGroups> UsersToClientsGroups { get; set; }
 
-        public ICollection<ListOfTasks>? ListTasks { get; set; }
+        public virtual ICollection<ListOfTasks> ListTasks { get; set; }
 
-        public ICollection<UserTask>? AsignerTasks { get; set; }
+        public virtual ICollection<UserTask> AsignerTasks { get; set; }
 
-        public ICollection<UserTask>? AsigneeTasks { get; set; }
+        public virtual ICollection<UserTask> AsigneeTasks { get; set; }
 
-        public ICollection<UsersToPositions>? UsersToPositions { get; set; }
+        public virtual ICollection<UsersToPositions> UsersToPositions { get; set; }
 
-        public ICollection<NoteToUser>? NoteToUser { get; set; }
+        public virtual ICollection<NoteToUser> NoteToUser { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

@@ -9,12 +9,11 @@ namespace XYZEngineeringProject.Domain.Models
 {
     public class Position : ISoftDataEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         //relations
-
-        public IList<UsersToPositions>? UsersToPositions { get; set; }
+        public virtual IList<UsersToPositions> UsersToPositions { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

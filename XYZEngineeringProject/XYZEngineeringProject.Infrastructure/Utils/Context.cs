@@ -22,7 +22,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         public DbSet<NoteToUser> NoteToUser { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<UserTask> Tasks { get; set; }
-        public DbSet<UsersToClientsGroups> UsersClientsGroups { get; set; }
+        public DbSet<UsersToClientsGroups> UsersToClientsGroups { get; set; }
         public DbSet<UsersToDepartments> UsersToDepartments { get; set; }
         public DbSet<UsersToPositions> UsersToPositions { get; set; }
         public DbSet<LogicCompany> LogicCompanies { get; set; }
@@ -68,12 +68,6 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 .WithMany(u => u.AsigneeTasks)
                 .HasForeignKey(u => u.AssigneeUserId);
 
-            //////////////////////////////////////// UsersClientsGroups many to one Groups
-            builder.Entity<UsersToClientsGroups>()
-                .HasOne(s => s.Group)
-                .WithMany(g => g.UsersClientsGroups)
-                .HasForeignKey(s => s.GroupId);
-
             //////////////////////////////////////// ClientsAddress many to one Client
             builder.Entity<ClientAdress>()
                 .HasOne(s => s.Client)
@@ -86,24 +80,24 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 .WithMany(g => g.AppUsers)
                 .HasForeignKey(s => s.CompanyId);
 
-            //////////////////////////////////////// Client many to one LogicCompany
-            builder.Entity<Client>()
-                .HasOne(s => s.Company)
-                .WithMany(g => g.Clients)
-                .HasForeignKey(s => s.CompanyId);
-
             //////////////////////////////////////// Client many to many AppUser (UsersClientsGroups)
             builder.Entity<UsersToClientsGroups>().HasKey(x => new { x.UserId, x.ClientId });
 
             builder.Entity<UsersToClientsGroups>()
                 .HasOne(s => s.Client)
-                .WithMany(s => s.UsersClientsGroups)
+                .WithMany(s => s.UsersToClientsGroups)
                 .HasForeignKey(s => s.ClientId);
 
             builder.Entity<UsersToClientsGroups>()
                 .HasOne(s => s.User)
-                .WithMany(s => s.UsersClientsGroups)
+                .WithMany(s => s.UsersToClientsGroups)
                 .HasForeignKey(s => s.UserId);
+
+            //////////////////////////////////////// UsersToClientsGroups many to one Groups
+            builder.Entity<UsersToClientsGroups>()
+                .HasOne(s => s.Group)
+                .WithMany(g => g.UsersToClientsGroups)
+                .HasForeignKey(s => s.GroupId);
 
             //////////////////////////////////////// AppUser many to many Departments (UsersToDepartments)
             builder.Entity<UsersToDepartments>().HasKey(x => new { x.UserId, x.DepartmentId });
@@ -173,6 +167,11 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         public int SaveChangesHard()
         {
             softDataCheckChanges(true);
+            return base.SaveChanges();
+        }
+
+        public int _ClearSaveChanges()
+        {
             return base.SaveChanges();
         }
 

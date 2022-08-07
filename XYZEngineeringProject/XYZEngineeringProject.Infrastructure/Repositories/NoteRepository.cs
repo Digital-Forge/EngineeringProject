@@ -32,13 +32,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return note.Id;
         }
 
-        public IQueryable<Note> GetAll()
+        public IQueryable<Note>? GetAll()
         {
             var currentUser = _infrastructureUtils.GetUserFormHttpContext();
 
             if (currentUser?.Company == null)
-                return _context.Note
-                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
+                return null;
             else
                 return _context.Note
                     .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
@@ -151,6 +150,11 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 return false;
             }
             return true;
+        }
+
+        public IQueryable<Note> _GetEveryOne()
+        {
+            return _context.Note;
         }
 
         public bool __RemoveHard(Note note)

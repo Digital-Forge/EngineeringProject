@@ -17,7 +17,8 @@ namespace XYZEngineeringProject.Domain.Interfaces
         bool Update(Department department);
         Department? GetDepartmentById(Guid departmentId);
         IQueryable<Department> GetDepartmentByIdAsQuerable(Guid departmentId);
-        IQueryable<Department> GetAll();
+        IQueryable<Department>? GetAll();
+        IQueryable<Department> _GetEveryOne();
         IQueryable<Department>? GetDepartmentByCompany();
         IQueryable<Department>? GetDepartmentByCompany(Guid companyId);
 

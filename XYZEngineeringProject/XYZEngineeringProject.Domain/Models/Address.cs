@@ -17,7 +17,7 @@ namespace XYZEngineeringProject.Domain.Models
         //relations
 
         public string? AppUserId { get; set; }
-        public AppUser? User { get; set; }
+        public virtual AppUser User { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

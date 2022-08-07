@@ -31,13 +31,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return client.Id;
         }
 
-        public IQueryable<Client> GetAll()
+        public IQueryable<Client>? GetAll()
         {
             var currentUser = _infrastructureUtils.GetUserFormHttpContext();
 
-            if (currentUser?.Company == null) 
-                return _context.Clients
-                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
+            if (currentUser?.Company == null)
+                return null;
             else 
                 return _context.Clients
                     .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
@@ -191,6 +190,11 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 return false;
             }
             return true;
+        }
+
+        public IQueryable<Client> _GetEveryOne()
+        {
+            return _context.Clients;
         }
     }
 }

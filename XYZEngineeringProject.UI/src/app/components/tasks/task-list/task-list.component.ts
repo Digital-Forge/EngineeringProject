@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Task } from 'src/app/models/task.model';
+import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 
 @Component({
   selector: 'app-task-list',
@@ -9,6 +10,8 @@ import { Task } from 'src/app/models/task.model';
 })
 export class TaskListComponent implements OnInit {
 
+  public Priority2LabelMapping = Priority2LabelMapping
+  public priorityTypes = Object.values(Priority).filter(value => typeof value === 'number');
   tasks: Task[] = [];
   constructor(private taskService: TaskService) { }
 

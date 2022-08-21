@@ -23,7 +23,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _logger = logger;
         }
 
-        public int Add(Position position)
+        public Guid Add(Position position)
         {
             _context.Positions.Add(position);
             _context.SaveChanges();
@@ -32,13 +32,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return position.Id;
         }
 
-        public IQueryable<Position> GetAll()
+        public IQueryable<Position>? GetAll()
         {
             var currentUser = _infrastructureUtils.GetUserFormHttpContext();
 
             if (currentUser?.Company == null)
-                return _context.Positions
-                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
+                return null;
             else
                 return _context.Positions
                     .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
@@ -63,14 +62,14 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                  .Where(x => x.CompanyId == companyId);
         }
 
-        public Position? GetPositionById(int positionId)
+        public Position? GetPositionById(Guid positionId)
         {
             return _context.Positions
                 .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
                 .FirstOrDefault(x => x.Id == positionId);
         }
 
-        public IQueryable<Position> GetPositionByIdAsQuerable(int positionId)
+        public IQueryable<Position> GetPositionByIdAsQuerable(Guid positionId)
         {
             return _context.Positions
                 .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
@@ -100,11 +99,11 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool Remove(int positionById)
+        public bool Remove(Guid positionById)
         {
-            if (positionById == 0)
+            if (positionById == Guid.Empty)
             {
-                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove position by 0 id");
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove position by empty guid id");
                 return false;
             }
 
@@ -153,6 +152,11 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
+        public IQueryable<Position> _GetEveryOne()
+        {
+            return _context.Positions;
+        }
+
         public bool __RemoveHard(Position position)
         {
             try
@@ -170,7 +174,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool __RemoveHard(int positionById)
+        public bool __RemoveHard(Guid positionById)
         {
             try
             {

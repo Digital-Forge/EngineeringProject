@@ -11,14 +11,14 @@
     {
         <img class="user-image" src="~/img/default-user-picture.png" onmouseover="showUserMenu()" onmouseout="hideUserMenu()"/>
 
-        @*<div id="user-menu invisible">
+        <div id="user-menu invisible">
             User menu
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">
                     Logout
                 </button>
             </form>
-        </div>*@
+        </div>
     }
     else
     {

@@ -16,8 +16,8 @@ namespace XYZEngineeringProject.Domain.Models
 
         //relations
 
-        public ICollection<UsersToClientsGroups>? UsersClientsGroups { get; set; }
-        public ICollection<ClientAdress>? ClientAdresses { get; set; }
+        public virtual ICollection<UsersToClientsGroups> UsersToClientsGroups { get; set; }
+        public virtual ICollection<ClientAdress> ClientAdresses { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }
@@ -26,6 +26,6 @@ namespace XYZEngineeringProject.Domain.Models
         public DateTime? UpdateDate { get; set; }
         public UseStatusEntity UseStatus { get; set; }
         public Guid CompanyId { get; set; }
-        public LogicCompany Company { get; set; } // bonus relation
+        //public LogicCompany Company { get; set; } // bonus relation
     }
 }

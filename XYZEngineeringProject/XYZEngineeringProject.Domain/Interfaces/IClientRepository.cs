@@ -17,7 +17,8 @@ namespace XYZEngineeringProject.Domain.Interfaces
         bool Update(Client client);
         Client? GetClientById(Guid clientId);
         IQueryable<Client> GetClientByIdAsQuerable(Guid clientId);
-        IQueryable<Client> GetAll();
+        IQueryable<Client>? GetAll();
+        IQueryable<Client> _GetEveryOne();
         IQueryable<Client>? GetClientByCompany();
         IQueryable<Client>? GetClientByCompany(Guid companyId);
     }

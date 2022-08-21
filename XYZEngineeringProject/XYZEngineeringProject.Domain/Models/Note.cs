@@ -15,8 +15,7 @@ namespace XYZEngineeringProject.Domain.Models
         public DateTime Date { get; set; }
 
         //relations
-
-        public IList<NoteToUser>? NoteToUsers { get; set; }
+        public virtual IList<NoteToUser> NoteToUsers { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

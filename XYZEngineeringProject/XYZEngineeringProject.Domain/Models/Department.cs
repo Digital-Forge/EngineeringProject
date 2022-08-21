@@ -16,7 +16,7 @@ namespace XYZEngineeringProject.Domain.Models
 
         public Guid? IdDepartmentUp { get; set; }
 
-        public ICollection<UsersToDepartments>? UsersToDepartments { get; set; }
+        public virtual ICollection<UsersToDepartments> UsersToDepartments { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

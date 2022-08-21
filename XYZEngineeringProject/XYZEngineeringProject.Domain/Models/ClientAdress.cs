@@ -16,7 +16,7 @@ namespace XYZEngineeringProject.Domain.Models
         //relations
 
         public Guid? ClientId { get; set; }
-        public Client? Client { get; set; }
+        public virtual Client Client { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

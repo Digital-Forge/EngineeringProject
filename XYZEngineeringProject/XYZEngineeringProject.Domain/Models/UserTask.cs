@@ -17,14 +17,14 @@ namespace XYZEngineeringProject.Domain.Models
 
         //relations
 
-        public string? AssignerUserId { get; set; }
-        public AppUser? AssignerUser { get; set; }
+        public string AssignerUserId { get; set; }
+        public virtual AppUser AssignerUser { get; set; }
 
         public string? AssigneeUserId { get; set; }
-        public AppUser? AssigneeUser { get; set; }
+        public virtual AppUser? AssigneeUser { get; set; }
 
         public Guid? ListOfTasksId { get; set; }
-        public ListOfTasks? ListOfTasks { get; set; }
+        public virtual ListOfTasks? ListOfTasks { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

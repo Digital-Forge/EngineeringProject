@@ -11,9 +11,9 @@ namespace XYZEngineeringProject.Domain.Models
         //relations
 
         public string UserId { get; set; }
-        public AppUser User { get; set; }
+        public virtual AppUser User { get; set; }
 
         public Guid PositionId { get; set; }
-        public Position Position { get; set; }
+        public virtual Position Position { get; set; }
     }
 }

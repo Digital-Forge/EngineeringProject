@@ -9,15 +9,16 @@ namespace XYZEngineeringProject.Domain.Interfaces
 {
     public interface IPositionRepository
     {
-        int Add(Position position);
+        Guid Add(Position position);
         bool Remove(Position position);
-        bool Remove(int positionById);
+        bool Remove(Guid positionById);
         bool __RemoveHard(Position position);
-        bool __RemoveHard(int positionById);
+        bool __RemoveHard(Guid positionById);
         bool Update(Position position);
-        Position? GetPositionById(int positionId);
-        IQueryable<Position> GetPositionByIdAsQuerable(int positionId);
-        IQueryable<Position> GetAll();
+        Position? GetPositionById(Guid positionId);
+        IQueryable<Position> GetPositionByIdAsQuerable(Guid positionId);
+        IQueryable<Position>? GetAll();
+        IQueryable<Position> _GetEveryOne();
         IQueryable<Position>? GetPositionByCompany();
         IQueryable<Position>? GetPositionByCompany(Guid companyId);
     }

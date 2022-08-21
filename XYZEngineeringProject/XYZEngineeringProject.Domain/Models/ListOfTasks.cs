@@ -15,9 +15,9 @@ namespace XYZEngineeringProject.Domain.Models
         //relations
 
         public string? UserId { get; set; }
-        public AppUser? User { get; set; }
+        public virtual AppUser User { get; set; }
 
-        public ICollection<UserTask>? Task { get; set; }
+        public virtual ICollection<UserTask> Task { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

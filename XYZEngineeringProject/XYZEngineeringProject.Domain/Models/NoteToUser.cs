@@ -11,8 +11,8 @@ namespace XYZEngineeringProject.Domain.Models
         //relations
 
         public string UserId { get; set; }
-        public AppUser User { get; set; }
+        public virtual AppUser User { get; set; }
         public Guid NoteId { get; set; }
-        public Note Note { get; set; }
+        public virtual Note Note { get; set; }
     }
 }

@@ -1,14 +1,14 @@
 export enum Priority {
-    // No, 
-    // Low, 
-    // Medium, 
-    // High, 
-    // Done
-    No = 'No', 
-    Low = 'Low', 
-    Medium = 'Medium', 
-    High = 'High', 
-    Done = 'Done'
+    No, 
+    Low, 
+    Medium, 
+    High, 
+    Done
+    // No = 'No', 
+    // Low = 'Low', 
+    // Medium = 'Medium', 
+    // High = 'High', 
+    // Done = 'Done'
 }
 
 export const Priority2LabelMapping: Record<Priority, String> = {

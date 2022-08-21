@@ -14,7 +14,7 @@
         <tbody>
             <tr *ngFor="let task of tasks">
                 <td>{{task.id}}</td>
-                <td>{{task.deadLine}}</td>
+                <td>{{task.deadline | date:'dd/MM/yyyy'}}</td>
                 <td>{{task.title}}</td>
                 <td>{{task.description}}</td>
                 <td>{{Priority2LabelMapping[task.priority]}}</td>

@@ -15,19 +15,18 @@
                 </div>
                 <div class="mb-3">
                     <label for="priority" class="form-label">Priority</label><br>
-                    <select id="priority" name="priority" class="form-control" [(ngModel)]="addTaskRequest.priority">
+                    <select id="priority" name="priority" class="form-control" [(ngModel)]="addTaskRequest.priority" (ngModelChange)="onChange($event)">
                         <option *ngFor="let priority of priorityTypes" [ngValue]="priority"  >
-                            <!-- {{Priority2LabelMapping[priority]}} -->
                             {{priority}}
                         </option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="deadLine" class="form-label">Deadline</label>
-                    <input type="date" class="form-control" id="deadLine" name="deadLine" [(ngModel)]="addTaskRequest.deadLine">
+                    <label for="deadline" class="form-label">Deadline</label>
+                    <input type="date" class="form-control" id="deadline" name="deadline" [(ngModel)]="addTaskRequest.deadline">
                   </div>
                 <button type="submit" class="btn btn-primary">Save</button>
               </form>
          </div>
-    </div>    
+    </div>
 </div>

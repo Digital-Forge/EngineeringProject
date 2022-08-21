@@ -14,15 +14,15 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.baseApiUrl + 'api/Tasks')
+    return this.http.get<Task[]>(this.baseApiUrl + 'Task/GetAllTasks')
   }
 
   addTask(addTaskRequest: Task): Observable<Task> {
     addTaskRequest.id = this.emptyGuid;
-    return this.http.post<Task>(this.baseApiUrl + 'api/Tasks', addTaskRequest)
+    return this.http.post<Task>(this.baseApiUrl + 'Task', addTaskRequest)
   }
 
   getTask(id:string): Observable<Task> {
-    return this.http.get<Task>(this.baseApiUrl + 'api/Tasks/' + id)
+    return this.http.get<Task>(this.baseApiUrl + 'Task/' + id)
   }
 }

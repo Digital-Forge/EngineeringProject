@@ -1,3 +1,5 @@
+import { LoginComponent } from './components/login/login.component';
+import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { EditTaskComponent } from './components/tasks/edit-task/edit-task.component';
 import { AddTaskComponent } from './components/tasks/add-task/add-task.component';
 import { TaskListComponent } from './components/tasks/task-list/task-list.component';
@@ -7,7 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: TaskListComponent
+    component: LoginComponent
   },
   {
     path: 'tasks',

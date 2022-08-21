@@ -12,6 +12,7 @@ namespace XYZEngineeringProject.Application
             // Services Dependency Injection
             services.AddTransient<IUtilsService, UtilsService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
+            services.AddTransient<ITaskService, TaskService>();
             //services.AddTransient<I, >();
             
             // FluentValidation Dependency Injection

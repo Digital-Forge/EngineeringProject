@@ -25,6 +25,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public Guid? CreateAdmin(AppUser admin)
         {
+            admin.UserId = Guid.Empty;
             admin.CompanyId = Guid.Empty;
             admin.CreateDate = DateTime.Now;
             admin.UpdateDate = DateTime.Now;

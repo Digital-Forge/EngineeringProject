@@ -8,7 +8,9 @@ import { AddTaskComponent } from './components/tasks/add-task/add-task.component
 import { EditTaskComponent } from './components/tasks/edit-task/edit-task.component';
 import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,16 @@ import { FormsModule } from '@angular/forms';
     TaskListComponent,
     AddTaskComponent,
     EditTaskComponent,
-    NotesListComponent
+    NotesListComponent,
+    AuthorizationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -49,7 +49,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 
                 if (userIdClaim != null)
                 {
-                    return _context.AppUsers.Where(x => x.Id == userIdClaim.Value).FirstOrDefault();
+                    return _context.AppUsers.Where(x => x.Id.ToString() == userIdClaim.Value).FirstOrDefault();
                 }
             }
             return null;
@@ -65,7 +65,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 
                 if (userIdClaim != null)
                 {
-                    return _context.AppUsers.Where(x => x.Id == userIdClaim.Value).FirstOrDefault()?.Company;
+                    return _context.AppUsers.Where(x => x.Id.ToString() == userIdClaim.Value).FirstOrDefault()?.Company;
                 }
             }
             return null;

@@ -38,8 +38,8 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             user.CreateDate = DateTime.Now;
             user.UpdateDate = DateTime.Now;
-            user.CreateBy = currentUser.UserId;
-            user.UpdateBy = currentUser.UserId;
+            user.CreateBy = currentUser.Id;
+            user.UpdateBy = currentUser.Id;
             user.CompanyId = currentUser.CompanyId;
 
             var result = _userManager.CreateAsync(user).Result;
@@ -47,7 +47,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             if (result.Succeeded)
             {
                 _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add user - {user.Id}");
-                return user.UserId;
+                return user.Id;
             }
             _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed add user - {result.Errors.First().Description}");
             return null;
@@ -87,14 +87,14 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         {
             return _context.AppUsers
                 .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
-                .FirstOrDefault(x => x.UserId == userId);
+                .FirstOrDefault(x => x.Id == userId);
         }
 
         public IQueryable<AppUser> GetUserByIdAsQuerable(Guid userId)
         {
             return _context.AppUsers
                 .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
-                .Where(x => x.UserId == userId);
+                .Where(x => x.Id == userId);
         }
 
         public bool Remove(AppUser user)
@@ -199,7 +199,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         {
             try
             {
-                var buff = _context.AppUsers.FirstOrDefault(x => x.UserId == userById);
+                var buff = _context.AppUsers.FirstOrDefault(x => x.Id == userById);
                 if (buff == null)
                 {
                     _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying hard remove user, who don't exist");

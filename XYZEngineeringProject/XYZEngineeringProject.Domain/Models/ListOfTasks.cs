@@ -14,7 +14,7 @@ namespace XYZEngineeringProject.Domain.Models
 
         //relations
 
-        public string? UserId { get; set; }
+        public Guid? UserId { get; set; }
         public virtual AppUser User { get; set; }
 
         public virtual ICollection<UserTask> Task { get; set; }
@@ -25,6 +25,6 @@ namespace XYZEngineeringProject.Domain.Models
         public Guid? UpdateBy { get; set; }
         public DateTime? UpdateDate { get; set; }
         public UseStatusEntity UseStatus { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
     }
 }

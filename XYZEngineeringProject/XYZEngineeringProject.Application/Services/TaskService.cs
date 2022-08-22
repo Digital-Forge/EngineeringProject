@@ -21,7 +21,7 @@ namespace XYZEngineeringProject.Application.Services
             return _taskRepository.GetAll().Select(x => new TaskVM
             {
                 Id = x.Id,
-                AssigneeUserId = x.AssigneeUserId,
+                AssigneeUserId = x.AssigneeUserId.ToString(),
                 Deadline = x.Deadline,
                 Description = x.Description,
                 ListOfTasks = x.ListOfTasks,

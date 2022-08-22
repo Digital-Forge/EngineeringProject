@@ -23,6 +23,6 @@ namespace XYZEngineeringProject.Domain.Models
         public Guid? UpdateBy { get; set; }
         public DateTime? UpdateDate { get; set; }
         public UseStatusEntity UseStatus { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
     }
 }

@@ -17,10 +17,10 @@ namespace XYZEngineeringProject.Domain.Models
 
         //relations
 
-        public string AssignerUserId { get; set; }
+        public Guid AssignerUserId { get; set; }
         public virtual AppUser AssignerUser { get; set; }
 
-        public string? AssigneeUserId { get; set; }
+        public Guid? AssigneeUserId { get; set; }
         public virtual AppUser? AssigneeUser { get; set; }
 
         public Guid? ListOfTasksId { get; set; }
@@ -32,6 +32,6 @@ namespace XYZEngineeringProject.Domain.Models
         public Guid? UpdateBy { get; set; }
         public DateTime? UpdateDate { get; set; }
         public UseStatusEntity UseStatus { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using XYZEngineeringProject.Domain.Models;
@@ -6,7 +7,7 @@ using XYZEngineeringProject.Domain.Models.EntityUtils;
 
 namespace XYZEngineeringProject.Infrastructure.Utils
 {
-    public class Context : IdentityDbContext
+    public class Context : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
         private readonly InfrastructureUtils _infrastructureUtils;
 
@@ -194,20 +195,20 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                         break;
                     case EntityState.Deleted:
                         entry.Entity.UpdateDate = DateTime.Now;
-                        entry.Entity.UpdateBy = currentUser?.UserId;
+                        entry.Entity.UpdateBy = currentUser?.Id;
                         entry.Entity.UseStatus = UseStatusEntity.Delete;
                         entry.State = hardMode ? EntityState.Deleted : EntityState.Modified;
                         break;
                     case EntityState.Modified:
                         entry.Entity.UpdateDate = DateTime.Now;
-                        entry.Entity.UpdateBy = currentUser?.UserId;
+                        entry.Entity.UpdateBy = currentUser?.Id;
                         entry.Entity.UseStatus = UseStatusEntity.Update;
                         break;
                     case EntityState.Added:
                         entry.Entity.CreateDate = DateTime.Now;
                         entry.Entity.UpdateDate = DateTime.Now;
-                        entry.Entity.CreateBy = currentUser?.UserId ?? Guid.Empty;
-                        entry.Entity.UpdateBy = currentUser?.UserId;
+                        entry.Entity.CreateBy = currentUser?.Id ?? Guid.Empty;
+                        entry.Entity.UpdateBy = currentUser?.Id;
                         entry.Entity.CompanyId = currentUser?.CompanyId ?? entry.Entity.CompanyId;
                         entry.Entity.UseStatus = UseStatusEntity.Create;
                         break;

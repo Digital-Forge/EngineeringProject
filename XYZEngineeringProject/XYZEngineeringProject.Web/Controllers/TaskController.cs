@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using XYZEngineeringProject.Application.Interfaces;
+using XYZEngineeringProject.Application.ViewModels;
+using XYZEngineeringProject.Domain.Models;
 
 namespace XYZEngineeringProject.Web.Controllers
 {
@@ -25,6 +27,12 @@ namespace XYZEngineeringProject.Web.Controllers
         public IActionResult GetAllTasks()
         {
             return Ok(_taskService.GetAllTasks().ToList());
+        }
+
+        [HttpPost]
+        public IActionResult AddTask([FromBody] TaskVM taskRequest)
+        {
+            return Ok(_taskService.AddTask(taskRequest));
         }
     }
 }

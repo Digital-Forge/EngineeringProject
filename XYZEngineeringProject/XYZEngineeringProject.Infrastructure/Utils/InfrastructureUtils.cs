@@ -23,7 +23,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string? GetUserIdFormHttpContext()
+        public Guid? GetUserIdFormHttpContext()
         {
             var claimsIdentity = _httpContextAccessor?.HttpContext?.User.Identity as ClaimsIdentity;
             if (claimsIdentity != null)
@@ -33,7 +33,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 
                 if (userIdClaim != null)
                 {
-                    return userIdClaim.Value;
+                    return new Guid(userIdClaim.Value);
                 }
             }
             return null;

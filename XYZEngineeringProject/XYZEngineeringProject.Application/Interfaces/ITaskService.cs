@@ -11,5 +11,7 @@ namespace XYZEngineeringProject.Application.Interfaces
     public interface ITaskService
     {
         public List<TaskVM> GetAllTasks();
+
+        public bool AddTask(TaskVM taskVM);
     }
 }

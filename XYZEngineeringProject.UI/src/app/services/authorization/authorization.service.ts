@@ -12,7 +12,11 @@ export class AuthorizationService {
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient) { }
 
-  login(login: Login): Observable<Login> {
-    return this.http.post<Login>(this.baseApiUrl + 'Authorization/Login', login);
+  login(login: Login) {
+    return this.http.post<Login>(this.baseApiUrl + 'Authorization/Login', login).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('token', res.token);
+      }
+    });
   }
 }

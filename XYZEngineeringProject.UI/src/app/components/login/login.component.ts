@@ -20,11 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.authorizationService.login(this.login).subscribe({
-      next: (response) => {
-        console.log(response);
-      }
-    })
+    this.authorizationService.login(this.login)
   }
 
 }

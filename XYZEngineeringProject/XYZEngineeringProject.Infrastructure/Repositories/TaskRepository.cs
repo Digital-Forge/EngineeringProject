@@ -25,6 +25,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public Guid Add(UserTask task)
         {
+            task.AssignerUserId = _infrastructureUtils.GetUserIdFormHttpContext().Value;
             _context.Tasks.Add(task);
             _context.SaveChanges();
 

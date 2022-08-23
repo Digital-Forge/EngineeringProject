@@ -19,7 +19,7 @@ export class TaskService {
 
   addTask(addTaskRequest: Task): Observable<Task> {
     addTaskRequest.id = this.emptyGuid;
-    return this.http.post<Task>(this.baseApiUrl + 'Task', addTaskRequest)
+    return this.http.post<Task>(this.baseApiUrl + 'Task/AddTask', addTaskRequest)
   }
 
   getTask(id:string): Observable<Task> {

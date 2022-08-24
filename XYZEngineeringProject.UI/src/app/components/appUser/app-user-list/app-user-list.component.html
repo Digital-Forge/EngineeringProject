@@ -1,0 +1,28 @@
+<div class="container-fluid my-5">
+    <h1 class="mb-3">AppUsers</h1>
+    <table class="table" *ngIf="users && users.length >0">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Full Name</th>
+                <th>PESEL</th>
+                <th>Home address</th>
+                <th>Post address</th>
+                <th>phone</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.id}}</td>
+                <td>{{user.fullName}}</td>
+                <td>{{user.pesel}}</td>
+                <td>{{user.address.addressHome}}</td>
+                <td>{{user.address.addressPost}}</td>
+                <td>{{user.address.phone}}</td>
+                <td><a [routerLink]="['/appusers', 'edit', user.id]">View</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="!users || users.length <= 0">No users found</p>
+</div>

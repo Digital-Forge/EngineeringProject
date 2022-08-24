@@ -12,6 +12,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { LoginComponent } from './components/login/login.component';
+import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
+import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { LoginComponent } from './components/login/login.component';
     EditTaskComponent,
     NotesListComponent,
     AuthorizationComponent,
-    LoginComponent
+    LoginComponent,
+    AppUserListComponent,
+    AddAppUserComponent
   ],
   imports: [
     BrowserModule,

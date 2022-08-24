@@ -29,11 +29,11 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             if (claimsIdentity != null)
             {
                 var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                    .FirstOrDefault(x => x.Type == "id")?.Value;
 
-                if (userIdClaim != null)
+                if (!String.IsNullOrEmpty(userIdClaim))
                 {
-                    return new Guid(userIdClaim.Value);
+                    return _context.AppUsers.FirstOrDefault(x => x.UseStatus != UseStatusEntity.Delete && x.Id.ToString() == userIdClaim)?.Id;
                 }
             }
             return null;
@@ -45,11 +45,11 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             if (claimsIdentity != null)
             {
                 var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                    .FirstOrDefault(x => x.Type == "Id")?.Value;
 
                 if (userIdClaim != null)
                 {
-                    return _context.AppUsers.Where(x => x.Id.ToString() == userIdClaim.Value).FirstOrDefault();
+                    return _context.AppUsers.FirstOrDefault(x => x.UseStatus != UseStatusEntity.Delete && x.Id.ToString() == userIdClaim);
                 }
             }
             return null;
@@ -61,11 +61,11 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             if (claimsIdentity != null)
             {
                 var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                    .FirstOrDefault(x => x.Type == "Id")?.Value;
 
                 if (userIdClaim != null)
                 {
-                    return _context.AppUsers.Where(x => x.Id.ToString() == userIdClaim.Value).FirstOrDefault()?.Company;
+                    return _context.AppUsers.FirstOrDefault(x => x.UseStatus != UseStatusEntity.Delete && x.Id.ToString() == userIdClaim)?.Company;
                 }
             }
             return null;

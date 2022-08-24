@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels.Authorization;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Application.Services
 {
@@ -18,12 +20,14 @@ namespace XYZEngineeringProject.Application.Services
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IConfiguration _config;
         private readonly IUtilsService _utilsService;
+        private readonly Context _context;
 
-        public AuthorizationService(SignInManager<AppUser> signInManager, IConfiguration config, IUtilsService utilsService)
+        public AuthorizationService(SignInManager<AppUser> signInManager, IConfiguration config, IUtilsService utilsService, Context context)
         {
             _signInManager = signInManager;
             _config = config;
             _utilsService = utilsService;
+            _context = context;
         }
 
         public bool AuthenticateUser(LoginVM input)
@@ -48,7 +52,8 @@ namespace XYZEngineeringProject.Application.Services
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Issuer"], null, null, DateTime.Now.AddMinutes(120), credentials);
+            var claims = new List<Claim>() { new Claim("id", _context.AppUsers.First(x => x.UserName == input.Email).Id.ToString())};
+            var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Issuer"], claims, null, DateTime.Now.AddMinutes(120), credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

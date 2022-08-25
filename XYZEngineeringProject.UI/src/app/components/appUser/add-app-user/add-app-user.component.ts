@@ -13,6 +13,8 @@ export class AddAppUserComponent implements OnInit {
 
   addAppUserRequest: AppUser = {
     id: '',
+    username: '',
+    passwordHash: '',
     fullName: '',
     pesel: 0,
     address: {

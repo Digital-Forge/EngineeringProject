@@ -45,7 +45,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             if (claimsIdentity != null)
             {
                 var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == "Id")?.Value;
+                    .FirstOrDefault(x => x.Type == "id")?.Value;
 
                 if (userIdClaim != null)
                 {
@@ -61,7 +61,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             if (claimsIdentity != null)
             {
                 var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == "Id")?.Value;
+                    .FirstOrDefault(x => x.Type == "id")?.Value;
 
                 if (userIdClaim != null)
                 {

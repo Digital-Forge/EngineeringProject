@@ -37,7 +37,7 @@ namespace XYZEngineeringProject.Application.Services
 
         public List<TaskVM> GetAllTasks()
         {
-            return _taskRepository.GetAll().Select(x => new TaskVM
+            return _taskRepository.GetAll().ToList().Select(x => new TaskVM
             {
                 Id = x.Id,
                 AssigneeUserId = Guid.Empty,

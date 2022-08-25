@@ -6,6 +6,14 @@
          <div class="col-6">
             <form #form="ngForm" (ngSubmit)="addAppUser()">
                 <div class="mb-3">
+                    <label for="username" class="form-label">username</label>
+                    <input type="text" class="form-control" id="username" name ="username" [(ngModel)]="addAppUserRequest.username">
+                </div>
+                <div class="mb-3">
+                    <label for="passwordHash" class="form-label">password</label>
+                    <input type="password" class="form-control" id="passwordHash" name ="passwordHash" [(ngModel)]="addAppUserRequest.passwordHash">
+                </div>
+                <div class="mb-3">
                   <label for="fullName" class="form-label">Full name</label>
                   <input type="text" class="form-control" id="fullName" name ="fullName" [(ngModel)]="addAppUserRequest.fullName">
                 </div>

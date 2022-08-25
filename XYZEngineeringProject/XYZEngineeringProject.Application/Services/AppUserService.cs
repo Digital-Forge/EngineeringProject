@@ -22,6 +22,8 @@ namespace XYZEngineeringProject.Application.Services
         {
             return _userRepository.GetAll().Select(x => new AppUserVM
             {
+                UserName = x.UserName,
+                PasswordHash = x.PasswordHash,
                 Address = x.Address,
                 FullName = x.FullName,
                 PESEL = x.PESEL,
@@ -34,6 +36,8 @@ namespace XYZEngineeringProject.Application.Services
             AppUser user = new AppUser
             {
                 Id = new Guid(appUser.Id),
+                UserName = appUser.UserName,
+                PasswordHash = appUser.PasswordHash,
                 FullName = appUser.FullName,
                 PESEL= appUser.PESEL,
                 Address = appUser.Address

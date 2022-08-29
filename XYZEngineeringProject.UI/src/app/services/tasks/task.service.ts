@@ -23,6 +23,6 @@ export class TaskService {
   }
 
   getTask(id:string): Observable<Task> {
-    return this.http.get<Task>(this.baseApiUrl + 'Task/' + id)
+    return this.http.get<Task>(this.baseApiUrl + 'Task/EditTask/' + id)
   }
 }

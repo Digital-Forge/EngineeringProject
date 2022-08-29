@@ -16,7 +16,7 @@
                 <div class="mb-3">
                     <label for="priority" class="form-label">Priority</label><br>
                     <select id="priority" name="priority" class="form-control" [(ngModel)]="taskDetails.priority" (ngModelChange)="onChange($event)">
-                        <option *ngFor="let priority of priorityTypes" [ngValue]="priority"  [selected]="taskDetails.priority">
+                        <option *ngFor="let priority of priorityTypes" [ngValue]="priority"  [selected]="priority === taskDetails.priority">
                             {{priority}}
                         </option>
                     </select>

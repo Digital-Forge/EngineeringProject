@@ -14,6 +14,7 @@ import { AuthorizationComponent } from './components/authorization/authorization
 import { LoginComponent } from './components/login/login.component';
 import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
 import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
+import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-u
     AuthorizationComponent,
     LoginComponent,
     AppUserListComponent,
-    AddAppUserComponent
+    AddAppUserComponent,
+    EditAppUserComponent
   ],
   imports: [
     BrowserModule,

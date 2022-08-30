@@ -1,3 +1,4 @@
+import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
 import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
 import { LoginComponent } from './components/login/login.component';
@@ -35,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'appusers/edit/:id',
-    component: AppUserListComponent
+    component: EditAppUserComponent
   }
 ];
 

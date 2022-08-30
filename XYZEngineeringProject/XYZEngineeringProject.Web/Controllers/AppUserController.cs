@@ -36,5 +36,11 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_appUserService.AddNewUser(appUserRequest));
         }
+
+        [HttpGet]
+        public IActionResult GetUser(string id)
+        {
+            return Ok(_appUserService.GetAllUsers().ToList().FirstOrDefault(x => x.Id == id));
+        }
     }
 }

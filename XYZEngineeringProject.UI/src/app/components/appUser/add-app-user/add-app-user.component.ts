@@ -13,7 +13,7 @@ export class AddAppUserComponent implements OnInit {
 
   addAppUserRequest: AppUser = {
     id: '',
-    username: '',
+    userName: '',
     passwordHash: '',
     fullName: '',
     pesel: 0,
@@ -22,8 +22,9 @@ export class AddAppUserComponent implements OnInit {
       phone: 0,
       addressPost: '',
       addressHome: ''
-    }
+    }  
   }
+  companies:any;
   constructor(private appUserService: AppuserService, private router: Router) { }
 
   ngOnInit(): void {

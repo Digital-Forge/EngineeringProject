@@ -2,7 +2,7 @@ import { Address } from "./address.model";
 
 export interface AppUser {
     id: string,
-    username: string,
+    userName: string,
     passwordHash: string,
     fullName: string,
     pesel: number,

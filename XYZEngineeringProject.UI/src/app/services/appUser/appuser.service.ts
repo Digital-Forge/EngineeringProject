@@ -23,4 +23,8 @@ export class AppuserService {
 
     return this.http.post<AppUser>(this.baseApiUrl + 'AppUser/AddNewUser', addAppUserRequest)
   }
+
+  getAppUser(id: string): Observable<AppUser> {
+    return this.http.get<AppUser>(this.baseApiUrl + 'AppUser/GetUser/' +id)
+  }
 }

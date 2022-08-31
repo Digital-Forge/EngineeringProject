@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +49,12 @@ namespace XYZEngineeringProject.Application.Services
                 Priority = x.Priority,
                 Title = x.Title
             }).ToList();
+        }
+
+        public bool EditTask(TaskVM editTaskRequest)
+        {
+            var task = _taskRepository.GetTaskById(editTaskRequest.Id);
+            return _taskRepository.Update(task);
         }
     }
 }

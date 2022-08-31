@@ -25,4 +25,8 @@ export class TaskService {
   getTask(id:string): Observable<Task> {
     return this.http.get<Task>(this.baseApiUrl + 'Task/EditTask/' + id)
   }
+
+  saveChanges(editTaskRequest: Task): Observable<any> {
+    return this.http.put(this.baseApiUrl + 'Task/EditTask',editTaskRequest);
+  }
 }

@@ -40,5 +40,11 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_taskService.GetAllTasks().FirstOrDefault(x => x.Id == Guid.Parse(id)));
         }
+
+        [HttpPut]
+        public IActionResult EditTask([FromBody] TaskVM editTaskRequest)
+        {
+            return Ok(_taskService.EditTask(editTaskRequest));
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace XYZEngineeringProject.Application.Interfaces
         public List<TaskVM> GetAllTasks();
 
         public bool AddTask(TaskVM taskVM);
+        public bool EditTask(TaskVM editTaskRequest);
     }
 }

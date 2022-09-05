@@ -1,4 +1,4 @@
-<form [formGroup]="clientFilterForm">
+<form [formGroup]="clientListFilterForm">
     <div class="row">
         <div class="col-12 col-lg-4">
             <div class="form-group">
@@ -6,7 +6,7 @@
                     {{"ClientFilters.firstName" | translate }}
                 </label>
                 <input type="text" class="form-control" id="firstName" formControlName="firstName">
-                <input-message [input]="candidateListFilterForm.get('firstName')"></input-message>
+                <!-- <input-message [input]="clientListFilterForm.get('firstName')"></input-message> -->
             </div>
         </div>
     </div>

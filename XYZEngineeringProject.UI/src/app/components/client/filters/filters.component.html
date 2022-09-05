@@ -1,0 +1,13 @@
+<form [formGroup]="clientFilterForm">
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <div class="form-group">
+                <label for="clientFirstName">
+                    {{"ClientFilters.firstName" | translate }}
+                </label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                <input-message [input]="candidateListFilterForm.get('firstName')"></input-message>
+            </div>
+        </div>
+    </div>
+</form>

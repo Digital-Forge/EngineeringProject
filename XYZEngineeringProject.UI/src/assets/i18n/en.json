@@ -1,0 +1,11 @@
+{
+    "Client": {
+        "name": "Name",
+        "email": "Email",
+        "emails": "Email addresses",
+        "phone": "Phone",
+        "phones": "Phone numbers",
+        "firstName": "First name",
+        "lastName": "Last name"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "Client": {
+        "name": "Nazwa",
+        "email": "Email",
+        "emails": "Adresy email",
+        "phone": "Telefon",
+        "phones": "Numery telefonu",
+        "firstName": "Imię",
+        "lastName": "Nazwisko"
+    },
+    "ClientFilters": {
+        "firstName": "Imię"
+    }
+}

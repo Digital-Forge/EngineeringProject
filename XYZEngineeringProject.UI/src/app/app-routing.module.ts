@@ -1,3 +1,7 @@
+import { ClientIndexComponent } from './components/client/index/client-index.component';
+import { ClientFormComponent } from './components/client/form/client-form.component';
+import { ClientViewComponent } from './components/client/view/client-view.component';
+import { ClientComponent } from './components/client/client.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { EditTaskComponent } from './components/tasks/edit-task/edit-task.component';
@@ -22,6 +26,19 @@ const routes: Routes = [
   {
     path: 'tasks/edit/:id',
     component: EditTaskComponent
+  },
+  {
+    path: 'client',
+    component: ClientIndexComponent
+  },
+  {
+    path: 'client/:id',
+    component: ClientViewComponent
+  },
+  {
+    path: 'client/:id/edit',
+    component: ClientFormComponent,
+    //tu będzie dodawane zabezpieczenie wejścia na stronę
   }
 ];
 

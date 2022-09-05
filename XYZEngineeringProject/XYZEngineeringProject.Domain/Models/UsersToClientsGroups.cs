@@ -10,7 +10,7 @@ namespace XYZEngineeringProject.Domain.Models
     {
         //relations
 
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         public virtual AppUser User { get; set; }
 
         public Guid ClientId { get; set; }

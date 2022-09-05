@@ -9,11 +9,11 @@ using XYZEngineeringProject.Domain.Models.EntityUtils;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class AppUser : IdentityUser, ISoftDataEntity
+    public class AppUser : IdentityUser<Guid>, ISoftDataEntity
     {
-        
-        public Guid UserId { get; set; }
-        public override string Id { get => UserId.ToString(); set => UserId = new Guid(value); }
+
+        //public Guid UserId { get; set; }
+        //public override string Id { get => UserId.ToString(); set => UserId = new Guid(value); }
 
         public string FullName { get; set; }
         public int PESEL { get; set; }
@@ -46,7 +46,7 @@ namespace XYZEngineeringProject.Domain.Models
         public Guid? UpdateBy { get; set; }
         public DateTime? UpdateDate { get; set; }
         public UseStatusEntity UseStatus { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
         public LogicCompany? Company { get; set; } // bonus relation
     }
 }

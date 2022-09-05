@@ -18,7 +18,7 @@ namespace XYZEngineeringProject.Domain.Models.EntityUtils
         public UseStatusEntity UseStatus { get; set; }
 
         // Date per logic instance
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
 
     }
 }

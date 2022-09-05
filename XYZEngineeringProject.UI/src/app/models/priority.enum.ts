@@ -11,7 +11,7 @@ export enum Priority {
     // Done = 'Done'
 }
 
-export const Priority2LabelMapping: Record<Priority, String> = {
+export const Priority2LabelMapping: Record<Priority, string> = {
     [Priority.No]: "No",
     [Priority.Low]: "Low",
     [Priority.Medium]: "Medium",

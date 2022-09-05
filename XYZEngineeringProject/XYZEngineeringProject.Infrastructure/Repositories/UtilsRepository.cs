@@ -25,8 +25,8 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public Guid? CreateAdmin(AppUser admin)
         {
-            admin.UserId = Guid.Empty;
-            admin.CompanyId = Guid.Empty;
+            admin.Id = Guid.Empty;
+            admin.CompanyId = null;
             admin.CreateDate = DateTime.Now;
             admin.UpdateDate = DateTime.Now;
             admin.CreateBy = Guid.Empty;
@@ -40,7 +40,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             if (result.Succeeded)
             {
                 _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add admin - {admin.Id}");
-                return admin.UserId;
+                return admin.Id;
             }
             _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed add admin - {result.Errors.First().Description}");
             return null;

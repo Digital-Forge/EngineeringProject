@@ -1,5 +1,5 @@
 import { TaskService } from './../../../services/tasks/task.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { Task } from '../../../models/task.model'
 import { Component, OnInit } from '@angular/core';
 import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
@@ -14,7 +14,9 @@ export class EditTaskComponent implements OnInit {
 
   public Priority2LabelMapping = Priority2LabelMapping
   public priorityTypes = Object.values(Priority).filter(value => typeof value === "string");
-  public pipe = new DatePipe('pl-EU');
+  public selectorPriority: string = '';
+  public selectorDate: any;
+  public pipe = new DatePipe('en-US');
   taskDetails: Task = {
     id: '',
     deadline: new Date(),
@@ -32,14 +34,27 @@ export class EditTaskComponent implements OnInit {
           this.taskService.getTask(id).subscribe({
             next: (response) => {
               this.taskDetails = response;
+              this.selectorPriority = this.Priority2LabelMapping[this.taskDetails.priority];              
+              this.selectorDate = this.pipe.transform(this.taskDetails.deadline, 'yyy-MM-dd');
             }
           })
         }
       }
     })
+    
+
   }
 
   onChange(event: Priority) {
-    this.taskDetails.priority = Object.values(Priority).indexOf(event);
+    this.taskDetails.priority = Object.values(Priority).indexOf(event);    
+  }
+
+  saveChanges(){
+    this.taskService.saveChanges(this.taskDetails).subscribe({
+      next: (response) => {
+        console.log(response);
+        
+      }
+    })
   }
 }

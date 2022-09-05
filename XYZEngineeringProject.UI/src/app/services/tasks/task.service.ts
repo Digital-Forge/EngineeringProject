@@ -19,10 +19,14 @@ export class TaskService {
 
   addTask(addTaskRequest: Task): Observable<Task> {
     addTaskRequest.id = this.emptyGuid;
-    return this.http.post<Task>(this.baseApiUrl + 'Task', addTaskRequest)
+    return this.http.post<Task>(this.baseApiUrl + 'Task/AddTask', addTaskRequest)
   }
 
   getTask(id:string): Observable<Task> {
-    return this.http.get<Task>(this.baseApiUrl + 'Task/' + id)
+    return this.http.get<Task>(this.baseApiUrl + 'Task/EditTask/' + id)
+  }
+
+  saveChanges(editTaskRequest: Task): Observable<any> {
+    return this.http.put(this.baseApiUrl + 'Task/EditTask',editTaskRequest);
   }
 }

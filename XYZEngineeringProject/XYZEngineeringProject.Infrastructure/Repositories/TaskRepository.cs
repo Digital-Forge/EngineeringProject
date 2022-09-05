@@ -25,6 +25,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public Guid Add(UserTask task)
         {
+            task.AssignerUserId = _infrastructureUtils.GetUserIdFormHttpContext().Value;
             _context.Tasks.Add(task);
             _context.SaveChanges();
 
@@ -36,7 +37,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         {
             var currentUser = _infrastructureUtils.GetUserFormHttpContext();
 
-            if (currentUser?.Company == null)
+            if (currentUser?.CompanyId == null || currentUser?.CompanyId == Guid.Empty)
                 return null;
             else
                 return _context.Tasks

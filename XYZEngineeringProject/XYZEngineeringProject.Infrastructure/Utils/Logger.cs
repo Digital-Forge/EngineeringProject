@@ -21,7 +21,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 Source = source.ToString(),
                 InfoType = infoType.ToString(),
                 Info = info,
-                UserId = _infrastructureUtils.GetUserIdFormHttpContext(),
+                UserId = _infrastructureUtils.GetUserIdFormHttpContext().ToString(),
                 DataStamp = DateTime.Now
             });
 

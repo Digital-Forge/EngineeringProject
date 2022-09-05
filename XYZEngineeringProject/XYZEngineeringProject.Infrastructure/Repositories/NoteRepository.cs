@@ -36,7 +36,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         {
             var currentUser = _infrastructureUtils.GetUserFormHttpContext();
 
-            if (currentUser?.Company == null)
+            if (currentUser?.CompanyId == null || currentUser?.CompanyId == Guid.Empty)
                 return null;
             else
                 return _context.Note

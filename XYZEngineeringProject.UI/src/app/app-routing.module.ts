@@ -2,6 +2,9 @@ import { ClientIndexComponent } from './components/client/index/client-index.com
 import { ClientFormComponent } from './components/client/form/client-form.component';
 import { ClientViewComponent } from './components/client/view/client-view.component';
 import { ClientComponent } from './components/client/client.component';
+import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
+import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
+import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { EditTaskComponent } from './components/tasks/edit-task/edit-task.component';
@@ -39,6 +42,18 @@ const routes: Routes = [
     path: 'client/:id/edit',
     component: ClientFormComponent,
     //tu będzie dodawane zabezpieczenie wejścia na stronę
+  },
+  {
+    path: 'appusers',
+    component: AppUserListComponent
+  },
+  {
+    path: 'appusers/add',
+    component: AddAppUserComponent
+  },
+  {
+    path: 'appusers/edit/:id',
+    component: EditAppUserComponent
   }
 ];
 

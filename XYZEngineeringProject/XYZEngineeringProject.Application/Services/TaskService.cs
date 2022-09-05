@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Domain.Models;
 
 namespace XYZEngineeringProject.Application.Services
 {
@@ -16,12 +18,30 @@ namespace XYZEngineeringProject.Application.Services
         {
             _taskRepository = taskRepository;
         }
+
+        public bool AddTask(TaskVM taskRequest)
+        {
+            UserTask task = new UserTask
+            {
+                AssigneeUserId = null,
+                Id = Guid.Empty,
+                Deadline = taskRequest.Deadline,
+                Description = taskRequest.Description,
+                Priority = taskRequest.Priority,
+                Title = taskRequest.Title
+            };
+
+            _taskRepository.Add(task);
+
+            return true;
+        }
+
         public List<TaskVM> GetAllTasks()
         {
-            return _taskRepository.GetAll().Select(x => new TaskVM
+            return _taskRepository.GetAll().ToList().Select(x => new TaskVM
             {
                 Id = x.Id,
-                AssigneeUserId = x.AssigneeUserId,
+                AssigneeUserId = Guid.Empty,
                 Deadline = x.Deadline,
                 Description = x.Description,
                 ListOfTasks = x.ListOfTasks,
@@ -29,6 +49,12 @@ namespace XYZEngineeringProject.Application.Services
                 Priority = x.Priority,
                 Title = x.Title
             }).ToList();
+        }
+
+        public bool EditTask(TaskVM editTaskRequest)
+        {
+            var task = _taskRepository.GetTaskById(editTaskRequest.Id);
+            return _taskRepository.Update(task);
         }
     }
 }

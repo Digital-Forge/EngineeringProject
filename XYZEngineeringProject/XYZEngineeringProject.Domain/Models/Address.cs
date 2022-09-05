@@ -16,7 +16,7 @@ namespace XYZEngineeringProject.Domain.Models
 
         //relations
 
-        public string? AppUserId { get; set; }
+        public Guid? AppUserId { get; set; }
         public virtual AppUser User { get; set; }
 
         // ISoftDataEntity
@@ -25,6 +25,6 @@ namespace XYZEngineeringProject.Domain.Models
         public Guid? UpdateBy { get; set; }
         public DateTime? UpdateDate { get; set; }
         public UseStatusEntity UseStatus { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
     }
 }

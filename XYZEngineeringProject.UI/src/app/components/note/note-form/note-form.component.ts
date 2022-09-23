@@ -1,3 +1,4 @@
+import { NoteService } from '../../../services/notes/note.service';
 import { NoteStatus } from './../../../models/noteStatus.enum';
 import { Note } from './../../../models/note.model';
 import { Component, OnInit } from '@angular/core';
@@ -19,8 +20,10 @@ export class NoteFormComponent implements OnInit {
     date: new Date()
   }
   public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
+  public selectorDate: any
+  public noteStatus: any
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private noteService: NoteService) { }
 
   ngOnInit(): void {
   }
@@ -41,7 +44,11 @@ export class NoteFormComponent implements OnInit {
   }
   
   addNote() {
-    throw new Error('Function not implemented.');
+    this.noteService.addNote(this.noteDetails).subscribe({
+      next: (res) => {
+        this.router.navigate(['note']);
+      }
+    });
   }
 }
 

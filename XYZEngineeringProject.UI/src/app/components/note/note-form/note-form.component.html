@@ -8,16 +8,26 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6 form">
-            <form (ngSubmit)="submit()">
+            <form #form="ngForm" (ngSubmit)="submit()">
+                <div class="mb-3">
+                    <label for="title" class="label-form">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="noteDetails.title">
+                </div>
                 <div class="mb-3">
                     <label for="noteStatus" class="form-label">Note Status</label><br>
-                    <select id="prionoteStatusrity" name="noteStatus" class="form-control" [(ngModel)]="noteDetails.noteStatus"
+                    <select id="prionoteStatusrity" name="noteStatus" class="form-control" [(ngModel)]="noteStatus"
                         (ngModelChange)="onChange($event)">
                         <option *ngFor="let noteStatus of noteStatuses">
                             {{noteStatus}}
                         </option>
                     </select>
                 </div>
+                <div class="mb-3">
+                    <label for="selectorDate" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="selectorDate" name="selectorDate" [(ngModel)]="selectorDate">
+                </div>
+                <button type="submit" class="btn btn-primary" *ngIf="editMode">Save</button>
+                <button type="submit" class="btn btn-primary" *ngIf="!editMode">Add Note</button>
             </form>
         </div>
     </div>

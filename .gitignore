@@ -353,3 +353,4 @@ MigrationBackup/
 /SQL2019-SSEI-Dev.exe
 /SQL2019-SSEI-Expr.exe
 XYZEngineeringProject.UI/.angular/cache
+XYZEngineeringProject/XYZEngineeringProject.Web/appsettings.json

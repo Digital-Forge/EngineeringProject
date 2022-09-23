@@ -9,7 +9,8 @@ import {TranslateService} from "@ngx-translate/core";
 export class AppComponent {
   title = 'XYZEngineeringProject.UI';
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
-    translate.use('en');
+    //TODO ustawić tłumaczenie na wybrane przez użytkownika
+    translate.setDefaultLang('pl');
+    translate.use('pl');
   }
 }

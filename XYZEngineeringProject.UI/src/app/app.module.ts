@@ -1,3 +1,4 @@
+import { NavbarComponent } from './shared/navbar/navbar/navbar.component';
 import { InterceptorService } from './services/interceptor/interceptor.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,7 +39,8 @@ import { ClientFiltersComponent } from './components/client/filters/filters.comp
     ClientFiltersComponent,
     AppUserListComponent,
     AddAppUserComponent,
-    EditAppUserComponent
+    EditAppUserComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

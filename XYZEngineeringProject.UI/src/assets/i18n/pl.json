@@ -1,4 +1,14 @@
 {
+    "Menu": {
+        "tasks": "Zadania",
+        "calendar": "Kalendarz",
+        "clients": "Klienci",
+        "leaves": "Urlopy",
+        "announcements": "Ogłoszenia",
+        "documents": "Dokumenty",
+        "chat": "Komunikator",
+        "settings": "Ustawienia"
+    },
     "Client": {
         "name": "Nazwa",
         "email": "Email",

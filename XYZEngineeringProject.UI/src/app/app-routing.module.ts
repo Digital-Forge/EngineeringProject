@@ -23,15 +23,15 @@ const routes: Routes = [
     component: TaskListComponent
   },
   {
-    path: 'tasks/add',
+    path: 'task/add',
     component: AddTaskComponent
   },
   {
-    path: 'tasks/edit/:id',
+    path: 'task/edit/:id',
     component: EditTaskComponent
   },
   {
-    path: 'client',
+    path: 'clients',
     component: ClientIndexComponent
   },
   {

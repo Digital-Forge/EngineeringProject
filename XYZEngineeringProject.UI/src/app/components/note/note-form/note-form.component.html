@@ -1,0 +1,24 @@
+<div>
+    <div *ngIf="editMode;else header">
+        <h1 class="mb-3 header">Edit Note</h1>
+    </div>
+    <ng-template #header>
+        <h1 class="mb-3 header">Add New Note</h1>
+    </ng-template>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 form">
+            <form (ngSubmit)="submit()">
+                <div class="mb-3">
+                    <label for="noteStatus" class="form-label">Note Status</label><br>
+                    <select id="prionoteStatusrity" name="noteStatus" class="form-control" [(ngModel)]="noteDetails.noteStatus"
+                        (ngModelChange)="onChange($event)">
+                        <option *ngFor="let noteStatus of noteStatuses">
+                            {{noteStatus}}
+                        </option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

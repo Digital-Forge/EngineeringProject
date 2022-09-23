@@ -1,17 +1,18 @@
-import { TaskService } from './../../../services/tasks/task.service';
-import { DatePipe, formatDate } from '@angular/common';
-import { Task } from '../../../models/task.model'
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
+import { TaskService } from 'src/app/services/tasks/task.service';
+import { Task } from '../../../models/task.model'
 
 @Component({
-  selector: 'app-edit-task',
-  templateUrl: './edit-task.component.html',
-  styleUrls: ['./edit-task.component.css']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class EditTaskComponent implements OnInit {
+export class UserTaskFormComponent implements OnInit {
 
+  public editMode: boolean = false;
   public Priority2LabelMapping = Priority2LabelMapping
   public priorityTypes = Object.values(Priority).filter(value => typeof value === "string");
   public selectorPriority: string = '';
@@ -35,18 +36,26 @@ export class EditTaskComponent implements OnInit {
             next: (response) => {
               this.taskDetails = response;
               this.selectorPriority = this.Priority2LabelMapping[this.taskDetails.priority];              
-              this.selectorDate = this.pipe.transform(this.taskDetails.deadline, 'yyy-MM-dd');
+              this.selectorDate = this.pipe.transform(this.taskDetails.deadline, 'yyyy-MM-dd');
+              this.editMode = true;          
             }
           })
         }
       }
     })
-    
-
   }
 
   onChange(event: Priority) {
     this.taskDetails.priority = Object.values(Priority).indexOf(event);    
+  }
+
+  submit() {
+    if (this.editMode) {
+      this.saveChanges();
+    }
+    else {
+      this.addTask();
+    }
   }
 
   saveChanges(){
@@ -57,4 +66,13 @@ export class EditTaskComponent implements OnInit {
       }
     })
   }
+
+  addTask() {
+    this.taskService.addTask(this.taskDetails).subscribe({
+      next: (task) => {
+        this.router.navigate(['tasks']);
+      }
+    })
+  }
+
 }

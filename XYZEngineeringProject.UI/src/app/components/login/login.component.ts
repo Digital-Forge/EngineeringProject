@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { AuthorizationService } from './../../services/authorization/authorization.service';
 import { Login } from './../../models/login.model';
 import { Component, OnInit } from '@angular/core';

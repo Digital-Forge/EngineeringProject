@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Task } from 'src/app/models/task.model';
-import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 
 @Component({
-  selector: 'app-task-list',
-  templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  selector: 'user-task-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.css']
 })
-export class TaskListComponent implements OnInit {
+export class UserTaskIndexComponent implements OnInit {
 
   public Priority2LabelMapping = Priority2LabelMapping
   public priorityTypes = Object.values(Priority).filter(value => typeof value === 'number');

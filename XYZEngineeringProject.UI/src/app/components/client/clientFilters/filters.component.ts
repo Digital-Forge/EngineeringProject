@@ -1,4 +1,4 @@
-import { Client, ClientResponse } from './../../../models/client.model';
+import { Client, ClientResponse } from '../../../models/client.model';
 import { AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Route, Router, ActivatedRoute } from '@angular/router';

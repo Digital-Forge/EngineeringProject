@@ -160,3 +160,7 @@ iframe {
 .hidden {
     visibility: hidden;
 }
+
+.header {
+    text-align: center;
+}

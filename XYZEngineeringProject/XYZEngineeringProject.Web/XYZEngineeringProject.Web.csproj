@@ -25,4 +25,6 @@
     <ProjectReference Include="..\XYZEngineeringProject.Infrastructure\XYZEngineeringProject.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://goreleaser.com/static/schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

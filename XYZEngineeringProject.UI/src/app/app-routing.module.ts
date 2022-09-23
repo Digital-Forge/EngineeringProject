@@ -1,3 +1,4 @@
+import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
 import { NoteComponent } from './components/note/note.component';
@@ -23,12 +24,9 @@ const routes: Routes = [
     path: 'tasks',
     component: UserTaskComponent,
     children: [
-      {
-        path: '', component: UserTaskIndexComponent },
-      {
-        path: 'add', component: UserTaskFormComponent },
-      {
-        path: 'edit/:id', component: UserTaskFormComponent },
+      { path: '', component: UserTaskIndexComponent },
+      { path: 'add', component: UserTaskFormComponent },
+      { path: 'edit/:id', component: UserTaskFormComponent },
     ]
   },
   {
@@ -60,12 +58,20 @@ const routes: Routes = [
     path: 'note',
     component: NoteComponent,
     children: [
-
       { path: '', component: NoteIndexComponent },
       { path: 'add', component: NoteFormComponent },
       { path: 'edit/:id', component: NoteFormComponent}
     ]
-  }
+  },
+  {
+    path: 'calendar',
+    component: UserTaskComponent,
+    children: [
+      { path: '', component: CalendarComponent },
+      // { path: 'add', component: UserTaskFormComponent },
+      // { path: 'edit/:id', component: UserTaskFormComponent },
+    ]
+  },
 ];
 
 @NgModule({

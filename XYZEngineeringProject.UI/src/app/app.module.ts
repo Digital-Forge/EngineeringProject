@@ -27,6 +27,7 @@ import { NoteComponent } from './components/note/note.component';
 import { NoteFilterComponent } from './components/note/note-filter/note-filter.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
+import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NoteFormComponent } from './components/note/note-form/note-form.compone
     NoteComponent,
     NoteFilterComponent,
     NoteIndexComponent,
-    NoteFormComponent
+    NoteFormComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

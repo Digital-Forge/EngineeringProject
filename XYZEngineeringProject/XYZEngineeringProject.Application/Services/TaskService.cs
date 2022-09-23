@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,12 @@ namespace XYZEngineeringProject.Application.Services
     public class TaskService : ITaskService
     {
         private readonly ITaskRepository _taskRepository;
-        public TaskService(ITaskRepository taskRepository)
+        private readonly IMapper _mapper;
+
+        public TaskService(ITaskRepository taskRepository, IMapper mapper)
         {
             _taskRepository = taskRepository;
+            _mapper = mapper;
         }
 
         public bool AddTask(TaskVM taskRequest)
@@ -54,6 +58,11 @@ namespace XYZEngineeringProject.Application.Services
         public bool EditTask(TaskVM editTaskRequest)
         {
             var task = _taskRepository.GetTaskById(editTaskRequest.Id);
+            task.Title = editTaskRequest.Title;
+            task.Description = editTaskRequest.Description;
+            task.Priority = editTaskRequest.Priority;
+            task.Deadline = editTaskRequest.Deadline;
+
             return _taskRepository.Update(task);
         }
     }

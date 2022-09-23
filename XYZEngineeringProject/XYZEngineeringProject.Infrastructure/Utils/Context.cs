@@ -146,7 +146,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             softDataCheckChanges();
             return base.SaveChanges();
         }
-
+        /*
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             softDataCheckChanges();
@@ -163,7 +163,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         {
             softDataCheckChanges();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-        }
+        }*/
 
         public int SaveChangesHard()
         {

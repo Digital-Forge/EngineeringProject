@@ -26,7 +26,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         public Guid? CreateAdmin(AppUser admin)
         {
             admin.Id = Guid.Empty;
-            admin.CompanyId = null;
+            admin.CompanyId = _context.LogicCompanies.FirstOrDefault()?.Id;
             admin.CreateDate = DateTime.Now;
             admin.UpdateDate = DateTime.Now;
             admin.CreateBy = Guid.Empty;
@@ -48,7 +48,8 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public void InitHelloWorld()
         {
-            
+            _context.LogicCompanies.Add(new Domain.Models.EntityUtils.LogicCompany { Name = "Nicość" });
+            _context.SaveChanges();
         }
     }
 }

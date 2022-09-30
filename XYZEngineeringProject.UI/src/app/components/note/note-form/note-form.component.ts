@@ -3,6 +3,7 @@ import { NoteStatus } from './../../../models/noteStatus.enum';
 import { Note } from './../../../models/note.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-note-form',
@@ -22,10 +23,26 @@ export class NoteFormComponent implements OnInit {
   public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
   public selectorDate: any
   public noteStatus: any
+  public pipe = new DatePipe('en-GB');
 
   constructor(private route: ActivatedRoute, private router: Router, private noteService: NoteService) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe({
+      next: (params) => {
+        const id = params.get('id');
+        if (id) {
+          this.noteService.getNote(id).subscribe({
+            next: (response) => {
+              this.noteDetails = response;
+              this.noteStatus = this.noteStatuses[this.noteDetails.noteStatus];              
+              this.selectorDate = this.pipe.transform(this.noteDetails.date, 'yyyy-MM-dd');
+              this.editMode = true;          
+            }
+          })
+        }
+      }
+    })
   }
 
   submit() {
@@ -37,10 +54,23 @@ export class NoteFormComponent implements OnInit {
     }
   }
   onChange(event: NoteStatus) {
+    this.noteDetails.noteStatus = Object.values(NoteStatus).indexOf(event);
+  }
+  updateDate(event: Date)
+  {
+    this.noteDetails.date = event;
   }
 
   saveChanges() {
-    throw new Error('Function not implemented.');
+    this.noteService.saveChanges(this.noteDetails).subscribe({
+      next: (res) =>
+      {
+        if(res == true)
+        {
+          window.location.reload();
+        }
+      }
+    });
   }
   
   addNote() {

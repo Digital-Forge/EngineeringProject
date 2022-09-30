@@ -21,4 +21,12 @@ export class NoteService {
     noteDetails.id = this.emptyGuid;
     return this.http.post<Note>(this.baseApiUrl + 'Note/AddNote', noteDetails)
   }
+
+  getNote(id: string): Observable<Note> {
+    return this.http.get<Note>(this.baseApiUrl + 'Note/EditNote/' + id);
+  }
+
+  saveChanges(editNoteRequest: Note): Observable<any> {
+    return this.http.put(this.baseApiUrl + 'Note/EditNote', editNoteRequest);
+  }
 }

@@ -1,4 +1,7 @@
+import { NoteService } from './../../../services/notes/note.service';
+import { Note } from './../../../models/note.model';
 import { Component, OnInit } from '@angular/core';
+import { NoteStatus } from 'src/app/models/noteStatus.enum';
 
 @Component({
   selector: 'app-note-index',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoteIndexComponent implements OnInit {
 
-  constructor() { }
+  public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
+  notes: Note[] = [];
+  constructor(private noteService: NoteService) { }
 
   ngOnInit(): void {
+    this.noteService.getAllNotes().subscribe({
+      next: (notes) => {
+        this.notes = notes
+      },
+      error: (res) => {
+        console.log(res);        
+      }
+    })
   }
 
 }

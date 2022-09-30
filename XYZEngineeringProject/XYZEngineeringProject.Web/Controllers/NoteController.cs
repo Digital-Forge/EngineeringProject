@@ -29,9 +29,15 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditTask(string id)
+        public IActionResult EditNote(string id)
         {
             return Ok(_noteService.GetAllNotes().FirstOrDefault(x => x.Id == Guid.Parse(id)));
+        }
+
+        [HttpPut]
+        public IActionResult EditNote([FromBody] NoteVM editNoteRequest)
+        {
+            return Ok(_noteService.EditNote(editNoteRequest));
         }
     }
 }

@@ -38,12 +38,26 @@ namespace XYZEngineeringProject.Application.Services
 
         public bool EditNote(NoteVM noteVM)
         {
-            throw new NotImplementedException();
+            var note = _noteRepository.GetNoteById(noteVM.Id);
+            if (note !=null)
+            {
+                note.Date = noteVM.Date;
+                note.Title = noteVM.Title;
+                note.NoteStatus = noteVM.NoteStatus;
+                return _noteRepository.Update(note);
+            }
+            return false;
         }
 
         public List<NoteVM> GetAllNotes()
         {
-            throw new NotImplementedException();
+            return _noteRepository.GetAll().Select(x => new NoteVM
+            {
+                Date = x.Date,
+                Title = x.Title,
+                Id = x.Id,
+                NoteStatus = x.NoteStatus
+            }).ToList();
         }
     }
 }

@@ -17,7 +17,7 @@ export class UserTaskFormComponent implements OnInit {
   public priorityTypes = Object.values(Priority).filter(value => typeof value === "string");
   public selectorPriority: string = '';
   public selectorDate: any;
-  public pipe = new DatePipe('en-US');
+  public pipe = new DatePipe('en-GB');
   taskDetails: Task = {
     id: '',
     deadline: new Date(),

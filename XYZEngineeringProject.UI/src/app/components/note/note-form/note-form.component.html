@@ -24,7 +24,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="selectorDate" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="selectorDate" name="selectorDate" [(ngModel)]="selectorDate">
+                    <input type="date" class="form-control" id="selectorDate" name="selectorDate" [(ngModel)]="selectorDate" (ngModelChange)="updateDate($event)">
                 </div>
                 <button type="submit" class="btn btn-primary" *ngIf="editMode">Save</button>
                 <button type="submit" class="btn btn-primary" *ngIf="!editMode">Add Note</button>

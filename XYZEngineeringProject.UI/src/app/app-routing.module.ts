@@ -1,3 +1,4 @@
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
@@ -14,6 +15,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserTaskIndexComponent } from './components/user-task/userTaskIndex/index.component';
 import { UserTaskComponent } from './components/user-task/user-task.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,38 +23,48 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'tasks',
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'tasks', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
     component: UserTaskComponent,
     children: [
       { path: '', component: UserTaskIndexComponent },
       { path: 'add', component: UserTaskFormComponent },
       { path: 'edit/:id', component: UserTaskFormComponent },
-    ]
+    ],
+    canActivate: [AuthGuard] 
   },
   {
     path: 'clients',
-    component: ClientIndexComponent
+    component: ClientIndexComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'client/:id',
-    component: ClientViewComponent
+    component: ClientViewComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'client/:id/edit',
     component: ClientFormComponent,
-    //tu będzie dodawane zabezpieczenie wejścia na stronę
+    canActivate: [AuthGuard] 
   },
   {
     path: 'appusers',
-    component: AppUserListComponent
+    component: AppUserListComponent,
+    canActivate: [AuthGuard] // TODO zabezpieczenie dostępu tylko dla wybranych ról ?
   },
   {
     path: 'appusers/add',
-    component: AddAppUserComponent
+    component: AddAppUserComponent,
+    canActivate: [AuthGuard] // TODO zabezpieczenie dostępu tylko dla wybranych ról ?
   },
   {
     path: 'appusers/edit/:id',
-    component: EditAppUserComponent
+    component: EditAppUserComponent,
+    canActivate: [AuthGuard] // TODO zabezpieczenie dostępu tylko dla wybranych ról ?
   },
   {
     path: 'note',
@@ -61,7 +73,8 @@ const routes: Routes = [
       { path: '', component: NoteIndexComponent },
       { path: 'add', component: NoteFormComponent },
       { path: 'edit/:id', component: NoteFormComponent}
-    ]
+    ],
+    canActivate: [AuthGuard] 
   },
   {
     path: 'calendar',
@@ -70,7 +83,8 @@ const routes: Routes = [
       { path: '', component: CalendarComponent },
       // { path: 'add', component: UserTaskFormComponent },
       // { path: 'edit/:id', component: UserTaskFormComponent },
-    ]
+    ],
+    canActivate: [AuthGuard] 
   },
 ];
 

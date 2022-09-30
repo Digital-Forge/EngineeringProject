@@ -10,15 +10,16 @@ import { Task } from 'src/app/models/task.model';
 })
 export class UserTaskIndexComponent implements OnInit {
 
-  public Priority2LabelMapping = Priority2LabelMapping
+  public Priority2LabelMapping = Priority2LabelMapping;
   public priorityTypes = Object.values(Priority).filter(value => typeof value === 'number');
   tasks: Task[] = [];
+
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
     this.taskService.getAllTasks().subscribe({
       next: (tasks) => {
-        this.tasks = tasks
+        this.tasks = tasks;
       },
       error: (response) => {
         console.log(response);

@@ -1,167 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
-@import "menu.css";
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
-
-:root {   
-    --shadow-rgba: rgba(0, 0, 0, 0.15);
-    --primary: #bbddfa;
-    --primary-rgb: rgb(187, 221, 250);
-    --table-inner-border: rgb(168, 168, 168);
-    --shadow-rgba: rgba(0, 0, 0, 0.15);
-}
-
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-html {
-    position: relative;
-    min-height: 100%;
+:root {
+    --primary: #385485;
+    --secondary: #B3E3F2;
+    --dark-gray: #3D3D3D;
+    --gray: #BFBFBF;
+    --light-gray: #E6E6E6;
+    --success-primary: #33A68F;
+    --success-secondary: #f7ffea;
+    --warning-primary: #eeaa17;
+    --warning-secondary: #fff5c7;
+    --danger-primary: #BD3C43;
+    --danger-secondary: #ffeaeb;
+    --primary-box-shadow: 0px 0px 20px -15px var(--primary);
+    --secondary-box-shadow: 0px 0px 10px 0px var(--secondary);
 }
 
 body {
-    margin-bottom: 60px;
+    text-transform: capitalize;
 }
 
-
-/* TODO kolorki tylko dla active i hover, dla reszty default */
-.bg-primary {
-    --bg-opacity: 1;
-    background-color: rgba(var(--primary-rgb), var(--bg-opacity)) !important;
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 0rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    /* border-left: 2px solid var(--primary); */
+    /* -webkit-text-stroke-color: var(--secondary);
+    -webkit-text-fill-color: var(--primary);
+    -webkit-text-stroke-width: 2px; */
 }
 
-.bg-white {
-    background-color: white;
+table {
+    border: 0px !important;
 }
 
-.shadow-center {
-    box-shadow: 0 0 0.75rem var(--shadow-rgba) !important;
+thead {
+    /* text-transform: lowercase; */
+    /* background-color: var(--secondary); */
+    font-weight: 400;
+}
+.bi {
+    -webkit-text-stroke-width: 1.25px;
+    -webkit-text-stroke-color: var(--primary);
+    -webkit-text-fill-color: white;
+    /* text-shadow: 0 0 5px var(--secondary); */
 }
 
-.shadow-right {
-    box-shadow: 0.25rem 0 0.5rem var(--shadow-rgba) !important;
+.bg-success {
+    background-color: var(--success-primary) !important;
 }
 
-.veritcal-align-top {
-    position: sticky;
-    top: 0;
+.bg-warning {
+    background-color: var(--warning-primary) !important;
 }
 
-.vertical-align-middle {
-    position: sticky;
-    transform: translateY(-50%);
-    top: 50vh;
+.bg-danger {
+    background-color: var(--danger-primary) !important;
 }
 
-.vertical-align-bottom {
-    position: sticky;
-    top: 100vh;
+.btn {
+    border-radius: 50px;
+    padding: 0 2em;
+    text-transform: lowercase;
 }
 
-img.user-image {
-    border-radius: 50%;
-}
-
-.container {
-    display:flex;
-    /* justify-content:center; */
-}
-
-@media (max-width: 575px) {
-    .container-sm, .container {
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-    }
-}
-
-@media (min-width: 576px) {
-    .container-sm, .container {
-        max-width: calc(520px - var(--menu-width));
-    }
-}
-
-@media (min-width: 768px) {
-    .container-md, .container-sm, .container {
-        max-width: calc(710px - var(--menu-width));
-    }
-}
-
-@media (min-width: 992px) {
-    .container-lg, .container-md, .container-sm, .container {
-        max-width: calc(930px - var(--menu-width));
-    }
-}
-
-@media (min-width: 1200px) {
-    .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: calc(1140px - var(--menu-width));
-    }
-}
-
-@media (min-width: 1400px) {
-    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: calc(1320px - var(--menu-width));
-    }
-}
-
-.iframe-holder {
-    position: fixed;
-    width: calc(100% - 60px);
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    margin-left: 60px;
-    float: left;
-    box-sizing: border-box;
-    z-index: 0;
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    padding: 20px 20px 20px 20px;
-}
-
-.container {
-    height: 100%;
-    margin-left: 60px;
+.btn-primary {
     background-color: transparent;
+    color: var(--primary);
+    border: 0;
+    outline: 2px solid var(--secondary);
+    /* outline-offset: 2px; */
+    /* box-shadow: var(--secondary-box-shadow);   */
 }
 
-.container-h100-w50 {
-    position: relative;
-    margin: 0;
-    min-width: 600px;
-    max-width: calc(100% - 100px);
-    height: auto;
-    float: left;
-}
-
-@media screen and (max-width: 900px) {
-    /* Add a pseudo element with the 
-       text from attribute 'data-abbr' */
-    th.weekday[data-abbr]::after {
-        content: attr(data-abbr);
-    }
-
-    /* Hide the original label */
-    th.weekday > span {
-        display: none;
-    }
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-.header {
-    text-align: center;
+.shadow-primary {
+    box-shadow: var(--primary-box-shadow);
 }

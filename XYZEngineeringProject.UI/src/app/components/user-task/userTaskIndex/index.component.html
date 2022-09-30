@@ -1,27 +1,40 @@
 <div class="container-fluid my-5">
-    <h1 class="mb-3">Tasks</h1>
-    <table class="table" *ngIf="tasks && tasks.length >0">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>DeadLine</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Priority</th>
-                <th> </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let task of tasks">
-                <td>{{task.id}}</td>
-                <td>{{task.deadline | date:'dd/MM/yyyy'}}</td>
-                <td>{{task.title}}</td>
-                <td>{{task.description}}</td>
-                <td>{{Priority2LabelMapping[task.priority]}}</td>
-                <td><a [routerLink]="['/tasks', 'edit', task.id]">View</a></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row mb-5">
+        <h1 class="col-10">{{ 'Task.tasks' | translate }}</h1>
+        <div class="col-2 d-flex justify-content-end">
+            <button class="btn btn-primary" [routerLink]="['/tasks', 'add']">{{ 'Button.add' | translate }}</button>
+        </div>
+    </div>  
+    <div>
+        <table class="table table-stripped" *ngIf="tasks && tasks.length >0">
+            <thead>
+                <tr>
+                    <!-- <th>{{ 'Task.id' | translate }}</th> -->
+                    <th>{{ 'Task.deadline' | translate }}</th>
+                    <th>{{ 'Task.title' | translate }}</th>
+                    <th>{{ 'Task.description' | translate }}</th>
+                    <th>{{ 'Task.priority' | translate }}</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of tasks">
+                    <!-- <td>{{task.id}}</td> -->
+                    <td>{{task.deadline | date:'dd/MM/yyyy'}}</td>
+                    <td>{{task.title}}</td>
+                    <td>{{task.description}}</td>
+                    <td><span class="badge badge-light" [ngClass]="{'bg-success': Priority2LabelMapping[task.priority] == 'Low',
+                    'bg-warning': Priority2LabelMapping[task.priority] == 'Medium',
+                    'bg-danger': Priority2LabelMapping[task.priority] == 'High'}">
+                        {{ 'Priority.' + Priority2LabelMapping[task.priority] | translate}}</span>  
+                    </td>
+                    <td>
+                        <a [routerLink]="['/tasks', 'edit', task.id]">{{ 'Button.edit' | translate }}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <p *ngIf="!tasks || tasks.length <= 0">No tasks found</p>
 </div>
 <router-outlet></router-outlet>

@@ -1,33 +1,35 @@
 <div class="d-flex align-items-start">
-    <div class="nav flex-column nav-pills m-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active mb-2" href="tasks">
-            <i class="bi bi-stickies-fill" title="{{ 'Menu.tasks' | translate }}"></i>              
+    <div *ngIf="isAuthorized" class="nav flex-column nav-pills m-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <!-- TODO podmieniać routerLinki w miarę powstawania komponentów (to też naprawi problem stylu aktywnego linku na dashboard) -->
+        <a class="nav-link mb-2" routerLink="dashboard" routerLinkActive="active">
+            <i class="bi bi-person-fill" title="{{ 'Menu.dashboard' | translate }}"></i>              
         </a>
-        <a class="nav-link" href="calandar">
+        <a class="nav-link mb-2" routerLink="note" routerLinkActive="active">
+            <i class="bi bi-stickies-fill" title="{{ 'Menu.note' | translate }}"></i>              
+        </a>
+        <a class="nav-link mb-2" routerLink="tasks" routerLinkActive="active">
+            <i class="bi bi-list-ul" title="{{ 'Menu.tasks' | translate }}"></i>              
+        </a>
+        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-calendar-week-fill" title="{{ 'Menu.calendar' | translate }}"></i>            
         </a>
-        <a class="nav-link" href="clients">
+        <a class="nav-link" routerLink="clients" routerLinkActive="active">
             <i class="bi bi-people-fill clients" title="{{ 'Menu.clients' | translate }}"></i>
         </a>
-        <a class="nav-link" href="">
+        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-door-open-fill" title="{{ 'Menu.leaves' | translate }}"></i>
         </a>
-        <a class="nav-link" href="">
+        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-megaphone-fill" title="{{ 'Menu.announcements' | translate }}"></i>
         </a>
-        <a class="nav-link" href="">
+        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-folder-fill" title="{{ 'Menu.documents' | translate }}"></i>
         </a>
-        <a class="nav-link" href="">
+        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-chat-text-fill" title="{{ 'Menu.chat' | translate }}"></i>
         </a>
-        <a class="nav-link" href="">
-            <i class="bi bi-serttings-fill" title="{{ 'Menu.settings' | translate }}"></i>
+        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+            <i class="bi bi-gear-fill" title="{{ 'Menu.settings' | translate }}"></i>
         </a>
-    </div>
-    <div class="tab-content w-100 h-100" style="background-color: lightblue;">
-        
-            <router-outlet></router-outlet>
-        
     </div>
 </div>

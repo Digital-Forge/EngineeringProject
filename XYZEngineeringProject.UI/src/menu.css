@@ -1,4 +1,4 @@
-﻿:root { 
+﻿/* :root { 
     --menu-icon-height: 2.5em;
     --menu-icon-height-hover: 3em;
     --menu-icon-width: 2.5em;
@@ -17,11 +17,11 @@
     --announcements-theme: rgb(23, 33, 172);
     --documents-theme: rgb(224, 163, 31);
     --chat-theme: rgb(136, 206, 211);
-    --settings-theme: rgb(34, 34, 34);*/
+    --settings-theme: rgb(34, 34, 34);
 }
 
 
-@media (max-width: 575px), (max-height: 730px) /*small screen menu display */ {
+@media (max-width: 575px), (max-height: 730px) {
     #menu {
         display: none;
         visibility: hidden;
@@ -36,7 +36,7 @@
     }
 }
 
-@media (min-width: 576px) and (min-height: 731px) /*large screen menu display */ {
+@media (min-width: 576px) and (min-height: 731px)  {
     #menu {
         display: inline;
         position: absolute;
@@ -58,7 +58,7 @@
     width: 1em;
     padding: 0px 0px;
     margin: 0.2em 0.1em;
-    /* background-color: lightcoral; */
+ background-color: lightcoral;
 }
 
 .menu-item > img {
@@ -104,4 +104,4 @@
     padding: 10px;
     border-radius: 10px;
     z-index: 3;
-}
+} */

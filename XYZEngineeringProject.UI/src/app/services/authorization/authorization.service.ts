@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AuthorizationService {
 
   baseApiUrl: string = environment.baseApiUrl;
+  protected isLoggedIn = false;
   constructor(private http: HttpClient, private router: Router) { }
 
   login(login: Login) {
@@ -19,5 +20,9 @@ export class AuthorizationService {
         this.router.navigate(['tasks']);
       }
     });
+  }
+
+  getAuthStatus() {
+    return localStorage.getItem('token') ? true : false;
   }
 }

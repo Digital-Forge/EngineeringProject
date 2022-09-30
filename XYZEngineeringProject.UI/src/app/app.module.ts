@@ -1,3 +1,4 @@
+import { AuthorizationService } from './services/authorization/authorization.service';
 import { NavbarComponent } from './shared/navbar/navbar/navbar.component';
 import { InterceptorService } from './services/interceptor/interceptor.service';
 import { NgModule } from '@angular/core';
@@ -28,6 +29,7 @@ import { NoteFilterComponent } from './components/note/note-filter/note-filter.c
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { CalendarComponent } from './components/calendar/calendar/calendar.compo
     NoteFilterComponent,
     NoteIndexComponent,
     NoteFormComponent,
-    CalendarComponent
+    CalendarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,10 @@ import { CalendarComponent } from './components/calendar/calendar/calendar.compo
         }
     })
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass:InterceptorService, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:InterceptorService, multi: true},
+    AuthorizationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

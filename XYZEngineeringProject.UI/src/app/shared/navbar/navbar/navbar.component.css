@@ -1,0 +1,19 @@
+.nav-link {
+    padding: 5px 10px;
+}
+
+.bi:hover {
+    -webkit-text-stroke-color: var(--secondary);
+}
+
+.bi {
+    font-size: 24px;
+}
+
+.nav-link.active {
+    background-color: transparent;
+}
+
+.nav-link.active >.bi {
+    -webkit-text-stroke-color: var(--secondary);
+}

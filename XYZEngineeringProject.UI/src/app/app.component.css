@@ -1,1 +1,22 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+.sidebar {
+    box-shadow: 1px 0px 20px -15px var(--primary);  
+    /* box-shadow: 5px 0px 20px 0px rgba(61,61,61,0.5); */
+    width: 64px;
+    height: 100vh;
+    position: fixed;
+    float: left;
+}
+.sidebar-items {
+    margin-top: calc((100vh - 392px) / 2);
+    height: 392px;
+}
+
+.router-outlet {
+    width: calc(100vw - 64px);
+    height: auto;
+    margin-left: 64px;
+    float: left;
+    padding: 0 15px;
+}

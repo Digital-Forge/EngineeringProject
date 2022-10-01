@@ -15,7 +15,7 @@
 
 .router-outlet {
     width: calc(100vw - 64px);
-    height: auto;
+    height: 100vh;
     margin-left: 64px;
     float: left;
     padding: 0 15px;

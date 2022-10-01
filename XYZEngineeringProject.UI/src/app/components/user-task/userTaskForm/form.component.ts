@@ -13,7 +13,7 @@ import { Task } from '../../../models/task.model'
 export class UserTaskFormComponent implements OnInit {
 
   public editMode: boolean = false;
-  public Priority2LabelMapping = Priority2LabelMapping
+  public Priority2LabelMapping = Priority2LabelMapping;
   public priorityTypes = Object.values(Priority).filter(value => typeof value === "string");
   public selectorPriority: string = '';
   public selectorDate: any;

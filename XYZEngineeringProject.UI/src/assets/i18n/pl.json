@@ -1,7 +1,9 @@
 {
     "Button": {
         "edit": "Edytuj",
-        "add": "Dodaj"
+        "add": "Dodaj",
+        "done": "Ukończone",
+        "restore": "Przywróć"
     },
     "Menu": {
         "tasks": "Zadania",

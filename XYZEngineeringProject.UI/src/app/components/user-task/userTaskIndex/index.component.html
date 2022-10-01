@@ -1,40 +1,59 @@
 <div class="container-fluid my-5">
     <div class="row mb-5">
-        <h1 class="col-10">{{ 'Task.tasks' | translate }}</h1>
-        <div class="col-2 d-flex justify-content-end">
-            <button class="btn btn-primary" [routerLink]="['/tasks', 'add']">{{ 'Button.add' | translate }}</button>
+        <h1 class="col-9">{{ 'Task.tasks' | translate }}</h1>
+        <div class="col-3 d-flex justify-content-end">
+            <a class="btn btn-md btn-dark" [routerLink]="['/tasks', 'add']">
+                <i class="bi bi-plus-lg me-1"></i>{{ 'Button.add' | translate }}
+            </a>
         </div>
-    </div>  
-    <div>
-        <table class="table table-stripped" *ngIf="tasks && tasks.length >0">
-            <thead>
-                <tr>
-                    <!-- <th>{{ 'Task.id' | translate }}</th> -->
-                    <th>{{ 'Task.deadline' | translate }}</th>
-                    <th>{{ 'Task.title' | translate }}</th>
-                    <th>{{ 'Task.description' | translate }}</th>
-                    <th>{{ 'Task.priority' | translate }}</th>
-                    <th> </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let task of tasks">
-                    <!-- <td>{{task.id}}</td> -->
-                    <td>{{task.deadline | date:'dd/MM/yyyy'}}</td>
-                    <td>{{task.title}}</td>
-                    <td>{{task.description}}</td>
-                    <td><span class="badge badge-light" [ngClass]="{'bg-success': Priority2LabelMapping[task.priority] == 'Low',
-                    'bg-warning': Priority2LabelMapping[task.priority] == 'Medium',
-                    'bg-danger': Priority2LabelMapping[task.priority] == 'High'}">
-                        {{ 'Priority.' + Priority2LabelMapping[task.priority] | translate}}</span>  
-                    </td>
-                    <td>
-                        <a [routerLink]="['/tasks', 'edit', task.id]">{{ 'Button.edit' | translate }}</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-    <p *ngIf="!tasks || tasks.length <= 0">No tasks found</p>
-</div>
-<router-outlet></router-outlet>
+    <div>
+        <div class="card-columns">
+            <div *ngFor="let task of tasks">
+                <div class="card card-corner p-1 mb-3" *ngIf="Priority2LabelMapping[task.priority] != 'Done'; else done">
+                    <div class="card-body">
+                        <div class="card-subtitle text-center mb-2">
+                            {{task.deadline | date:'dd-MM-yyyy'}}
+                        </div>
+
+                        <div class="note-priority" [ngClass]="{
+                            'bg-success': Priority2LabelMapping[task.priority] == 'Low',
+                            'bg-warning': Priority2LabelMapping[task.priority] == 'Medium',
+                            'bg-danger': Priority2LabelMapping[task.priority] == 'High',
+                            'bg-secondary': Priority2LabelMapping[task.priority] == 'No'}"></div>
+
+                        <h3 class="card-title text-center mb-2">{{task.title}}</h3>
+                        <div class="card-text text-justify mb-2">{{task.description}}</div>
+
+                        <div class="d-flex justify-content-end mt-3">
+                            <a class="btn btn-sm btn-light me-2" [routerLink]="['/tasks', 'edit', task.id]">
+                                <i class="bi bi-pencil-square me-1"></i>
+                                {{ 'Button.edit' | translate }}
+                            </a>
+                            <a class="btn btn-sm btn-success-light" (click)="completeTask(task.id)">
+                                <i class="bi bi-check2-square me-1"></i>{{ 'Button.done' | translate }}                               
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #done>
+                    <div class="card text-secondary p-1 mb-3">
+                        <div class="card-body">
+                            <div class="card-subtitle text-center">{{task.deadline | date:'dd/MM/yyyy'}}</div>
+                            <div class="note-corner bg-secondary"></div>
+
+                            <h3 class="card-title text-center text-decoration-line-through">{{task.title}}</h3>
+
+                            <div class="d-flex justify-content-end mt-3">
+                                <a class="card-link btn btn-sm btn-light" (click)="restoreTask(task.id)">
+                                    {{ 'Button.restore' | translate }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <p *ngIf="!tasks || tasks.length <= 0">No tasks found</p>
+    </div>
+    <router-outlet></router-outlet>

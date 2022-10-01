@@ -1,7 +1,7 @@
 :root {
-    --primary: #385485;
-    --secondary: #B3E3F2;
-    --dark-gray: #3D3D3D;
+    --primary: #3d64a2;
+    --secondary: #a4d2ff;
+    --dark-gray: #444447;
     --gray: #BFBFBF;
     --light-gray: #E6E6E6;
     --success-primary: #33A68F;
@@ -10,23 +10,32 @@
     --warning-secondary: #fff5c7;
     --danger-primary: #BD3C43;
     --danger-secondary: #ffeaeb;
-    --primary-box-shadow: 0px 0px 20px -15px var(--primary);
+    --primary-box-shadow: 0px 0px 15px 5px var(--primary);
     --secondary-box-shadow: 0px 0px 10px 0px var(--secondary);
+    --note-border: 1px solid var(--light-gray);
 }
 
 body {
-    text-transform: capitalize;
+        font-weight: 400 !important;
+        letter-spacing: 0rem;
 }
 
 h1 {
     text-transform: uppercase;
-    letter-spacing: 0rem;
     font-size: 1.5rem;
     font-weight: 400;
-    /* border-left: 2px solid var(--primary); */
-    /* -webkit-text-stroke-color: var(--secondary);
-    -webkit-text-fill-color: var(--primary);
-    -webkit-text-stroke-width: 2px; */
+}
+
+h2 {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 400;
 }
 
 table {
@@ -38,9 +47,9 @@ thead {
     /* background-color: var(--secondary); */
     font-weight: 400;
 }
-.bi {
+.nav-link > .bi {
     -webkit-text-stroke-width: 1.25px;
-    -webkit-text-stroke-color: var(--primary);
+    -webkit-text-stroke-color: var(--dark-gray);
     -webkit-text-fill-color: white;
     /* text-shadow: 0 0 5px var(--secondary); */
 }
@@ -57,21 +66,135 @@ thead {
     background-color: var(--danger-primary) !important;
 }
 
+.bg-secondary {
+    background-color: var(--light-gray) !important;
+}
+
 .btn {
-    border-radius: 50px;
-    padding: 0 2em;
-    text-transform: lowercase;
+    border-radius: 14px;
+    border: 0 !important;
+    padding: 0.25em 1em 0.35em;
+    /* text-transform: uppercase; */
+    box-shadow: 0 0 5px 1px var(--light-gray);
 }
 
 .btn-primary {
-    background-color: transparent;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    color: var(--primary);  
+    background-color: white;
+    border: 1px solid var(--primary);
+}
+
+.btn-secondary {
+    background-color: white;
     color: var(--primary);
-    border: 0;
-    outline: 2px solid var(--secondary);
-    /* outline-offset: 2px; */
-    /* box-shadow: var(--secondary-box-shadow);   */
+    border: 1px solid var(--secondary);
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+    background-color: var(--secondary);
+    color: white;  
+    border: 1px solid var(--secondary);
+}
+
+.btn-light {
+    color: var(--dark-gray);
+    background-color: white;
+    border: 1px solid var(--dark-gray);
+}
+
+.btn-light:hover, .btn-light:focus {
+    background-color: var(--dark-gray);
+    color: white;  
+    border: 1px solid var(--dark-gray);
+}
+
+.btn-dark {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--dark-gray);
+}
+
+.btn-dark:hover, .btn-dark:focus {
+    background-color: white;
+    color: var(--dark-gray);  
+    border: 1px solid var(--dark-gray);
+}
+
+.btn-success {
+    background-color: var(--success-primary);
+    border: 1px solid var(--success-primary);
+}
+
+.btn-success:hover, .btn-success:focus {
+    background-color: white;
+    color: var(--success-primary);
+    border: 1px solid var(--success-primary);
+}
+
+.btn-success-light {
+    color: var(--success-primary);
+    border: 1px solid var(--success-primary);
+}
+
+.btn-success-light:hover, .btn-success:focus {
+    background-color: var(--success-primary);
+    color: white;
+    border: 1px solid var(--success-primary);
+}
+
+.card-columns {
+    columns: 3;
+}
+
+.card {
+    -webkit-column-break-inside: avoid;
+    /* background-color: lightblue; */
+    border: var(--note-border);
+    border-radius: 5px;
+}
+
+.card-corner {
+    clip-path: polygon(calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%, 0 0);
+}
+
+.note-priority {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 31px;
+    height: 31px;
+    z-index: 2;
+    clip-path: polygon(0 100%, 0 0, 100% 100%);
+    border: var(--note-border);
+    border-bottom-left-radius: 5px;
 }
 
 .shadow-primary {
     box-shadow: var(--primary-box-shadow);
+}
+
+.shadow-secondary {
+    box-shadow: var(--secondary-box-shadow);
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* breakpoint lg */
+@media only screen and (max-width: 1200px) {
+    .card-columns{ 
+        columns: 2;
+    }
+}
+
+/* breakpoint sm */
+@media only screen and (max-width: 768px) {
+    .card-columns{ 
+        columns: 1;
+    }
 }

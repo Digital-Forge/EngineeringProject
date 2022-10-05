@@ -17,7 +17,7 @@ export class AuthorizationService {
     return this.http.post<Login>(this.baseApiUrl + 'Authorization/Login', login).subscribe({
       next: (res: any) => {
         localStorage.setItem('token', res.token);
-        this.router.navigate(['tasks']);
+        this.router.navigate(['task']);
       }
     });
   }

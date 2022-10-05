@@ -16,6 +16,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserTaskIndexComponent } from './components/user-task/userTaskIndex/index.component';
 import { UserTaskComponent } from './components/user-task/user-task.component';
 import { AuthGuard } from './services/auth.guard';
+import { ClientComponent } from './components/client/client.component';
 
 const routes: Routes = [
   {
@@ -38,17 +39,12 @@ const routes: Routes = [
   },
   {
     path: 'clients',
-    component: ClientIndexComponent,
-    canActivate: [AuthGuard] 
-  },
-  {
-    path: 'client/:id',
-    component: ClientViewComponent,
-    canActivate: [AuthGuard] 
-  },
-  {
-    path: 'client/:id/edit',
-    component: ClientFormComponent,
+    component: ClientComponent,
+    children: [
+      {path: '', component: ClientIndexComponent},
+      {path: 'add', component: ClientFormComponent},
+      {path: 'edit/:id', component: ClientFormComponent}
+    ],
     canActivate: [AuthGuard] 
   },
   {

@@ -15,6 +15,7 @@ namespace XYZEngineeringProject.Application
             services.AddTransient<ITaskService, TaskService>();
             services.AddTransient<IAppUserService, AppUserService>();
             services.AddTransient<INoteService, NoteService>();
+            services.AddTransient<IClientService, ClientService>();
             //services.AddTransient<I, >();
             
             // FluentValidation Dependency Injection

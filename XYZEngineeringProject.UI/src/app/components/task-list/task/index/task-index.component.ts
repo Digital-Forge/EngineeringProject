@@ -5,11 +5,11 @@ import { Task } from 'src/app/models/task.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'user-task-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css']
+  selector: 'task-index',
+  templateUrl: './task-index.component.html',
+  styleUrls: ['./task-index.component.css']
 })
-export class UserTaskIndexComponent implements OnInit {
+export class TaskComponent implements OnInit {
 
   public Priority2LabelMapping = Priority2LabelMapping;
   public priorityTypes = Object.values(Priority).filter(value => typeof value === 'number');

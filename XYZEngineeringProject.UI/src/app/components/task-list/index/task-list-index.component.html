@@ -1,0 +1,30 @@
+<div class="container-fluid my-5">
+    <div class="row mb-5">
+        <h1 class="col-9">{{ 'Task.taskLists' | translate }}</h1>
+        <div class="col-3 d-flex justify-content-end">
+            <a class="btn btn-md btn-dark" [routerLink]="['/task-list', 'add']">
+                <i class="bi bi-plus-lg me-1"></i>{{ 'Button.add' | translate }}
+            </a>
+        </div>
+    </div>
+    <div>
+        <div class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'Tasks.name' | translate }}</th>
+                    <th>{{ 'Tasks.dateCreate' | translate }}</th>
+                    <th>{{ 'Tasks.status' | translate }}</th>
+                    <th>{{ 'Tasks.actions' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let taskList of taskLists">
+                    <td>{{ taskList.name }}</td>
+                    <td>{{ taskList.dateCreate }}</td>
+                    <td>{{ taskList.status }}</td>
+                    <td>{{ taskList.name }}</td>
+                </tr>
+            </tbody>
+        </div>
+    </div>
+</div>

@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 import { TaskService } from 'src/app/services/tasks/task.service';
-import { Task } from '../../../models/task.model'
+import { Task } from 'src/app/models/task.model';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'task-form',
+  templateUrl: './task-form.component.html',
+  styleUrls: ['./task-form.component.css']
 })
-export class UserTaskFormComponent implements OnInit {
+export class TaskFormComponent implements OnInit {
 
   public editMode: boolean = false;
   public Priority2LabelMapping = Priority2LabelMapping;
@@ -23,7 +23,10 @@ export class UserTaskFormComponent implements OnInit {
     deadline: new Date(),
     priority: Priority.Done,
     title: '',
-    description: ''
+    description: '',
+    assignedUserId: '',
+    taskListId: '',
+    isComplete: false
   }
   constructor(private route: ActivatedRoute, private taskService: TaskService, private router: Router) { }
 

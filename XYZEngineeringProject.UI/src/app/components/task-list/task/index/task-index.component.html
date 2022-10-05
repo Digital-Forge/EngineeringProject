@@ -2,7 +2,7 @@
     <div class="row mb-5">
         <h1 class="col-9">{{ 'Task.tasks' | translate }}</h1>
         <div class="col-3 d-flex justify-content-end">
-            <a class="btn btn-md btn-dark" [routerLink]="['/tasks', 'add']">
+            <a class="btn btn-md btn-dark" [routerLink]="['/task', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.add' | translate }}
             </a>
         </div>
@@ -20,13 +20,14 @@
                             'bg-success': Priority2LabelMapping[task.priority] == 'Low',
                             'bg-warning': Priority2LabelMapping[task.priority] == 'Medium',
                             'bg-danger': Priority2LabelMapping[task.priority] == 'High',
-                            'bg-secondary': Priority2LabelMapping[task.priority] == 'No'}"></div>
+                            'bg-secondary': Priority2LabelMapping[task.priority] == 'No'}">
+                        </div>
 
                         <h3 class="card-title text-center mb-2">{{task.title}}</h3>
                         <div class="card-text text-justify mb-2">{{task.description}}</div>
 
                         <div class="d-flex justify-content-end mt-3">
-                            <a class="btn btn-sm btn-light me-2" [routerLink]="['/tasks', 'edit', task.id]">
+                            <a class="btn btn-sm btn-light me-2" [routerLink]="['/task', 'edit', task.id]">
                                 <i class="bi bi-pencil-square me-1"></i>
                                 {{ 'Button.edit' | translate }}
                             </a>
@@ -57,3 +58,4 @@
         <p *ngIf="!tasks || tasks.length <= 0">No tasks found</p>
     </div>
     <router-outlet></router-outlet>
+</div>

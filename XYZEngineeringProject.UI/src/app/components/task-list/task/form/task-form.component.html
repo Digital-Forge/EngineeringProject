@@ -1,34 +1,32 @@
-<div class="container-xxl">
-    <div *ngIf="editMode;else header">
-        <h1 class="mb-3 header">
-            Edit Task
-        </h1>
+<div class="container-fluid my-5">
+    <div *ngIf="editMode; else header" class="row mb-5 text-center">
+        <h1 class="col-12">{{ 'Task.editTask' | translate }}</h1>
     </div>
     <ng-template #header>
-        <h1 class="mb-3 header">
-            Add New Task
-        </h1>
+        <div class="row mb-5 text-center">
+            <h1 class="col-12">{{ 'Task.addTask' | translate }}</h1>
+        </div>
     </ng-template>
     <div class="row">
         <div class="col-3"></div>
         <div class="col-md-6 form">
             <form #form="ngForm" (ngSubmit)="submit()">
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
+                    <label for="title" class="form-label">{{ 'Task.title' | translate }}</label>
                     <input type="text" class="form-control" id="title" name="title" [(ngModel)]="taskDetails.title">
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <input type="text" class="form-control" id="description" name="description"
-                        [(ngModel)]="taskDetails.description">
+                    <label for="description" class="form-label">{{ 'Task.description' | translate }}</label>
+                    <textarea class="form-control" id="description" name="description"
+                        [(ngModel)]="taskDetails.description"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="priority" class="form-label">Priority</label><br>
+                    <label for="priority" class="form-label">{{ 'Task.priority' | translate }}</label><br>
                     <select id="priority" name="priority" class="form-control" [(ngModel)]="selectorPriority"
                         (ngModelChange)="onChange($event)">
                         <option *ngFor="let priority of priorityTypes" [ngValue]="priority"
                             [selected]="selectorPriority">
-                            {{priority}}
+                            {{ 'Priority.' + priority | translate }}
                         </option>
                     </select>
                     <!-- <select id="priority" name="priority" class="form-control" [(ngModel)]="taskDetails.priority"
@@ -39,12 +37,14 @@
                     </select> -->
                 </div>
                 <div class="mb-3">
-                    <label for="selectorDate" class="form-label">Deadline</label>
+                    <label for="selectorDate" class="form-label">{{ 'Task.deadline' | translate }}</label>
                     <input type="date" class="form-control" id="selectorDate" name="selectorDate"
                         [(ngModel)]="selectorDate">
                 </div>
-                <button type="submit" class="btn btn-primary" *ngIf="editMode">Save</button>
-                <button type="submit" class="btn btn-primary" *ngIf="!editMode">Add Task</button>
+                <div class="d-flex justify-content-end mt-4">                  
+                    <button type="submit" class="btn btn-success-light" *ngIf="editMode">{{ 'Button.update' | translate }}</button>
+                    <button type="submit" class="btn btn-success-light" *ngIf="!editMode">{{ 'Button.add' | translate }}</button>
+                </div>
             </form>
         </div>
         <div class="col-3"></div>

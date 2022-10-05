@@ -1,5 +1,6 @@
 :root {
-    --primary: #3d64a2;
+    --primary: rgb(62, 100, 163);
+    --primary-rgb: 62, 100, 163;
     --secondary: #a4d2ff;
     --dark-gray: #444447;
     --gray: #BFBFBF;
@@ -10,8 +11,9 @@
     --warning-secondary: #fff5c7;
     --danger-primary: #BD3C43;
     --danger-secondary: #ffeaeb;
-    --primary-box-shadow: 0px 0px 15px 5px var(--primary);
-    --secondary-box-shadow: 0px 0px 10px 0px var(--secondary);
+    --primary-box-shadow: 0px 0px 10px 1px rgba(var(--primary-rgb), 0.2);
+    --secondary-box-shadow: 0px 0px 10px 1px var(--secondary);
+    --gray-box-shadow: 0px 0px 10px -2px var(--gray);
     --note-border: 1px solid var(--light-gray);
 }
 
@@ -146,6 +148,12 @@ thead {
     border: 1px solid var(--success-primary);
 }
 
+.form {
+    box-shadow: var(--primary-box-shadow);
+    border-radius: 5px;
+    padding: 2rem;
+}
+
 .card-columns {
     columns: 3;
 }
@@ -153,33 +161,31 @@ thead {
 .card {
     -webkit-column-break-inside: avoid;
     /* background-color: lightblue; */
-    border: var(--note-border);
+    border: 0;
     border-radius: 5px;
-}
-
-.card-corner {
-    clip-path: polygon(calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%, 0 0);
+    box-shadow: var(--primary-box-shadow);
+    
 }
 
 .note-priority {
     position: absolute;
-    top: -2px;
-    right: -2px;
+    top: 0px;
+    right: 0px;
     width: 31px;
     height: 31px;
     z-index: 2;
-    clip-path: polygon(0 100%, 0 0, 100% 100%);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
     border: var(--note-border);
-    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
-
+/* 
 .shadow-primary {
     box-shadow: var(--primary-box-shadow);
 }
 
 .shadow-secondary {
     box-shadow: var(--secondary-box-shadow);
-}
+} */
 
 .text-justify {
     text-align: justify;

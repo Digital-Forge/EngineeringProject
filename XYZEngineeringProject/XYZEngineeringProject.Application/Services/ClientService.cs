@@ -25,7 +25,7 @@ namespace XYZEngineeringProject.Application.Services
             Client client = new Client()
             {
                 Name = clientVM.Name,
-                Surname = clientVM.Surname
+                //Surname = clientVM.Surname
             };
 
             _clientRepository.Add(client);
@@ -38,7 +38,7 @@ namespace XYZEngineeringProject.Application.Services
             if (client != null)
             {
                 client.Name = clientVM.Name;
-                client.Surname = clientVM.Surname;
+                //client.Surname = clientVM.Surname;
                 return _clientRepository.Update(client);
             }
             return false;
@@ -50,7 +50,7 @@ namespace XYZEngineeringProject.Application.Services
             {
                 Id = x.Id,
                 Name = x.Name,
-                Surname = x.Surname
+                //Surname = x.Surname
             }).ToList();
         }
     }

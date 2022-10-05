@@ -28,7 +28,7 @@ namespace XYZEngineeringProject.Domain.Models
 
         public virtual ICollection<UsersToDepartments> UsersToDepartments { get; set; }
 
-        public virtual ICollection<UsersToClientsGroups> UsersToClientsGroups { get; set; }
+        public virtual ICollection<UsersToClients> UsersToClientsGroups { get; set; }
 
         public virtual ICollection<ListOfTasks> ListTasks { get; set; }
 

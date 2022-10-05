@@ -15,15 +15,14 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         public DbSet<Address> UserAddresses { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<ClientAdress> ClientsAdresses { get; set; }
+        public DbSet<ClientContact> ClientContacts { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<Group> Groups { get; set; }
         public DbSet<ListOfTasks> ListTasks { get; set; }
         public DbSet<Note> Note { get; set; }
         public DbSet<NoteToUser> NoteToUser { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<UserTask> Tasks { get; set; }
-        public DbSet<UsersToClientsGroups> UsersToClientsGroups { get; set; }
+        public DbSet<UsersToClients> UsersToClientsGroups { get; set; }
         public DbSet<UsersToDepartments> UsersToDepartments { get; set; }
         public DbSet<UsersToPositions> UsersToPositions { get; set; }
         public DbSet<LogicCompany> LogicCompanies { get; set; }
@@ -69,11 +68,6 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 .WithMany(u => u.AsigneeTasks)
                 .HasForeignKey(u => u.AssigneeUserId);
 
-            //////////////////////////////////////// ClientsAddress many to one Client
-            builder.Entity<ClientAdress>()
-                .HasOne(s => s.Client)
-                .WithMany(g => g.ClientAdresses)
-                .HasForeignKey(s => s.ClientId);
 
             //////////////////////////////////////// AppUser many to one LogicCompany
             builder.Entity<AppUser>()
@@ -82,23 +76,23 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 .HasForeignKey(s => s.CompanyId);
 
             //////////////////////////////////////// Client many to many AppUser (UsersClientsGroups)
-            builder.Entity<UsersToClientsGroups>().HasKey(x => new { x.UserId, x.ClientId });
+            builder.Entity<UsersToClients>().HasKey(x => new { x.UserId, x.ClientId });
 
-            builder.Entity<UsersToClientsGroups>()
+            builder.Entity<UsersToClients>()
                 .HasOne(s => s.Client)
-                .WithMany(s => s.UsersToClientsGroups)
+                .WithMany(s => s.ClientsToUsers)
                 .HasForeignKey(s => s.ClientId);
 
-            builder.Entity<UsersToClientsGroups>()
+            builder.Entity<UsersToClients>()
                 .HasOne(s => s.User)
                 .WithMany(s => s.UsersToClientsGroups)
                 .HasForeignKey(s => s.UserId);
 
             //////////////////////////////////////// UsersToClientsGroups many to one Groups
-            builder.Entity<UsersToClientsGroups>()
-                .HasOne(s => s.Group)
-                .WithMany(g => g.UsersToClientsGroups)
-                .HasForeignKey(s => s.GroupId);
+            builder.Entity<ClientContact>()
+                .HasOne(s => s.Client)
+                .WithMany(g => g.ClientContacts)
+                .HasForeignKey(s => s.ClientId);
 
             //////////////////////////////////////// AppUser many to many Departments (UsersToDepartments)
             builder.Entity<UsersToDepartments>().HasKey(x => new { x.UserId, x.DepartmentId });

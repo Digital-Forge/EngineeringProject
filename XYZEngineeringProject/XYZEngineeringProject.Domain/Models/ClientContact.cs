@@ -7,16 +7,17 @@ using XYZEngineeringProject.Domain.Models.EntityUtils;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class ClientData : ISoftDataEntity
+    public class ClientContact : ISoftDataEntity
     {
         public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string Data { get; set; }
+        public string Firstname { get; set; }
+        public string Surname { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
-        //relations
-
-        public Guid? ClientId { get; set; }
-        public virtual Client Client { get; set; }
+        //Relations
+        public Guid ClientId { get; set; }
+        public Client Client { get; set; }
 
         // ISoftDataEntity
         public Guid CreateBy { get; set; }

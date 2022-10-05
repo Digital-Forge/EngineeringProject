@@ -1,4 +1,4 @@
-import { Client, ClientResponse } from '../../../models/client.model';
+import { Client } from '../../../models/client.model';
 import { AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Route, Router, ActivatedRoute } from '@angular/router';
@@ -88,20 +88,20 @@ export class ClientFiltersComponent {
       }
     })
 
-    forkJoin([
-      this.service.getClients(),
-      //...
-    ]).pipe(map(([ clients ]) => {
-      return {
-        clients, /*...*/
-      }; })).pipe(first()).subscribe({
-        next: (res: {
-          clients: ClientResponse, /*...*/
-        }) => {
-          this.clients = res.clients.data;
-          //...
-        }
-      });
+    // forkJoin([
+    //   this.service.getAllClients(),
+    //   //...
+    // ]).pipe(map(([ clients ]) => {
+    //   return {
+    //     clients, /*...*/
+    //   }; })).pipe(first()).subscribe({
+    //     next: (res: {
+    //       clients: Client[], /*...*/
+    //     }) => {
+    //       this.clients = res.clients.data;
+    //       //...
+    //     }
+    //   });
 
   }
 

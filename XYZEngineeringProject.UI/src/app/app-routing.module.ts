@@ -7,6 +7,7 @@ import { TaskFormComponent } from './components/task-list/task/form/task-form.co
 import { ClientIndexComponent } from './components/client/clientIndex/client-index.component';
 import { ClientFormComponent } from './components/client/clientForm/client-form.component';
 import { ClientViewComponent } from './components/client/clientView/client-view.component';
+import { ClientComponent } from './components/client/client.component';
 import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
 import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
@@ -46,17 +47,12 @@ const routes: Routes = [
   },
   {
     path: 'clients',
-    component: ClientIndexComponent,
-    canActivate: [AuthGuard] 
-  },
-  {
-    path: 'client/:id',
-    component: ClientViewComponent,
-    canActivate: [AuthGuard] 
-  },
-  {
-    path: 'client/:id/edit',
-    component: ClientFormComponent,
+    component: ClientComponent,
+    children: [
+      {path: '', component: ClientIndexComponent},
+      {path: 'add', component: ClientFormComponent},
+      {path: 'edit/:id', component: ClientFormComponent}
+    ],
     canActivate: [AuthGuard] 
   },
   {

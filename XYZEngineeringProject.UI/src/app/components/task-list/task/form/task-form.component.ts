@@ -38,7 +38,7 @@ export class TaskFormComponent implements OnInit {
           this.taskService.getTask(id).subscribe({
             next: (response) => {
               this.taskDetails = response;
-              this.selectorPriority = this.Priority2LabelMapping[this.taskDetails.priority];              
+              this.selectorPriority = this.Priority2LabelMapping[this.taskDetails.priority];
               this.selectorDate = this.pipe.transform(this.taskDetails.deadline, 'yyyy-MM-dd');
               this.editMode = true;          
             }

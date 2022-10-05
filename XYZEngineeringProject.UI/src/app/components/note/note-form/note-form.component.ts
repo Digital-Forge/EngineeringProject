@@ -35,7 +35,7 @@ export class NoteFormComponent implements OnInit {
           this.noteService.getNote(id).subscribe({
             next: (response) => {
               this.noteDetails = response;
-              this.noteStatus = this.noteStatuses[this.noteDetails.noteStatus];              
+              this.noteStatus = this.noteStatuses[this.noteDetails.noteStatus];
               this.selectorDate = this.pipe.transform(this.noteDetails.date, 'yyyy-MM-dd');
               this.editMode = true;          
             }

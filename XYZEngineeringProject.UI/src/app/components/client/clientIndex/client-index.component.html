@@ -1,6 +1,25 @@
  <client-filters></client-filters>
  
- <table> 
-    <th>{{ 'Client.name' | translate }}</th>
-    <th>{{ 'Client.email' | translate }}</th>
-</table>
+ <div class="container-fluid my-5">
+    <h1 class="mb-3">Clients</h1>
+    <table class="table" *ngIf="clients && clients.length >0">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let client of clients">
+                <td>{{client.id}}</td>
+                <td>{{client.name}}</td>
+                <td>{{client.surname }}</td>
+                <td><a [routerLink]="['/clients', 'edit', client.id]">View</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="!clients || clients.length <= 0">No notes found</p>
+</div>
+<router-outlet></router-outlet>

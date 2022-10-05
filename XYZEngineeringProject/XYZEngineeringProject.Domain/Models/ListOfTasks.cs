@@ -12,6 +12,8 @@ namespace XYZEngineeringProject.Domain.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
 
+        public StatusListOfTask Status { get; set; }
+
         //relations
 
         public Guid? UserId { get; set; }

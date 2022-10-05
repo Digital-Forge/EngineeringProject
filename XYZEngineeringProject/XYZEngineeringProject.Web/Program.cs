@@ -8,6 +8,9 @@ using XYZEngineeringProject.Infrastructure.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +57,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
 });
 
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.SerializerOptions.WriteIndented = true;
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+});
 
 var app = builder.Build();
 

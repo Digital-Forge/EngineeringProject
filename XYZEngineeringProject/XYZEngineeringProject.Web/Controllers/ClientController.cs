@@ -15,7 +15,7 @@ namespace XYZEngineeringProject.Web.Controllers
             _logger = logger;
             _clientService = clientService;
         }
-
+        #region Client
         [HttpGet]
         public IActionResult GetAllClients()
         {
@@ -39,5 +39,32 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_clientService.EditClient(editClientRequest));
         }
+
+        #endregion
+        #region Groups
+        [HttpGet]
+        public IActionResult GetAllGroups()
+        {
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult AddGroup([FromBody] GroupVM addGroupRequest)
+        {
+            return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult EditGroup(string id)
+        {
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult EditGroup([FromBody] GroupVM editGroupRequest)
+        {
+            return Ok();
+        }
+        #endregion
     }
 }

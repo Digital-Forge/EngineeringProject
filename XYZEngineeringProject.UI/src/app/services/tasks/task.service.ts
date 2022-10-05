@@ -1,4 +1,4 @@
-import { Task } from '../../models/task.model';
+import { Task, TaskList } from '../../models/task.model';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -28,5 +28,9 @@ export class TaskService {
 
   saveChanges(editTaskRequest: Task): Observable<any> {
     return this.http.put(this.baseApiUrl + 'Task/EditTask',editTaskRequest);
+  }
+
+  getAllTaskLists(): Observable<TaskList[]> {
+    return this.http.get<TaskList[]>(this.baseApiUrl + 'ListTasks/GetAllTasks');
   }
 }

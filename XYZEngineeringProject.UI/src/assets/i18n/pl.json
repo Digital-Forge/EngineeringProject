@@ -2,6 +2,7 @@
     "Button": {
         "edit": "Edytuj",
         "add": "Dodaj",
+        "update": "Aktualizuj",
         "done": "Ukończone",
         "restore": "Przywróć"
     },
@@ -29,11 +30,16 @@
     },
     "Task": {
         "tasks": "Zadania",
+        "taskLists": "Listy zadań",
+        "addTask": "Utwórz zadanie",
+        "editTask": "Edytuj zadanie",
+        "addTaskList": "Utwórz listę zadań",
+        "editTaskList": "Edytuj listę zadań",
         "id": "ID",
         "deadline": "Termin",
         "title": "Tytuł",
         "description": "Opis",
-        "priority": "Priorytet"
+        "priority": "Priorytet"        
     },
     "Priority": {
         "No": "Brak",

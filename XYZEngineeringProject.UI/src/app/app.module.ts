@@ -19,17 +19,20 @@ import { AppUserListComponent } from './components/appUser/app-user-list/app-use
 import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
 import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 import { ClientFiltersComponent } from './components/client/clientFilters/filters.component';
-import { UserTaskComponent } from './components/user-task/user-task.component';
-import { FiltersComponent } from './components/user-task/userTaskFilters/filters.component';
-import { UserTaskFormComponent } from './components/user-task/userTaskForm/form.component';
-import { UserTaskIndexComponent } from './components/user-task/userTaskIndex/index.component';
-import { ViewComponent } from './components/user-task/userTaskView/view.component';
+
 import { NoteComponent } from './components/note/note.component';
 import { NoteFilterComponent } from './components/note/note-filter/note-filter.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TaskListComponent } from './components/task-list/index/task-list-index.component';
+import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
+import { TaskListFiltersComponent } from './components/task-list/filters/task-list-filters.component';
+import { TaskComponent } from './components/task-list/task/index/task-index.component';
+import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
+import { TaskFiltersComponent } from './components/task-list/task/filters/task-filters.component';
+import { ClientGroupFormComponent } from './components/client/client-group-form/client-group-form.component';
 
 @NgModule({
   declarations: [
@@ -45,17 +48,19 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AddAppUserComponent,
     EditAppUserComponent,
     NavbarComponent,
-    UserTaskComponent,
-    FiltersComponent,
-    UserTaskFormComponent,
-    UserTaskIndexComponent,
-    ViewComponent,
     NoteComponent,
     NoteFilterComponent,
     NoteIndexComponent,
     NoteFormComponent,
     CalendarComponent,
-    DashboardComponent
+    DashboardComponent,
+    TaskListComponent,
+    TaskListFormComponent,
+    TaskListFiltersComponent,
+    TaskComponent,
+    TaskFormComponent,
+    TaskFiltersComponent,
+    ClientGroupFormComponent
   ],
   imports: [
     BrowserModule,

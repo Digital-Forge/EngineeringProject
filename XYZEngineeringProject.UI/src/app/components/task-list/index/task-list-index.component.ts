@@ -1,6 +1,6 @@
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Component, OnInit } from '@angular/core';
-import { Task, TaskList } from 'src/app/models/task.model';
+import { Task, ListOfTasks } from 'src/app/models/task.model';
 import { Priority } from 'src/app/models/priority.enum';
 
 @Component({
@@ -10,7 +10,7 @@ import { Priority } from 'src/app/models/priority.enum';
 })
 export class TaskListComponent implements OnInit {
 
-  taskLists: TaskList[] = [];
+  taskLists: ListOfTasks[] = [];
 
   constructor(
     private taskService: TaskService

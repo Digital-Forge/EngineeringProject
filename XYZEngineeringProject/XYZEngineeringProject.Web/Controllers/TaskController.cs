@@ -46,5 +46,29 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_taskService.EditTask(editTaskRequest));
         }
+
+        [HttpGet]
+        public IActionResult GetAllListOfTasks()
+        {
+            return Ok(_taskService.GetAllListOfTasks().ToList());
+        }
+
+        [HttpPost]
+        public IActionResult AddListOfTasks([FromBody] ListOfTasksVM listOfTasksRequest)
+        {
+            return Ok(_taskService.AddListOfTasks(listOfTasksRequest));
+        }
+
+        [HttpGet]
+        public IActionResult GetListOfTasksById(string id)
+        {
+            return Ok(_taskService.GetAllListOfTasks().FirstOrDefault(x => x.Id == Guid.Parse(id)));
+        }
+
+        [HttpPut]
+        public IActionResult EditListOfTasks([FromBody] ListOfTasksVM listOfTasksRequest)
+        {
+            return Ok(_taskService.EditListOfTasks(listOfTasksRequest));
+        }
     }
 }

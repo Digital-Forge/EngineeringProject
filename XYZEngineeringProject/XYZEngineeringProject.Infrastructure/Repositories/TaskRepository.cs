@@ -204,6 +204,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         #region ListOfTasks
         public Guid Add(ListOfTasks listOfTasks)
         {
+            listOfTasks.UserId = _infrastructureUtils.GetUserIdFormHttpContext().Value;
             _context.ListTasks.Add(listOfTasks);
             _context.SaveChanges();
 

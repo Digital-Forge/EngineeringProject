@@ -15,7 +15,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="noteStatus" class="form-label">Note Status</label><br>
-                    <select id="prionoteStatusrity" name="noteStatus" class="form-control" [(ngModel)]="noteStatus"
+                    <select id="noteStatus" name="noteStatus" class="form-control" [(ngModel)]="noteStatus"
                         (ngModelChange)="onChange($event)">
                         <option *ngFor="let noteStatus of noteStatuses">
                             {{noteStatus}}

@@ -32,22 +32,23 @@ export class ClientService {
     return this.http.put<Client>(`${environment.baseApiUrl}Client/EditClient`, editClientRequest);
   }
 
-  getAllGroups(): Observable<Group[]> {
-    return this.http.get<Group[]>(`${environment.baseApiUrl}Client/GetAllGroups`);
-  }
+  //STARE NA RAZIE NIE USUWAĆ
+  // getAllGroups(): Observable<Group[]> {
+  //   return this.http.get<Group[]>(`${environment.baseApiUrl}Client/GetAllGroups`);
+  // }
 
-  getGroup(id:string): Observable<Group> {
-    return this.http.get<Group>(`${environment.baseApiUrl}Client/EditGroup/${id}`);
-  }
+  // getGroup(id:string): Observable<Group> {
+  //   return this.http.get<Group>(`${environment.baseApiUrl}Client/EditGroup/${id}`);
+  // }
 
-  addGroup(addGroupRequest: Group): Observable<Group> {
-    addGroupRequest.id = this.emptyGuid
-    return this.http.post<Group>(`${environment.baseApiUrl}Client/AddGroup`,addGroupRequest);
-  }
+  // addGroup(addGroupRequest: Group): Observable<Group> {
+  //   addGroupRequest.id = this.emptyGuid
+  //   return this.http.post<Group>(`${environment.baseApiUrl}Client/AddGroup`,addGroupRequest);
+  // }
 
-  editGroup(editGroupRequest: Group): Observable<any> {
-    return this.http.put<Group>(`${environment.baseApiUrl}Client/EditGroup`,editGroupRequest);
-  }
+  // editGroup(editGroupRequest: Group): Observable<any> {
+  //   return this.http.put<Group>(`${environment.baseApiUrl}Client/EditGroup`,editGroupRequest);
+  // }
   
 
 }

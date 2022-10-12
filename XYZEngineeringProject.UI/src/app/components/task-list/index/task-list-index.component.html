@@ -8,21 +8,33 @@
         </div>
     </div>
     <div>
-        <div class="table">
+        <div class="table table-striped">
             <thead>
                 <tr>
                     <th>{{ 'Tasks.name' | translate }}</th>
                     <th>{{ 'Tasks.dateCreate' | translate }}</th>
                     <th>{{ 'Tasks.status' | translate }}</th>
-                    <th>{{ 'Tasks.actions' | translate }}</th>
+                    <!-- <th>{{ 'Tasks.actions' | translate }}</th> -->
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let taskList of taskLists">
+                <!-- <tr *ngFor="let taskList of taskLists">
                     <td>{{ taskList.name }}</td>
                     <td>{{ taskList.dateCreate }}</td>
                     <td>{{ taskList.status }}</td>
                     <td>{{ taskList.name }}</td>
+                </tr> -->
+                <tr>
+                    <td>Plan zajęć dla grupy piątkowej</td>
+                    <td>11-10-2022</td>
+                    <td>In progress</td>
+                    <td class="border-0">edit</td>
+                </tr>
+                <tr>
+                    <td>Plan zajęć dla grupy piątkowej</td>
+                    <td>11-10-2022</td>
+                    <td>In progress</td>
+                    <td class="border-0">edit</td>
                 </tr>
             </tbody>
         </div>

@@ -25,10 +25,13 @@ namespace XYZEngineeringProject.Application.Services
             Client client = new Client()
             {
                 Name = clientVM.Name,
-                //Surname = clientVM.Surname
+                Description = clientVM.Description,
+                Address = clientVM.Address,
+                Comments = clientVM.Comments,
+                NIP = clientVM.NIP
             };
 
-            _clientRepository.Add(client);
+            _clientRepository.AddClient(client);
             return true;
         }
 
@@ -38,19 +41,25 @@ namespace XYZEngineeringProject.Application.Services
             if (client != null)
             {
                 client.Name = clientVM.Name;
-                //client.Surname = clientVM.Surname;
-                return _clientRepository.Update(client);
+                client.Description = clientVM.Description;
+                client.Address = clientVM.Address;
+                client.Comments = clientVM.Comments;
+                client.NIP = clientVM.NIP;
+                return _clientRepository.UpdateClient(client);
             }
             return false;
         }
 
         public List<ClientVM> GetAllClients()
         {
-            return _clientRepository.GetAll().Select(x => new ClientVM
+            return _clientRepository.GetAllClients().Select(x => new ClientVM
             {
                 Id = x.Id,
                 Name = x.Name,
-                //Surname = x.Surname
+                Description= x.Description,
+                NIP= x.NIP,
+                Address = x.Address,
+                Comments= x.Comments
             }).ToList();
         }
     }

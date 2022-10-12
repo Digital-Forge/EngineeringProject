@@ -21,5 +21,17 @@ namespace XYZEngineeringProject.Domain.Interfaces
         IQueryable<UserTask> _GetEveryOne();
         IQueryable<UserTask>? GetTaskByCompany();
         IQueryable<UserTask>? GetTaskByCompany(Guid companyId);
+        Guid Add(ListOfTasks listOfTasks);
+        IQueryable<ListOfTasks>? GetAllListsOfTasks();
+        IQueryable<ListOfTasks>? GetListsOfTasksByCompany();
+        IQueryable<ListOfTasks>? GetListsOfTasksByCompany(Guid companyId);
+        ListOfTasks? GetListOfTasksById(Guid listOfTasksId);
+        IQueryable<ListOfTasks> GetListOfTasksByIdAsQuerable(Guid listOfTasksId);
+        bool Remove(ListOfTasks listOfTasks);
+        bool RemoveListOfTasksById(Guid listOfTasksId);
+        bool Update(ListOfTasks listOfTasks);
+        IQueryable<ListOfTasks>? GetEveryListOfTasks();
+        bool __RemoveHard(ListOfTasks listOfTasks);
+        bool __RemoveHardListOfTasksById(Guid listOfTasksId);
     }
 }

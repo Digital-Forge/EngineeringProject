@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XYZEngineeringProject.Domain.Models
 {
-    public class UsersToClientsGroups
+    public class UsersToClients
     {
         //relations
 
@@ -15,9 +15,5 @@ namespace XYZEngineeringProject.Domain.Models
 
         public Guid ClientId { get; set; }
         public virtual Client Client { get; set; }
-
-        public Guid? GroupId { get; set; }
-        public virtual Group Group { get; set; }
-
     }
 }

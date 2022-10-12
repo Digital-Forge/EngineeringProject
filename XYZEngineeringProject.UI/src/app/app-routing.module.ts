@@ -1,3 +1,4 @@
+import { ClientGroupFormComponent } from './components/client/client-group-form/client-group-form.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
@@ -51,7 +52,9 @@ const routes: Routes = [
     children: [
       {path: '', component: ClientIndexComponent},
       {path: 'add', component: ClientFormComponent},
-      {path: 'edit/:id', component: ClientFormComponent}
+      {path: 'edit/:id', component: ClientFormComponent},
+      {path: 'group/add', component: ClientGroupFormComponent},
+      {path: 'group/edit/:id', component: ClientGroupFormComponent}
     ],
     canActivate: [AuthGuard] 
   },

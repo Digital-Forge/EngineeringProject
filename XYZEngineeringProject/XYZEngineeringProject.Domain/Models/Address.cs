@@ -15,7 +15,6 @@ namespace XYZEngineeringProject.Domain.Models
         public string AddressHome { get; set; }
 
         //relations
-
         public Guid? AppUserId { get; set; }
         public virtual AppUser User { get; set; }
 

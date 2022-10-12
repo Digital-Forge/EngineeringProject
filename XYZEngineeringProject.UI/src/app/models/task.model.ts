@@ -18,7 +18,7 @@ export interface ListOfTasks {
     id: string,
     name: string,
     createDate: Date,
-    //project: string, //krótki, 100 znaków
+    project: string, //krótki, 100 znaków
     //client: Client,
     status: TaskListStatus, //odniesienie do task list status (new, in_progress, complete)
 }

@@ -19,7 +19,7 @@ export class TaskListFormComponent implements OnInit {
     status: TaskListStatus.New,
     id: '',
     createDate: new Date(),
-    //project: ''
+    project: ''
   }
 
   public taskListStatuses = Object.values(TaskListStatus).filter(value => typeof value === "string");

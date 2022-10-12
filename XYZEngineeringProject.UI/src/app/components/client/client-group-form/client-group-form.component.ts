@@ -17,21 +17,21 @@ export class ClientGroupFormComponent implements OnInit {
     description: ''
   }
   constructor(private route: ActivatedRoute, private router: Router, private clientService: ClientService) { }
-
+//STARE NA RAZIE NIE USUWAĆ
   ngOnInit(): void {
-    this.route.paramMap.subscribe({
-      next: (params) => {
-        const id = params.get('id');
-        if (id) {
-          this.clientService.getGroup(id).subscribe({
-            next: (response) => {
-              this.groupDetails = response;
-              this.editMode = true;          
-            }
-          })
-        }
-      }
-    })
+    // this.route.paramMap.subscribe({
+    //   next: (params) => {
+    //     const id = params.get('id');
+    //     if (id) {
+    //       this.clientService.getGroup(id).subscribe({
+    //         next: (response) => {
+    //           this.groupDetails = response;
+    //           this.editMode = true;          
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
   }
   submit() {
     if (this.editMode) {
@@ -43,23 +43,23 @@ export class ClientGroupFormComponent implements OnInit {
   }
   
   saveChanges() {
-    this.clientService.editGroup(this.groupDetails).subscribe({
-      next: (res) =>
-      {
-        if(res == true)
-        {
-          window.location.reload();
-        }
-      }
-    });
+    // this.clientService.editGroup(this.groupDetails).subscribe({
+    //   next: (res) =>
+    //   {
+    //     if(res == true)
+    //     {
+    //       window.location.reload();
+    //     }
+    //   }
+    // });
   }
   
   addGroup() {
-    this.clientService.addGroup(this.groupDetails).subscribe({
-      next: (res) => {
-        //this.router.navigate(['note']);
-      }
-    });
+    // this.clientService.addGroup(this.groupDetails).subscribe({
+    //   next: (res) => {
+    //     //this.router.navigate(['note']);
+    //   }
+    // });
   }
 
 }

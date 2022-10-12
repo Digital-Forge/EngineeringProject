@@ -11,7 +11,7 @@ namespace XYZEngineeringProject.Application.ViewModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        //public string Project { get; set; }
+        public string Project { get; set; }
         public StatusListOfTask Status { get; set; }
         public DateTime CreateDate { get; set; }
     }

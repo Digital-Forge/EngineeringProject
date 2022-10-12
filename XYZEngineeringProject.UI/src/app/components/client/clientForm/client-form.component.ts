@@ -1,5 +1,5 @@
 import { ClientService } from './../../../services/client/client.service';
-import { Client } from './../../../models/client.model';
+import { Client, IClientContact, ClientContact } from './../../../models/client.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,11 +11,32 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ClientFormComponent implements OnInit {
 
   public editMode: boolean = false
+  public showAddNewContact: boolean = false;
   clientDetails: Client = {
     id: '',
     name: '',
-    surname: ''
+    description: '',
+    nip: '',
+    comments: '',
+    address: '',
+    contacts: [
+      // {
+      //   firstname: '',
+      //   surname: '',
+      //   phone: '',
+      //   email: '',
+      //   id: ''
+      // }
+  ]
   }
+  contactTemp: ClientContact = new ClientContact('','','','','');
+  // {
+  //   id: '',
+  //   firstname: '',
+  //   surname: '',
+  //   phone: '',
+  //   email: ''
+  // }
   constructor(private route: ActivatedRoute, private clientService: ClientService, private router: Router) {    
    }
 
@@ -58,5 +79,23 @@ export class ClientFormComponent implements OnInit {
         }
       }
     })
+  }
+
+  addNewContact() {
+    if (this.clientDetails.contacts == null) {
+      // this.clientDetails.contacts = [{
+      //   firstname: this.contactTemp.firstname.valueOf(),
+      //   surname: this.contactTemp.surname.valueOf(),
+      //   phone: this.contactTemp.phone.valueOf(),
+      //   email: this.contactTemp.email.valueOf(),
+      //   id: this.contactTemp.id.valueOf()
+      // }]
+      this.clientDetails.contacts = [new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email)];
+    }
+    else {
+      this.clientDetails.contacts.push(new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email));
+    }
+    this.contactTemp = new ClientContact('','','','','');
+    this.showAddNewContact = false;
   }
 }

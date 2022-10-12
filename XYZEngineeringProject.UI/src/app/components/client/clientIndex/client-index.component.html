@@ -15,7 +15,7 @@
             <tr *ngFor="let client of clients">
                 <td>{{client.id}}</td>
                 <td>{{client.name}}</td>
-                <td>{{client.surname }}</td>
+                <td>{{client.description }}</td>
                 <td><a [routerLink]="['/clients', 'edit', client.id]">View</a></td>
             </tr>
         </tbody>

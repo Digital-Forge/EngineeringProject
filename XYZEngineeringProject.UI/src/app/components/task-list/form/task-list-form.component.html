@@ -14,7 +14,7 @@
                     <input type="text" class="form-control" id="name" name="name" [(ngModel)]="taskListDetails.name">
                 </div>
                 <div class="mb-3">
-                    <label for="taskListStatus" class="form-label">Note Status</label><br>
+                    <label for="taskListStatus" class="form-label">List Status</label><br>
                     <select id="taskListStatus" name="taskListStatus" class="form-control" [(ngModel)]="taskListStatus"
                         (ngModelChange)="onChange($event)">
                         <option *ngFor="let taskListStatus of taskListStatuses">
@@ -22,10 +22,10 @@
                         </option>
                     </select>
                 </div>
-                <!-- <div class="mb-3">
+                <div class="mb-3">
                     <label for="project" class="label-form">Project</label>
                     <input type="text" class="form-control" id="prject" name="project" [(ngModel)]="taskListDetails.project">
-                </div>                -->
+                </div>               
                 <button type="submit" class="btn btn-primary" *ngIf="editMode">Save</button>
                 <button type="submit" class="btn btn-primary" *ngIf="!editMode">Add List</button>
             </form>

@@ -351,12 +351,30 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public IQueryable<ClientContact>? GetAllClientContracts(Guid clientId)
         {
-            throw new NotImplementedException();
+            if (clientId == null || clientId == Guid.Empty)
+            {
+                return null;
+            }
+
+            var currentUser = _infrastructureUtils.GetUserFormHttpContext();
+
+            if (currentUser?.CompanyId == null || currentUser?.CompanyId == Guid.Empty)
+                return null;
+            else
+                return _context.ClientContacts
+                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                    .Where(x => x.CompanyId == currentUser.CompanyId)
+                    .Where(x => x.ClientId == clientId);
         }
 
         public IQueryable<ClientContact> _GetEveryOneClientContracts(Guid clientId)
         {
-            throw new NotImplementedException();
+            if (clientId == null || clientId == Guid.Empty)
+            {
+                return null;
+            }
+            return _context.ClientContacts
+                .Where(x => x.ClientId == clientId);
         }
 
         public bool AddClientToUser(Guid clientId, Guid userId)

@@ -28,7 +28,7 @@ namespace XYZEngineeringProject.Application.Services
                 //Surname = clientVM.Surname
             };
 
-            _clientRepository.Add(client);
+            _clientRepository.AddClient(client);
             return true;
         }
 
@@ -39,14 +39,14 @@ namespace XYZEngineeringProject.Application.Services
             {
                 client.Name = clientVM.Name;
                 //client.Surname = clientVM.Surname;
-                return _clientRepository.Update(client);
+                return _clientRepository.UpdateClient(client);
             }
             return false;
         }
 
         public List<ClientVM> GetAllClients()
         {
-            return _clientRepository.GetAll().Select(x => new ClientVM
+            return _clientRepository.GetAllClients().Select(x => new ClientVM
             {
                 Id = x.Id,
                 Name = x.Name,

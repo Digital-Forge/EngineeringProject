@@ -22,7 +22,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _logger = logger;
         }
 
-        public Guid Add(Client client)
+        public Guid AddClient(Client client)
         {
             _context.Clients.Add(client);
             _context.SaveChanges();
@@ -31,7 +31,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return client.Id;
         }
 
-        public IQueryable<Client>? GetAll()
+        public IQueryable<Client>? GetAllClients()
         {
             var currentUser = _infrastructureUtils.GetUserFormHttpContext();
 
@@ -75,7 +75,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 .Where(x => x.CompanyId == companyId);
         }
 
-        public bool Remove(Client client)
+        public bool RemoveClient(Client client)
         {
             if(client == null)
             {
@@ -98,7 +98,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool Remove(Guid clientById)
+        public bool RemoveClient(Guid clientById)
         {
             if (clientById == Guid.Empty)
             {
@@ -128,7 +128,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool Update(Client client)
+        public bool UpdateClient(Client client)
         {
             if (client == null)
             {
@@ -151,12 +151,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool __RemoveHard(Client client)
+        public bool __RemoveHardClient(Client client)
         {
             try
             {
                 _context.Clients.Remove(client);
-                _context.SaveChanges();
+                _context._ClearSaveChanges();
 
                 _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Hard remove clients - {client.Id}");
             }
@@ -168,7 +168,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool __RemoveHard(Guid clientById)
+        public bool __RemoveHardClient(Guid clientById)
         {
             try
             {
@@ -180,7 +180,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 }
 
                 _context.Clients.Remove(buff);
-                _context.SaveChanges();
+                _context._ClearSaveChanges();
 
                 _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Hard remove clients - {buff?.Id}");
             }
@@ -192,9 +192,221 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public IQueryable<Client> _GetEveryOne()
+        public IQueryable<Client> _GetEveryOneClients()
         {
             return _context.Clients;
+        }
+
+        public Guid AddClientContract(ClientContact contact)
+        {
+            _context.ClientContacts.Add(contact);
+            _context.SaveChanges();
+
+            _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add client contact - {contact.Id}");
+            return contact.Id;
+        }
+
+        public bool RemoveClientContract(ClientContact contact)
+        {
+            if (contact == null)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove null client contact");
+                return false;
+            }
+
+            try
+            {
+                _context.ClientContacts.Remove(contact);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Remove client contact - {contact.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed remove client contact - {contact.Id} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool RemoveClientContract(Guid contactById)
+        {
+            if (contactById == Guid.Empty)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove client by empty guid");
+                return false;
+            }
+
+            try
+            {
+                var buff = GetClientContractById(contactById);
+                if (buff == null)
+                {
+                    _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove client contact, who don't exist or deleted");
+                    return false;
+                }
+
+                _context.ClientContacts.Remove(buff);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Remove client contact - {buff?.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed remove client contact - {contactById} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool __RemoveHardClientContract(ClientContact contact)
+        {
+            try
+            {
+                _context.ClientContacts.Remove(contact);
+                _context._ClearSaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Hard remove client contact - {contact.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed hard remove client contact - {contact.Id} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool __RemoveHardClientContract(Guid contactById)
+        {
+            try
+            {
+                var buff = _context.ClientContacts.FirstOrDefault(x => x.Id == contactById);
+                if (buff == null)
+                {
+                    _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying hard remove client contact, who don't exist");
+                    return false;
+                }
+
+                _context.ClientContacts.Remove(buff);
+                _context._ClearSaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Hard remove client contact - {buff?.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed hard remove client contact - {contactById} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public bool UpdateClientContract(ClientContact contact)
+        {
+            if (contact == null)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying update null client contact");
+                return false;
+            }
+
+            try
+            {
+                _context.ClientContacts.Update(contact);
+                _context.SaveChanges();
+
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, $"Update client contact - {contact.Id}");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed update client contact - {contact.Id} - [{e.Message}]");
+                return false;
+            }
+            return true;
+        }
+
+        public ClientContact? GetClientContractById(Guid contactId)
+        {
+            return _context.ClientContacts
+                .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                .FirstOrDefault(x => x.Id == contactId);
+        }
+
+        public IQueryable<ClientContact> GetClientContractByIdAsQuerable(Guid contactId)
+        {
+            return _context.ClientContacts
+                .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                .Where(x => x.Id == contactId);
+        }
+
+        public IQueryable<ClientContact>? GetAllClientContracts()
+        {
+            var currentUser = _infrastructureUtils.GetUserFormHttpContext();
+
+            if (currentUser?.CompanyId == null || currentUser?.CompanyId == Guid.Empty)
+                return null;
+            else
+                return _context.ClientContacts
+                    .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                    .Where(x => x.CompanyId == currentUser.CompanyId);
+        }
+
+        public IQueryable<ClientContact>? GetAllClientContracts(Guid clientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<ClientContact> _GetEveryOneClientContracts(Guid clientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddClientToUser(Guid clientId, Guid userId)
+        {
+            try
+            {
+                _context.UsersToClients.Add(new UsersToClients { ClientId = clientId, UserId = userId });
+                _context.SaveChanges();
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add client ({clientId}) to user ({userId})");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Exception in client repository in AddClientToUser : {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool AddClientToUser(Client client, AppUser user)
+        {
+            return AddClientToUser(client.Id, user.Id);
+        }
+
+        public bool RemoveClientFromUser(Guid clientId, Guid userId)
+        {
+            var buff = _context.UsersToClients.FirstOrDefault(x => x.UserId == userId && x.ClientId == clientId);
+
+            if (buff == null)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"No find relation between client ({clientId}) and user ({userId})");
+                return false;
+            }
+
+            try
+            {
+                _context.UsersToClients.Remove(buff);
+                _context.SaveChanges();
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Remove relation between client ({clientId}) and user ({userId})");
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Exception in client repository in RemoveClientFromUser : {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool RemoveClientFromUser(Client client, AppUser user)
+        {
+            return RemoveClientFromUser(client.Id, user.Id);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         public DbSet<NoteToUser> NoteToUser { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<UserTask> Tasks { get; set; }
-        public DbSet<UsersToClients> UsersToClientsGroups { get; set; }
+        public DbSet<UsersToClients> UsersToClients { get; set; }
         public DbSet<UsersToDepartments> UsersToDepartments { get; set; }
         public DbSet<UsersToPositions> UsersToPositions { get; set; }
         public DbSet<LogicCompany> LogicCompanies { get; set; }

@@ -8,57 +8,59 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6 form">
-            <form #form="ngForm" (ngSubmit)="submit()">
+            <form #form="ngForm" [formGroup]="clientForm" (ngSubmit)="submit()">
                 <div class="mb-3">
                     <label for="name" class="label-form">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="clientDetails.name">
+                    <input type="text" class="form-control" id="name" name="name" formControlName="name" [(ngModel)]="clientDetails.name">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="label-form">Description</label>
-                    <input type="text" class="form-control" id="description" name="description" [(ngModel)]="clientDetails.description">
+                    <input type="text" class="form-control" id="description" name="description" formControlName="description" [(ngModel)]="clientDetails.description">
                 </div>
                 <div class="mb-3">
                     <label for="comments" class="label-form">Comments</label>
-                    <input type="text" class="form-control" id="comments" name="comments" [(ngModel)]="clientDetails.comments">
+                    <input type="text" class="form-control" id="comments" name="comments" formControlName="comments" [(ngModel)]="clientDetails.comments">
                 </div>
                 <div class="mb-3">
                     <label for="nip" class="label-form">NIP</label>
-                    <input type="text" class="form-control" id="nip" name="nip" [(ngModel)]="clientDetails.nip">
+                    <input type="text" class="form-control" id="nip" name="nip" formControlName="nip" [(ngModel)]="clientDetails.nip">
                 </div>
                 <div class="mb-3">
                     <label for="address" class="label-form">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" [(ngModel)]="clientDetails.address">
+                    <input type="text" class="form-control" id="address" name="address" formControlName="address" [(ngModel)]="clientDetails.address">
                 </div>
                 <div class="mb-3">
+                    <h1 *ngIf="clientDetails.contacts">Contacts section</h1>
                     <div *ngFor="let contact of clientDetails.contacts" class="row">
                         <div>
                             <label for="firstname" class="label-form">First name</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="contact.firstname">
+                            <input type="text" class="form-control" id="firstname" [value]="contact.firstname">
                         </div>
                         <div>
                             <label for="surname" class="label-form">Surname</label>
-                            <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="contact.surname">
+                            <input type="text" class="form-control" id="surname" [value]="contact.surname">
                         </div>
                         <div>
                             <label for="phone" class="label-form">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="contact.phone">
+                            <input type="text" class="form-control" id="phone" name="phone" [value]="contact.phone">
                         </div>
                         <div>
                             <label for="email" class="label-form">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contact.email">
+                            <input type="text" class="form-control" id="email" name="email" [value]="contact.email">
                         </div>
                     </div>
-                    <div *ngIf="false ; else addNewClient "></div>
-                    <!-- <button type="button" class="btn btn-primary" (click)="addNewContact()" *ngIf="!showAddNewContact">Add new contact</button> -->
+                    <div *ngIf="!showAddNewContact ; else addNewClientContact "></div>
+                    <button type="button" class="btn btn-primary" (click)="addNewContact()" *ngIf="!showAddNewContact">Add new contact</button>
                 </div>
-                <button type="submit" class="btn btn-primary" *ngIf="editMode">Save</button>
+                <button type="submit" class="btn btn-primary" *ngIf="editMode" [disabled]="clientForm.invalid">Save</button>
                 <button type="submit" class="btn btn-primary" *ngIf="!editMode">Add Client</button>
             </form>
         </div>
     </div>
 </div>
 
-<ng-template #addNewClient>
+<ng-template #addNewClientContact>
+    <h1>Add New Contact Section</h1>
     <div>
         <label for="firstname" class="label-form">First name</label>
         <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="contactTemp.firstname">
@@ -75,5 +77,5 @@
         <label for="email" class="label-form">Email</label>
         <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contactTemp.email">
     </div>
-    <button type="button" class="btn btn-primary" (click)="addNewContact()">Add contact</button>
+    <button type="button" class="btn btn-primary" (click)="addContact()">Add contact</button>
 </ng-template>

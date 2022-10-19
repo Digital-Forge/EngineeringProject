@@ -5,25 +5,25 @@ export interface Client {
     comments: string,
     nip: string,
     address:string,
-    contacts: IClientContact[]
+    contacts?: IClientContact[]
 }
 
 export interface IClientContact {
-    id: string,
-    firstname: string,
-    surname: string,
-    phone: string,
-    email: string
+    id: any,
+    firstname: any,
+    surname: any,
+    phone: any,
+    email: any
 }
 
 export class ClientContact implements IClientContact {
-    public id: string ;
-    public firstname: string;
-    public surname: string;
-    public phone: string;
-    public email: string;
+    public id: any ;
+    public firstname: any;
+    public surname: any;
+    public phone: any;
+    public email: any;
 
-    constructor(id: string, firstname: string, surname:string, phone:string, email: string){
+    constructor(id: any, firstname: any, surname:any, phone:any, email: any){
         this.id=id;
         this.firstname=firstname;
         this.surname=surname;

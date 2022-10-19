@@ -14,6 +14,6 @@ namespace XYZEngineeringProject.Application.ViewModels
         public string Comments { get; set; }
         public string NIP { get; set; }
         public string Address { get; set; }
-        public List<ClientContactVM> Contacts{ get; set; }
+        public ICollection<ClientContactVM> Contacts{ get; set; }
     }
 }

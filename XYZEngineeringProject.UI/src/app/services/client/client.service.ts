@@ -29,7 +29,9 @@ export class ClientService {
   }
 
   editClient(editClientRequest: Client): Observable<any> {
-    editClientRequest.contacts = []; // TODO na razie nie przesyła się wartość listy nie wiem czemu i wszystko się psuje
+    //editClientRequest.contacts = []; // TODO na razie nie przesyła się wartość listy nie wiem czemu i wszystko się psuje
+    console.log(editClientRequest);
+    
     return this.http.put<Client>(`${environment.baseApiUrl}Client/EditClient`, editClientRequest);
   }
 

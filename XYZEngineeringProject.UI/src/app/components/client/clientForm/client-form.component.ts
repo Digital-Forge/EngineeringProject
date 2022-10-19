@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from './../../../services/client/client.service';
 import { Client, IClientContact, ClientContact } from './../../../models/client.model';
 import { Component, OnInit } from '@angular/core';
@@ -10,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ClientFormComponent implements OnInit {
 
+
+  clientForm !: FormGroup;
   public editMode: boolean = false
   public showAddNewContact: boolean = false;
   clientDetails: Client = {
@@ -19,25 +22,16 @@ export class ClientFormComponent implements OnInit {
     nip: '',
     comments: '',
     address: '',
-    contacts: [
-      // {
-      //   firstname: '',
-      //   surname: '',
-      //   phone: '',
-      //   email: '',
-      //   id: ''
-      // }
-  ]
+    contacts: []
   }
-  contactTemp: ClientContact = new ClientContact('','','','','');
-  // {
-  //   id: '',
-  //   firstname: '',
-  //   surname: '',
-  //   phone: '',
-  //   email: ''
-  // }
-  constructor(private route: ActivatedRoute, private clientService: ClientService, private router: Router) {    
+  contactTemp: IClientContact = new ClientContact('','','','','');
+
+  constructor(
+    private route: ActivatedRoute,
+    private clientService: ClientService,
+    private router: Router,
+    private fb: FormBuilder
+    ) {    
    }
 
   ngOnInit(): void {
@@ -53,6 +47,14 @@ export class ClientFormComponent implements OnInit {
           })
         }
       }
+    });
+
+    this.clientForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      comments: [''],
+      address: [''],
+      nip: ['']
     })
   }
 
@@ -82,20 +84,24 @@ export class ClientFormComponent implements OnInit {
   }
 
   addNewContact() {
+    
+    this.showAddNewContact = true;
+  }
+
+  addContact() {
     if (this.clientDetails.contacts == null) {
-      // this.clientDetails.contacts = [{
-      //   firstname: this.contactTemp.firstname.valueOf(),
-      //   surname: this.contactTemp.surname.valueOf(),
-      //   phone: this.contactTemp.phone.valueOf(),
-      //   email: this.contactTemp.email.valueOf(),
-      //   id: this.contactTemp.id.valueOf()
-      // }]
-      this.clientDetails.contacts = [new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email)];
+      this.clientDetails.contacts = [{
+        firstname: this.contactTemp.firstname.valueOf(),
+        surname: this.contactTemp.surname.valueOf(),
+        phone: this.contactTemp.phone.valueOf(),
+        email: this.contactTemp.email.valueOf(),
+        id: this.contactTemp.id.valueOf()
+      }]      
     }
     else {
-      this.clientDetails.contacts.push(new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email));
+      this.clientDetails.contacts.push(this.contactTemp);
     }
     this.contactTemp = new ClientContact('','','','','');
-    this.showAddNewContact = false;
-  }
+    this.showAddNewContact=false;
+ }
 }

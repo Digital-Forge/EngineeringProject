@@ -26,6 +26,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         public DbSet<UsersToDepartments> UsersToDepartments { get; set; }
         public DbSet<UsersToPositions> UsersToPositions { get; set; }
         public DbSet<LogicCompany> LogicCompanies { get; set; }
+        public DbSet<EmailConfig> EmailConfigs { get; set; }
 
         //logger
         public DbSet<Log> Logs { get; set; }

@@ -70,5 +70,13 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_taskService.EditListOfTasks(listOfTasksRequest));
         }
+
+        [HttpGet]
+        public IActionResult GetTaskByList(string id)
+        {
+            var list = _taskService.GetTasksByList(new Guid(id));
+
+            return list != null ? Ok(list) : BadRequest(); 
+        }
     }
 }

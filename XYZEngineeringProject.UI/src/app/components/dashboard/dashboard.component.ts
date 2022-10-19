@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  isAuthorized = false;
+  constructor(
+    private authService: AuthorizationService
+  ) { }
 
   ngOnInit(): void {
+    this.isAuthorized = this.authService.getAuthStatus();
   }
 
 }

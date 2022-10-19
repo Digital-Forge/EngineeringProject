@@ -30,35 +30,35 @@
                     <input type="text" class="form-control" id="address" name="address" [(ngModel)]="clientDetails.address">
                 </div>
                 <div class="mb-3">
-                    <div *ngFor="let contact of clientDetails.contacts" class="row">
+                    <div *ngFor="let contact of clientDetails.contacts;" class="row">
                         <div>
                             <label for="firstname" class="label-form">First name</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="contact.firstname">
+                            <input type="text" class="form-control" id="firstname" formControlName="firstname" [(ngModel)]="contact.firstname" [value]="contact.firstname">
                         </div>
                         <div>
                             <label for="surname" class="label-form">Surname</label>
-                            <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="contact.surname">
+                            <input type="text" class="form-control" id="surname" formControlName="surname" [(ngModel)]="contact.surname" [value]="contact.surname">
                         </div>
                         <div>
                             <label for="phone" class="label-form">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="contact.phone">
+                            <input type="text" class="form-control" id="phone" formControlName="phone" [(ngModel)]="contact.phone" [value]="contact.phone">
                         </div>
                         <div>
                             <label for="email" class="label-form">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contact.email">
+                            <input type="text" class="form-control" id="email" formControlName="email" [(ngModel)]="contact.email" [value]="contact.email">
                         </div>
                     </div>
-                    <div *ngIf="false ; else addNewClient "></div>
+                    <!-- <div *ngIf="false ; else addNewClient"></div> -->
                     <!-- <button type="button" class="btn btn-primary" (click)="addNewContact()" *ngIf="!showAddNewContact">Add new contact</button> -->
                 </div>
                 <button type="submit" class="btn btn-primary" *ngIf="editMode">Save</button>
-                <button type="submit" class="btn btn-primary" *ngIf="!editMode">Add Client</button>
+                <button class="btn btn-primary" (click)="addContact()" *ngIf="!editMode">Add contact</button>
             </form>
         </div>
     </div>
 </div>
 
-<ng-template #addNewClient>
+<!-- <ng-template #addNewClient>
     <div>
         <label for="firstname" class="label-form">First name</label>
         <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="contactTemp.firstname">
@@ -76,4 +76,4 @@
         <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contactTemp.email">
     </div>
     <button type="button" class="btn btn-primary" (click)="addNewContact()">Add contact</button>
-</ng-template>
+</ng-template> -->

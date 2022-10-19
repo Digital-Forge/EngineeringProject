@@ -1,6 +1,6 @@
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Client } from './../../../models/client.model';
-import { ListOfTasks } from 'src/app/models/task.model';
+import { TaskList } from 'src/app/models/task.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskListStatus } from 'src/app/models/taskListStatus.enum';
@@ -14,12 +14,13 @@ export class TaskListFormComponent implements OnInit {
 
   public editMode:boolean = false;
 
-  taskListDetails: ListOfTasks = {
+  taskListDetails: TaskList = {
     name: '',
     status: TaskListStatus.New,
     id: '',
     createDate: new Date(),
-    project: ''
+    project: '',
+    tasks: []
   }
 
   public taskListStatuses = Object.values(TaskListStatus).filter(value => typeof value === "string");

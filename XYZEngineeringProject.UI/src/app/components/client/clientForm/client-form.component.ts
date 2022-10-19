@@ -81,21 +81,28 @@ export class ClientFormComponent implements OnInit {
     })
   }
 
-  addNewContact() {
-    if (this.clientDetails.contacts == null) {
-      // this.clientDetails.contacts = [{
-      //   firstname: this.contactTemp.firstname.valueOf(),
-      //   surname: this.contactTemp.surname.valueOf(),
-      //   phone: this.contactTemp.phone.valueOf(),
-      //   email: this.contactTemp.email.valueOf(),
-      //   id: this.contactTemp.id.valueOf()
-      // }]
-      this.clientDetails.contacts = [new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email)];
-    }
-    else {
-      this.clientDetails.contacts.push(new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email));
-    }
-    this.contactTemp = new ClientContact('','','','','');
-    this.showAddNewContact = false;
+  addContact() {
+     this.clientDetails.contacts.push(new ClientContact('','','','',''));
+     console.log(this.clientDetails.contacts);
   }
+  // addNewContact() {
+  //   console.log(this.clientDetails.contacts);
+
+  //   if (this.clientDetails.contacts == null) {
+  //     // this.clientDetails.contacts = [{
+  //     //   firstname: this.contactTemp.firstname.valueOf(),
+  //     //   surname: this.contactTemp.surname.valueOf(),
+  //     //   phone: this.contactTemp.phone.valueOf(),
+  //     //   email: this.contactTemp.email.valueOf(),
+  //     //   id: this.contactTemp.id.valueOf()
+  //     // }]
+  //     this.clientDetails.contacts = [new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email)];
+
+  //   }
+  //   else {
+  //     this.clientDetails.contacts.push(new ClientContact(this.contactTemp.id,this.contactTemp.firstname,this.contactTemp.surname,this.contactTemp.phone,this.contactTemp.email));
+  //   }
+  //   this.contactTemp = new ClientContact('','','','','');
+  //   this.showAddNewContact = false;
+  // }
 }

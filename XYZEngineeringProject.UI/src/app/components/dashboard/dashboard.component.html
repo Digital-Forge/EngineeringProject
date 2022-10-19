@@ -1,1 +1,4 @@
-<p>dashboard works!</p>
+<p *ngIf="isAuthorized; else notAuthorized">dashboard works!</p>
+<ng-template #notAuthorized>
+    <img src="https://images.squarespace-cdn.com/content/v1/5b15f1c08f513073b6c0f52f/1531949826523-X3SOQWH7FXW6SCDS880S/Mike_Henry_Consuela.jpeg"/>
+</ng-template>

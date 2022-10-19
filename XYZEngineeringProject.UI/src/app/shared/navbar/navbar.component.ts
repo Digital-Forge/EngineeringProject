@@ -1,6 +1,9 @@
+import { map } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
+import { ActivatedRoute } from '@angular/router';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +12,22 @@ import { AuthorizationService } from 'src/app/services/authorization/authorizati
 })
 export class NavbarComponent implements OnInit {
 
-  public isAuthorized = false;
+  //@Input() isAuthorized!: boolean;
+
   constructor(
     private authService: AuthorizationService,
-    private translateService: TranslateService
-  ) {}
+
+  ) {
+
+  }
 
   ngOnInit(): void {
-    this.isAuthorized = this.authService.getAuthStatus();
+  
+  }
+
+  logout() {
+    this.authService.logout();
+   // this.isAuthorized = false;
+
   }
 }

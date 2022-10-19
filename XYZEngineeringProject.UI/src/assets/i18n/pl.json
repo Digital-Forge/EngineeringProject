@@ -39,7 +39,18 @@
         "deadline": "Termin",
         "title": "Tytuł",
         "description": "Opis",
-        "priority": "Priorytet"        
+        "priority": "Priorytet",
+        "created": "Utworzono"        
+    },
+    "TaskListStatus": {
+        "New": "Nowe",
+        "InProgress": "W trakcie",
+        "Done": "Ukończone"
+    },
+    "NoteStatus": {
+        "Future": "Przyszłe",
+        "Now": "Teraz",
+        "Archive": "Archiwalne"
     },
     "Priority": {
         "No": "Brak",

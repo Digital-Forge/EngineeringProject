@@ -27,12 +27,11 @@
       </div>
     </div>
   </nav> -->
-<div class="sidebar">
-  <div class="sidebar-items d-flex align-items-center">
-    <app-navbar></app-navbar>
+  <div *ngIf="isAuthorized" class="sidebar">
+    <div class="sidebar-items d-flex align-items-center">
+      <app-navbar></app-navbar>
+    </div>
   </div>
-</div>  
-<div class="router-outlet">
-  <router-outlet></router-outlet>
-</div>  
- 
+  <div class="router-outlet">
+    <router-outlet></router-outlet>
+  </div>

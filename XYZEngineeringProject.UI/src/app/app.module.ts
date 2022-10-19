@@ -1,5 +1,5 @@
 import { AuthorizationService } from './services/authorization/authorization.service';
-import { NavbarComponent } from './shared/navbar/navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { InterceptorService } from './services/interceptor/interceptor.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,6 +33,7 @@ import { TaskComponent } from './components/task-list/task/index/task-index.comp
 import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
 import { TaskFiltersComponent } from './components/task-list/task/filters/task-filters.component';
 import { ClientGroupFormComponent } from './components/client/client-group-form/client-group-form.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ClientGroupFormComponent } from './components/client/client-group-form/
     TaskComponent,
     TaskFormComponent,
     TaskFiltersComponent,
-    ClientGroupFormComponent
+    ClientGroupFormComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

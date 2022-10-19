@@ -14,11 +14,13 @@ export interface Task {
     //TODO te pola ostatecznie będą obowiązkowe, więc trzeba będzie dorobić je w componencie
 }
 
-export interface ListOfTasks {
+export interface TaskList {
     id: string,
     name: string,
     createDate: Date,
     project: string, //krótki, 100 znaków
     //client: Client,
     status: TaskListStatus, //odniesienie do task list status (new, in_progress, complete)
+    tasks?: Task[],
+    isComplete?: boolean
 }

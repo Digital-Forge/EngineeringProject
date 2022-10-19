@@ -1,4 +1,4 @@
-import { Task, ListOfTasks } from '../../models/task.model';
+import { Task, TaskList } from '../../models/task.model';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -30,20 +30,20 @@ export class TaskService {
     return this.http.put(this.baseApiUrl + 'Task/EditTask',editTaskRequest);
   }
 
-  getAllTaskLists(): Observable<ListOfTasks[]> {
-    return this.http.get<ListOfTasks[]>(this.baseApiUrl + 'Task/GetAllListOfTasks');
+  getAllTaskLists(): Observable<TaskList[]> {
+    return this.http.get<TaskList[]>(this.baseApiUrl + 'Task/GetAllListOfTasks');
   }
 
-  addListOfTasks(addListOfTasksRequest: ListOfTasks):Observable<ListOfTasks> {
+  addListOfTasks(addListOfTasksRequest: TaskList):Observable<TaskList> {
     addListOfTasksRequest.id=this.emptyGuid;
-    return this.http.post<ListOfTasks>(this.baseApiUrl + 'Task/AddListOfTasks',addListOfTasksRequest);
+    return this.http.post<TaskList>(this.baseApiUrl + 'Task/AddListOfTasks',addListOfTasksRequest);
   }
 
-  getListOfTasks(id: string): Observable<ListOfTasks> {
-    return this.http.get<ListOfTasks>(this.baseApiUrl + 'Task/GetListOfTasksById' + id);
+  getListOfTasks(id: string): Observable<TaskList> {
+    return this.http.get<TaskList>(this.baseApiUrl + 'Task/GetListOfTasksById/' + id);
   }
 
-  saveListOfTasks(editListOfTasksReuqest: ListOfTasks): Observable<any> {
-    return this.http.put<ListOfTasks>(this.baseApiUrl + 'Task/EditListOfTasks', editListOfTasksReuqest);
+  saveListOfTasks(editListOfTasksReuqest: TaskList): Observable<any> {
+    return this.http.put<TaskList>(this.baseApiUrl + 'Task/EditListOfTasks', editListOfTasksReuqest);
   }
 }

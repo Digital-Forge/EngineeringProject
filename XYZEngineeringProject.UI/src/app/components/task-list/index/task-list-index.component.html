@@ -7,36 +7,40 @@
             </a>
         </div>
     </div>
-    <div>
-        <div class="table table-striped">
-            <thead>
-                <tr>
-                    <th>{{ 'Tasks.name' | translate }}</th>
-                    <th>{{ 'Tasks.dateCreate' | translate }}</th>
-                    <th>{{ 'Tasks.status' | translate }}</th>
-                    <!-- <th>{{ 'Tasks.actions' | translate }}</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- <tr *ngFor="let taskList of taskLists">
-                    <td>{{ taskList.name }}</td>
-                    <td>{{ taskList.createDate }}</td>
-                    <td>{{ taskList.status }}</td>
-                    <td>{{ taskList.name }}</td>
-                </tr> -->
-                <tr>
-                    <td>Plan zajęć dla grupy piątkowej</td>
-                    <td>11-10-2022</td>
-                    <td>In progress</td>
-                    <td class="border-0">edit</td>
-                </tr>
-                <tr>
-                    <td>Plan zajęć dla grupy piątkowej</td>
-                    <td>11-10-2022</td>
-                    <td>In progress</td>
-                    <td class="border-0">edit</td>
-                </tr>
-            </tbody>
+    <!-- <div> -->
+        <div class="card-columns">
+            <div *ngFor="let taskList of taskLists">
+                <div class="card card-corner p-1 mb-3">
+                    <div class="card-body">
+                        <div class="card-subtitle text-center mb-2" [ngClass]="{
+                            'text-success': taskListStatuses[taskList.status] == 'New', 
+                            'text-warning': taskListStatuses[taskList.status] == 'InProgress', 
+                            'text-gray': taskListStatuses[taskList.status] == 'Done'}">
+                                {{('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
+                        </div>
+
+                        <h3 class="card-title text-center mb-2" [routerLink]="['/task-list', taskList.id]">{{taskList.name}}</h3>
+                        <div class="card-subtitle text-center mb-2">{{ 'Task.created' | translate}} {{taskList.createDate | date:'dd-MM-yyyy'}}</div>
+                        
+                        
+                        <div *ngFor="let task of tasks">                         
+                            <!-- <div *ngIf="!task.isComplete"><i class="bi bi-square"></i></div>
+                            <div *ngIf="task.isComplete"><i class="bi bi-check-square"></i></div> -->
+                            <div class="float-start">{{ taskExample.length > 100 ? (taskExample.substring(0,100) + '...') : taskExample }}</div>                         
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-3">
+                            <a class="btn btn-sm btn-light me-2" [routerLink]="['/task-list', 'edit', taskList.id]">
+                                <i class="bi bi-pencil-square me-1"></i>
+                                {{ 'Button.edit' | translate }}
+                            </a>
+                            <!-- <a class="btn btn-sm btn-success-light" (click)="completeTask(taskList.id)"> -->
+                                <!-- <i class="bi bi-check2-square me-1"></i>{{ 'Button.done' | translate }}                               
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    <!-- </div> -->
 </div>

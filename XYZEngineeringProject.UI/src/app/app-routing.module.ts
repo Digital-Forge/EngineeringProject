@@ -19,21 +19,28 @@ import { TaskComponent } from './components/task-list/task/index/task-index.comp
 import { TaskListComponent } from './components/task-list/index/task-list-index.component';
 import { AuthGuard } from './services/auth.guard';
 import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: HomePageComponent
+  },
+  {
+    path: 'login',
     component: LoginComponent
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
     children: [
       { path: '', component: TaskListComponent },
       { path: 'add', component: TaskListFormComponent },
+      { path: ':id', component: TaskComponent },
       { path: 'edit/:id', component: TaskListFormComponent },
     ],
     canActivate: [AuthGuard] 
@@ -41,10 +48,11 @@ const routes: Routes = [
   {
     path: 'task',
     children: [
-      { path: '', component: TaskComponent},
+     // { path: ':id', component: TaskComponent},
       { path: 'add', component: TaskFormComponent},
       { path: 'edit/:id', component: TaskFormComponent},
     ],
+    canActivate: [AuthGuard] 
   },
   {
     path: 'clients',

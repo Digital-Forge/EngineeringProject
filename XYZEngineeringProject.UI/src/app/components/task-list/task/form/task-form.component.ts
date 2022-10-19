@@ -18,6 +18,7 @@ export class TaskFormComponent implements OnInit {
   public selectorPriority: string = '';
   public selectorDate: any;
   public pipe = new DatePipe('en-GB');
+
   taskDetails: Task = {
     id: '',
     deadline: new Date(),
@@ -28,7 +29,16 @@ export class TaskFormComponent implements OnInit {
     taskListId: '',
     isComplete: false
   }
-  constructor(private route: ActivatedRoute, private taskService: TaskService, private router: Router) { }
+
+  constructor(
+    private route: ActivatedRoute, 
+    private taskService: TaskService, 
+    private router: Router
+  ) { 
+    if (this.router.url.includes('edit')) {
+      console.log('edit');
+    }
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({

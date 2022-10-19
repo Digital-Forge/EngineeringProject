@@ -13,12 +13,11 @@ namespace XYZEngineeringProject.Application.ViewModels
         public DateTime Deadline { get; set; }
         public Priority Priority { get; set; }
         public string Title { get; set; }
-
-        public Guid AssigneeUserId { get; set; }
-
         public string Description { get; set; }
-
+        public Guid? AssigneeUserId { get; set; }
+        public Guid AssignerUserId { get; set; }
         public Guid? ListOfTasksId { get; set; }
         public ListOfTasks? ListOfTasks { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

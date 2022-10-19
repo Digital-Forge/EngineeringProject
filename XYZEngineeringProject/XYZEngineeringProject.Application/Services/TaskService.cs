@@ -23,7 +23,6 @@ namespace XYZEngineeringProject.Application.Services
             _mapper = mapper;
         }
 
-        #region Task
         public bool AddTask(TaskVM taskRequest)
         {
             UserTask task = new UserTask
@@ -66,9 +65,8 @@ namespace XYZEngineeringProject.Application.Services
 
             return _taskRepository.Update(task);
         }
-        #endregion
 
-        #region ListOfTasks
+        
         public bool AddListOfTasks(ListOfTasksVM listOfTasksRequest)
         {
             ListOfTasks list = new ListOfTasks()
@@ -101,6 +99,23 @@ namespace XYZEngineeringProject.Application.Services
 
             return _taskRepository.Update(list);
         }
-        #endregion
+
+        public List<TaskVM> GetTasksByList(Guid id)
+        {
+            return _taskRepository.GetListOfTasksByIdAsQuerable(id)
+                .SelectMany(x => x.Task)
+                .Select(e => new TaskVM 
+                { 
+                    Id = e.Id,
+                    Title = e.Title,
+                    Description = e.Description,
+                    Priority = e.Priority,
+                    CreateDate = e.CreateDate,
+                    Deadline = e.Deadline,
+                    AssigneeUserId = e.AssigneeUserId,
+                    AssignerUserId = e.AssignerUserId,
+                    ListOfTasksId = e.ListOfTasksId,
+                }).ToList();
+        }
     }
 }

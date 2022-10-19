@@ -32,7 +32,6 @@ import { TaskListFiltersComponent } from './components/task-list/filters/task-li
 import { TaskComponent } from './components/task-list/task/index/task-index.component';
 import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
 import { TaskFiltersComponent } from './components/task-list/task/filters/task-filters.component';
-import { ClientGroupFormComponent } from './components/client/client-group-form/client-group-form.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
@@ -61,8 +60,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     TaskComponent,
     TaskFormComponent,
     TaskFiltersComponent,
-    ClientGroupFormComponent,
-    HomePageComponent
+    HomePageComponent,
+    TaskFiltersComponent
   ],
   imports: [
     BrowserModule,

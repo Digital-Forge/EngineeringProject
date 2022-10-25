@@ -17,3 +17,7 @@
 .nav-link.active >.bi {
     -webkit-text-stroke-color: var(--secondary);
 }
+
+.nav-link.active >.bi:hover {
+    -webkit-text-stroke-color: var(--primary);
+}

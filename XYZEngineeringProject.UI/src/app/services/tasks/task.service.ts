@@ -1,3 +1,4 @@
+import { TaskListResponse } from './../../models/task.model';
 import { Task, TaskList } from '../../models/task.model';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -17,6 +18,10 @@ export class TaskService {
     return this.http.get<Task[]>(this.baseApiUrl + 'Task/GetAllTasks')
   }
 
+  getTaskByTaskListId(id: string): Observable<Task[]> {
+    return this.http.get<Task[]>(this.baseApiUrl + 'Task/GetTaskByList/' + id);
+  }
+
   addTask(addTaskRequest: Task): Observable<Task> {
     addTaskRequest.id = this.emptyGuid;
     return this.http.post<Task>(this.baseApiUrl + 'Task/AddTask', addTaskRequest)
@@ -30,6 +35,7 @@ export class TaskService {
     return this.http.put(this.baseApiUrl + 'Task/EditTask',editTaskRequest);
   }
 
+  //zwraca wszystkie TaskList-y
   getAllTaskLists(): Observable<TaskList[]> {
     return this.http.get<TaskList[]>(this.baseApiUrl + 'Task/GetAllListOfTasks');
   }
@@ -39,7 +45,8 @@ export class TaskService {
     return this.http.post<TaskList>(this.baseApiUrl + 'Task/AddListOfTasks',addListOfTasksRequest);
   }
 
-  getListOfTasks(id: string): Observable<TaskList> {
+  // zwraca TaskList po id
+  getTaskListById(id: string): Observable<TaskList> {
     return this.http.get<TaskList>(this.baseApiUrl + 'Task/GetListOfTasksById/' + id);
   }
 

@@ -1,10 +1,13 @@
 {
     "Button": {
+        "view": "Zobacz",
         "edit": "Edytuj",
         "add": "Dodaj",
         "update": "Aktualizuj",
         "done": "Ukończone",
-        "restore": "Przywróć"
+        "restore": "Przywróć",
+        "addTaskList": "Dodaj listę zadań",
+        "addTask": "Dodaj zadanie"
     },
     "Menu": {
         "tasks": "Zadania",
@@ -40,7 +43,8 @@
         "title": "Tytuł",
         "description": "Opis",
         "priority": "Priorytet",
-        "created": "Utworzono"        
+        "created": "Utworzono",
+        "noTasks": "Na tej liście nie ma jeszcze zadań"        
     },
     "TaskListStatus": {
         "New": "Nowe",

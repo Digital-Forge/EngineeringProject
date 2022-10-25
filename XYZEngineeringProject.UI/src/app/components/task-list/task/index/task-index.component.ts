@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Task } from 'src/app/models/task.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'task-index',
@@ -18,6 +18,7 @@ export class TaskComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private readonly router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -25,14 +26,23 @@ export class TaskComponent implements OnInit {
   }
 
   getData() {
-    this.taskService.getAllTasks().subscribe({
-      next: (tasks) => {
-        this.tasks = tasks;
-      },
-      error: (response) => {
-        console.log(response);
+    this.route.paramMap.subscribe({
+      next: (param) => {
+        const id = param.get('id');
+        if (id) {
+          this.taskService.getTaskByTaskListId(id).subscribe({
+            next: (tasks) => {
+              this.tasks = tasks;
+            },
+            error: (response) => {
+              console.log(response);
+            }
+          });
+        }
       }
-    });
+    })
+
+    
   }
 
   completeTask(id: string) {

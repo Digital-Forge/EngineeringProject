@@ -23,7 +23,10 @@ export class EditAppUserComponent implements OnInit {
       addressHome: ''
     }
   }
-  constructor(private route: ActivatedRoute,private appUserService: AppuserService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private appUserService: AppuserService
+    ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({

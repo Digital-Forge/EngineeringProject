@@ -6,10 +6,10 @@ export interface Task {
     id: string,
     deadline?: Date,
     priority: Priority, // UWAGA dałoby radę zmienić to na priorityId z odniesieniem do tabeli taskPriority (none, low, medium, high)?
-    title: string,
+    title?: string,
     description?: string,
     assignedUserId?: string,
-    taskListId?: string,
+    listOfTasksId?: string,
     isComplete?: boolean 
     //TODO te pola ostatecznie będą obowiązkowe, więc trzeba będzie dorobić je w componencie
 }
@@ -17,10 +17,15 @@ export interface Task {
 export interface TaskList {
     id: string,
     name: string,
-    createDate: Date,
-    project: string, //krótki, 100 znaków
+    createDate?: Date,
+    project?: string, //krótki, 100 znaków
     //client: Client,
     status: TaskListStatus, //odniesienie do task list status (new, in_progress, complete)
+    tasks?: Task[]
+}
+
+export interface TaskListResponse {
+    taskListData: TaskList,
     tasks?: Task[],
     isComplete?: boolean
 }

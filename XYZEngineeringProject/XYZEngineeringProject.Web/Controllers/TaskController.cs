@@ -7,7 +7,7 @@ using XYZEngineeringProject.Domain.Models;
 namespace XYZEngineeringProject.Web.Controllers
 {
     [Authorize]
-    public class TaskController: Controller
+    public class TaskController : Controller
     {
         private readonly ILogger<TaskController> _logger;
         private readonly ITaskService _taskService;
@@ -76,7 +76,7 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             var list = _taskService.GetTasksByList(new Guid(id));
 
-            return list != null ? Ok(list) : BadRequest(); 
+            return list != null ? Ok(list) : BadRequest();
         }
     }
 }

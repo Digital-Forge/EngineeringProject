@@ -26,7 +26,7 @@ export class TaskFormComponent implements OnInit {
     title: '',
     description: '',
     assignedUserId: '',
-    taskListId: '',
+    listOfTasksId: '',
     isComplete: false
   }
 

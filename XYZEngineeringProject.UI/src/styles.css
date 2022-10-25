@@ -3,7 +3,7 @@
     --primary-rgb: 62, 100, 163;
     --secondary: #a4d2ff;
     --dark-gray: #444447;
-    --gray: #BFBFBF;
+    --gray: #757577;
     --light-gray: #E6E6E6;
     --success-primary: #33A68F;
     --success-secondary: #f7ffea;
@@ -21,6 +21,16 @@
 body {
         font-weight: 400 !important;
         letter-spacing: 0rem;
+        font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: var(--secondary);
 }
 
 h1 {
@@ -37,7 +47,7 @@ h2 {
 
 h3 {
     text-transform: uppercase;
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 400;
 }
 
@@ -90,8 +100,9 @@ thead {
 }
 
 .text-gray {
-    color: var(--dark-gray) !important;
+    color: var(--gray) !important;
 }
+
 .btn {
     border-radius: 14px;
     border: 0 !important;

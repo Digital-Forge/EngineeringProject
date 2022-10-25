@@ -31,7 +31,7 @@
                 </div>
                 <div class="mb-3">
                     <h1 *ngIf="clientDetails.contacts">Contacts section</h1>
-                    <div *ngFor="let contact of clientDetails.contacts" class="row">
+                    <div *ngFor="let contact of clientDetails.contacts"  class="row">
                         <div>
                             <label for="firstname" class="label-form">First name</label>
                             <input type="text" class="form-control" id="firstname" [value]="contact.firstname">

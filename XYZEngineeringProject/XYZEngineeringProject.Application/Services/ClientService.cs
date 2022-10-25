@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +39,7 @@ namespace XYZEngineeringProject.Application.Services
 
         public bool EditClient(ClientVM clientVM)
         {
-            var client = _clientRepository.GetClientById(clientVM.Id);
+            var client = _clientRepository.GetClientByIdAsQuerable(clientVM.Id).Include(x => x.ClientContacts).FirstOrDefault();
             if (client != null)
             {
                 client.Name = clientVM.Name;
@@ -45,6 +47,24 @@ namespace XYZEngineeringProject.Application.Services
                 client.Address = clientVM.Address;
                 client.Comments = clientVM.Comments;
                 client.NIP = clientVM.NIP;
+                clientVM.Contacts.Where(x => x.Id == Guid.Empty).ToList().ForEach(x => client.ClientContacts.Add(new ClientContact
+                {
+                    Firstname = x.Firstname,
+                    Surname = x.Surname,
+                    Phone = x.Phone,
+                    Id = x.Id,
+                    Email = x.Email,
+                    ClientId = clientVM.Id
+                }));
+                clientVM.Contacts.Where(x => x.Id != Guid.Empty).ToList().ForEach(x =>
+                {
+                    var contact = client.ClientContacts.FirstOrDefault(y => y.Id == x.Id);
+                    contact.Phone = x.Phone;
+                    contact.Firstname = x.Firstname;
+                    contact.Surname = x.Surname;
+                    contact.Email = x.Email;
+                    _clientRepository.UpdateClientContract(contact);
+                });
                 return _clientRepository.UpdateClient(client);
             }
             return false;
@@ -59,7 +79,15 @@ namespace XYZEngineeringProject.Application.Services
                 Description= x.Description,
                 NIP= x.NIP,
                 Address = x.Address,
-                Comments= x.Comments
+                Comments= x.Comments,
+                Contacts = x.ClientContacts.Select(y => new ClientContactVM
+                {
+                    Firstname = y.Firstname,
+                    Id = y.Id,
+                    Email= y.Email,
+                    Phone= y.Phone,
+                    Surname= y.Surname
+                }).ToList()
             }).ToList();
         }
     }

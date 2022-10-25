@@ -24,7 +24,7 @@ export class ClientFormComponent implements OnInit {
     address: '',
     contacts: []
   }
-  contactTemp: IClientContact = new ClientContact('','','','','');
+  contactTemp: IClientContact = new ClientContact('','','','');
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +43,7 @@ export class ClientFormComponent implements OnInit {
             next: (response) => {
               this.clientDetails = response;
               this.editMode = true;
+              console.log(this.clientDetails.contacts);              
             }
           })
         }
@@ -101,7 +102,7 @@ export class ClientFormComponent implements OnInit {
     else {
       this.clientDetails.contacts.push(this.contactTemp);
     }
-    this.contactTemp = new ClientContact('','','','','');
+    this.contactTemp = new ClientContact('','','','');
     this.showAddNewContact=false;
  }
 }

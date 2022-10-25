@@ -9,22 +9,22 @@ export interface Client {
 }
 
 export interface IClientContact {
-    id: any,
-    firstname: any,
-    surname: any,
-    phone: any,
-    email: any
+    id: string,
+    firstname: string,
+    surname: string,
+    phone: string,
+    email: string
 }
 
 export class ClientContact implements IClientContact {
-    public id: any ;
-    public firstname: any;
-    public surname: any;
-    public phone: any;
-    public email: any;
+    public id: string ;
+    public firstname: string;
+    public surname: string;
+    public phone: string;
+    public email: string;
 
-    constructor(id: any, firstname: any, surname:any, phone:any, email: any){
-        this.id=id;
+    constructor(firstname: string, surname:string, phone:string, email: string){
+        this.id='00000000-0000-0000-0000-000000000000';
         this.firstname=firstname;
         this.surname=surname;
         this.phone=phone;

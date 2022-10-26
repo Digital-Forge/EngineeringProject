@@ -25,8 +25,8 @@ namespace XYZEngineeringProject.Application.Services
                 UserName = x.UserName,
                 PasswordHash = x.PasswordHash,
                 Address = x.Address,
-                FullName = x.FullName,
-                PESEL = x.PESEL,
+                Name = x.Firstname,
+                Surname = x.Surname,
                 Id = x.Id.ToString()
             }).ToList();
         }
@@ -38,8 +38,8 @@ namespace XYZEngineeringProject.Application.Services
                 Id = new Guid(appUser.Id),
                 UserName = appUser.UserName,
                 PasswordHash = appUser.PasswordHash,
-                FullName = appUser.FullName,
-                PESEL= appUser.PESEL,
+                Firstname = appUser.Name,
+                Surname= appUser.Surname,
                 Address = appUser.Address
             };
 

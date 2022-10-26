@@ -27,16 +27,16 @@ namespace XYZEngineeringProject.Domain.Interfaces
 
         // Client Contacts
 
-        Guid AddClientContract(ClientContact contact);
-        bool RemoveClientContract(ClientContact contact);
-        bool RemoveClientContract(Guid contactById);
-        bool __RemoveHardClientContract(ClientContact contact);
-        bool __RemoveHardClientContract(Guid contactById);
-        bool UpdateClientContract(ClientContact contact);
-        ClientContact? GetClientContractById(Guid contactId);
-        IQueryable<ClientContact> GetClientContractByIdAsQuerable(Guid contactId);
-        IQueryable<ClientContact>? GetAllClientContracts(Guid clientId);
-        IQueryable<ClientContact> _GetEveryOneClientContracts(Guid clientId);
+        Guid AddClientContact(ClientContact contact);
+        bool RemoveClientContact(ClientContact contact);
+        bool RemoveClientContact(Guid contactById);
+        bool __RemoveHardClientContact(ClientContact contact);
+        bool __RemoveHardClientContact(Guid contactById);
+        bool UpdateClientContact(ClientContact contact);
+        ClientContact? GetClientContactById(Guid contactId);
+        IQueryable<ClientContact> GetClientContactByIdAsQuerable(Guid contactId);
+        IQueryable<ClientContact>? GetAllClientContacts(Guid clientId);
+        IQueryable<ClientContact> _GetEveryOneClientContacts(Guid clientId);
 
 
         // relation

@@ -63,7 +63,7 @@ namespace XYZEngineeringProject.Application.Services
                     contact.Firstname = x.Firstname;
                     contact.Surname = x.Surname;
                     contact.Email = x.Email;
-                    _clientRepository.UpdateClientContract(contact);
+                    _clientRepository.UpdateClientContact(contact);
                 });
                 return _clientRepository.UpdateClient(client);
             }

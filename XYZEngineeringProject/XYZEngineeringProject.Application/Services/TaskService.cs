@@ -27,7 +27,7 @@ namespace XYZEngineeringProject.Application.Services
         {
             UserTask task = new UserTask
             {
-                AssigneeUserId = null,
+                AssignToUserId = null,
                 Id = Guid.Empty,
                 Deadline = taskRequest.Deadline,
                 Description = taskRequest.Description,
@@ -115,8 +115,8 @@ namespace XYZEngineeringProject.Application.Services
                     Priority = e.Priority,
                     CreateDate = e.CreateDate,
                     Deadline = e.Deadline,
-                    AssigneeUserId = e.AssigneeUserId,
-                    AssignerUserId = e.AssignerUserId,
+                    AssigneeUserId = e.AssignToUserId,
+                    AssignerUserId = e.AssignFromUserId,
                     ListOfTasksId = e.ListOfTasksId,
                 }).ToList();
         }

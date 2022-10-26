@@ -24,15 +24,15 @@ export class ClientFormComponent implements OnInit {
     address: '',
     contacts: []
   }
-  contactTemp: IClientContact = new ClientContact('', '', '', '');
+  contactTemp: IClientContact = new ClientContact('','','','');
 
   constructor(
     private route: ActivatedRoute,
     private clientService: ClientService,
     private router: Router,
     private fb: FormBuilder
-  ) {
-  }
+    ) {    
+   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
@@ -43,13 +43,7 @@ export class ClientFormComponent implements OnInit {
             next: (response) => {
               this.clientDetails = response;
               this.editMode = true;
-              this.clientForm = this.fb.group({
-                name: [this.clientDetails.name, Validators.required],
-                description: [this.clientDetails.description],
-                comments: [this.clientDetails.comments],
-                address: [this.clientDetails.address],
-                nip: [this.clientDetails.nip]
-              })
+              console.log(this.clientDetails.contacts);              
             }
           })
         }
@@ -91,7 +85,7 @@ export class ClientFormComponent implements OnInit {
   }
 
   addNewContact() {
-
+    
     this.showAddNewContact = true;
   }
 
@@ -103,12 +97,12 @@ export class ClientFormComponent implements OnInit {
         phone: this.contactTemp.phone.valueOf(),
         email: this.contactTemp.email.valueOf(),
         id: this.contactTemp.id.valueOf()
-      }]
+      }]      
     }
     else {
       this.clientDetails.contacts.push(this.contactTemp);
     }
-    this.contactTemp = new ClientContact('', '', '', '');
-    this.showAddNewContact = false;
-  }
+    this.contactTemp = new ClientContact('','','','');
+    this.showAddNewContact=false;
+ }
 }

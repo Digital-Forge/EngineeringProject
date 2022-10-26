@@ -25,8 +25,10 @@ export class TaskFormComponent implements OnInit {
     priority: Priority.Done,
     title: '',
     description: '',
-    assignedUserId: '',
-    listOfTasksId: '',
+    assigneeUserId: '00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, do którego ma być przypisany task
+    assignerUserId:'00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, który dodaje taska
+    createDate: new Date(),
+    listOfTasksId: '00000000-0000-0000-0000-000000000000', //TODO przekazać z urla id listy. do której ma się dodać task
     isComplete: false
   }
 

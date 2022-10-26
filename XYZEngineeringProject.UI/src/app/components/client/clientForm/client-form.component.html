@@ -11,23 +11,23 @@
             <form #form="ngForm" [formGroup]="clientForm" (ngSubmit)="submit()">
                 <div class="mb-3">
                     <label for="name" class="label-form">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" formControlName="name" [(ngModel)]="clientDetails.name">
+                    <input type="text" class="form-control" id="name" name="name" formControlName="name">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="label-form">Description</label>
-                    <input type="text" class="form-control" id="description" name="description" formControlName="description" [(ngModel)]="clientDetails.description">
+                    <input type="text" class="form-control" id="description" name="description" formControlName="description">
                 </div>
                 <div class="mb-3">
                     <label for="comments" class="label-form">Comments</label>
-                    <input type="text" class="form-control" id="comments" name="comments" formControlName="comments" [(ngModel)]="clientDetails.comments">
+                    <input type="text" class="form-control" id="comments" name="comments" formControlName="comments">
                 </div>
                 <div class="mb-3">
                     <label for="nip" class="label-form">NIP</label>
-                    <input type="text" class="form-control" id="nip" name="nip" formControlName="nip" [(ngModel)]="clientDetails.nip">
+                    <input type="text" class="form-control" id="nip" name="nip" formControlName="nip">
                 </div>
                 <div class="mb-3">
                     <label for="address" class="label-form">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" formControlName="address" [(ngModel)]="clientDetails.address">
+                    <input type="text" class="form-control" id="address" name="address" formControlName="address">
                 </div>
                 <div class="mb-3">
                     <h1 *ngIf="clientDetails.contacts">Contacts section</h1>

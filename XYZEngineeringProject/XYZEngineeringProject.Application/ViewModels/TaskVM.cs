@@ -17,7 +17,8 @@ namespace XYZEngineeringProject.Application.ViewModels
         public Guid? AssigneeUserId { get; set; }
         public Guid AssignerUserId { get; set; }
         public Guid? ListOfTasksId { get; set; }
-        public ListOfTasks? ListOfTasks { get; set; }
+        //public ListOfTasks? ListOfTasks { get; set; }
         public DateTime CreateDate { get; set; }
+        public bool IsComplete { get; set; }
     }
 }

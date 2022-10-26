@@ -8,8 +8,10 @@ export interface Task {
     priority: Priority, // UWAGA dałoby radę zmienić to na priorityId z odniesieniem do tabeli taskPriority (none, low, medium, high)?
     title?: string,
     description?: string,
-    assignedUserId?: string,
+    assigneeUserId?: string,
+    assignerUserId:string,
     listOfTasksId?: string,
+    createDate:Date,
     isComplete?: boolean 
     //TODO te pola ostatecznie będą obowiązkowe, więc trzeba będzie dorobić je w componencie
 }

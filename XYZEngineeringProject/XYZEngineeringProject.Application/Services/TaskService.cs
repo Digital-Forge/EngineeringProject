@@ -32,7 +32,8 @@ namespace XYZEngineeringProject.Application.Services
                 Deadline = taskRequest.Deadline,
                 Description = taskRequest.Description,
                 Priority = taskRequest.Priority,
-                Title = taskRequest.Title
+                Title = taskRequest.Title,
+                IsComplete = taskRequest.IsComplete,
             };
 
             _taskRepository.Add(task);
@@ -48,10 +49,11 @@ namespace XYZEngineeringProject.Application.Services
                 AssigneeUserId = Guid.Empty,
                 Deadline = x.Deadline,
                 Description = x.Description,
-                ListOfTasks = x.ListOfTasks,
+                //ListOfTasks = x.ListOfTasks,
                 ListOfTasksId = x.ListOfTasksId,
                 Priority = x.Priority,
-                Title = x.Title
+                Title = x.Title,
+                IsComplete=x.IsComplete,
             }).ToList();
         }
 
@@ -62,6 +64,7 @@ namespace XYZEngineeringProject.Application.Services
             task.Description = editTaskRequest.Description;
             task.Priority = editTaskRequest.Priority;
             task.Deadline = editTaskRequest.Deadline;
+            task.IsComplete = editTaskRequest.IsComplete;
 
             return _taskRepository.Update(task);
         }

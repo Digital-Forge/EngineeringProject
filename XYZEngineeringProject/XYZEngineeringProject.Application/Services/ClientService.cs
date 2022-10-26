@@ -30,7 +30,14 @@ namespace XYZEngineeringProject.Application.Services
                 Description = clientVM.Description,
                 Address = clientVM.Address,
                 Comments = clientVM.Comments,
-                NIP = clientVM.NIP
+                NIP = clientVM.NIP,
+                ClientContacts = clientVM.Contacts.Select(x => new ClientContact
+                {
+                    Firstname = x.Firstname,
+                    Surname = x.Surname,
+                    Email = x.Email,
+                    Phone = x.Phone
+                }).ToList()
             };
 
             _clientRepository.AddClient(client);

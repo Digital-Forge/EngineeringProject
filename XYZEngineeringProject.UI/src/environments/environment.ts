@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseApiUrl:'https://localhost:44382/'
+  baseApiUrl:'https://localhost:7250/',
+  emptyGuid:'00000000-0000-0000-0000-000000000000'
 };
 
 /*

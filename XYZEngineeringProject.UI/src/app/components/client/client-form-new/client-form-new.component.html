@@ -1,0 +1,29 @@
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <label for="name">name</label>
+    <input id="name" type="text" formControlName="name" required>
+    <label for="description">description</label>
+    <input id="description" type="text" formControlName="description">
+    <label for="nip">nip</label>
+    <input id="nip" type="text" formControlName="nip">
+    <label for="comments">comments</label>
+    <input id="comments" type="text" formControlName="comments">
+    <label for="address">address</label>
+    <input id="address" type="text" formControlName="address">
+    <ng-container formArrayName="clientContacts">
+        <h2>client contacts</h2>
+        <div *ngFor="let contact of clientContacs.controls; let i=index">
+            <ng-container [formGroupName]="i">
+                <label for="clientContact-{{i}}-firstName">First name</label>
+                <input id="clientContact-{{i}}-firstName" type="text" formControlName="firstName">
+                <label for="clientContact-{{i}}-surname">surname</label>
+                <input id="clientContact-{{i}}-surname" type="text" formControlName="surname">
+                <label for="clientContact-{{i}}-phone">phone</label>
+                <input id="clientContact-{{i}}-phone" type="text" formControlName="phone">
+                <label for="clientContact-{{i}}-email">email</label>
+                <input id="clientContact-{{i}}-email" type="text" formControlName="email">
+            </ng-container>
+        </div>
+        <button type="button" (click)="addClientContact()">Add another contact</button>
+    </ng-container>
+    <button type="submit" [disabled]="!clientForm.valid">submit</button>
+</form>

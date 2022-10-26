@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class TaskService {
 
   baseApiUrl: string = environment.baseApiUrl;
-  emptyGuid: string = '00000000-0000-0000-0000-000000000000';
+  emptyGuid: string = environment.emptyGuid;
   constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<Task[]> {

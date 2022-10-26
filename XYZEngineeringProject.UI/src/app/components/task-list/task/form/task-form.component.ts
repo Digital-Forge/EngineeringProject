@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Task } from 'src/app/models/task.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'task-form',
@@ -25,10 +26,10 @@ export class TaskFormComponent implements OnInit {
     priority: Priority.Done,
     title: '',
     description: '',
-    assigneeUserId: '00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, do którego ma być przypisany task
-    assignerUserId:'00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, który dodaje taska
+    assigneeUserId: environment.emptyGuid, //TODO przekazać id użytkownika, do którego ma być przypisany task
+    assignerUserId:environment.emptyGuid, //TODO przekazać id użytkownika, który dodaje taska
     createDate: new Date(),
-    listOfTasksId: '00000000-0000-0000-0000-000000000000', //TODO przekazać z urla id listy. do której ma się dodać task
+    listOfTasksId: environment.emptyGuid, //TODO przekazać z urla id listy. do której ma się dodać task
     isComplete: false
   }
 

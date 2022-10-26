@@ -10,7 +10,7 @@ import { AppUser } from 'src/app/models/app-user.model';
 export class AppuserService {
 
   baseApiUrl: string = environment.baseApiUrl;
-  emptyGuid: string = '00000000-0000-0000-0000-000000000000';
+  emptyGuid: string = environment.emptyGuid;
   constructor(private http: HttpClient) { }
 
   getAllUsers(): Observable<AppUser[]> {

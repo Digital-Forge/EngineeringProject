@@ -1,3 +1,5 @@
+import { environment } from "src/environments/environment";
+
 export interface Client {
     id: string,
     name: string,
@@ -24,7 +26,7 @@ export class ClientContact implements IClientContact {
     public email: string;
 
     constructor(firstname: string, surname:string, phone:string, email: string){
-        this.id='00000000-0000-0000-0000-000000000000';
+        this.id=environment.emptyGuid;
         this.firstname=firstname;
         this.surname=surname;
         this.phone=phone;

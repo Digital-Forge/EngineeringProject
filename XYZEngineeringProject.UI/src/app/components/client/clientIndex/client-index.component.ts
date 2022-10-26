@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './client-index.component.html',
   styleUrls: ['./client-index.component.css']
 })
-export class ClientIndexComponent implements OnInit {
+export class ClientComponent implements OnInit {
 
   clients: Client[] = [];
   constructor(private clientService: ClientService) { }

@@ -8,6 +8,7 @@
                 <th>Date</th>
                 <th>Status</th>
                 <th> </th>
+                <th> </th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +17,8 @@
                 <td>{{note.title}}</td>
                 <td>{{note.date | date:'dd/MM/yyyy'}}</td>
                 <td>{{ "NoteStatus." + noteStatuses[note.noteStatus] | translate}}</td> 
-                <td><a [routerLink]="['/note', 'edit', note.id]">View</a></td>
+                <td><a [routerLink]="['/note', note.id]">View</a></td>
+                <td><a [routerLink]="['/note', 'edit', note.id]">Edit</a></td>
             </tr>
         </tbody>
     </table>

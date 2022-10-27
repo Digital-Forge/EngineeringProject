@@ -53,7 +53,7 @@ export class TaskFormComponent implements OnInit {
               this.taskDetails = response;
               this.selectorPriority = this.Priority2LabelMapping[this.taskDetails.priority];
               this.selectorDate = this.pipe.transform(this.taskDetails.deadline, 'yyyy-MM-dd');
-              this.editMode = true;          
+              this.editMode = true;              
             }
           })
         }

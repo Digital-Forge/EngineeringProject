@@ -18,8 +18,6 @@ import { AppUserListComponent } from './components/appUser/app-user-list/app-use
 import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
 import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 import { ClientFiltersComponent } from './components/client/clientFilters/filters.component';
-
-import { NoteComponent } from './components/note/note.component';
 import { NoteFilterComponent } from './components/note/note-filter/note-filter.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
@@ -33,6 +31,8 @@ import { TaskFormComponent } from './components/task-list/task/form/task-form.co
 import { TaskFiltersComponent } from './components/task-list/task/filters/task-filters.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
+import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
+import { NoteViewComponent } from './components/note/note-view/note-view.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,6 @@ import { ClientFormNewComponent } from './components/client/client-form-new/clie
     AddAppUserComponent,
     EditAppUserComponent,
     NavbarComponent,
-    NoteComponent,
     NoteFilterComponent,
     NoteIndexComponent,
     NoteFormComponent,
@@ -61,7 +60,9 @@ import { ClientFormNewComponent } from './components/client/client-form-new/clie
     TaskFiltersComponent,
     HomePageComponent,
     TaskFiltersComponent,
-    ClientFormNewComponent
+    ClientFormNewComponent,
+    NoteFormNewComponent,
+    NoteViewComponent
   ],
   imports: [
     BrowserModule,

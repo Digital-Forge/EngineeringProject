@@ -2,7 +2,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
-import { NoteComponent } from './components/note/note.component';
 import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
 import { ClientComponent } from './components/client/clientIndex/client-index.component';
 import { ClientFormComponent } from './components/client/clientForm/client-form.component';
@@ -19,6 +18,8 @@ import { AuthGuard } from './services/auth.guard';
 import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
+import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
+import { NoteViewComponent } from './components/note/note-view/note-view.component';
 
 const routes: Routes = [
   {
@@ -81,11 +82,14 @@ const routes: Routes = [
   },
   {
     path: 'note',
-    component: NoteComponent,
+    // component: NoteComponent,
     children: [
       { path: '', component: NoteIndexComponent },
-      { path: 'add', component: NoteFormComponent },
-      { path: 'edit/:id', component: NoteFormComponent}
+      { path: ':id', component: NoteViewComponent },
+      // { path: 'add', component: NoteFormComponent },
+      { path: 'add', component: NoteFormNewComponent },
+      // { path: 'edit/:id', component: NoteFormComponent}
+      { path: 'edit/:id', component: NoteFormNewComponent}
     ],
     canActivate: [AuthGuard] 
   },

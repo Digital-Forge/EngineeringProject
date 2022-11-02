@@ -2,12 +2,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
-import { NoteComponent } from './components/note/note.component';
 import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
-import { ClientIndexComponent } from './components/client/clientIndex/client-index.component';
+import { ClientComponent } from './components/client/clientIndex/client-index.component';
 import { ClientFormComponent } from './components/client/clientForm/client-form.component';
 import { ClientViewComponent } from './components/client/clientView/client-view.component';
-import { ClientComponent } from './components/client/client.component';
 import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
 import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
@@ -19,6 +17,9 @@ import { TaskListComponent } from './components/task-list/index/task-list-index.
 import { AuthGuard } from './services/auth.guard';
 import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
+import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
+import { NoteViewComponent } from './components/note/note-view/note-view.component';
 
 const routes: Routes = [
   {
@@ -56,11 +57,11 @@ const routes: Routes = [
   },
   {
     path: 'clients',
-    component: ClientComponent,
     children: [
-      {path: '', component: ClientIndexComponent},
-      {path: 'add', component: ClientFormComponent},
-      {path: 'edit/:id', component: ClientFormComponent}
+      {path: '', component: ClientComponent},
+      {path: ':id', component: ClientViewComponent},
+      {path: 'add', component: ClientFormNewComponent},
+      {path: 'edit/:id', component: ClientFormNewComponent}
     ],
     canActivate: [AuthGuard] 
   },
@@ -81,11 +82,14 @@ const routes: Routes = [
   },
   {
     path: 'note',
-    component: NoteComponent,
+    // component: NoteComponent,
     children: [
       { path: '', component: NoteIndexComponent },
-      { path: 'add', component: NoteFormComponent },
-      { path: 'edit/:id', component: NoteFormComponent}
+      { path: ':id', component: NoteViewComponent },
+      // { path: 'add', component: NoteFormComponent },
+      { path: 'add', component: NoteFormNewComponent },
+      // { path: 'edit/:id', component: NoteFormComponent}
+      { path: 'edit/:id', component: NoteFormNewComponent}
     ],
     canActivate: [AuthGuard] 
   },

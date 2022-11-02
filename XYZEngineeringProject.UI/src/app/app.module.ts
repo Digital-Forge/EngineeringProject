@@ -8,10 +8,9 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
-import { ClientComponent } from './components/client/client.component';
 import { ClientFormComponent } from './components/client/clientForm/client-form.component';
 import { ClientViewComponent } from './components/client/clientView/client-view.component';
-import { ClientIndexComponent } from './components/client/clientIndex/client-index.component';
+import { ClientComponent } from './components/client/clientIndex/client-index.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
@@ -19,8 +18,6 @@ import { AppUserListComponent } from './components/appUser/app-user-list/app-use
 import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
 import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 import { ClientFiltersComponent } from './components/client/clientFilters/filters.component';
-
-import { NoteComponent } from './components/note/note.component';
 import { NoteFilterComponent } from './components/note/note-filter/note-filter.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
@@ -33,22 +30,23 @@ import { TaskComponent } from './components/task-list/task/index/task-index.comp
 import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
 import { TaskFiltersComponent } from './components/task-list/task/filters/task-filters.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
+import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
+import { NoteViewComponent } from './components/note/note-view/note-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthorizationComponent,
     LoginComponent,
-    ClientComponent,
     ClientFormComponent,
     ClientViewComponent,
-    ClientIndexComponent,
+    ClientComponent,
     ClientFiltersComponent,
     AppUserListComponent,
     AddAppUserComponent,
     EditAppUserComponent,
     NavbarComponent,
-    NoteComponent,
     NoteFilterComponent,
     NoteIndexComponent,
     NoteFormComponent,
@@ -61,7 +59,10 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     TaskFormComponent,
     TaskFiltersComponent,
     HomePageComponent,
-    TaskFiltersComponent
+    TaskFiltersComponent,
+    ClientFormNewComponent,
+    NoteFormNewComponent,
+    NoteViewComponent
   ],
   imports: [
     BrowserModule,

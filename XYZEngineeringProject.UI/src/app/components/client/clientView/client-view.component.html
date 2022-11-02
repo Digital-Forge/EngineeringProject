@@ -1,1 +1,13 @@
-<p>client-view works!</p>
+<h1>Client data</h1>
+<label>Name: {{clientDetails.name}}</label><br><br>
+<label>Description: {{clientDetails.description}}</label><br><br>
+<label>NIP: {{clientDetails.nip}}</label><br><br>
+<label>Comments: {{clientDetails.comments}}</label><br><br>
+<label>Address {{clientDetails.address}}</label><br><br>
+<label>Contacts</label><br><br>
+<div *ngFor="let contact of clientDetails.contacts">
+    <label>First name: {{contact.firstname}}</label>
+    <label>First name: {{contact.surname}}</label>
+    <label>First name: {{contact.phone}}</label>
+    <label>First name: {{contact.email}}</label><br><br>
+</div>

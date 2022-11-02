@@ -1,4 +1,4 @@
-export enum NoteStatus {
+export enum TaskStatus {
     New,
     InProgress,
     Done

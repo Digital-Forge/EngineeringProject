@@ -27,7 +27,8 @@ namespace XYZEngineeringProject.Application.Services
         {
             var firstAdmin = new AppUser
             {
-                FullName = "Jan Kowalski",
+                Firstname = "admin",
+                Surname = "admin",
                 UserName = "admin",
                 PasswordHash = "admin"
             };

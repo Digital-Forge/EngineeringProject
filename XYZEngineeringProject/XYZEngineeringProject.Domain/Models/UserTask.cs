@@ -18,11 +18,11 @@ namespace XYZEngineeringProject.Domain.Models
 
         //relations
 
-        public Guid AssignerUserId { get; set; }
-        public virtual AppUser AssignerUser { get; set; }
+        public Guid AssignFromUserId { get; set; }
+        public virtual AppUser AssignFromUser { get; set; }
 
-        public Guid? AssigneeUserId { get; set; }
-        public virtual AppUser? AssigneeUser { get; set; }
+        public Guid? AssignToUserId { get; set; }
+        public virtual AppUser? AssignToUser { get; set; }
 
         public Guid? ListOfTasksId { get; set; }
         public virtual ListOfTasks? ListOfTasks { get; set; }

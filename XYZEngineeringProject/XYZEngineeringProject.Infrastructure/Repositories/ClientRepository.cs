@@ -197,7 +197,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return _context.Clients;
         }
 
-        public Guid AddClientContract(ClientContact contact)
+        public Guid AddClientContact(ClientContact contact)
         {
             _context.ClientContacts.Add(contact);
             _context.SaveChanges();
@@ -206,7 +206,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return contact.Id;
         }
 
-        public bool RemoveClientContract(ClientContact contact)
+        public bool RemoveClientContact(ClientContact contact)
         {
             if (contact == null)
             {
@@ -229,7 +229,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool RemoveClientContract(Guid contactById)
+        public bool RemoveClientContact(Guid contactById)
         {
             if (contactById == Guid.Empty)
             {
@@ -239,7 +239,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             try
             {
-                var buff = GetClientContractById(contactById);
+                var buff = GetClientContactById(contactById);
                 if (buff == null)
                 {
                     _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying remove client contact, who don't exist or deleted");
@@ -259,7 +259,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool __RemoveHardClientContract(ClientContact contact)
+        public bool __RemoveHardClientContact(ClientContact contact)
         {
             try
             {
@@ -276,7 +276,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool __RemoveHardClientContract(Guid contactById)
+        public bool __RemoveHardClientContact(Guid contactById)
         {
             try
             {
@@ -300,7 +300,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public bool UpdateClientContract(ClientContact contact)
+        public bool UpdateClientContact(ClientContact contact)
         {
             if (contact == null)
             {
@@ -323,14 +323,14 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return true;
         }
 
-        public ClientContact? GetClientContractById(Guid contactId)
+        public ClientContact? GetClientContactById(Guid contactId)
         {
             return _context.ClientContacts
                 .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
                 .FirstOrDefault(x => x.Id == contactId);
         }
 
-        public IQueryable<ClientContact> GetClientContractByIdAsQuerable(Guid contactId)
+        public IQueryable<ClientContact> GetClientContactByIdAsQuerable(Guid contactId)
         {
             return _context.ClientContacts
                 .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
@@ -349,7 +349,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                     .Where(x => x.CompanyId == currentUser.CompanyId);
         }
 
-        public IQueryable<ClientContact>? GetAllClientContracts(Guid clientId)
+        public IQueryable<ClientContact>? GetAllClientContacts(Guid clientId)
         {
             if (clientId == null || clientId == Guid.Empty)
             {
@@ -367,7 +367,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                     .Where(x => x.ClientId == clientId);
         }
 
-        public IQueryable<ClientContact> _GetEveryOneClientContracts(Guid clientId)
+        public IQueryable<ClientContact> _GetEveryOneClientContacts(Guid clientId)
         {
             if (clientId == null || clientId == Guid.Empty)
             {

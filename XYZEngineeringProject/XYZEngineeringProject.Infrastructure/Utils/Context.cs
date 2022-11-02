@@ -59,15 +59,15 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 
             //////////////////////////////////////// Tasks many to one AppUser
             builder.Entity<UserTask>()
-                .HasOne(u => u.AssignerUser)
+                .HasOne(u => u.AssignFromUser)
                 .WithMany(u => u.AsignerTasks)
-                .HasForeignKey(u => u.AssignerUserId);
+                .HasForeignKey(u => u.AssignFromUserId);
 
             //////////////////////////////////////// Tasks many to one AppUser
             builder.Entity<UserTask>()
-                .HasOne(u => u.AssigneeUser)
+                .HasOne(u => u.AssignToUser)
                 .WithMany(u => u.AsigneeTasks)
-                .HasForeignKey(u => u.AssigneeUserId);
+                .HasForeignKey(u => u.AssignToUserId);
 
 
             //////////////////////////////////////// AppUser many to one LogicCompany

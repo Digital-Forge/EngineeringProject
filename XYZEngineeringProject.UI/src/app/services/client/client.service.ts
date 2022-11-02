@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 })
 export class ClientService {
 
-  emptyGuid: string = '00000000-0000-0000-0000-000000000000';
+  emptyGuid: string = environment.emptyGuid;
   constructor(
     protected readonly http: HttpClient,
   ) { }
@@ -29,8 +29,7 @@ export class ClientService {
   }
 
   editClient(editClientRequest: Client): Observable<any> {
-    //editClientRequest.contacts = []; // TODO na razie nie przesyła się wartość listy nie wiem czemu i wszystko się psuje
-    console.log(editClientRequest);
+    //console.log(editClientRequest);
     
     return this.http.put<Client>(`${environment.baseApiUrl}Client/EditClient`, editClientRequest);
   }

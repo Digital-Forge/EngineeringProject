@@ -6,6 +6,8 @@ import { TaskService } from 'src/app/services/tasks/task.service';
 import { Task, TaskList } from 'src/app/models/task.model';
 import { AppUser } from 'src/app/models/app-user.model';
 import { forkJoin, map, first } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { FormMode } from 'src/app/models/form-mode.enum';
 
 @Component({
   selector: 'task-form',
@@ -14,7 +16,6 @@ import { forkJoin, map, first } from 'rxjs';
 })
 export class TaskFormComponent implements OnInit {
 
-  public editMode: boolean = false;
   public Priority2LabelMapping = Priority2LabelMapping;
   public priorityTypes = Object.values(Priority).filter(value => typeof value === "string");
   public selectorPriority: string = '';
@@ -28,16 +29,17 @@ export class TaskFormComponent implements OnInit {
     priority: Priority.Done,
     title: '',
     description: '',
-    assigneeUserId: '00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, do którego ma być przypisany task
-    assignerUserId: '00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, który dodaje taska
+    assigneeUserId: environment.emptyGuid, //TODO przekazać id użytkownika, do którego ma być przypisany task
+    assignerUserId:environment.emptyGuid, //TODO przekazać id użytkownika, który dodaje taska
     createDate: new Date(),
-    listOfTasksId: '00000000-0000-0000-0000-000000000000', //TODO przekazać z urla id listy. do której ma się dodać task
+    listOfTasksId: environment.emptyGuid, //TODO przekazać z urla id listy. do której ma się dodać task
     isComplete: false
   }
 
   taskList!: TaskList;
   taskLists: TaskList[] = [];
-  formMode: string = 'edit';
+  formMode = FormMode.Edit;
+  taskListId: string | null;
 
 
   constructor(
@@ -54,26 +56,29 @@ export class TaskFormComponent implements OnInit {
 
     this.route.paramMap.subscribe({
       next: (params) => {
-        const id = params.get('id');
-        if (id && this.router.url.includes('/edit')) {
+        this.taskListId = params.get('id');
+        if (this.taskListId && this.router.url.includes('/edit')) {
           //id to task id
-          this.taskService.getTask(id).subscribe({
+          this.taskService.getTask(this.taskListId).subscribe({
             next: (response) => {
               this.taskDetails = response;
               this.selectorPriority = this.Priority2LabelMapping[this.taskDetails.priority];
               this.selectorDate = this.pipe.transform(this.taskDetails.deadline, 'yyyy-MM-dd');
-              this.editMode = true;
+              this.formMode = FormMode.Edit;
             }
           })
         }
-        else if (id && this.router.url.includes('/add')) {
+        else if (this.taskListId && this.router.url.includes('/add')) {
           //id to task list id
-          this.taskService.getTaskListById(id).subscribe({
+          this.taskService.getTaskListById(this.taskListId).subscribe({
             next: (response) => {
               this.taskList = response;
             }
           })
-          this.editMode = false;
+          this.formMode = FormMode.AddFromList;
+        }
+        else {
+          this.formMode = FormMode.Add;
         }
       }
     });
@@ -96,11 +101,14 @@ export class TaskFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.editMode) {
+    if (this.formMode == FormMode.Edit) {
       this.saveChanges();
     }
-    else {
+    else if (this.formMode == FormMode.Add) {
       this.addTask();
+    }
+    else if (this.formMode == FormMode.AddFromList) {
+      this.addTaskFromList();
     }
   }
 
@@ -119,6 +127,11 @@ export class TaskFormComponent implements OnInit {
         this.router.navigate(['tasks']);
       }
     })
+  }
+
+  addTaskFromList() {
+    // ustawić id listy zadań na this.taskListId
+    //zapisać zmiany
   }
 
 }

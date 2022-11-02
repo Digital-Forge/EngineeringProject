@@ -44,7 +44,9 @@
         "description": "Opis",
         "priority": "Priorytet",
         "created": "Utworzono",
-        "noTasks": "Na tej liście nie ma jeszcze zadań"        
+        "noTasks": "Na tej liście nie ma jeszcze zadań",
+        "status": "Status",
+        "taskList": "Przypisz do listy zadań"       
     },
     "TaskListStatus": {
         "New": "Nowe",

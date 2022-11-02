@@ -1,8 +1,14 @@
 <div class="container-fluid my-5">
     <div class="row mb-5">
-        <h1 class="col-9">{{ 'Task.tasks' | translate }}</h1>
+        <div class="col-9">
+            <h1 class="float-start">
+                <a [routerLink]="['/task-list']">{{ 'Task.tasks' | translate }}</a>
+                <i class="bi bi-arrow-right-short mx-1"></i>
+            </h1>
+            <h1 class="float-start">{{ taskList.name }}</h1>
+        </div>
         <div class="col-3 d-flex justify-content-end">
-            <a class="btn btn-md btn-dark" [routerLink]="['/task', 'add']">
+            <a class="btn btn-md btn-dark" [routerLink]="['/task', 'add', taskList.id]">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.add' | translate }}
             </a>
         </div>
@@ -10,8 +16,9 @@
     <div>
         <div class="card-columns">
             <div *ngFor="let task of tasks">
-                <div class="card card-corner p-1 mb-3" *ngIf="Priority2LabelMapping[task.priority] != 'Done'; else done">
+                <div class="card card-corner p-1 mb-3" *ngIf="!task.isComplete; else done">
                     <div class="card-body">
+                       complete: {{task.isComplete}}
                         <div class="card-subtitle text-center mb-2">
                             {{task.deadline | date:'dd-MM-yyyy'}}
                         </div>
@@ -28,16 +35,17 @@
 
                         <div class="d-flex justify-content-end mt-3">
                             <a class="btn btn-sm btn-light me-2" [routerLink]="['/task', 'edit', task.id]">
-                                <i class="bi bi-pencil-square me-1"></i>
-                                {{ 'Button.edit' | translate }}
+                                <i class="bi bi-pencil-square"></i>                            
                             </a>
                             <a class="btn btn-sm btn-success-light" (click)="completeTask(task.id)">
-                                <i class="bi bi-check2-square me-1"></i>{{ 'Button.done' | translate }}                               
+                                <i class="bi bi-check2-square"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 <ng-template #done>
+                    complete: {{task.isComplete}}
+
                     <div class="card text-secondary p-1 mb-3">
                         <div class="card-body">
                             <div class="card-subtitle text-center">{{task.deadline | date:'dd/MM/yyyy'}}</div>

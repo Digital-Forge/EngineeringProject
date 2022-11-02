@@ -31,8 +31,8 @@ export class TaskService {
     return this.http.get<Task>(this.baseApiUrl + 'Task/EditTask/' + id)
   }
 
-  saveChanges(editTaskRequest: Task): Observable<any> {
-    return this.http.put(this.baseApiUrl + 'Task/EditTask',editTaskRequest);
+  saveChanges(editTaskRequest: Task): Observable<Task> {
+    return this.http.put<Task>(this.baseApiUrl + 'Task/EditTask', editTaskRequest);
   }
 
   //zwraca wszystkie TaskList-y

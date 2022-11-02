@@ -17,6 +17,12 @@
 
                     <div class="row mb-2">
                         <div class="col-9">
+                            <p class="card-subtitle text-gray mb-2" [ngClass]="{
+                                'text-success': taskListStatuses[taskList.status] == 'New',
+                                'text-warning': taskListStatuses[taskList.status] == 'InProgress',
+                                'text-gray': taskListStatuses[taskList.status] == 'Done'}">
+                              {{('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
+                            </p>
                             <h3 class="card-title  mb-2">{{taskList.name}}</h3>
                             <p class="card-subtitle text-gray mb-2">
                                 {{ 'Task.created' | translate}} {{taskList.createDate | date:'dd/MM/yyyy'}}

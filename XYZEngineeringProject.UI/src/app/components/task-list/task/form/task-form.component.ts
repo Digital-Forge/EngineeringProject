@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 import { TaskService } from 'src/app/services/tasks/task.service';
-import { Task } from 'src/app/models/task.model';
+import { Task, TaskList } from 'src/app/models/task.model';
+import { AppUser } from 'src/app/models/app-user.model';
+import { forkJoin, map, first } from 'rxjs';
 
 @Component({
   selector: 'task-form',
@@ -19,6 +21,7 @@ export class TaskFormComponent implements OnInit {
   public selectorDate: any;
   public pipe = new DatePipe('en-GB');
 
+  //default data:
   taskDetails: Task = {
     id: '',
     deadline: new Date(),
@@ -26,42 +29,70 @@ export class TaskFormComponent implements OnInit {
     title: '',
     description: '',
     assigneeUserId: '00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, do którego ma być przypisany task
-    assignerUserId:'00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, który dodaje taska
+    assignerUserId: '00000000-0000-0000-0000-000000000000', //TODO przekazać id użytkownika, który dodaje taska
     createDate: new Date(),
     listOfTasksId: '00000000-0000-0000-0000-000000000000', //TODO przekazać z urla id listy. do której ma się dodać task
     isComplete: false
   }
 
+  taskList!: TaskList;
+  taskLists: TaskList[] = [];
+  formMode: string = 'edit';
+
+
   constructor(
-    private route: ActivatedRoute, 
-    private taskService: TaskService, 
+    private route: ActivatedRoute,
+    private taskService: TaskService,
     private router: Router
-  ) { 
+  ) {
     if (this.router.url.includes('edit')) {
       console.log('edit');
     }
   }
 
   ngOnInit(): void {
+
     this.route.paramMap.subscribe({
       next: (params) => {
         const id = params.get('id');
-        if (id) {
+        if (id && this.router.url.includes('/edit')) {
+          //id to task id
           this.taskService.getTask(id).subscribe({
             next: (response) => {
               this.taskDetails = response;
               this.selectorPriority = this.Priority2LabelMapping[this.taskDetails.priority];
               this.selectorDate = this.pipe.transform(this.taskDetails.deadline, 'yyyy-MM-dd');
-              this.editMode = true;          
+              this.editMode = true;
             }
           })
         }
+        else if (id && this.router.url.includes('/add')) {
+          //id to task list id
+          this.taskService.getTaskListById(id).subscribe({
+            next: (response) => {
+              this.taskList = response;
+            }
+          })
+          this.editMode = false;
+        }
       }
-    })
+    });
+
+    this.taskService.getAllTaskLists().subscribe({
+      next: (response) => {
+        this.taskLists = response;
+      }
+    });
+
+    this.initForm();
+  }
+
+  initForm() {
+
   }
 
   onChange(event: Priority) {
-    this.taskDetails.priority = Object.values(Priority).indexOf(event);    
+    this.taskDetails.priority = Object.values(Priority).indexOf(event);
   }
 
   submit() {
@@ -73,11 +104,11 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
-  saveChanges(){
+  saveChanges() {
     this.taskService.saveChanges(this.taskDetails).subscribe({
       next: (response) => {
         console.log(response);
-        
+
       }
     })
   }

@@ -12,7 +12,7 @@ export interface Task {
     assignerUserId:string,
     listOfTasksId?: string,
     createDate:Date,
-    isComplete?: boolean 
+    isComplete: boolean 
     //TODO te pola ostatecznie będą obowiązkowe, więc trzeba będzie dorobić je w componencie
 }
 

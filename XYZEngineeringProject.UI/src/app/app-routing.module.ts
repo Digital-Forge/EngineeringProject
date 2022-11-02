@@ -49,7 +49,7 @@ const routes: Routes = [
     children: [
      // { path: ':id', component: TaskComponent},
       { path: 'add', component: TaskFormComponent},
-      { path: 'add/:id', component: TaskFormComponent},
+      { path: 'add/:listId', component: TaskFormComponent},
       { path: 'edit/:id', component: TaskFormComponent},
     ],
     canActivate: [AuthGuard] 

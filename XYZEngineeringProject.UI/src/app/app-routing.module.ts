@@ -20,6 +20,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
 import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
 import { NoteViewComponent } from './components/note/note-view/note-view.component';
+import { TaskListFormNewComponent } from './components/task-list/task-list-form-new/task-list-form-new.component';
 
 const routes: Routes = [
   {
@@ -39,9 +40,11 @@ const routes: Routes = [
     path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
     children: [
       { path: '', component: TaskListComponent },
-      { path: 'add', component: TaskListFormComponent },
+      // { path: 'add', component: TaskListFormComponent },
+      { path: 'add', component: TaskListFormNewComponent },
       { path: ':id', component: TaskComponent },
-      { path: 'edit/:id', component: TaskListFormComponent },
+      // { path: 'edit/:id', component: TaskListFormComponent },
+      { path: 'edit/:id', component: TaskListFormNewComponent },
     ],
     canActivate: [AuthGuard] 
   },

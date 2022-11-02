@@ -33,6 +33,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
 import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
 import { NoteViewComponent } from './components/note/note-view/note-view.component';
+import { TaskListFormNewComponent } from './components/task-list/task-list-form-new/task-list-form-new.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { NoteViewComponent } from './components/note/note-view/note-view.compone
     TaskFiltersComponent,
     ClientFormNewComponent,
     NoteFormNewComponent,
-    NoteViewComponent
+    NoteViewComponent,
+    TaskListFormNewComponent
   ],
   imports: [
     BrowserModule,

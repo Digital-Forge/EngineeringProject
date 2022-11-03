@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
 
 namespace XYZEngineeringProject.Web.Controllers
 {
+    [Authorize]
     public class AppUserController : Controller
     {
         private readonly ILogger<TaskController> _logger;

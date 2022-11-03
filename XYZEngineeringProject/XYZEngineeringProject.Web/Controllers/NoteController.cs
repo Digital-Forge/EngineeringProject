@@ -5,6 +5,7 @@ using XYZEngineeringProject.Application.ViewModels;
 
 namespace XYZEngineeringProject.Web.Controllers
 {
+    [Authorize]
     public class NoteController : Controller
     {
         private readonly ILogger<NoteController> _logger;

@@ -34,6 +34,8 @@ import { ClientFormNewComponent } from './components/client/client-form-new/clie
 import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
 import { NoteViewComponent } from './components/note/note-view/note-view.component';
 import { TaskListFormNewComponent } from './components/task-list/task-list-form-new/task-list-form-new.component';
+import { TaskListViewComponent } from './components/task-list/view/task-list-view.component';
+import { TaskFormNewComponent } from './components/task-list/task/form-new/task-form-new.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { TaskListFormNewComponent } from './components/task-list/task-list-form-
     ClientFormNewComponent,
     NoteFormNewComponent,
     NoteViewComponent,
-    TaskListFormNewComponent
+    TaskListFormNewComponent,
+    TaskListViewComponent,
+    TaskFormNewComponent
   ],
   imports: [
     BrowserModule,

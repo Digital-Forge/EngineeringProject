@@ -21,6 +21,8 @@ import { ClientFormNewComponent } from './components/client/client-form-new/clie
 import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
 import { NoteViewComponent } from './components/note/note-view/note-view.component';
 import { TaskListFormNewComponent } from './components/task-list/task-list-form-new/task-list-form-new.component';
+import { TaskListViewComponent } from './components/task-list/view/task-list-view.component';
+import { TaskFormNewComponent } from './components/task-list/task/form-new/task-form-new.component';
 
 const routes: Routes = [
   {
@@ -42,7 +44,8 @@ const routes: Routes = [
       { path: '', component: TaskListComponent },
       // { path: 'add', component: TaskListFormComponent },
       { path: 'add', component: TaskListFormNewComponent },
-      { path: ':id', component: TaskComponent },
+      { path: ':id', component: TaskListViewComponent },
+      // { path: ':id', component: TaskComponent },
       // { path: 'edit/:id', component: TaskListFormComponent },
       { path: 'edit/:id', component: TaskListFormNewComponent },
     ],
@@ -52,7 +55,8 @@ const routes: Routes = [
     path: 'task',
     children: [
      // { path: ':id', component: TaskComponent},
-      { path: 'add', component: TaskFormComponent},
+      // { path: 'add', component: TaskFormComponent},
+      { path: 'add', component: TaskFormNewComponent},
       { path: 'add/:listId', component: TaskFormComponent},
       { path: 'edit/:id', component: TaskFormComponent},
     ],
@@ -62,8 +66,8 @@ const routes: Routes = [
     path: 'clients',
     children: [
       {path: '', component: ClientComponent},
-      {path: ':id', component: ClientViewComponent},
       {path: 'add', component: ClientFormNewComponent},
+      {path: ':id', component: ClientViewComponent},
       {path: 'edit/:id', component: ClientFormNewComponent}
     ],
     canActivate: [AuthGuard] 

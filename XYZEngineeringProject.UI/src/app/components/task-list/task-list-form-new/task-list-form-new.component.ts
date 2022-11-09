@@ -2,7 +2,7 @@ import { Task } from 'src/app/models/task.model';
 import { Priority } from './../../../models/priority.enum';
 import { TaskList } from './../../../models/task.model';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, Validators, FormControl, AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { DatePipe } from '@angular/common';
@@ -18,7 +18,7 @@ export class TaskListFormNewComponent implements OnInit {
   editMode: boolean = false
   taskListStatuses = Object.values(TaskListStatus).filter(value => typeof value === "string");
   taskPriorities = Object.values(Priority).filter(value => typeof value === "string");
-  pipe = new DatePipe('en-GB');
+  pipe = new DatePipe('en-GB');  
   taskListDetails: TaskList = {
     id: '',
     name: '',
@@ -64,14 +64,13 @@ export class TaskListFormNewComponent implements OnInit {
   updateTaskListForm() {
     this.taskListForm.patchValue({
       name: this.taskListDetails.name,
-      project: this.taskListDetails.project,
-      status: this.taskListDetails.status.toString()
+      project: this.taskListDetails.project
     })
     const controls = this.taskListDetails.tasks?.map(task => {
       return this.fb.group({
         id: [task.id],
-        deadline: [task.deadline, Validators.required],
-        priority: [task.priority],
+        deadline: [this.pipe.transform(task.deadline, 'yyyy-MM-dd'), Validators.required],
+        priority: [this.taskPriorities[task.priority]],
         title: [task.title, Validators.required],
         description: [task.description],
         assigneeUserId: [task.assigneeUserId],
@@ -108,6 +107,7 @@ export class TaskListFormNewComponent implements OnInit {
       }
     })
     this.taskListDetails.tasks = listTasksTemp;
+    
   }
 
   addListTask() {
@@ -115,7 +115,8 @@ export class TaskListFormNewComponent implements OnInit {
       deadline: [''],
       priority: [''],
       title: [''],
-      description: ['']
+      description: [''],
+      listOfTasksId:[this.taskListDetails.id||null]
     })
 
     this.listTasks.push(group);
@@ -145,6 +146,10 @@ export class TaskListFormNewComponent implements OnInit {
         }
       }
     })
+  }
+  selectRightPriority(control: AbstractControl) {
+    //TODO  temporary hack 
+    control.get('priority')?.setValue(control.get('priority')?.value||this.taskPriorities[0])    
   }
 
 }

@@ -34,6 +34,7 @@ namespace XYZEngineeringProject.Application.Services
                 Priority = taskRequest.Priority,
                 Title = taskRequest.Title,
                 IsComplete = taskRequest.IsComplete,
+                ListOfTasksId= taskRequest.ListOfTasksId,
             };
 
             _taskRepository.Add(task);
@@ -122,6 +123,21 @@ namespace XYZEngineeringProject.Application.Services
             var list = _taskRepository.GetListOfTasksById(editListOfTasksRequest.Id);
             list.Name = editListOfTasksRequest.Name;
             list.Status = editListOfTasksRequest.Status;
+            list.Project= editListOfTasksRequest.Project;
+
+            foreach (var taskVM in editListOfTasksRequest.Tasks)
+            {
+                var task = _taskRepository.GetTaskById(taskVM.Id);
+                if (task==null)
+                {
+                    AddTask(taskVM);
+                }
+                else
+                {
+                    EditTask(taskVM);
+                }
+                
+            }
 
             return _taskRepository.Update(list);
         }

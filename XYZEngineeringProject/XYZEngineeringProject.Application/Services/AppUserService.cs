@@ -35,12 +35,11 @@ namespace XYZEngineeringProject.Application.Services
         {
             AppUser user = new AppUser
             {
-                Id = new Guid(appUser.Id),
+                Id = Guid.Empty,
                 UserName = appUser.UserName,
                 PasswordHash = appUser.PasswordHash,
                 Firstname = appUser.Name,
-                Surname= appUser.Surname,
-                Address = appUser.Address
+                Surname= appUser.Surname
             };
 
             _userRepository.Add(user);

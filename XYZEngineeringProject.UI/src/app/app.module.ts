@@ -14,9 +14,6 @@ import { ClientComponent } from './components/client/clientIndex/client-index.co
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
-import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
-import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
-import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
 import { ClientFiltersComponent } from './components/client/clientFilters/filters.component';
 import { NoteFilterComponent } from './components/note/note-filter/note-filter.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
@@ -36,6 +33,10 @@ import { NoteViewComponent } from './components/note/note-view/note-view.compone
 import { TaskListFormNewComponent } from './components/task-list/task-list-form-new/task-list-form-new.component';
 import { TaskListViewComponent } from './components/task-list/view/task-list-view.component';
 import { TaskFormNewComponent } from './components/task-list/task/form-new/task-form-new.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { UserComponent } from './components/settings/user/user.component';
+import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
+import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,6 @@ import { TaskFormNewComponent } from './components/task-list/task/form-new/task-
     ClientViewComponent,
     ClientComponent,
     ClientFiltersComponent,
-    AppUserListComponent,
-    AddAppUserComponent,
-    EditAppUserComponent,
     NavbarComponent,
     NoteFilterComponent,
     NoteIndexComponent,
@@ -68,7 +66,11 @@ import { TaskFormNewComponent } from './components/task-list/task/form-new/task-
     NoteViewComponent,
     TaskListFormNewComponent,
     TaskListViewComponent,
-    TaskFormNewComponent
+    TaskFormNewComponent,
+    SettingsComponent,
+    UserComponent,
+    UserFormComponent,
+    UserViewComponent
   ],
   imports: [
     BrowserModule,

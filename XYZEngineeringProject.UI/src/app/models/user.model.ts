@@ -1,10 +1,11 @@
 import { Address } from "./address.model";
 
-export interface AppUser {
+export interface User {
     id: string,
     userName: string,
     passwordHash: string,
-    fullName: string,
+    name: string,
+    surname: string,
     pesel: number,
     address: Address
 }

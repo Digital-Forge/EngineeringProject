@@ -1,3 +1,6 @@
+import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
+import { UserComponent } from './components/settings/user/user.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { NoteFormComponent } from './components/note/note-form/note-form.component';
@@ -6,9 +9,6 @@ import { TaskFormComponent } from './components/task-list/task/form/task-form.co
 import { ClientComponent } from './components/client/clientIndex/client-index.component';
 import { ClientFormComponent } from './components/client/clientForm/client-form.component';
 import { ClientViewComponent } from './components/client/clientView/client-view.component';
-import { EditAppUserComponent } from './components/appUser/edit-app-user/edit-app-user.component';
-import { AddAppUserComponent } from './components/appUser/add-app-user/add-app-user.component';
-import { AppUserListComponent } from './components/appUser/app-user-list/app-user-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -36,7 +36,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
     path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
@@ -49,67 +49,63 @@ const routes: Routes = [
       // { path: 'edit/:id', component: TaskListFormComponent },
       { path: 'edit/:id', component: TaskListFormNewComponent },
     ],
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
     path: 'task',
     children: [
-     // { path: ':id', component: TaskComponent},
+      // { path: ':id', component: TaskComponent},
       // { path: 'add', component: TaskFormComponent},
-      { path: 'add', component: TaskFormNewComponent},
-      { path: 'add/:listId', component: TaskFormComponent},
-      { path: 'edit/:id', component: TaskFormComponent},
+      { path: 'add', component: TaskFormNewComponent },
+      { path: 'add/:listId', component: TaskFormComponent },
+      { path: 'edit/:id', component: TaskFormComponent },
     ],
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
     path: 'clients',
     children: [
-      {path: '', component: ClientComponent},
-      {path: 'add', component: ClientFormNewComponent},
-      {path: ':id', component: ClientViewComponent},
-      {path: 'edit/:id', component: ClientFormNewComponent}
+      { path: '', component: ClientComponent },
+      { path: 'add', component: ClientFormNewComponent },
+      { path: ':id', component: ClientViewComponent },
+      { path: 'edit/:id', component: ClientFormNewComponent }
     ],
-    canActivate: [AuthGuard] 
-  },
-  {
-    path: 'appusers',
-    component: AppUserListComponent,
-    canActivate: [AuthGuard] // TODO zabezpieczenie dostępu tylko dla wybranych ról ?
-  },
-  {
-    path: 'appusers/add',
-    component: AddAppUserComponent,
-    canActivate: [AuthGuard] // TODO zabezpieczenie dostępu tylko dla wybranych ról ?
-  },
-  {
-    path: 'appusers/edit/:id',
-    component: EditAppUserComponent,
-    canActivate: [AuthGuard] // TODO zabezpieczenie dostępu tylko dla wybranych ról ?
+    canActivate: [AuthGuard]
   },
   {
     path: 'note',
-    // component: NoteComponent,
     children: [
       { path: '', component: NoteIndexComponent },
       { path: ':id', component: NoteViewComponent },
       // { path: 'add', component: NoteFormComponent },
       { path: 'add', component: NoteFormNewComponent },
       // { path: 'edit/:id', component: NoteFormComponent}
-      { path: 'edit/:id', component: NoteFormNewComponent}
+      { path: 'edit/:id', component: NoteFormNewComponent }
     ],
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
     path: 'calendar',
-    component: CalendarComponent,
     children: [
       { path: '', component: CalendarComponent },
       // { path: 'add', component: UserTaskFormComponent },
       // { path: 'edit/:id', component: UserTaskFormComponent },
     ],
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
+  {
+    path: 'settings',
+    children: [
+      { path: '', component: SettingsComponent },
+      {
+        path: 'users',
+        children: [
+          { path: '', component: UserComponent },
+          { path: 'add', component: UserFormComponent }
+        ]
+      }
+    ]
+  }
 ];
 
 @NgModule({

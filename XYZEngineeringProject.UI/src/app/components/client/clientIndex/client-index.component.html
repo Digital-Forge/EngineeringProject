@@ -1,25 +1,45 @@
- <client-filters></client-filters>
+ <!-- <client-filters></client-filters> -->
  
  <div class="container-fluid my-5">
     <h1 class="mb-3">Clients</h1>
-    <table class="table" *ngIf="clients && clients.length >0">
+    <table class="table table-hover table-borderless table-stripped" *ngIf="clients && clients.length > 0">
         <thead>
-            <tr>
-                <th>id</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th> </th>
-                <th> </th>
-            </tr>
+          <tr class="">
+                <th colspan="">{{ 'Client.name' | translate }}</th>
+                <th colspan="">{{ 'Client.description' | translate }}</th>
+                <!-- <th>{{ 'Client.comments' | translate }}</th> -->
+                <th></th>
+           </tr>    
         </thead>
-        <tbody>
-            <tr *ngFor="let client of clients">
-                <td>{{client.id}}</td>
-                <td>{{client.name}}</td>
-                <td>{{client.description }}</td>
-                <td><a [routerLink]="['/clients', 'edit', client.id]">edit</a></td>
-                <td><a [routerLink]="['/clients', client.id]">view</a></td>
+        <tbody *ngFor="let client of clients">
+            <tr class="border-top">            
+                <td colspan="">{{client.name}}</td>
+                <td colspan="">{{client.description }}</td>
+                <!-- <td>{{client.comments }}</td> -->
+                <td><a [routerLink]="['/clients', 'edit', client.id]">edit </a> <a [routerLink]="['/clients', client.id]">view</a></td>
             </tr>
+            <tr *ngIf="client.contacts!.length > 0">
+                <td colspan="1">
+                    <table class="table-nested">
+                        <thead>
+                            <tr>
+                                <th>{{ 'Client.firstname' | translate }}</th>
+                                <th>{{ 'Client.surname' | translate }}</th>
+                                <th>{{ 'Client.phone' | translate }}</th>
+                                <th>{{ 'Client.email' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let contact of client.contacts">
+                                <td>{{contact.firstname}}</td>
+                                <td>{{contact.surname}}</td>
+                                <td>{{contact.phone}}</td>
+                                <td>{{contact.email}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>     
         </tbody>
     </table>
     <p *ngIf="!clients || clients.length <= 0">No notes found</p>

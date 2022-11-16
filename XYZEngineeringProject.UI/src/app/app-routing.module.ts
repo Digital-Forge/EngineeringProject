@@ -59,8 +59,8 @@ const routes: Routes = [
     path: 'clients',
     children: [
       {path: '', component: ClientComponent},
+      {path: 'add', component: ClientFormComponent},
       {path: ':id', component: ClientViewComponent},
-      {path: 'add', component: ClientFormNewComponent},
       {path: 'edit/:id', component: ClientFormNewComponent}
     ],
     canActivate: [AuthGuard] 

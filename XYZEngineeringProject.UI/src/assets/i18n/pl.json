@@ -21,12 +21,15 @@
     },
     "Client": {
         "name": "Nazwa",
+        "description": "Opis",
+        "comments": "Komentarze",      
         "email": "Email",
         "emails": "Adresy email",
         "phone": "Telefon",
         "phones": "Numery telefonu",
-        "firstName": "Imię",
-        "lastName": "Nazwisko"
+        "firstname": "Imię",
+        "surname": "Nazwisko",
+        "contacts": "Osoby"
     },
     "ClientFilters": {
         "firstName": "Imię"

@@ -26,7 +26,7 @@ export class TaskFormComponent implements OnInit {
   taskDetails: Task = {
     id: '',
     deadline: new Date(),
-    priority: Priority.Done,
+    priority: Priority.No,
     title: '',
     description: '',
     assigneeUserId: environment.emptyGuid, //TODO przekazać id użytkownika, do którego ma być przypisany task

@@ -7,7 +7,9 @@
         "done": "Ukończone",
         "restore": "Przywróć",
         "addTaskList": "Dodaj listę zadań",
-        "addTask": "Dodaj zadanie"
+        "addTask": "Dodaj zadanie",
+        "addClient": "Dodaj klienta",
+        "save": "Zapisz"
     },
     "Menu": {
         "tasks": "Zadania",
@@ -20,16 +22,24 @@
         "settings": "Ustawienia"
     },
     "Client": {
+        "clients": "Klienci",
+        "editClient": "Edytuj klienta",
+        "addClient": "Dodaj klienta",
         "name": "Nazwa",
         "description": "Opis",
-        "comments": "Komentarze",      
+        "comment": "Komentarz",      
         "email": "Email",
         "emails": "Adresy email",
         "phone": "Telefon",
         "phones": "Numery telefonu",
         "firstname": "Imię",
         "surname": "Nazwisko",
-        "contacts": "Osoby"
+        "contactPerson": "Osoba",
+        "contactPersons": "Osoby",
+        "address": "Adres",
+        "nip": "NIP",
+        "addContact": "Dodaj osobę",
+        "noContactsYet":   "Nie dodano jeszcze osób"
     },
     "ClientFilters": {
         "firstName": "Imię"

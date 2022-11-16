@@ -23,7 +23,7 @@ export class TaskFormNewComponent implements OnInit {
   taskDetails: Task = {
     id: '',
     deadline: new Date(),
-    priority: Priority.Done,
+    priority: Priority.No,
     title: '',
     description: '',
     assigneeUserId: environment.emptyGuid, //TODO przekazać id użytkownika, do którego ma być przypisany task
@@ -55,7 +55,9 @@ export class TaskFormNewComponent implements OnInit {
         if (id) {
           this.taskService.getTask(id).subscribe({
             next: (response) => {
-              this.formMode = FormMode.Edit
+              this.formMode = FormMode.Edit;
+              this.taskDetails = response;
+              this.updateTaskForm();
             }
           });
         }
@@ -85,7 +87,7 @@ export class TaskFormNewComponent implements OnInit {
     this.taskDetails.title = this.taskForm.controls.title.value || '',
       this.taskDetails.description = this.taskForm.controls.description.value || '',
       this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || ''),
-      this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority?.value || Priority.Done),
+      this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority?.value || Priority.No),
       this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || undefined
   }
 

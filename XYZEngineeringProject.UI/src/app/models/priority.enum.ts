@@ -3,7 +3,6 @@ export enum Priority {
     Low, 
     Medium, 
     High, 
-    Done
     // No = 'No', 
     // Low = 'Low', 
     // Medium = 'Medium', 
@@ -16,5 +15,4 @@ export const Priority2LabelMapping: Record<Priority, string> = {
     [Priority.Low]: "Low",
     [Priority.Medium]: "Medium",
     [Priority.High]: "High",
-    [Priority.Done]: "Done"
 };

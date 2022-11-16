@@ -23,7 +23,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TaskListComponent } from './components/task-list/index/task-list-index.component';
 import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
 import { TaskListFiltersComponent } from './components/task-list/filters/task-list-filters.component';
-import { TaskComponent } from './components/task-list/task/index/task-index.component';
+// import { TaskComponent } from './components/task-list/task/index/task-index.component';
 import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
 import { TaskFiltersComponent } from './components/task-list/task/filters/task-filters.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -56,7 +56,7 @@ import { UserViewComponent } from './components/settings/user/user-view/user-vie
     TaskListComponent,
     TaskListFormComponent,
     TaskListFiltersComponent,
-    TaskComponent,
+    // TaskComponent,
     TaskFormComponent,
     TaskFiltersComponent,
     HomePageComponent,

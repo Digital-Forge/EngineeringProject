@@ -32,7 +32,7 @@ export class ClientFormNewComponent implements OnInit {
     clientContacts: this.fb.array([])
   });
 
-  get clientContacs() {
+  get clientContacts() {
     return this.clientForm.get('clientContacts') as FormArray;
   }
 
@@ -78,7 +78,7 @@ export class ClientFormNewComponent implements OnInit {
       })
     })
     controls?.forEach(control => {
-      this.clientContacs.push(control)
+      this.clientContacts.push(control)
     })
   }
 
@@ -108,7 +108,7 @@ export class ClientFormNewComponent implements OnInit {
       id: ['']
     })
 
-    this.clientContacs.push(group);
+    this.clientContacts.push(group);
   }
 
   onSubmit() {

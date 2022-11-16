@@ -1,6 +1,7 @@
 import { ClientService } from 'src/app/services/client/client.service';
 import { Client } from './../../../models/client.model';
 import { Component, OnInit } from '@angular/core';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-client-index',
@@ -21,6 +22,10 @@ export class ClientComponent implements OnInit {
         console.log(res);
       }
     })
+  }
+
+  toggleContacts(client: Client) {
+    client.isContactsVisible = !client.isContactsVisible;
   }
 
 }

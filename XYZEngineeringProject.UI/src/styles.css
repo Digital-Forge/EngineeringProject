@@ -22,7 +22,7 @@
 body {
         font-weight: 400 !important;
         letter-spacing: 0rem;
-        font-size: 12px;
+        font-size: 14px;
 }
 
 a {
@@ -36,7 +36,7 @@ a:hover {
 
 h1 {
     text-transform: lowercase;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 400;
 }
 
@@ -46,12 +46,17 @@ h2 {
 }
 
 h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 400;
 }
  
 h1::first-letter {
     text-transform: capitalize !important;
+}
+
+i.bi {
+    font-size: 1rem;
+    margin: 0 2.55px;
 }
 
 table {
@@ -63,6 +68,7 @@ thead {
     /* background-color: var(--secondary); */
     font-weight: 400;
 }
+
 .nav-link > .bi {
     -webkit-text-stroke-width: 1.25px;
     -webkit-text-stroke-color: var(--dark-gray);
@@ -110,12 +116,20 @@ thead {
     color: var(--gray) !important;
 }
 
+.br-5 {
+    border-radius: 5px;
+}
+
 .btn {
     border-radius: 14px;
     border: 0 !important;
-    padding: 0.25em 1em 0.35em;
+    padding: 0.3em 1em 0.3em 1em;
     /* text-transform: uppercase; */
     box-shadow: 0 0 5px 1px var(--light-gray);
+}
+
+.btn:focus{
+    outline: none;
 }
 
 .btn-primary {
@@ -190,6 +204,11 @@ thead {
     box-shadow: var(--primary-box-shadow);
     border-radius: 5px;
     padding: 2rem;
+    bottom: 50px !important;
+}
+
+.no-shadow{
+    box-shadow: none;
 }
 
 .card-columns {
@@ -227,26 +246,26 @@ thead {
     text-align: justify;
 }
 
-table.table-nested {
+/* tables */
+table { 
     box-shadow: var(--primary-box-shadow);
+    padding: 3px;
     border-radius: 5px;
-    width: 100%;
-    
+    /* table-layout: fixed; */
 }
 
-table.table-nested tr {
-    border-bottom: 1px solid var(--light-gray) !important;
-
+td > table {
+    box-shadow: 
+    inset 0px 10px 10px -10px rgba(var(--primary-rgb), 0.2),
+    inset 0px -10px 10px -10px rgba(var(--primary-rgb), 0.2);    border-radius: 0;
 }
 
-table.table-nested th {
-    padding: 0.1rem 0 0.1rem 1rem;
-}
+td {
+    border: 0;
+    /* border-top: 1px solid black; */
+        padding: 0 8px;
+        min-width: 15vw;
 
-table.table-nested td {
-    padding: 0.1rem 0 0.1rem 1rem;
-
-    
 }
 
 /* breakpoint lg */

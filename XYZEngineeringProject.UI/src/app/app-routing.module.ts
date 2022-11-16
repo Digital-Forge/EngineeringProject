@@ -12,7 +12,7 @@ import { ClientViewComponent } from './components/client/clientView/client-view.
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TaskComponent } from './components/task-list/task/index/task-index.component';
+// import { TaskComponent } from './components/task-list/task/index/task-index.component';
 import { TaskListComponent } from './components/task-list/index/task-list-index.component';
 import { AuthGuard } from './services/auth.guard';
 import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
@@ -57,8 +57,8 @@ const routes: Routes = [
       // { path: ':id', component: TaskComponent},
       // { path: 'add', component: TaskFormComponent},
       { path: 'add', component: TaskFormNewComponent },
-      { path: 'add/:listId', component: TaskFormComponent },
-      { path: 'edit/:id', component: TaskFormComponent },
+      { path: 'add/:listId', component: TaskFormNewComponent },
+      { path: 'edit/:id', component: TaskFormNewComponent },
     ],
     canActivate: [AuthGuard]
   },

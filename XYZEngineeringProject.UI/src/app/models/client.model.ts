@@ -7,7 +7,8 @@ export interface Client {
     comments: string,
     nip: string,
     address:string,
-    contacts?: IClientContact[]
+    contacts?: IClientContact[],
+    isContactsVisible?: boolean
 }
 
 export interface IClientContact {
@@ -19,7 +20,7 @@ export interface IClientContact {
 }
 
 export class ClientContact implements IClientContact {
-    public id: string ;
+    public id: string;
     public firstname: string;
     public surname: string;
     public phone: string;

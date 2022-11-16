@@ -20,7 +20,7 @@ namespace XYZEngineeringProject.Web.Controllers
         [HttpGet]
         public IActionResult GetAllNotes()
         {
-            return Ok(_noteService.GetAllNotes().ToList());
+            return Ok(_noteService.GetAllNotes());
         }
 
         [HttpPost]

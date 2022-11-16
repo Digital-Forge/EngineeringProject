@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace XYZEngineeringProject.Infrastructure.Utils
 {
@@ -33,7 +32,8 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             Other,
             Controller,
             Service,
-            Repository
+            Repository,
+            Middleware
         }
 
         public enum InfoType 

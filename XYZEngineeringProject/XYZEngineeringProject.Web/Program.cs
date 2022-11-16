@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http.Json;
+using XYZEngineeringProject.Application.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,6 +84,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

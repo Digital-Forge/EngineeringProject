@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppUserListComponent } from './app-user-list.component';
+import { TaskFormNewComponent } from './task-form-new.component';
 
-describe('AppUserListComponent', () => {
-  let component: AppUserListComponent;
-  let fixture: ComponentFixture<AppUserListComponent>;
+describe('TaskFormNewComponent', () => {
+  let component: TaskFormNewComponent;
+  let fixture: ComponentFixture<TaskFormNewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppUserListComponent ]
+      declarations: [ TaskFormNewComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppUserListComponent);
+    fixture = TestBed.createComponent(TaskFormNewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

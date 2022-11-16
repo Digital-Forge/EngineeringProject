@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace XYZEngineeringProject.Web.Controllers
 {
+    [Authorize]
     public class AppUserControllerTest : Controller
     {
         // GET: AppUserControllerTest

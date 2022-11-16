@@ -1,0 +1,13 @@
+<h1>TaskList data</h1>
+<label>Name: {{taskListDetails.name}}</label><br><br>
+<label>Poject: {{taskListDetails.project}}</label><br><br>
+<label>Status: {{taskListStatuses[taskListDetails.status]}}</label><br><br>
+<label>Tasks</label><br><br>
+<div *ngFor="let task of taskListDetails.tasks">
+    <label>Title: {{task.title}}</label><br>
+    <label>Desciprion: {{task.description}}</label><br>
+    <label>Priority: {{taskPriorities[task.priority]}}</label><br>
+    <label>Deadline: {{task.deadline | date:'yyyy-MM-dd' }}</label><br>
+    <label>CreateDate:  {{task.createDate | date:'yyyy-MM-dd'}}</label><br><br>
+</div>
+

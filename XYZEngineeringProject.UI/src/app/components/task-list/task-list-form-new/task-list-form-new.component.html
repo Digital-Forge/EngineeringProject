@@ -1,0 +1,33 @@
+<form [formGroup]="taskListForm" (ngSubmit)="onSubmit()">
+    <label for="name">name</label>
+    <input id="name" type="text" formControlName="name" required>
+    <label for="project">project</label>
+    <input id="project" type="text" formControlName="project">
+    <label for="status">status</label>
+    <select id="status" formControlName="status"  [selectedIndex]="this.taskListDetails.status">
+        <option *ngFor="let status of taskListStatuses">
+            {{status}}
+        </option>
+    </select>
+    <ng-container formArrayName="tasks">
+        <h2>Tasks</h2>
+        <div *ngFor="let task of listTasks.controls; let i=index">
+            <ng-container [formGroupName]="i">
+                <label for="task-{{i}}-deadline">deadline</label>
+                <input id="task-{{i}}-deadline" type="date" formControlName="deadline">
+                <label for="task-{{i}}-priority">priority</label>
+                <select id="task-{{i}}-priority" formControlName="priority" [selectedIndex]="selectRightPriority(task)">
+                    <option *ngFor="let priority of taskPriorities">
+                        {{priority}}
+                    </option>
+                </select>
+                <label for="task-{{i}}-title">title</label>
+                <input id="task-{{i}}-title" type="text" formControlName="title">
+                <label for="task-{{i}}-description">description</label>
+                <input id="task-{{i}}-description" type="text" formControlName="description">
+            </ng-container>
+        </div>
+        <button type="button" (click)="addListTask()">Add another task</button>
+    </ng-container>
+    <button type="submit" [disabled]="!taskListForm.valid">submit</button>
+</form>

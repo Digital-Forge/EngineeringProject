@@ -24,10 +24,16 @@ namespace XYZEngineeringProject.Application.Services
             {
                 UserName = x.UserName,
                 PasswordHash = x.PasswordHash,
-                Address = x.Address,
                 Name = x.Firstname,
                 Surname = x.Surname,
-                Id = x.Id.ToString()
+                Id = x.Id.ToString(),
+                Address = new AddressVM 
+                {
+                    Id=x.Address.Id.ToString(),
+                    AddressHome= x.Address.AddressHome,
+                    AddressPost = x.Address.AddressPost,
+                    Phone = x.Address.Phone
+                },
             }).ToList();
         }
 
@@ -35,12 +41,11 @@ namespace XYZEngineeringProject.Application.Services
         {
             AppUser user = new AppUser
             {
-                Id = new Guid(appUser.Id),
+                Id = Guid.Empty,
                 UserName = appUser.UserName,
                 PasswordHash = appUser.PasswordHash,
                 Firstname = appUser.Name,
-                Surname= appUser.Surname,
-                Address = appUser.Address
+                Surname= appUser.Surname
             };
 
             _userRepository.Add(user);

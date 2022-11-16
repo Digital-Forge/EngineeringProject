@@ -5,8 +5,8 @@
     <input type="date" id="date" formControlName="date">
     <label for="noteStatus">Status</label>
     <select id="noteStatus" formControlName="noteStatus" [selectedIndex]="this.noteDetails.noteStatus">
-        <option *ngFor="let s of noteStatuses">
-            {{s}}
+        <option *ngFor="let status of noteStatuses">
+            {{status}}
         </option>
     </select>
     <button type="submit" [disabled]="!noteForm.valid">submit</button>

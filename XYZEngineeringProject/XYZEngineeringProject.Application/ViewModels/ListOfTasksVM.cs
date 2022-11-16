@@ -14,5 +14,6 @@ namespace XYZEngineeringProject.Application.ViewModels
         public string Project { get; set; }
         public StatusListOfTask Status { get; set; }
         public DateTime CreateDate { get; set; }
+        public ICollection<TaskVM> Tasks { get; set; }
     }
 }

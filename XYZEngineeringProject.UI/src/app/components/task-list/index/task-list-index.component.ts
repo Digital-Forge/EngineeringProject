@@ -15,7 +15,7 @@ export class TaskListComponent implements OnInit {
   public taskListStatuses = Object.values(TaskListStatus).filter(value => typeof value === "string");
   public taskLists: TaskList[] = [];
   // taskList: Task[] = [];
-  public tasks: Task[] =[];
+  public tasks: Task[] = [];
   // taskExample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed leo neque, lacinia id dapibus ac, hendrerit sit amet nisl. Etiam pulvinar eros ut nunc tristique, in viverra ipsum feugiat. Nunc hendrerit blandit nisl vulputate consectetur. Vestibulum et faucibus leo, sit amet sodales ex. Quisque id tellus dolor. Nullam est nisi, malesuada sit amet arcu eu, luctus suscipit tortor. Mauris sodales posuere magna, dapibus condimentum libero tristique a. Cras nec lacus at metus varius porta mattis vitae eros. Mauris tempor urna vitae nulla imperdiet feugiat. Proin vulputate eget nulla nec aliquet. Morbi pulvinar lacinia augue. Curabitur mattis malesuada nunc, a vestibulum enim convallis eget. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.';
 
   constructor(
@@ -31,18 +31,18 @@ export class TaskListComponent implements OnInit {
       next: (res) => {
         for (let i = 0; i < res.length; i++) {
           this.taskLists[i] = res[i];
-
-          this.taskService.getTaskByTaskListId(res[i].id).subscribe({
-            next: (tasksRes) => {
-              this.tasks = tasksRes;
-              this.taskLists[i].tasks = tasksRes;
-              console.log(this.taskLists[i].tasks);
-            },
-            error: (response) => {
-              console.log(response);
-            }
-          });
-        }   
+          //Przeniosłem to do backendu
+          // this.taskService.getTaskByTaskListId(res[i].id).subscribe({
+          //   next: (tasksRes) => {
+          //     this.tasks = tasksRes;
+          //     this.taskLists[i].tasks = tasksRes;
+          //     console.log(this.taskLists[i].tasks);
+          //   },
+          //   error: (response) => {
+          //     console.log(response);
+          //   }
+          // });
+        }
       },
       error: (response) => {
         console.log(response);

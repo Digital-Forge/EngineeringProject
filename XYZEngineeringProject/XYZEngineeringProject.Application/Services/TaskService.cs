@@ -34,6 +34,7 @@ namespace XYZEngineeringProject.Application.Services
                 Priority = taskRequest.Priority,
                 Title = taskRequest.Title,
                 IsComplete = taskRequest.IsComplete,
+                ListOfTasksId= taskRequest.ListOfTasksId,
             };
 
             _taskRepository.Add(task);
@@ -53,7 +54,7 @@ namespace XYZEngineeringProject.Application.Services
                 ListOfTasksId = x.ListOfTasksId,
                 Priority = x.Priority,
                 Title = x.Title,
-                IsComplete=x.IsComplete,
+                IsComplete = x.IsComplete,
             }).ToList();
         }
 
@@ -69,29 +70,52 @@ namespace XYZEngineeringProject.Application.Services
             return _taskRepository.Update(task);
         }
 
-        
+
         public bool AddListOfTasks(ListOfTasksVM listOfTasksRequest)
         {
             ListOfTasks list = new ListOfTasks()
             {
                 Name = listOfTasksRequest.Name,
                 Status = listOfTasksRequest.Status,
+                Project = listOfTasksRequest.Project,
                 Id = Guid.Empty
             };
 
             _taskRepository.Add(list);
+
+            foreach (TaskVM task in listOfTasksRequest.Tasks)
+            {
+                UserTask userTask = new UserTask()
+                {
+                    Id = Guid.Empty,
+                    Title = task.Title,
+                    Description = task.Description,
+                    Deadline = task.Deadline,
+                    Priority = task.Priority,
+                    ListOfTasksId = list.Id
+                };
+                _taskRepository.Add(userTask);
+            }
 
             return true;
         }
 
         public List<ListOfTasksVM> GetAllListOfTasks()
         {
-            return _taskRepository.GetAllListsOfTasks().Select(x => new ListOfTasksVM
+            List<ListOfTasksVM> lists =  _taskRepository.GetAllListsOfTasks().Select(x => new ListOfTasksVM
             {
                 Id = x.Id,
                 Name = x.Name,
                 Status = x.Status,
+                Project=x.Project
             }).ToList();
+
+            foreach (ListOfTasksVM list in lists)
+            {
+                list.Tasks = GetTasksByList(list.Id);
+            }
+
+            return lists;
         }
 
         public bool EditListOfTasks(ListOfTasksVM editListOfTasksRequest)
@@ -99,6 +123,21 @@ namespace XYZEngineeringProject.Application.Services
             var list = _taskRepository.GetListOfTasksById(editListOfTasksRequest.Id);
             list.Name = editListOfTasksRequest.Name;
             list.Status = editListOfTasksRequest.Status;
+            list.Project= editListOfTasksRequest.Project;
+
+            foreach (var taskVM in editListOfTasksRequest.Tasks)
+            {
+                var task = _taskRepository.GetTaskById(taskVM.Id);
+                if (task==null)
+                {
+                    AddTask(taskVM);
+                }
+                else
+                {
+                    EditTask(taskVM);
+                }
+                
+            }
 
             return _taskRepository.Update(list);
         }
@@ -107,8 +146,8 @@ namespace XYZEngineeringProject.Application.Services
         {
             return _taskRepository.GetListOfTasksByIdAsQuerable(id)
                 .SelectMany(x => x.Task)
-                .Select(e => new TaskVM 
-                { 
+                .Select(e => new TaskVM
+                {
                     Id = e.Id,
                     Title = e.Title,
                     Description = e.Description,

@@ -42,7 +42,10 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             user.UpdateBy = currentUser.Id;
             user.CompanyId = currentUser.CompanyId;
 
-            var result = _userManager.CreateAsync(user).Result;
+            var buffPassword = user.PasswordHash;
+            user.PasswordHash = String.Empty;
+
+            var result = _userManager.CreateAsync(user, buffPassword).Result;
 
             if (result.Succeeded)
             {

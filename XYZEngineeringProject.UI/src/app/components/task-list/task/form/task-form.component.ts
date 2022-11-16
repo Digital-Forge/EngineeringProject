@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Priority, Priority2LabelMapping } from 'src/app/models/priority.enum';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Task, TaskList } from 'src/app/models/task.model';
-import { AppUser } from 'src/app/models/app-user.model';
+import { User } from 'src/app/models/user.model';
 import { forkJoin, map, first } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FormMode } from 'src/app/models/form-mode.enum';

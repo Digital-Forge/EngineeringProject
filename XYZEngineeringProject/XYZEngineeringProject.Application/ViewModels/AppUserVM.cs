@@ -20,7 +20,7 @@ namespace XYZEngineeringProject.Application.ViewModels
 
         public int PESEL { get; set; }
 
-        public Address? Address { get; set; }
+        public AddressVM? Address { get; set; }
 
     }
 }

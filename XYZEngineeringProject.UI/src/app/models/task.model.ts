@@ -1,6 +1,5 @@
 import { TaskListStatus } from './taskListStatus.enum';
 import { Priority } from "./priority.enum";
-import { Client } from "./client.model";
 
 export interface Task {
     id: string,

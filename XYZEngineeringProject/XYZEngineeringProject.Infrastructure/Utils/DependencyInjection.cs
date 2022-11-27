@@ -27,6 +27,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
             services.AddTransient<ITaskRepository, TaskRepository>();
             services.AddTransient<IUtilsRepository, UtilsRepository>();
             services.AddTransient<IEmailRepository, EmailRepository>();
+            services.AddTransient<IFileRepository, FileRepository>();
             //services.AddTransient<I, >();
 
 

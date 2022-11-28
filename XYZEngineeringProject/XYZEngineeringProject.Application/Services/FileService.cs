@@ -57,21 +57,59 @@ namespace XYZEngineeringProject.Application.Services
         }
         public FileStructureVM GetStructure()
         {
-            var departments = _meService.GetMyDepartments();
+            var company = _meService.GetMyCompany();
 
-            foreach (var dep in departments)
+            var structureVM = new FileStructureVM()
             {
+                Name = company.Name                
+            };
 
-
-
-
-
-
+            if (structureVM.Directores == null)
+            {
+                structureVM.Directores = new List<FileStructureVM>();
             }
 
+            var structureDB = _fileRepository.GetUserDirectories();
 
+            foreach (var dir in structureDB)
+            {
+                if (dir == null) continue;
 
-            throw new NotImplementedException();
+                structureVM.Directores.Add(mapStructureToVM(dir));
+            }
+
+            return structureVM;
+        }
+
+        private FileStructureVM mapStructureToVM(Domain.Models.File.Directory dir)
+        {
+            var dirVM = new FileStructureVM()
+            {
+                Id = dir.Id,
+                Name = dir.Name,
+                Path = dir.PathMask,
+                Files = dir.Files.Select(x => new FileVM
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Path = x.PathMask,
+                    Format = x.Format,
+                    ObjectBase64 = null
+                }).ToList(),
+                Directores = new List<FileStructureVM>()
+            };
+
+            if (dir.ChildDirectories != null)
+            {
+                foreach (var item in dir.ChildDirectories)
+                {
+                    if (item == null) continue;
+
+                    dirVM.Directores.Add(mapStructureToVM(item));
+                }
+            }
+
+            return dirVM;
         }
 
         public bool SaveFile(FileVM file, Guid directoryId)

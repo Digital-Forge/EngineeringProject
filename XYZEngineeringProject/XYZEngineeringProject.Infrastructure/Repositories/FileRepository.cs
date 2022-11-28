@@ -311,5 +311,57 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             return file;
         }
+
+        public List<Domain.Models.File.Directory>? GetUserDirectories()
+        {
+            var user = _infrastructureUtils.GetUserFormHttpContext();
+
+            if (user == null) return null;
+
+            var directoryList = _context.AppUsers
+                .Where(x => x.Id == user.Id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                .SelectMany(s => s.UsersToDepartments)
+                .Select(s => s.Departments)
+                .SelectMany(s => s.Directories)
+                .Select(s => s.Directory)
+                .Include(i => i.Files)
+                .Include(i => i.ChildDirectories)
+                .ThenInclude(i => i.Files)
+                .ToList();
+
+            if (directoryList == null) return null;
+
+            foreach (var dir_1 in directoryList)
+            {
+                foreach (var dir_2 in dir_1.ChildDirectories)
+                {
+                    dir_2.ChildDirectories = GetUserDirectories(dir_2).ChildDirectories;
+                }
+            } 
+
+            return directoryList;
+        }
+
+        private Domain.Models.File.Directory? GetUserDirectories(Domain.Models.File.Directory? directory)
+        {
+            if (directory == null) return null;
+
+            var child_dir = _context.Directories
+                .Where(x => x.Id == directory.Id)
+                .Include(i => i.ChildDirectories)
+                .ThenInclude(i => i.Files)
+                .Select(x => x.ChildDirectories).FirstOrDefault();
+
+            if (child_dir == null) return directory;
+
+            for (int i = 0; i < child_dir.Count; i++)
+            {
+                child_dir[i] = GetUserDirectories(child_dir[i]);
+                child_dir[i].ParentDirectory = directory;
+            }
+
+            directory.ChildDirectories = child_dir.Count == 0 ? null : child_dir;
+            return directory;
+        }
     }
 }

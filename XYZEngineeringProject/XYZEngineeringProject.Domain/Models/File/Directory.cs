@@ -16,8 +16,8 @@ namespace XYZEngineeringProject.Domain.Models.File
         public int DeepLevel { get; set; }
 
         // relation
-        public Guid ParentDirectoryId { get; set; }
-        public virtual Directory ParentDirectory { get; set; }
+        public Guid? ParentDirectoryId { get; set; }
+        public virtual Directory? ParentDirectory { get; set; }
         public virtual List<Directory> ChildDirectories { get; set; }
         public virtual List<File> Files { get; set; }
         public virtual List<AccessDirectory> Departments { get; set; }

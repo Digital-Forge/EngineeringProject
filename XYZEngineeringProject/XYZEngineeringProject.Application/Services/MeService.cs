@@ -8,6 +8,7 @@ using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.EntityUtils;
 using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Application.Services
@@ -25,6 +26,14 @@ namespace XYZEngineeringProject.Application.Services
             _userRepository = userRepository;
             _departmentRepository = departmentRepository;
             _infrastructureUtils = new InfrastructureUtils(context, httpContextAccessor);
+        }
+
+        public LogicCompany? GetMyCompany()
+        {
+            var me = _userRepository.GetUserByIdAsQuerable(_infrastructureUtils.GetUserIdFormHttpContext().Value);
+            var company = me.Select(x => x.Company).FirstOrDefault();
+
+            return company;
         }
 
         public MyDataVM GetMyData()

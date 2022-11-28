@@ -21,5 +21,6 @@ namespace XYZEngineeringProject.Domain.Interfaces
         void DeleteDirectory(Guid id);
         Guid? CreateDirectory(Guid paretntDictionaryId, string name);
         bool AccessToDirectory(Guid id);
+        List<Models.File.Directory>? GetUserDirectories();
     }
 }

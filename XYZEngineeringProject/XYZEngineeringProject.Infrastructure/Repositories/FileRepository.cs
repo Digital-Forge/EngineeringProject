@@ -230,12 +230,17 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             if (userId == null || userId == Guid.Empty) return false;
 
-            var dictionary = _context.Directories
-                .Include(i => i.Departments)
+            var directory = _context.Directories
                 .Where(x => x.Id == id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
 
-            var currentDictionary = dictionary.FirstOrDefault();
-            if (currentDictionary == null || currentDictionary.DeepLevel == 0) return false;
+            var currentDirectory = directory.FirstOrDefault();
+            if (currentDirectory == null || currentDirectory.DeepLevel == 0) return false;
+
+            var deepInclude = string.Concat(Enumerable.Repeat("ParentDirectory.", currentDirectory.DeepLevel - 1)) + "Departments";
+
+            directory = _context.Directories
+                .Include(deepInclude)
+                .Where(x => x.Id == id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete); ;               
 
             var user = _context.Users
                .Include(i => i.UsersToDepartments)
@@ -243,12 +248,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             if (user == null || user.UsersToDepartments == null) return false;
 
-            for (int deep = 0; deep < currentDictionary.DeepLevel - 1; deep++)
+            for (int deep = 0; deep < currentDirectory.DeepLevel - 1; deep++)
             {
-                dictionary = dictionary.Select(x => x.ParentDirectory);
+                directory = directory.Select(x => x.ParentDirectory);
             }
 
-            var baseDirectory = dictionary.FirstOrDefault();
+            var baseDirectory = directory.FirstOrDefault();
 
             if (baseDirectory?.Departments.Any(x => user.UsersToDepartments.Any(y => y.DepartmentId == x.DepartmentId)) ?? false)
             {

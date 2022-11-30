@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Domain.Models;
 using XYZEngineeringProject.Domain.Models.File;
 using XYZEngineeringProject.Infrastructure.Utils;
 
@@ -83,6 +84,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 Name = name,
                 ParentDirectoryId = directoryParent.ParentDirectoryId,
                 PathMask = directoryParent.PathMask + "\\" + name,
+                DeepLevel = directoryParent.DeepLevel + 1,
             };
 
             _context.Directories.Add(directory);
@@ -228,7 +230,9 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             if (userId == null || userId == Guid.Empty) return false;
 
-            var dictionary = _context.Directories.Where(x => x.Id == id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
+            var dictionary = _context.Directories
+                .Include(i => i.Departments)
+                .Where(x => x.Id == id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
 
             var currentDictionary = dictionary.FirstOrDefault();
             if (currentDictionary == null || currentDictionary.DeepLevel == 0) return false;
@@ -244,7 +248,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 dictionary = dictionary.Select(x => x.ParentDirectory);
             }
 
-            var baseDirectory = dictionary.Include(i => i.Departments).FirstOrDefault();
+            var baseDirectory = dictionary.FirstOrDefault();
 
             if (baseDirectory?.Departments.Any(x => user.UsersToDepartments.Any(y => y.DepartmentId == x.DepartmentId)) ?? false)
             {
@@ -319,14 +323,22 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             if (user == null) return null;
 
             var directoryList = _context.AppUsers
+                .Include(i => i.UsersToDepartments)
+                .ThenInclude(i => i.Departments)
+                .ThenInclude(i => i.Directories)
+                .ThenInclude(i => i.Directory)
+                .ThenInclude(i => i.ChildDirectories)
+                .ThenInclude(i => i.Files)
+                .Include(i => i.UsersToDepartments)
+                .ThenInclude(i => i.Departments)
+                .ThenInclude(i => i.Directories)
+                .ThenInclude(i => i.Directory)
+                .ThenInclude(i => i.Files)
                 .Where(x => x.Id == user.Id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
                 .SelectMany(s => s.UsersToDepartments)
                 .Select(s => s.Departments)
                 .SelectMany(s => s.Directories)
                 .Select(s => s.Directory)
-                .Include(i => i.Files)
-                .Include(i => i.ChildDirectories)
-                .ThenInclude(i => i.Files)
                 .ToList();
 
             if (directoryList == null) return null;
@@ -347,9 +359,9 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             if (directory == null) return null;
 
             var child_dir = _context.Directories
-                .Where(x => x.Id == directory.Id)
                 .Include(i => i.ChildDirectories)
                 .ThenInclude(i => i.Files)
+                .Where(x => x.Id == directory.Id)
                 .Select(x => x.ChildDirectories).FirstOrDefault();
 
             if (child_dir == null) return directory;
@@ -362,6 +374,32 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             directory.ChildDirectories = child_dir.Count == 0 ? null : child_dir;
             return directory;
+        }
+
+        public void _CreateDepartmentDirectory(Department department)
+        {
+            var company = _infrastructureUtils.GetCompany();
+
+            var dir = new Domain.Models.File.Directory
+            {
+                Name = department.Name,
+                DeepLevel = 1,
+                Path = $"\\{company.Id}\\",
+                PathMask = $"\\{company.Id}\\{department.Name}"
+            };
+
+            _context.Directories.Add(dir);
+            _context.SaveChanges();
+
+            dir.Path += dir.Id.ToString();
+
+            _context.AccessDirectories.Add(new AccessDirectory
+            {
+                DepartmentId = department.Id,
+                DirectoryId = dir.Id
+            });
+
+            _context.SaveChanges();
         }
     }
 }

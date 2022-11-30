@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XYZEngineeringProject.Domain.Models;
 
 namespace XYZEngineeringProject.Domain.Interfaces
 {
@@ -22,5 +23,7 @@ namespace XYZEngineeringProject.Domain.Interfaces
         Guid? CreateDirectory(Guid paretntDictionaryId, string name);
         bool AccessToDirectory(Guid id);
         List<Models.File.Directory>? GetUserDirectories();
+
+        void _CreateDepartmentDirectory(Department department);
     }
 }

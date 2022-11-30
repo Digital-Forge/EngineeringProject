@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Application.ViewModels.File;
+using XYZEngineeringProject.Domain.Models;
 
 namespace XYZEngineeringProject.Application.Interfaces
 {
@@ -18,5 +19,8 @@ namespace XYZEngineeringProject.Application.Interfaces
         void DeleteDirectory(Guid id);
         Guid? CreateDirectory(Guid paretntDictionaryId, string name);
         FileStream? GetFile(Guid id);
+
+        void _AddDepartmentDirectory(Department department);
+        void _AddDepartmentDirectory(Guid departmentId);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels.File;
 using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Domain.Models;
 using XYZEngineeringProject.Infrastructure.Repositories;
 using XYZEngineeringProject.Infrastructure.Utils;
 
@@ -12,11 +13,13 @@ namespace XYZEngineeringProject.Application.Services
     {
         private readonly IFileRepository _fileRepository;
         private readonly IMeService _meService;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public FileService(IFileRepository fileRepository, IMeService meService)
+        public FileService(IFileRepository fileRepository, IMeService meService, IDepartmentRepository departmentRepository)
         {
             _fileRepository = fileRepository;
             _meService = meService;
+            _departmentRepository = departmentRepository;
         }
 
         public void ChangeDirectoryName(Guid id, string name)
@@ -163,6 +166,20 @@ namespace XYZEngineeringProject.Application.Services
                 _fileRepository.DeleteFile(fileId.Value);
                 throw e;
             }
+        }
+
+        public void _AddDepartmentDirectory(Department department)
+        {
+            _fileRepository._CreateDepartmentDirectory(department);
+        }
+
+        public void _AddDepartmentDirectory(Guid departmentId)
+        {
+            var department = _departmentRepository.GetDepartmentById(departmentId);
+
+            if (department == null) return;
+
+            _fileRepository._CreateDepartmentDirectory(department);
         }
     }
 }

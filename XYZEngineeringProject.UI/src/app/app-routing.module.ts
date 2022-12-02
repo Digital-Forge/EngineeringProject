@@ -76,9 +76,9 @@ const routes: Routes = [
     path: 'note',
     children: [
       { path: '', component: NoteIndexComponent },
+      { path: 'add', component: NoteFormNewComponent },
       { path: ':id', component: NoteViewComponent },
       // { path: 'add', component: NoteFormComponent },
-      { path: 'add', component: NoteFormNewComponent },
       // { path: 'edit/:id', component: NoteFormComponent}
       { path: 'edit/:id', component: NoteFormNewComponent }
     ],

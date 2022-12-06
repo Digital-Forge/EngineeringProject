@@ -79,9 +79,6 @@ const routes: Routes = [
       { path: '', component: NoteIndexComponent },
       { path: 'add', component: NoteFormNewComponent },
       { path: ':id', component: NoteViewComponent },
-      // { path: 'add', component: NoteFormComponent },
-   
-      // { path: 'edit/:id', component: NoteFormComponent}
       { path: 'edit/:id', component: NoteFormNewComponent }
     ],
     canActivate: [AuthGuard]

@@ -9,6 +9,7 @@
         "addTaskList": "Dodaj listę zadań",
         "addTask": "Dodaj zadanie",
         "addClient": "Dodaj klienta",
+        "addNote": "Dodaj notatkę",
         "save": "Zapisz"
     },
     "Menu": {
@@ -65,6 +66,13 @@
         "New": "Nowe",
         "InProgress": "W trakcie",
         "Done": "Ukończone"
+    },
+    "Note": {
+        "notes": "Notatki",
+        "title": "Treść",
+        "status": "Status",
+        "date": "Data",
+        "noNotesFound": "Nie znaleziono notatek"
     },
     "NoteStatus": {
         "Future": "Przyszłe",

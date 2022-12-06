@@ -1,27 +1,37 @@
 <div class="container-fluid my-5">
-    <h1 class="mb-3">Notes</h1>
+    <div class="row mb-5">
+        <h1 class="col-lg-9">{{ 'Note.notes' | translate }}</h1>
+        <div class="col-lg-3 d-flex justify-content-end">
+            <a class="btn btn-md btn-primary pe-4 py-2" [routerLink]="['/note', 'add']">
+                <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addNote' | translate }}
+            </a>
+        </div>
+    </div>
     <table class="table" *ngIf="notes && notes.length >0">
         <thead>
             <tr>
-                <th>id</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th> </th>
+                <th>{{ 'Note.date' | translate }}</th>
+                <th>{{ 'Note.status' | translate }}</th>
+                <th>{{ 'Note.title' | translate }}</th>
                 <th> </th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let note of notes">
-                <td>{{note.id}}</td>
-                <td>{{note.title}}</td>
-                <td>{{note.date | date:'dd/MM/yyyy'}}</td>
-                <td>{{ "NoteStatus." + noteStatuses[note.noteStatus] | translate}}</td> 
-                <td><a [routerLink]="['/note', note.id]">View</a></td>
-                <td><a [routerLink]="['/note', 'edit', note.id]">Edit</a></td>
+                <td>{{note.date | date:'dd-MM-yyyy'}}</td>
+                <td>{{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}</td> 
+                <td>{{note.title | slice: 0:300}}<span *ngIf="note.title!.length >= 300">...</span></td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-secondary me-2" [routerLink]="['/note', 'edit', note.id]">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <a class="btn btn-sm btn-secondary me-2" [routerLink]="['/note', note.id]">
+                        <i class="bi bi-eye-fill"></i>
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
-    <p *ngIf="!notes || notes.length <= 0">No notes found</p>
+    <p *ngIf="!notes || notes.length <= 0">{{ 'Note.noNotesFound' | translate }}</p>
 </div>
 <router-outlet></router-outlet>

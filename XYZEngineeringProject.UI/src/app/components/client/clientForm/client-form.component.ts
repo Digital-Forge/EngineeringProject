@@ -67,6 +67,7 @@ export class ClientFormComponent implements OnInit {
       this.addNote();
     }
   }
+
   addNote() {
     this.clientService.addClient(this.clientDetails).subscribe({
       next: (res) => {
@@ -74,6 +75,7 @@ export class ClientFormComponent implements OnInit {
       }
     })
   }
+  
   saveChanges() {
     this.clientService.editClient(this.clientDetails).subscribe({
       next: (res) => {

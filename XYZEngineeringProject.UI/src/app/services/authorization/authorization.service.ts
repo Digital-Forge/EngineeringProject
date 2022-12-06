@@ -35,7 +35,7 @@ export class AuthorizationService {
     });
   }
 
-  getAuthStatus() {
+  isAuthorized() {
     return localStorage.getItem('token') ? true : false;
   }
 }

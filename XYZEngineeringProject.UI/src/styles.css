@@ -63,6 +63,12 @@ table {
     border: 0px !important;
 }
 
+.table td,
+.table thead {
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+}
+
 thead {
     /* text-transform: lowercase; */
     /* background-color: var(--secondary); */

@@ -1,4 +1,4 @@
-<form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
     <label for="title">Title</label>
     <input type="text" id="title" formControlName="title">
     <label for="date">Date</label>
@@ -10,4 +10,43 @@
         </option>
     </select>
     <button type="submit" [disabled]="!noteForm.valid">submit</button>
-</form>
+</form> -->
+
+
+<div>
+    <div *ngIf="editMode; else header" class="row mb-5 text-center">
+        <h1 class="col-12">{{ 'Note.editNote' | translate }}</h1>
+    </div>
+    <ng-template #header>
+        <div class="row mb-3 text-center">
+            <h1 class="col-12">{{ 'Note.addNote' | translate }}</h1>
+        </div>
+    </ng-template>
+
+    <div class="form">
+        <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="title" class="label-form">{{ 'Note.title' | translate }}</label>
+                    <textarea class="form-control" id="title" formControlName="title" [(ngModel)]="noteDetails.title"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="noteStatus" class="form-label">{{ 'Note.status' | translate }}</label><br>
+                    <select id="noteStatus" formControlName="noteStatus" class="form-control" [selectedIndex]="this.noteDetails.noteStatus">
+                        <option *ngFor="let status of noteStatuses">
+                            {{status}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="date" class="form-label">{{ 'Note.date' | translate }}</label>
+                    <input type="date" class="form-control" id="date" formControlName="date">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid" *ngIf="editMode">{{ 'Button.save' | translate}}</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid" *ngIf="!editMode">{{ 'Button.addNote' | translate}}</button>
+        </form>
+    </div>
+</div>

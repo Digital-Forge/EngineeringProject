@@ -17,8 +17,8 @@ export class NoteIndexComponent implements OnInit {
   ngOnInit(): void {
     this.noteService.getAllNotes().subscribe({
       next: (notes) => {
-        this.notes = notes
-        console.log(this.notes);
+        this.notes = notes;
+        console.log(this.noteStatuses[3]);
       },
       error: (res) => {
         console.log(res);        

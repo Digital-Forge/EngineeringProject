@@ -7,7 +7,6 @@ using XYZEngineeringProject.Application.Interfaces;
 namespace XYZEngineeringProject.Web.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
     public class MeController : Controller
     {
         private readonly IMeService _meService;
@@ -17,7 +16,7 @@ namespace XYZEngineeringProject.Web.Controllers
             _meService = meService;
         }
 
-        [HttpGet("~/Me")]
+        [HttpGet]
         public IActionResult GetMyId()
         {
             var buff = _meService.MeId();
@@ -25,7 +24,17 @@ namespace XYZEngineeringProject.Web.Controllers
             return buff == null ? BadRequest() : Ok(buff);
         }
 
-        [HttpGet("~/My")]
+        [HttpGet]
+        public bool IsAuthorized()
+        {
+            var buff = _meService.MeId();
+
+            bool result = (buff != null);
+
+            return result;
+        }
+
+        [HttpGet]
         public IActionResult GetMyData()
         {
             var buff = _meService.GetMyData();

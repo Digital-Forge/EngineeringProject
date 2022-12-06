@@ -48,6 +48,10 @@ export class NoteFormNewComponent implements OnInit {
             }
           })
         }
+        else {
+          this.editMode = false;
+          // this.updateNoteForm();
+        }
       }
     })
   }
@@ -58,10 +62,11 @@ export class NoteFormNewComponent implements OnInit {
     if (this.editMode) {
       this.saveChanges();
     }
-    else {
+    else if (!this.editMode) {
       this.addNote();
     }
   }
+
   addNote() {
     this.noteService.addNote(this.noteDetails).subscribe({
       next: (res) => {

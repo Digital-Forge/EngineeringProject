@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 
 @Component({
   selector: 'home-page',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  isAuthorized = false;
+  constructor(
+    private authService: AuthorizationService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if (this.authService.isAuthorized()) {
+      this.router.navigate(['/dashboard']);
+    }  
   }
-
 }

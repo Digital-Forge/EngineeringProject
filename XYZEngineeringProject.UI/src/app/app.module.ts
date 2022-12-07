@@ -37,6 +37,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UserComponent } from './components/settings/user/user.component';
 import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
 import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DocumentComponent } from './components/document/document.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,8 @@ import { UserViewComponent } from './components/settings/user/user-view/user-vie
     SettingsComponent,
     UserComponent,
     UserFormComponent,
-    UserViewComponent
+    UserViewComponent,
+    DocumentComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,8 @@ import { UserViewComponent } from './components/settings/user/user-view/user-vie
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
-    })
+    }),
+    BrowserAnimationsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:InterceptorService, multi: true},

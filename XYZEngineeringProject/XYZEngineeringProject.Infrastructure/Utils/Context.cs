@@ -28,6 +28,11 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         public DbSet<LogicCompany> LogicCompanies { get; set; }
         public DbSet<EmailConfig> EmailConfigs { get; set; }
 
+        //Files
+        public DbSet<Domain.Models.File.File> Files { get; set; }
+        public DbSet<Domain.Models.File.Directory> Directories { get; set; }
+        public DbSet<Domain.Models.File.AccessDirectory> AccessDirectories { get; set; }
+
         //logger
         public DbSet<Log> Logs { get; set; }
 
@@ -69,6 +74,17 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 .WithMany(u => u.AsigneeTasks)
                 .HasForeignKey(u => u.AssignToUserId);
 
+            //////////////////////////////////////// File many to one Directory
+            builder.Entity<Domain.Models.File.File>()
+                .HasOne(u => u.Directory)
+                .WithMany(u => u.Files)
+                .HasForeignKey(u => u.DirectoryId);
+
+            //////////////////////////////////////// Directory many to one Directory
+            builder.Entity<Domain.Models.File.Directory>()
+                .HasOne(u => u.ParentDirectory)
+                .WithMany(u => u.ChildDirectories)
+                .HasForeignKey(u => u.ParentDirectoryId);
 
             //////////////////////////////////////// AppUser many to one LogicCompany
             builder.Entity<AppUser>()
@@ -134,6 +150,19 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 .WithMany(u => u.NoteToUsers)
                 .HasForeignKey(u => u.NoteId);
 
+            //////////////////////////////////////// Directories many to many Departments (AccessDirectory)
+            builder.Entity<Domain.Models.File.AccessDirectory>().HasKey(x => new { x.DirectoryId, x.DepartmentId });
+
+            builder.Entity<Domain.Models.File.AccessDirectory>()
+                .HasOne(u => u.Directory)
+                .WithMany(u => u.Departments)
+                .HasForeignKey(u => u.DirectoryId);
+
+            builder.Entity<Domain.Models.File.AccessDirectory>()
+                .HasOne(u => u.Department)
+                .WithMany(u => u.Directories)
+                .HasForeignKey(u => u.DepartmentId);
+
         }
 
         public override int SaveChanges()
@@ -195,9 +224,12 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                         entry.State = hardMode ? EntityState.Deleted : EntityState.Modified;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.UpdateDate = DateTime.Now;
-                        entry.Entity.UpdateBy = currentUser?.Id;
-                        entry.Entity.UseStatus = UseStatusEntity.Update;
+                        if (entry.Entity.UseStatus != UseStatusEntity.Delete)
+                        {
+                            entry.Entity.UpdateDate = DateTime.Now;
+                            entry.Entity.UpdateBy = currentUser?.Id;
+                            entry.Entity.UseStatus = UseStatusEntity.Update;
+                        }
                         break;
                     case EntityState.Added:
                         entry.Entity.CreateDate = DateTime.Now;

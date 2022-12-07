@@ -32,12 +32,12 @@ namespace XYZEngineeringProject.Application.Services
             _fileRepository.ChangeFileName(id, name);
         }
 
-        public Guid? CreateDirectory(Guid paretntDictionaryId, string name)
+        public Guid? CreateDirectory(Guid parentDirectoryId, string name)
         {
-            var parent = _fileRepository.GetDirectory(paretntDictionaryId);
+            var parent = _fileRepository.GetDirectory(parentDirectoryId);
             if (parent == null) return null;
 
-            return _fileRepository.CreateDirectory(paretntDictionaryId, name);
+            return _fileRepository.CreateDirectory(parentDirectoryId, name);
         }
 
         public void DeleteDirectory(Guid id)
@@ -67,9 +67,9 @@ namespace XYZEngineeringProject.Application.Services
                 Name = company.Name                
             };
 
-            if (structureVM.Directores == null)
+            if (structureVM.Directories == null)
             {
-                structureVM.Directores = new List<FileStructureVM>();
+                structureVM.Directories = new List<FileStructureVM>();
             }
 
             var structureDB = _fileRepository.GetUserDirectories();
@@ -78,7 +78,7 @@ namespace XYZEngineeringProject.Application.Services
             {
                 if (dir == null) continue;
 
-                structureVM.Directores.Add(mapStructureToVM(dir));
+                structureVM.Directories.Add(mapStructureToVM(dir));
             }
 
             return structureVM;
@@ -99,7 +99,7 @@ namespace XYZEngineeringProject.Application.Services
                     Format = x.Format,
                     ObjectBase64 = null
                 }).ToList(),
-                Directores = new List<FileStructureVM>()
+                Directories = new List<FileStructureVM>()
             };
 
             if (dir.ChildDirectories != null)
@@ -108,18 +108,18 @@ namespace XYZEngineeringProject.Application.Services
                 {
                     if (item == null) continue;
 
-                    dirVM.Directores.Add(mapStructureToVM(item));
+                    dirVM.Directories.Add(mapStructureToVM(item));
                 }
             }
 
             return dirVM;
         }
 
-        public bool SaveFile(FileVM file, Guid directoryId)
+        public bool SaveFile(FileVM file)
         {
             if (string.IsNullOrWhiteSpace(file.ObjectBase64)) return false;
 
-            var fileId = _fileRepository.CreateFile(directoryId, file.Name, file.Format);
+            var fileId = _fileRepository.CreateFile(Guid.Parse(file.DirectoryId), file.Name, file.Format);
 
             if (fileId == null || fileId == Guid.Empty) return false;
 
@@ -127,6 +127,8 @@ namespace XYZEngineeringProject.Application.Services
 
             try
             {
+                (new FileInfo(fileDB.Path.Replace($"\\{file.Id}",""))).Directory.Create(); 
+
                 using (MemoryStream fileStream = new MemoryStream(Convert.FromBase64String(file.ObjectBase64)))
                 {
                     var save = new FileStream(fileDB.Path, FileMode.CreateNew);

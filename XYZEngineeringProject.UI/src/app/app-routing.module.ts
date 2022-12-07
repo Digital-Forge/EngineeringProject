@@ -1,3 +1,4 @@
+import { DocumentComponent } from './components/document/document.component';
 import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
 import { UserComponent } from './components/settings/user/user.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -76,9 +77,9 @@ const routes: Routes = [
     path: 'note',
     children: [
       { path: '', component: NoteIndexComponent },
+      { path: 'add', component: NoteFormNewComponent },
       { path: ':id', component: NoteViewComponent },
       // { path: 'add', component: NoteFormComponent },
-      { path: 'add', component: NoteFormNewComponent },
       // { path: 'edit/:id', component: NoteFormComponent}
       { path: 'edit/:id', component: NoteFormNewComponent }
     ],
@@ -104,6 +105,12 @@ const routes: Routes = [
           { path: 'add', component: UserFormComponent }
         ]
       }
+    ]
+  },
+  {
+    path: 'documents',
+    children: [
+      {path:'', component:DocumentComponent},
     ]
   }
 ];

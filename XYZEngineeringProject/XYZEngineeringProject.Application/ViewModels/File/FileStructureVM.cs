@@ -12,6 +12,6 @@ namespace XYZEngineeringProject.Application.ViewModels.File
         public string Name { get; set; }
         public string Path { get; set; }
         public List<FileVM> Files { get; set; }
-        public List<FileStructureVM> Directores { get; set; }
+        public List<FileStructureVM> Directories { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,7 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 
                 if (userIdClaim != null)
                 {
-                    return _context.AppUsers.FirstOrDefault(x => x.UseStatus != UseStatusEntity.Delete && x.Id.ToString() == userIdClaim)?.Company;
+                    return _context.AppUsers.Include(i => i.Company).FirstOrDefault(x => x.UseStatus != UseStatusEntity.Delete && x.Id.ToString() == userIdClaim)?.Company;
                 }
             }
             return null;

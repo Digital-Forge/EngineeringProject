@@ -13,5 +13,7 @@ namespace XYZEngineeringProject.Application.ViewModels.File
         public string Format { get; set; }
         public string Path { get; set; }
         public string? ObjectBase64 { get; set; }
+
+        public string DirectoryId { get; set; }
     }
 }

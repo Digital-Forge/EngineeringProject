@@ -38,9 +38,9 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             if (string.IsNullOrWhiteSpace(name)) return;
 
             var directory = _context.Directories
-                .FirstOrDefault(x => 
-                    x.Id == id 
-                    && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete 
+                .FirstOrDefault(x =>
+                    x.Id == id
+                    && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete
                     && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.SolidConst);
 
             if (directory == null) return;
@@ -65,7 +65,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        public Guid? CreateDirectory(Guid paretntDictionaryId, string name)
+        public Guid? CreateDirectory(Guid parentDirectoryId, string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return null;
 
@@ -73,7 +73,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             var directoryParent = _context.Directories
                 .FirstOrDefault(x =>
-                    x.Id == paretntDictionaryId
+                    x.Id == parentDirectoryId
                     && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete
                     && x.CompanyId == user.CompanyId);
 
@@ -82,9 +82,10 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             var directory = new Domain.Models.File.Directory
             {
                 Name = name,
-                ParentDirectoryId = directoryParent.ParentDirectoryId,
+                ParentDirectoryId = directoryParent.Id,
                 PathMask = directoryParent.PathMask + "\\" + name,
                 DeepLevel = directoryParent.DeepLevel + 1,
+                Path = string.Empty,
             };
 
             _context.Directories.Add(directory);
@@ -97,7 +98,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return directory.Id;
         }
 
-        public Guid? CreateFile(Guid dictionaryId, string name, string format)
+        public Guid? CreateFile(Guid directoryId, string name, string format)
         {
             if (string.IsNullOrWhiteSpace(name)) return null;
 
@@ -105,7 +106,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             var directoryParent = _context.Directories
                 .FirstOrDefault(x =>
-                    x.Id == dictionaryId
+                    x.Id == directoryId
                     && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete
                     && x.CompanyId == user.CompanyId);
 
@@ -117,6 +118,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 Format = format,
                 DirectoryId = directoryParent.Id,
                 PathMask = directoryParent.PathMask + "\\" + name,
+                Path = string.Empty,
             };
 
             _context.Files.Add(file);
@@ -150,14 +152,14 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                     DeleteFile(item.Id);
                 }
             }
-            
+
             if (directory.ChildDirectories != null)
             {
                 foreach (var item in directory.ChildDirectories)
                 {
                     DeleteDirectory(item.Id);
                 }
-            }            
+            }
 
             _context.Directories.Remove(directory);
             _context.SaveChanges();
@@ -189,8 +191,8 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             try
             {
                 var path = _configuration.GetValue<string>("FilesRootPath");
-               
-                if(string.IsNullOrWhiteSpace(path))
+
+                if (string.IsNullOrWhiteSpace(path))
                 {
                     return "\\ProgramFiles";
                 }
@@ -213,8 +215,8 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             var file = _context.Files
                 .Include(i => i.Directory)
-                .FirstOrDefault(x => 
-                    x.Id == id 
+                .FirstOrDefault(x =>
+                    x.Id == id
                     && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
 
             if (file == null) return string.Empty;
@@ -240,7 +242,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             directory = _context.Directories
                 .Include(deepInclude)
-                .Where(x => x.Id == id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete); ;               
+                .Where(x => x.Id == id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete); ;
 
             var user = _context.Users
                .Include(i => i.UsersToDepartments)
@@ -304,7 +306,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                     x.Id == id
                     && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete
                     && x.CompanyId == user.CompanyId);
-
+            file.Path = GetFilesRootPath() + file.Path;
             return file;
         }
 
@@ -332,18 +334,19 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 .ThenInclude(i => i.Departments)
                 .ThenInclude(i => i.Directories)
                 .ThenInclude(i => i.Directory)
-                .ThenInclude(i => i.ChildDirectories)
-                .ThenInclude(i => i.Files)
+                .ThenInclude(i => i.ChildDirectories.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete))
+                .ThenInclude(i => i.Files.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete))
                 .Include(i => i.UsersToDepartments)
                 .ThenInclude(i => i.Departments)
                 .ThenInclude(i => i.Directories)
                 .ThenInclude(i => i.Directory)
-                .ThenInclude(i => i.Files)
+                .ThenInclude(i => i.Files.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete))
                 .Where(x => x.Id == user.Id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
                 .SelectMany(s => s.UsersToDepartments)
                 .Select(s => s.Departments)
                 .SelectMany(s => s.Directories)
                 .Select(s => s.Directory)
+                .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
                 .ToList();
 
             if (directoryList == null) return null;
@@ -352,9 +355,9 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             {
                 foreach (var dir_2 in dir_1.ChildDirectories)
                 {
-                    dir_2.ChildDirectories = GetUserDirectories(dir_2).ChildDirectories;
+                    dir_2.ChildDirectories = GetUserDirectories(dir_2).ChildDirectories?.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete).ToList();
                 }
-            } 
+            }
 
             return directoryList;
         }
@@ -364,9 +367,9 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             if (directory == null) return null;
 
             var child_dir = _context.Directories
-                .Include(i => i.ChildDirectories)
-                .ThenInclude(i => i.Files)
-                .Where(x => x.Id == directory.Id)
+                .Include(i => i.ChildDirectories.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete))
+                .ThenInclude(i => i.Files.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete))
+                .Where(x => x.Id == directory.Id && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
                 .Select(x => x.ChildDirectories).FirstOrDefault();
 
             if (child_dir == null) return directory;

@@ -61,8 +61,12 @@ export class TaskFormNewComponent implements OnInit {
             }
           });
         }
-        else if (!id) {
+        else if (id=='add') {
           this.formMode = FormMode.Add;
+        }
+        else if(!id)
+        {
+          this.formMode = FormMode.AddFromList;
         }
       }
     });

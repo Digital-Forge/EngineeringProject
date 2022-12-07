@@ -224,9 +224,12 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                         entry.State = hardMode ? EntityState.Deleted : EntityState.Modified;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.UpdateDate = DateTime.Now;
-                        entry.Entity.UpdateBy = currentUser?.Id;
-                        entry.Entity.UseStatus = UseStatusEntity.Update;
+                        if (entry.Entity.UseStatus != UseStatusEntity.Delete)
+                        {
+                            entry.Entity.UpdateDate = DateTime.Now;
+                            entry.Entity.UpdateBy = currentUser?.Id;
+                            entry.Entity.UseStatus = UseStatusEntity.Update;
+                        }
                         break;
                     case EntityState.Added:
                         entry.Entity.CreateDate = DateTime.Now;

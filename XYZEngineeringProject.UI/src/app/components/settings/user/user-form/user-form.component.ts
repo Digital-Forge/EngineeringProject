@@ -1,4 +1,5 @@
-import { User } from '../../../../models/user.model';
+import { User } from './../../../../models/user.model';
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { FormMode } from './../../../../models/form-mode.enum';
 import { Address } from './../../../../models/address.model';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client/client.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-user-form',
@@ -13,6 +15,8 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
+
+  // public currentUser?: User;
 
   userForm = this.fb.group({
     id: [''],
@@ -41,8 +45,8 @@ export class UserFormComponent implements OnInit {
       phone: 0
     }
   }
-  buttonText: string = 'Dodaj użytkownika';
 
+  buttonText: string = 'Dodaj użytkownika';
   formMode = FormMode.Add
   FormMode = FormMode;
 
@@ -52,12 +56,15 @@ export class UserFormComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private userService: UserService,
+    private authService: AuthorizationService,
   ) { }
 
   ngOnInit(): void {
     if (this.formMode == FormMode.Edit) {
       this.buttonText = 'Zapisz';
     }
+
+   
   }
 
   onSubmit() {

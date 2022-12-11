@@ -213,6 +213,10 @@ thead {
     bottom: 50px !important;
 }
 
+.form-control:focus,
+.form-select:focus {
+     box-shadow: none;
+}
 .no-shadow{
     box-shadow: none;
 }

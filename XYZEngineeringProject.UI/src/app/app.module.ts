@@ -37,7 +37,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UserComponent } from './components/settings/user/user.component';
 import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
 import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
-import { DocumentsComponent } from './documents/documents.component';
+import { DocumentsComponent } from './components/documents/documents.component';
 
 @NgModule({
   declarations: [

@@ -7,6 +7,7 @@ using XYZEngineeringProject.Application.Interfaces;
 namespace XYZEngineeringProject.Web.Controllers
 {
     [Authorize]
+    [Route("[controller]/[action]")]
     public class MeController : Controller
     {
         private readonly IMeService _meService;
@@ -22,16 +23,6 @@ namespace XYZEngineeringProject.Web.Controllers
             var buff = _meService.MeId();
 
             return buff == null ? BadRequest() : Ok(buff);
-        }
-
-        [HttpGet]
-        public bool IsAuthorized()
-        {
-            var buff = _meService.MeId();
-
-            bool result = (buff != null);
-
-            return result;
         }
 
         [HttpGet]

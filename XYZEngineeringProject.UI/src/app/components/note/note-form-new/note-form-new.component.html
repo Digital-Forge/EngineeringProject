@@ -13,7 +13,7 @@
 </form> -->
 
 
-<div>
+<div class="container-fluid my-5">
     <div *ngIf="editMode; else header" class="row mb-5 text-center">
         <h1 class="col-12">{{ 'Note.editNote' | translate }}</h1>
     </div>
@@ -24,25 +24,25 @@
     </ng-template>
 
     <div class="form">
-        <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="title" class="label-form">{{ 'Note.title' | translate }}</label>
-                    <textarea class="form-control" id="title" formControlName="title" [(ngModel)]="noteDetails.title"></textarea>
-                </div>
-            </div>
+        <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">          
             <div class="row mb-3">
                 <div class="col">
                     <label for="noteStatus" class="form-label">{{ 'Note.status' | translate }}</label><br>
-                    <select id="noteStatus" formControlName="noteStatus" class="form-control" [selectedIndex]="this.noteDetails.noteStatus">
-                        <option *ngFor="let status of noteStatuses">
-                            {{status}}
+                    <select id="noteStatus" formControlName="noteStatus" class="form-select" [selectedIndex]="this.noteDetails.noteStatus">
+                        <option *ngFor="let status of noteStatuses" [selected]="status == 'Own'">
+                            {{ ('NoteStatus.' + status) | translate }}
                         </option>
                     </select>
                 </div>
                 <div class="col">
                     <label for="date" class="form-label">{{ 'Note.date' | translate }}</label>
                     <input type="date" class="form-control" id="date" formControlName="date">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="title" class="label-form">{{ 'Note.title' | translate }}</label>
+                    <textarea class="form-control" id="title" formControlName="title" [(ngModel)]="noteDetails.title"></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid" *ngIf="editMode">{{ 'Button.save' | translate}}</button>

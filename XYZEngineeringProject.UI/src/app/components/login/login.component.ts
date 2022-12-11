@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthorizationService } from './../../services/authorization/authorization.service';
 import { Login } from './../../models/login.model';
 import { Component, OnInit } from '@angular/core';
@@ -14,12 +15,16 @@ export class LoginComponent implements OnInit {
     password: '',
     rememberMe: false
   }
-  constructor(private authorizationService: AuthorizationService) { }
+  constructor(
+    private authorizationService: AuthorizationService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {}
 
   onSubmit() {
-    this.authorizationService.login(this.login)
+    this.authorizationService.login(this.login);
+    this.router.navigate(['/dashboard']);
   }
 
 }

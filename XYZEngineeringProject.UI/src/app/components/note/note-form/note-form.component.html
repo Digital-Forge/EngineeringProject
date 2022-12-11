@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <div *ngIf="editMode; else header" class="row mb-5 text-center">
         <h1 class="col-12">{{ 'Note.editNote' | translate }}</h1>
     </div>
@@ -19,7 +19,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="noteStatus" class="form-label">{{ 'Note.status' | translate }}</label><br>
-                    <select id="noteStatus" name="noteStatus" class="form-control" [(ngModel)]="noteStatus"
+                    <select id="noteStatus" name="noteStatus" class="form-select" [(ngModel)]="noteStatus"
                         (ngModelChange)="onChange($event)">
                         <option *ngFor="let noteStatus of noteStatuses">
                             {{noteStatus}}
@@ -35,4 +35,4 @@
             <button type="submit" class="btn btn-primary" *ngIf="!editMode">Add Note</button>
         </form>
     </div>
-</div>
+</div> -->

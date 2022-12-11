@@ -8,8 +8,9 @@ import { AuthorizationService } from './authorization/authorization.service';
 })
 export class AuthGuard implements CanActivate {
 
+  public isAuthorized: boolean = false;
   constructor(
-    private authService: AuthorizationService,
+    private authorizationService: AuthorizationService,
     private router: Router
   ) {
   }
@@ -17,11 +18,17 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      var isAuthenticated = this.authService.isAuthorized();
-      if (!isAuthenticated) {
+     
+      this.authorizationService.isAuthorized().subscribe({
+        next: (res) => {
+          this.isAuthorized = res ? true : false;
+        }
+      });
+      
+      if (!this.isAuthorized) {
           this.router.navigate(['/login']);
       }
-      return isAuthenticated;  
+      return this.isAuthorized;  
     }
   
 }

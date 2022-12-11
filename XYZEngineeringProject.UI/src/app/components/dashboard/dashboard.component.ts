@@ -10,11 +10,14 @@ export class DashboardComponent implements OnInit {
 
   isAuthorized = false;
   constructor(
-    private authService: AuthorizationService
+    private authorizationService: AuthorizationService
   ) { }
 
   ngOnInit(): void {
-    this.isAuthorized = this.authService.isAuthorized();
-  }
+    this.authorizationService.isAuthorized().subscribe({
+      next: (res) => {
+        this.isAuthorized = res ? true : false;
+      }
+    })  }
 
 }

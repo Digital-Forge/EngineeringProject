@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from '../auth.guard';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +38,11 @@ export class AuthorizationService {
   }
 
   isAuthorized() {
-    return localStorage.getItem('token') ? true : false;
+    // return localStorage.getItem('token') ? true : false;
+    return this.http.get(this.baseApiUrl + 'Me/GetMyId');
+  }
+
+  currentUser(): Observable<User> {
+    return this.http.get<User>(this.baseApiUrl + 'Me/GetMyData');
   }
 }

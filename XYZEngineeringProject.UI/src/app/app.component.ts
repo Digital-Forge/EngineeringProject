@@ -23,7 +23,11 @@ export class AppComponent implements OnInit {
     translate.use('pl');
     
     this.router.events.subscribe( val => {
-      this.isAuthorized = this.authorizationService.isAuthorized();
+      this.authorizationService.isAuthorized().subscribe({
+        next: (res) => {
+          this.isAuthorized = res ? true : false;
+        }
+      });
     }); 
   }
 

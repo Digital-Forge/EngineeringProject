@@ -15,7 +15,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="taskListStatus" class="form-label">List Status</label><br>
-                    <select id="taskListStatus" name="taskListStatus" class="form-control" [(ngModel)]="taskListStatus"
+                    <select id="taskListStatus" name="taskListStatus" class="form-select" [(ngModel)]="taskListStatus"
                         (ngModelChange)="onChange($event)">
                         <option *ngFor="let taskListStatus of taskListStatuses">
                             {{taskListStatus}}

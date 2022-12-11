@@ -68,6 +68,8 @@
         "Done": "Ukończone"
     },
     "Note": {
+        "addNote":"Utwórz notatkę",
+        "editNote": "Edytuj notatkę",
         "notes": "Notatki",
         "title": "Treść",
         "status": "Status",
@@ -75,7 +77,7 @@
         "noNotesFound": "Nie znaleziono notatek"
     },
     "NoteStatus": {
-        "Future": "Przyszłe",
+        "Own": "Własne",
         "Now": "Teraz",
         "Archive": "Archiwalne"
     },

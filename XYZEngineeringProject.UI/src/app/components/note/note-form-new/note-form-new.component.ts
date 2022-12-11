@@ -19,7 +19,7 @@ export class NoteFormNewComponent implements OnInit {
     id: '',
     title: '',
     date: new Date(),
-    noteStatus: NoteStatus.Future
+    noteStatus: NoteStatus.Own
   }
 
   noteForm = this.fb.group({
@@ -95,7 +95,7 @@ export class NoteFormNewComponent implements OnInit {
 
   updateNoteDetails() {
     this.noteDetails.title = this.noteForm.controls.title.value || '';
-    this.noteDetails.noteStatus = Object.values(NoteStatus).indexOf(this.noteForm.controls.noteStatus?.value || NoteStatus.Future);
+    this.noteDetails.noteStatus = Object.values(NoteStatus).indexOf(this.noteForm.controls.noteStatus?.value || NoteStatus.Own);
     this.noteDetails.date = new Date(this.noteForm.controls.date?.value || new Date());
   }
 

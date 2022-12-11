@@ -1,5 +1,5 @@
 export enum NoteStatus {
-    Future,
-    Now,
-    Archive
+    Own,
+    Department,
+    Company
 }

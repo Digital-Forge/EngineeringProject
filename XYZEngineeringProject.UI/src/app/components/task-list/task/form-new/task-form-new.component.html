@@ -14,7 +14,7 @@
                 <div class="row mb-3" *ngIf="formMode == FormMode.Add">
                     <div class="col">
                         <label for="task-list" class="form-label">{{ 'Task.taskList' | translate }}</label><br>
-                        <select id="task-list" name="task-list" class="form-control form-select" formControlName="listOfTasksId">
+                        <select id="task-list" name="task-list" class="form-select" formControlName="listOfTasksId">
                             <option *ngFor="let taskList of taskLists" aria-placeholder="" [value]="taskList.id">
                                 {{taskList.name}}
                             </option>
@@ -36,7 +36,7 @@
                 <div class="row mb-3">
                     <div class="col-lg-6 col-12">
                         <label for="priority" class="form-label">{{ 'Task.priority' | translate }}</label><br>
-                        <select class="form-control form-select" id="priority" name="priority" aria-label="priority" formControlName="priority" [selectedIndex]="this.taskDetails.priority">
+                        <select class="form-select" id="priority" name="priority" aria-label="priority" formControlName="priority" [selectedIndex]="this.taskDetails.priority">
                             <option *ngFor="let priority of taskPriorities" [ngValue]="priority">
                                 {{ 'Priority.' + priority | translate }}
                             </option>

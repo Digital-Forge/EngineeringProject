@@ -21,5 +21,12 @@ namespace XYZEngineeringProject.Domain.Interfaces
         IQueryable<AppUser> _GetEveryOne();
         IQueryable<AppUser>? GetUserByCompany();
         IQueryable<AppUser>? GetUserByCompany(Guid companyId);
+
+        void AddRole(AppUser user, string role);
+        void AddRole(Guid userId, string role);
+        void AddRole(Guid userId, Guid roleId);
+        void RemoveRole(AppUser user, string role);
+        void RemoveRole(Guid userId, string role);
+        void RemoveRole(Guid userId, Guid roleId);
     }
 }

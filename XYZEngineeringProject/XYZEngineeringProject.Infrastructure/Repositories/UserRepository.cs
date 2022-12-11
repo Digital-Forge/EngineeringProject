@@ -221,5 +221,46 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             }
             return true;
         }
+
+        public void AddRole(AppUser user, string role)
+        {
+            var buffRole = _context.Roles.FirstOrDefault(x => x.NormalizedName == role.ToUpper());
+            AddRole(user.Id, buffRole.Id);
+        }
+
+        public void AddRole(Guid userId, string role)
+        {
+            var buffRole = _context.Roles.FirstOrDefault(x => x.NormalizedName == role.ToUpper());
+            AddRole(userId, buffRole.Id);
+        }
+
+        public void AddRole(Guid userId, Guid roleId)
+        {
+            _context.UserRoles.Add(new IdentityUserRole<Guid>
+            {
+                UserId = userId,
+                RoleId = roleId
+            });
+            _context.SaveChanges();
+        }
+
+        public void RemoveRole(AppUser user, string role)
+        {
+            var buffRole = _context.Roles.FirstOrDefault(x => x.NormalizedName == role.ToUpper());
+            RemoveRole(user.Id, buffRole.Id);
+        }
+
+        public void RemoveRole(Guid userId, string role)
+        {
+            var buffRole = _context.Roles.FirstOrDefault(x => x.NormalizedName == role.ToUpper());
+            RemoveRole(userId, buffRole.Id);
+        }
+
+        public void RemoveRole(Guid userId, Guid roleId)
+        {
+            var buff = _context.UserRoles.FirstOrDefault(x => x.UserId == userId && x.RoleId == roleId);
+            _context.UserRoles.Remove(buff);
+            _context.SaveChanges();
+        }
     }
 }

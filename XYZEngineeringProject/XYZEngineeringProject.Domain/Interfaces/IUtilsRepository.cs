@@ -11,5 +11,6 @@ namespace XYZEngineeringProject.Domain.Interfaces
     {
         Guid? CreateAdmin(AppUser appUser);
         void InitHelloWorld();
+        bool AddRole(string name);
     }
 }

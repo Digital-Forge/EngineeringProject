@@ -48,8 +48,28 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public void InitHelloWorld()
         {
+            AddRole("ADM");
+
             _context.LogicCompanies.Add(new Domain.Models.EntityUtils.LogicCompany { Name = "Nicość" });
             _context.SaveChanges();
+        }
+
+        public bool AddRole(string name)
+        {
+            try
+            {
+                _context.Roles.Add(new IdentityRole<Guid>
+                {
+                    Name = name,
+                    NormalizedName = name.ToUpper()
+                });
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

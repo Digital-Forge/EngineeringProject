@@ -34,7 +34,8 @@ namespace XYZEngineeringProject.Application.Services
             };
 
             _utilsRepository.InitHelloWorld();
-            _utilsRepository.CreateAdmin(firstAdmin);
+            var adminId = _utilsRepository.CreateAdmin(firstAdmin);
+            _userRepository.AddRole(adminId.Value, "ADM");
         }
 
         public bool isVoid()

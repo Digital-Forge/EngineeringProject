@@ -1,4 +1,4 @@
-import { DocumentsComponent } from './components/documents/documents.component';
+import { DocumentComponent } from './components/document/document.component';
 import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
 import { UserComponent } from './components/settings/user/user.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -108,7 +108,7 @@ const routes: Routes = [
   {
     path: 'documents',
     children: [
-      { path: '', component: DocumentsComponent }
+      {path:'', component:DocumentComponent},
     ]
   }
 ];

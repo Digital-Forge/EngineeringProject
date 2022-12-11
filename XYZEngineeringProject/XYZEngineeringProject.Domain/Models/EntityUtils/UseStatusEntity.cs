@@ -8,9 +8,9 @@ namespace XYZEngineeringProject.Domain.Models.EntityUtils
 {
     public enum UseStatusEntity
     {
-        Create,
-        Update,
-        Delete,
-        SolidConst
+        Create = 0,
+        Update = 1,
+        Delete = 2,
+        SolidConst = 3
     }
 }

@@ -1,3 +1,4 @@
+
 :root {
     --primary: rgb(62, 100, 163);
     --primary-rgb: 62, 100, 163;
@@ -291,3 +292,11 @@ td {
         columns: 1;
     }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.file-input {display: none;}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.EntityUtils;
 using XYZEngineeringProject.Domain.Models.File;
 using XYZEngineeringProject.Infrastructure.Utils;
 
@@ -384,9 +385,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             return directory;
         }
 
-        public void _CreateDepartmentDirectory(Department department)
+        public void _CreateDepartmentDirectory(Department department, LogicCompany? company = null)
         {
-            var company = _infrastructureUtils.GetCompany();
+            if (company == null)
+            {
+                company = _infrastructureUtils.GetCompany();
+            }
 
             var dir = new Domain.Models.File.Directory
             {

@@ -15,12 +15,14 @@ namespace XYZEngineeringProject.Application.Services
         private readonly IUserRepository _userRepository;
         private readonly IUtilsRepository _utilsRepository;
         private readonly Logger _logger;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public UtilsService(IUserRepository userRepository, IUtilsRepository utilsRepository, Logger logger)
+        public UtilsService(IUserRepository userRepository, IUtilsRepository utilsRepository, Logger logger, IDepartmentRepository departmentRepository)
         {
             _userRepository = userRepository;
             _utilsRepository = utilsRepository;
             _logger = logger;
+            _departmentRepository = departmentRepository;
         }
 
         public void InitWorld()
@@ -35,7 +37,11 @@ namespace XYZEngineeringProject.Application.Services
 
             _utilsRepository.InitHelloWorld();
             var adminId = _utilsRepository.CreateAdmin(firstAdmin);
+            _utilsRepository.InitHelloWorld2();
             _userRepository.AddRole(adminId.Value, "ADM");
+
+            var dep = _departmentRepository._GetEveryOne().FirstOrDefault();
+            _departmentRepository.AddUserToDepartment(adminId.Value, dep.Id);
         }
 
         public bool isVoid()

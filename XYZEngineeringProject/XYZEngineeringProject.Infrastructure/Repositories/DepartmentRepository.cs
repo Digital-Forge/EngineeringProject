@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.EntityUtils;
 using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Infrastructure.Repositories
@@ -15,12 +16,14 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         private readonly Context _context;
         private readonly InfrastructureUtils _infrastructureUtils;
         private readonly Logger _logger;
+        private readonly IFileRepository _fileRepository;
 
-        public DepartmentRepository(Context context, IHttpContextAccessor httpContextAccessor, Logger logger)
+        public DepartmentRepository(Context context, IHttpContextAccessor httpContextAccessor, Logger logger, IFileRepository fileRepository)
         {
             _context = context;
             _infrastructureUtils = new InfrastructureUtils(context, httpContextAccessor);
             _logger = logger;
+            _fileRepository = fileRepository;
         }
 
         public Guid Add(Department department)
@@ -29,6 +32,23 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.SaveChanges();
 
             _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add department - {department.Id}");
+
+            //create directory from departmnet
+            _fileRepository._CreateDepartmentDirectory(_context.Departments.FirstOrDefault(x => x.Id == department.Id));
+
+            return department.Id;
+        }
+
+        public Guid _Add(Department department, LogicCompany company)
+        {
+            _context.Departments.Add(department);
+            _context.SaveChanges();
+
+            _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add department - {department.Id}");
+
+            //create directory from departmnet
+            _fileRepository._CreateDepartmentDirectory(_context.Departments.FirstOrDefault(x => x.Id == department.Id), company);
+
             return department.Id;
         }
 
@@ -196,6 +216,35 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 return false;
             }
             return true;
+        }
+
+        public void AddUserToDepartment(AppUser user, Department department)
+        {
+            AddUserToDepartment(user.Id, department.Id);
+        }
+
+        public void AddUserToDepartment(Guid userId, Guid departmentId)
+        {
+            _context.UsersToDepartments.Add(new UsersToDepartments
+            {
+                DepartmentId = departmentId,
+                UserId = userId
+            });
+        }
+
+        public void RemoveUserFromDepartment(AppUser user, Department department)
+        {
+            RemoveUserFromDepartment(user.Id, department.Id);
+        }
+
+        public void RemoveUserFromDepartment(Guid userId, Guid departmentId)
+        {
+            var buff = _context.UsersToDepartments.FirstOrDefault(x => x.UserId == userId && x.DepartmentId == departmentId);
+
+            if (buff == null) return;
+
+            _context.UsersToDepartments.Remove(buff);
+            _context.SaveChanges();
         }
     }
 }

@@ -1,8 +1,8 @@
 import { map } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input,  Output, OnInit, EventEmitter } from '@angular/core';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Route } from '@angular/router';
 
 @Component({
@@ -12,10 +12,11 @@ import { Route } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  //@Input() isAuthorized!: boolean;
+  @Output() isLogoutClicked: EventEmitter<any> = new EventEmitter<boolean>(); 
 
   constructor(
-    private authService: AuthorizationService,
+    private authorizationService: AuthorizationService,
+    private router: Router
 
   ) {
 
@@ -25,9 +26,7 @@ export class NavbarComponent implements OnInit {
   
   }
 
-  logout() {
-    this.authService.logout();
-   // this.isAuthorized = false;
-
+   logoutClicked() {
+    this.isLogoutClicked.emit(true);
   }
 }

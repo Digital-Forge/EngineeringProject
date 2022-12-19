@@ -3,7 +3,7 @@ import { Priority } from "./priority.enum";
 
 export interface Task {
     id: string,
-    deadline?: Date,
+    deadline: Date,
     priority: Priority, // UWAGA dałoby radę zmienić to na priorityId z odniesieniem do tabeli taskPriority (none, low, medium, high)?
     title?: string,
     description?: string,

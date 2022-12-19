@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  isLogout: boolean;
 
   title = 'XYZEngineeringProject.UI';
   isAuthorized: boolean = false;
@@ -22,17 +24,24 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('pl');
     translate.use('pl');
     
-    this.router.events.subscribe( val => {
-      this.authorizationService.isAuthorized().subscribe({
-        next: (res) => {
-          this.isAuthorized = res ? true : false;
-        }
-      });
-    }); 
   }
 
   ngOnInit(): void {
-    //TODO usunąć jeśli nie będzie potrzebne
+   this.router.events.subscribe(val => {
+      this.authorizationService.getMyId().subscribe({
+        next: (res) => {
+          this.isAuthorized = true;
+        },
+        error: () => {
+          this.isAuthorized = false;
+        }
+      });
+    });
+  }
+
+  logout() {
+    this.authorizationService.logout();
+    this.isAuthorized = false;
   }
 
 }

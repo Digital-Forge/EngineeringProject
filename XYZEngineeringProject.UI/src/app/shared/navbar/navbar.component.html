@@ -1,6 +1,12 @@
 <div class="d-flex align-items-start">
     <div  class="nav flex-column nav-pills m-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <!-- TODO podmieniać routerLinki w miarę powstawania komponentów (to też naprawi problem stylu aktywnego linku na dashboard) -->
+        <!-- <a class="nav-link mb-2" routerLink="" routerLinkActive="active">
+            <p style="color: black">home</p>            
+        </a>
+        <a class="nav-link mb-2" routerLink="login" routerLinkActive="active">
+            <p style="color: black">login</p>            
+        </a> -->
         <a class="nav-link mb-2" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-person-fill" title="{{ 'Menu.dashboard' | translate }}"></i>              
         </a>
@@ -10,25 +16,25 @@
         <a class="nav-link mb-2" routerLink="task-list" routerLinkActive="active">
             <i class="bi bi-list-ul" title="{{ 'Menu.tasks' | translate }}"></i>              
         </a>
-        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+        <!-- <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-calendar-week-fill" title="{{ 'Menu.calendar' | translate }}"></i>            
-        </a>
+        </a> -->
         <a class="nav-link" routerLink="clients" routerLinkActive="active">
             <i class="bi bi-people-fill clients" title="{{ 'Menu.clients' | translate }}"></i>
         </a>
-        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+        <!-- <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
             <i class="bi bi-door-open-fill" title="{{ 'Menu.leaves' | translate }}"></i>
-        </a>
+        </a> -->
         <a class="nav-link" routerLink="documents" routerLinkActive="active">
             <i class="bi bi-folder-fill" title="{{ 'Menu.documents' | translate }}"></i>
         </a>
-        <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+        <a class="nav-link" routerLink="messages" routerLinkActive="active">
             <i class="bi bi-chat-text-fill" title="{{ 'Menu.chat' | translate }}"></i>
         </a>
         <a class="nav-link" routerLink="settings" routerLinkActive="active">
             <i class="bi bi-gear-fill" title="{{ 'Menu.settings' | translate }}"></i>
         </a>
-        <a class="nav-link" (click)="logout()" routerLinkActive="active">
+        <a class="nav-link" (click)="logoutClicked()" routerLinkActive="active">
             <i class="bi bi-power" title="{{ 'Menu.logout' | translate }}"></i>
         </a>
     </div>
@@ -37,7 +43,7 @@
             <a class="nav-link mb-2">
                 <i class="bi bi-person-x"></i>
             </a>
-            <p class="nav-link mb-2" (click)="logout()" routerLinkActive="active">
+            <p class="nav-link mb-2" (click)="logoutClicked()" routerLinkActive="active">
                 <i class="bi bi-power" title="{{ 'Menu.logout' | translate }}"></i>
             </p>
         </div>

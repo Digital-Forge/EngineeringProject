@@ -29,7 +29,7 @@
   </nav> -->
   <div *ngIf="isAuthorized" class="sidebar">
     <div class="sidebar-items d-flex align-items-center">
-      <app-navbar></app-navbar>
+      <app-navbar (isLogoutClicked)="logout()"></app-navbar>
     </div>
   </div>
   <div class="router-outlet">

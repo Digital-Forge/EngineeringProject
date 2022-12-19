@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthGuard } from '../auth.guard';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,14 @@ export class AuthorizationService {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private location: Location
   ) { }
 
   login(login: Login) {
     return this.http.post<Login>(this.baseApiUrl + 'Authorization/Login', login).subscribe({
       next: (res: any) => {
         localStorage.setItem('token', res.token);
-        this.router.navigate(['dashboard']); // TODO przekierować na dashboard
+        this.router.navigate(['/dashboard']);
       }
     });
   }
@@ -32,13 +34,12 @@ export class AuthorizationService {
     return this.http.get(this.baseApiUrl + 'Authorization/Logout').subscribe({
       next: (res: any) => {
         localStorage.removeItem('token');
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       }
     });
   }
 
-  isAuthorized() {
-    // return localStorage.getItem('token') ? true : false;
+  getMyId() {
     return this.http.get(this.baseApiUrl + 'Me/GetMyId');
   }
 

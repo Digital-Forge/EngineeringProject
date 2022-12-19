@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
     //   }
     // });
 
-    this.authService.isAuthorized().subscribe({
+    this.authService.getMyId().subscribe({
     next: (res) => {
       console.log('adasdasdasd');
       console.log(res);

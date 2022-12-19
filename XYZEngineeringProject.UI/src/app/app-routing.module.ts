@@ -31,13 +31,13 @@ const routes: Routes = [
     component: HomePageComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123

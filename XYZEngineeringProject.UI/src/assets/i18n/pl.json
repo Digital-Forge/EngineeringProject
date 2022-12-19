@@ -1,4 +1,7 @@
 {
+    "Authorization": {
+        "noAccess": "Nie masz dostępu do tej strony."
+    },
     "Button": {
         "view": "Zobacz",
         "edit": "Edytuj",
@@ -13,14 +16,27 @@
         "save": "Zapisz"
     },
     "Menu": {
+        "dashboard": "Pulpit",
+        "note": "Notatki",
         "tasks": "Zadania",
-        "calendar": "Kalendarz",
         "clients": "Klienci",
-        "leaves": "Urlopy",
-        "announcements": "Ogłoszenia",
         "documents": "Dokumenty",
-        "chat": "Komunikator",
-        "settings": "Ustawienia"
+        "chat": "Wiadomości",
+        "settings": "Ustawienia",
+        "logout": "Wyloguj"
+    },
+    "Dashboard": {
+        "dashboard": "Pulpit",
+        "notes": "Notatki",
+        "tasks": "Zadania",
+        "chat": "Wiadomości",
+        "todayIs": "Dzisiaj:",
+        "welcome": "Witaj",
+        "seeAll": "Zobacz wszystkie",
+        "todayTasks": "Dzisiejsze zadania",
+        "futureTasks": "Przyszłe zadania",
+        "latestNotes": "Najnowsze notatki",
+        "messages": "Wiadomości"
     },
     "Client": {
         "clients": "Klienci",
@@ -78,6 +94,8 @@
     },
     "NoteStatus": {
         "Own": "Własne",
+        "Department": "Dział",
+        "Company": "Cała firma",
         "Now": "Teraz",
         "Archive": "Archiwalne"
     },
@@ -87,5 +105,28 @@
         "Medium": "Średni",
         "High": "Wysoki",
         "Done": "Wykonane"
+    },
+    "MonthDate": {
+        "January": "stycznia",
+        "February": "lutego",
+        "March": "marca",
+        "April": "kwietnia",
+        "May": "maja",
+        "June": "czerwca",
+        "July": "lipca",
+        "August": "sierpnia",
+        "September": "września",
+        "October": "października",
+        "November": "listopada",
+        "December": "grudnia"
+    },
+    "Weekday": {
+        "Monday": "Poniedzałek",
+        "Tuesday": "Wtorek",
+        "Wednesday": "Środa",
+        "Thursday": "Czwartek",
+        "Friday": "Piątek",
+        "Saturday": "Sobota",
+        "Sunday": "Niedziela"
     }
 }

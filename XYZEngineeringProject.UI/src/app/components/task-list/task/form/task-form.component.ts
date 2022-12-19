@@ -59,6 +59,8 @@ export class TaskFormComponent implements OnInit {
       next: (params) => {
         
         this.taskListId = params.get('listId');
+        console.log(this.taskListId);
+
         if (this.taskListId && this.router.url.includes('/edit')) {
           //id to task id
           this.taskService.getTask(this.taskListId).subscribe({
@@ -103,6 +105,8 @@ export class TaskFormComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.taskListId);
+
     if (this.formMode == FormMode.Edit) {
       this.saveChanges();
     }
@@ -112,12 +116,14 @@ export class TaskFormComponent implements OnInit {
     else if (this.formMode == FormMode.AddFromList) {
       this.addTaskFromList();
     }
+    this.router.navigate(['task-list/' + this.taskListId]);
+
   }
 
   saveChanges() {
     this.taskService.saveChanges(this.taskDetails).subscribe({
       next: (response) => {
-        console.log(response);
+        
 
       }
     })
@@ -126,7 +132,6 @@ export class TaskFormComponent implements OnInit {
   addTask() {
     this.taskService.addTask(this.taskDetails).subscribe({
       next: (task) => {
-        this.router.navigate(['tasks']);
       }
     })
   }

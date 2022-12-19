@@ -19,6 +19,7 @@ export class TaskFormNewComponent implements OnInit {
   formMode = FormMode.Edit;
   FormMode = FormMode;
   taskLists: TaskList[] = [];
+  taskListId: string | null;
 
   taskDetails: Task = {
     id: '',
@@ -51,9 +52,11 @@ export class TaskFormNewComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (param) => {
-        const id = param.get('id');
-        if (id) {
-          this.taskService.getTask(id).subscribe({
+        this.taskListId = param.get('id');
+        console.log(this.taskListId);
+
+        if (this.taskListId) {
+          this.taskService.getTask(this.taskListId).subscribe({
             next: (response) => {
               this.formMode = FormMode.Edit;
               this.taskDetails = response;
@@ -61,10 +64,10 @@ export class TaskFormNewComponent implements OnInit {
             }
           });
         }
-        else if (id=='add') {
+        else if (this.taskListId=='add') {
           this.formMode = FormMode.Add;
         }
-        else if(!id)
+        else if(!this.taskListId)
         {
           this.formMode = FormMode.AddFromList;
         }
@@ -106,6 +109,8 @@ export class TaskFormNewComponent implements OnInit {
     else if (this.formMode == FormMode.AddFromList) {
       this.addTaskFromList();
     }
+
+    this.router.navigate(['task-list/' + this.taskListId]);
   }
 
   addTask() {

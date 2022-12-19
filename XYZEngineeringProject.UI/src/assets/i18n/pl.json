@@ -33,8 +33,9 @@
         "todayIs": "Dzisiaj:",
         "welcome": "Witaj",
         "seeAll": "Zobacz wszystkie",
-        "todayTasks": "Dzisiejsze zadania",
-        "futureTasks": "Przyszłe zadania",
+        "pastTasks": "Zaległe",
+        "todayTasks": "Dzisiejsze",
+        "futureTasks": "Przyszłe",
         "latestNotes": "Najnowsze notatki",
         "messages": "Wiadomości"
     },
@@ -106,27 +107,27 @@
         "High": "Wysoki",
         "Done": "Wykonane"
     },
-    "MonthDate": {
-        "January": "stycznia",
-        "February": "lutego",
-        "March": "marca",
-        "April": "kwietnia",
-        "May": "maja",
-        "June": "czerwca",
-        "July": "lipca",
-        "August": "sierpnia",
-        "September": "września",
-        "October": "października",
-        "November": "listopada",
-        "December": "grudnia"
+    "Month": {
+        "1": "stycznia",
+        "2": "lutego",
+        "3": "marca",
+        "4": "kwietnia",
+        "5": "maja",
+        "6": "czerwca",
+        "7": "lipca",
+        "8": "sierpnia",
+        "9": "września",
+        "10": "października",
+        "11": "listopada",
+        "12": "grudnia"
     },
     "Weekday": {
-        "Monday": "Poniedzałek",
-        "Tuesday": "Wtorek",
-        "Wednesday": "Środa",
-        "Thursday": "Czwartek",
-        "Friday": "Piątek",
-        "Saturday": "Sobota",
-        "Sunday": "Niedziela"
+        "1": "Poniedzałek",
+        "2": "Wtorek",
+        "3": "Środa",
+        "4": "Czwartek",
+        "5": "Piątek",
+        "6": "Sobota",
+        "0": "Niedziela"
     }
 }

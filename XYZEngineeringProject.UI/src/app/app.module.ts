@@ -39,6 +39,8 @@ import { UserFormComponent } from './components/settings/user/user-form/user-for
 import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocumentComponent } from './components/document/document.component';
+import { DateCustom } from './shared/pipes/dateLong.pipe';
+import { DateShort } from './shared/pipes/dateShort.pipe';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { DocumentComponent } from './components/document/document.component';
     UserComponent,
     UserFormComponent,
     UserViewComponent,
-    DocumentComponent
+    DocumentComponent,
+    DateCustom,
+    DateShort
   ],
   imports: [
     BrowserModule,

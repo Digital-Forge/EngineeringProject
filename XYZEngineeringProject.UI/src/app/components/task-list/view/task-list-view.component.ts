@@ -19,7 +19,8 @@ export class TaskListViewComponent implements OnInit {
   taskListDetails: TaskList = {
     id: '',
     name: '',
-    status: TaskListStatus.Done
+    status: TaskListStatus.Done,
+    createDate: new Date()
   }
 
   constructor(

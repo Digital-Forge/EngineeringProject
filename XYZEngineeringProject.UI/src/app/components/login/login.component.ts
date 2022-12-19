@@ -21,25 +21,21 @@ export class LoginComponent implements OnInit {
         private authorizationService: AuthorizationService,
         private router: Router,
         private location: Location
-    ) { this.authorizationService.getMyId().subscribe({
-            next: (res) => {
-                // this.location.replaceState('/');
-                // this.router.navigate(['/']);
-                this.router.navigate(['/']);
-                console.log('logged in');                
-            },
-            error: (res) => {
-                console.log('not logged in');
-            }
-        });   }
+    ) {   }
 
     ngOnInit(): void {
-       
+        this.authorizationService.getMyId().subscribe({
+            next: (res) => {
+                this.router.navigate(['/']);
+            },
+            error: (res) => {
+                console.log(res);
+            }
+        }); 
      }
 
     onSubmit() {
-        this.authorizationService.login(this.login);
-        
+        this.authorizationService.login(this.login);        
     }
 
 }

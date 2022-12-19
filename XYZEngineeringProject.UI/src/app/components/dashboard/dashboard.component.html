@@ -7,48 +7,170 @@
         </div>
         <div class="col-12 col-md-6">
             <h4 class="text-center text-md-end mt-2">
-                <i class="bi bi-calendar4-week me-1"></i> {{ ('Weekday.' + (today | date: 'EEEE')) | translate}}, {{
-                    today | date: 'dd'}} {{ ('MonthDate.' + (today | date: 'MMMM')) | translate }}
+                <i class="bi bi-calendar4-week me-1"></i> {{ today | dateCustom: 'fullLong' }}
             </h4>
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-12 col-lg-4">
-            <div class="shadow-primary br-5 p-3 my-2 m-lg-0">
-                <h4>{{ "Dashboard.todayTasks" | translate }} ({{ todayTasks.length }})</h4>
-                <div *ngFor="let task of todayTasks | slice:0:5">
-                        {{ task.deadline | date: 'yyyy-MM-dd'}}
-                        {{ task.title | slice: 0:100 }}
+        <div class="col-12">
+            <div class="shadow-primary br-5 py-4">
+                <div class="row px-5">
+                    <div class="col col-4"></div>
+                    <div class="col col-4 text-center ps-5">
+                        <h2>{{ 'Dashboard.tasks' | translate }}</h2>
+                    </div>
+                    <div class="col col-4 text-end">
+                        <a class="btn btn-sm btn-secondary" [routerLink]="['/task-list']">{{ 'Dashboard.seeAll' |
+                        translate }}</a>
+                    </div>
                 </div>
-                <h4 class="mt-3">{{ "Dashboard.futureTasks" | translate }} ({{ futureTasks.length }})</h4>
-                <div *ngFor="let task of futureTasks | slice:0:5">
-                        {{ task.deadline | date: 'yyyy-MM-dd'}}
-                        {{ task.title | slice: 0:100 }}
+                <div class="px-5">
+                    <hr>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <a class="btn btn-sm btn-secondary" [routerLink]="['/task-list']">{{ 'Dashboard.seeAll' | translate }}</a>
+                <div class="containter  pe-5">
+                <div class="row text-center my-2">
+                    <div class="col col-1"></div>
+                    <div class="col">
+                        <h4>{{ 'Dashboard.pastTasks' | translate }}</h4>
+                    </div>
+                    <div class="col">
+                        <h4>{{ 'Dashboard.todayTasks' | translate }}</h4>
+                    </div>
+                    <div class="col">
+                        <h4>{{ 'Dashboard.futureTasks' | translate }}</h4>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col col-1 eisenhower-priority">
+                        <h4>{{ 'Priority.High' | translate }}</h4>
+                    </div>
+                    <div class="col eisenhower bg-danger">
+                        <!-- pilne zaległe -->
+                        <div *ngIf="highPastTasks.length == 0"><i class="bi bi-check2-square"></i></div>
+                        <div *ngFor="let task of highPastTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-danger-light">
+                        <!-- pilne dzisiaj -->
+                        <div *ngFor="let task of highTodayTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-warning-light">
+                        <!-- pilne przyszłe -->
+                        <div *ngFor="let task of highFutureTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-1 eisenhower-priority">
+                        <h4>{{ 'Priority.Medium' | translate }}</h4>
+                    </div>
+                    <div class="col eisenhower bg-danger-light">
+                        <!-- średnie zaległe -->
+                        <div *ngFor="let task of mediumPastTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-warning-light">
+                        <!-- średnie dzisiaj -->
+                        <div *ngFor="let task of mediumTodayTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-success-light">
+                        <!-- średnie przyszłe -->
+                        <div *ngFor="let task of mediumFutureTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-1 eisenhower-priority">
+                        <h4>{{ 'Priority.Low' | translate }}</h4>
+                    </div>
+                    <div class="col eisenhower bg-warning-light">
+                        <!-- niski zaległe -->
+                        <div *ngFor="let task of lowPastTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-success-light">
+                        <!-- niski dzisiaj -->
+                        <div *ngFor="let task of lowTodayTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-success-dark">
+                        <!-- niski przyszłe -->
+                        <div *ngFor="let task of lowFutureTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-1 eisenhower-priority">
+                        <h4>{{ 'Priority.No' | translate }}</h4>
+                    </div>
+                    <div class="col eisenhower bg-primary">
+                        <!-- brak zaległe -->
+                        <div *ngFor="let task of noPastTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-secondary">
+                        <!-- brak dzisiaj -->
+                        <div *ngFor="let task of noTodayTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                    <div class="col eisenhower bg-light">
+                        <!-- brak przyszłe -->
+                        <div *ngFor="let task of noFutureTasks | slice:0:5">
+                            {{ task.title | slice: 0:100 }}
+                            ({{ task.deadline | dateCustom: 'dayMonth' }})
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+
             </div>
         </div>
         <div class="col-12 col-lg-4">
             <div class="shadow-primary br-5 p-3 my-2 m-lg-0">
                 <h4>{{ "Dashboard.latestNotes" | translate }} ({{ notes.length }})</h4>
                 <div *ngFor="let note of notes | slice:0:10">
-                        {{ note.date | date: 'yyyy-MM-dd'}}
-                        {{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}
-                        {{ note.title | slice: 0:100 }}
+                    {{ note.date | dateCustom: 'fullShort' }}
+                    {{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}
+                    {{ note.title | slice: 0:100 }}
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-sm btn-secondary" [routerLink]="['/note']">{{ 'Dashboard.seeAll' | translate }}</a>
+                    <a class="btn btn-sm btn-secondary" [routerLink]="['/note']">{{ 'Dashboard.seeAll' | translate
+                        }}</a>
                 </div>
-            </div>           
+            </div>
         </div>
         <div class="col-12 col-lg-4">
             <div class="shadow-primary br-5 p-3 my-2 m-lg-0">
                 <h4>{{ "Dashboard.messages" | translate }} ({{ messages.length }})</h4>
                 <span style="color: red">TODO</span>
                 <!-- <div *ngFor="let message of messages | slice:0:10">
-                        {{ note.date | date: 'yyyy-MM-dd'}}
+                        {{ note.date | dateCustom: 'fullShort'}}
                         {{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}
                         {{ note.title | slice: 0:100 }}
                 </div>
@@ -56,7 +178,7 @@
                     <a class="btn btn-sm btn-secondary" [routerLink]="['/note']">{{ 'Dashboard.seeAll' | translate }}</a>
                 </div> -->
             </div>
-        </div>  
+        </div>
     </div>
 </div>
 
@@ -65,5 +187,5 @@
         <div class="spinner-border" role="status">
             <span class="sr-only"></span>
         </div>
-    </div>  
+    </div>
 </ng-template>

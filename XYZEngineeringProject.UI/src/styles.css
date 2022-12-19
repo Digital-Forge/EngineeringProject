@@ -4,13 +4,17 @@
     --primary-rgb: 62, 100, 163;
     --secondary: #a4d2ff;
     --dark-gray: #444447;
-    --gray: #757577;
+    --gray: #c0c0c0;
     --light-gray: #E6E6E6;
     --success-primary: #33A68F;
+    --success-primary-dark: #94c707b8;
+    --success-primary-light: #b0bd0399;
     --success-secondary: #f7ffea;
     --warning-primary: #eeaa17;
+    --warning-primary-light: #ffae00a8;
     --warning-secondary: #fff5c7;
-    --danger-primary: #BD3C43;
+    --danger-primary: #cb5157;
+    --danger-primary-light: #f47200a0;
     --danger-secondary: #ffeaeb;
     --primary-box-shadow: 0px 0px 10px 1px rgba(var(--primary-rgb), 0.2);
     --primary-box-shadow-inset: inset 0px 0px 10px 1px rgba(var(--primary-rgb), 0.2);
@@ -21,9 +25,9 @@
 }
 
 body {
-        font-weight: 400 !important;
-        letter-spacing: 0rem;
-        font-size: 14px;
+    font-weight: 400 !important;
+    letter-spacing: 0rem;
+    font-size: 14px;
 }
 
 a {
@@ -92,12 +96,36 @@ thead {
     background-color: var(--success-primary) !important;
 }
 
+.bg-success-dark {
+    background-color: var(--success-primary-dark) !important;
+}
+
+.bg-success-light {
+    background-color: var(--success-primary-light) !important;
+}
+
 .bg-warning {
     background-color: var(--warning-primary) !important;
 }
 
+.bg-warning-light {
+    background-color: var(--warning-primary-light) !important;
+}
+
 .bg-danger {
     background-color: var(--danger-primary) !important;
+}
+
+.bg-danger-light {
+    background-color: var(--danger-primary-light) !important;
+}
+
+.bg-danger {
+    background-color: var(--danger-primary) !important;
+}
+
+.bg-darkgray {
+    background-color: var(--dark-gray) !important;
 }
 
 .bg-primary {
@@ -120,12 +148,21 @@ thead {
     color: var(--warning-primary) !important;
 }
 
+
 .text-danger {
     color: var(--danger-primary) !important;
 }
 
+.text-light-gray {
+    color: var(--light-gray) !important;
+}
+
 .text-gray {
     color: var(--gray) !important;
+}
+
+.italic {
+    font-style: italic;
 }
 
 .br-5 {
@@ -236,6 +273,18 @@ thead {
     border: 0;
     border-radius: 5px;
     box-shadow: var(--primary-box-shadow);
+}
+
+.eisenhower{
+    height: 10rem;
+    border-radius: 5px;
+    margin: 0.25rem;
+    padding: 0.5rem 1rem;
+}
+
+.eisenhower-priority h4{
+    transform: translate(1rem, 4rem) rotate(-90deg);
+
 }
 
 .note-priority {

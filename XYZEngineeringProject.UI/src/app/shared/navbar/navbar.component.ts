@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   
   }
 
-   logoutClicked() {
+  logoutClicked() {
     this.isLogoutClicked.emit(true);
   }
 }

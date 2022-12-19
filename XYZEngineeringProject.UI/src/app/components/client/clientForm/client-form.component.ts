@@ -43,7 +43,6 @@ export class ClientFormComponent implements OnInit {
             next: (response) => {
               this.clientDetails = response;
               this.editMode = true;
-              console.log(this.clientDetails.contacts);              
             }
           })
         }

@@ -26,19 +26,7 @@ import { TaskListViewComponent } from './components/task-list/view/task-list-vie
 import { TaskFormNewComponent } from './components/task-list/task/form-new/task-form-new.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomePageComponent
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+
   {
     path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
     children: [
@@ -110,6 +98,19 @@ const routes: Routes = [
     children: [
       {path:'', component:DocumentComponent},
     ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '',
+    component: HomePageComponent
   }
 ];
 

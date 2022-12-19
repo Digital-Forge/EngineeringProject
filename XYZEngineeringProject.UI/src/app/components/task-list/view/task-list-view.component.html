@@ -6,8 +6,8 @@
     <label>Title: {{task.title}}</label><br>
     <label>Desciprion: {{task.description}}</label><br>
     <label>Priority: {{taskPriorities[task.priority]}}</label><br>
-    <label>Deadline: {{task.deadline | date:'yyyy-MM-dd' }}</label><br>
-    <label>CreateDate:  {{task.createDate | date:'yyyy-MM-dd'}}</label><br><br>
+    <label>Deadline: {{task.deadline | dateCustom:'fullShort' }}</label><br>
+    <label>CreateDate:  {{task.createDate | dateCustom:'fullShort'}}</label><br><br>
 </div> -->
 
 
@@ -33,7 +33,7 @@
                     <div class="card-body">
                        complete: {{task.isComplete}}
                         <div class="card-subtitle text-center mb-2">
-                            {{task.deadline | date:'dd-MM-yyyy'}}
+                            {{task.deadline | dateCustom:'fullShort'}}
                         </div>
                         {{taskPriorities[task.priority]}}
                         <div class="note-priority" [ngClass]="{
@@ -61,7 +61,7 @@
 
                     <div class="card text-secondary p-1 mb-3">
                         <div class="card-body">
-                            <div class="card-subtitle text-center">{{task.deadline | date:'dd-MM-yyyy'}}</div>
+                            <div class="card-subtitle text-center">{{task.deadline | dateCustom:'fullShort'}}</div>
                             <div class="note-corner bg-secondary"></div>
 
                             <h3 class="card-title text-center text-decoration-line-through">{{task.title}}</h3>

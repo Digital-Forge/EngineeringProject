@@ -18,7 +18,7 @@ export interface Task {
 export interface TaskList {
     id: string,
     name: string,
-    createDate?: Date,
+    createDate: Date,
     project?: string, //krótki, 100 znaków
     //client: Client,
     status: TaskListStatus, //odniesienie do task list status (new, in_progress, complete)

@@ -9,7 +9,7 @@
         <div class="col">
             <!-- TODO kolory statusu *ngClass=""-->
             <h3 >{{ ('NoteStatus.' + (noteStatuses[noteDetails.noteStatus]) | translate) || '-'}}</h3>
-            <h3>{{ (noteDetails.date | date:'dd-MM-yyyy') || '-' }}</h3>
+            <h3>{{ (noteDetails.date | dateCustom:'fullShort') || '-' }}</h3>
         </div>        
     </div>
     <div class="row">

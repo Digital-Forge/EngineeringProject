@@ -20,7 +20,7 @@
                     <div class="card-body">
                        complete: {{task.isComplete}}
                         <div class="card-subtitle text-center mb-2">
-                            {{task.deadline | date:'dd-MM-yyyy'}}
+                            {{task.deadline | dateCustom:'fullShort'}}
                         </div>
 
                         <div class="note-priority" [ngClass]="{
@@ -48,7 +48,7 @@
 
                     <div class="card text-secondary p-1 mb-3">
                         <div class="card-body">
-                            <div class="card-subtitle text-center">{{task.deadline | date:'dd-MM-yyyy'}}</div>
+                            <div class="card-subtitle text-center">{{task.deadline | dateCustom:'fullShort'}}</div>
                             <div class="note-corner bg-secondary"></div>
 
                             <h3 class="card-title text-center text-decoration-line-through">{{task.title}}</h3>

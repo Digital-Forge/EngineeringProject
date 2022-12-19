@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -50,9 +51,18 @@ namespace XYZEngineeringProject.Application.Services
 
         public string GenerateJsonWebToken(LoginVM input)
         {
+            var user = _context.AppUsers.First(x => x.UserName == input.Email);
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new List<Claim>() { new Claim("id", _context.AppUsers.First(x => x.UserName == input.Email).Id.ToString())};
+            var claims = new List<Claim>() { new Claim("id", user.Id.ToString())};
+
+            var roles = _context.UserRoles.Where(x => x.UserId == user.Id).ToList();
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, _context.Roles.First(x => x.Id == role.RoleId).Name));
+            }         
+
             var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Issuer"], claims, null, DateTime.Now.AddMinutes(120), credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

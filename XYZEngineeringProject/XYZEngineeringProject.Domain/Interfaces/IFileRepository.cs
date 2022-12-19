@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.EntityUtils;
 
 namespace XYZEngineeringProject.Domain.Interfaces
 {
@@ -24,6 +25,6 @@ namespace XYZEngineeringProject.Domain.Interfaces
         bool AccessToDirectory(Guid id);
         List<Models.File.Directory>? GetUserDirectories();
 
-        void _CreateDepartmentDirectory(Department department);
+        void _CreateDepartmentDirectory(Department department, LogicCompany? company = null);
     }
 }

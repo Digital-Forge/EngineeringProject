@@ -15,12 +15,14 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         private readonly Context _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly Logger _logger;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public UtilsRepository(Context context, UserManager<AppUser> userManager, Logger logger)
+        public UtilsRepository(Context context, UserManager<AppUser> userManager, Logger logger, IDepartmentRepository departmentRepository)
         {
             _context = context;
             _userManager = userManager;
             _logger = logger;
+            _departmentRepository = departmentRepository;
         }
 
         public Guid? CreateAdmin(AppUser admin)
@@ -48,8 +50,38 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public void InitHelloWorld()
         {
+            AddRole("ADM");
+
             _context.LogicCompanies.Add(new Domain.Models.EntityUtils.LogicCompany { Name = "Nicość" });
             _context.SaveChanges();
+        }
+
+        public void InitHelloWorld2()
+        {
+            _departmentRepository._Add(new Department
+            {
+                Name = "Pustka",
+            },
+            _context.LogicCompanies.FirstOrDefault());
+            _context.SaveChanges();
+        }
+
+        public bool AddRole(string name)
+        {
+            try
+            {
+                _context.Roles.Add(new IdentityRole<Guid>
+                {
+                    Name = name,
+                    NormalizedName = name.ToUpper()
+                });
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

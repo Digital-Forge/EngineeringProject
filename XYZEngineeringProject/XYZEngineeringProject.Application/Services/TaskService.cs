@@ -34,7 +34,7 @@ namespace XYZEngineeringProject.Application.Services
                 Priority = taskRequest.Priority,
                 Title = taskRequest.Title,
                 IsComplete = taskRequest.IsComplete,
-                ListOfTasksId= taskRequest.ListOfTasksId,
+                ListOfTasksId= taskRequest.ListOfTasksId,    
             };
 
             _taskRepository.Add(task);
@@ -55,6 +55,7 @@ namespace XYZEngineeringProject.Application.Services
                 Priority = x.Priority,
                 Title = x.Title,
                 IsComplete = x.IsComplete,
+                CreateDate = x.CreateDate,
             }).ToList();
         }
 
@@ -107,7 +108,8 @@ namespace XYZEngineeringProject.Application.Services
                 Id = x.Id,
                 Name = x.Name,
                 Status = x.Status,
-                Project=x.Project
+                Project=x.Project,
+                CreateDate = x.CreateDate,
             }).ToList();
 
             foreach (ListOfTasksVM list in lists)

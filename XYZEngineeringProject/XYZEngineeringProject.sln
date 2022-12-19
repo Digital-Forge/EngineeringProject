@@ -11,10 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{930AD0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{AD59DAFE-3F5C-4E78-A165-3CF132D713D5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8960250F-04FB-4EAF-91E9-FD30C88DC075}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XYZEngineeringProject.Test", "XYZEngineeringProject.Test\XYZEngineeringProject.Test.csproj", "{CD678186-9871-4474-A924-4EAA92A3BE67}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XYZEngineeringProject.Infrastructure", "XYZEngineeringProject.Infrastructure\XYZEngineeringProject.Infrastructure.csproj", "{76AD2DAF-6540-4E7B-A4A4-349AEE42A4BA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XYZEngineeringProject.Domain", "XYZEngineeringProject.Domain\XYZEngineeringProject.Domain.csproj", "{23D64AF8-7728-416A-B143-3E62A930517F}"
@@ -34,10 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CD678186-9871-4474-A924-4EAA92A3BE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD678186-9871-4474-A924-4EAA92A3BE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD678186-9871-4474-A924-4EAA92A3BE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD678186-9871-4474-A924-4EAA92A3BE67}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76AD2DAF-6540-4E7B-A4A4-349AEE42A4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76AD2DAF-6540-4E7B-A4A4-349AEE42A4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76AD2DAF-6540-4E7B-A4A4-349AEE42A4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,7 +51,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CD678186-9871-4474-A924-4EAA92A3BE67} = {8960250F-04FB-4EAF-91E9-FD30C88DC075}
 		{76AD2DAF-6540-4E7B-A4A4-349AEE42A4BA} = {AD59DAFE-3F5C-4E78-A165-3CF132D713D5}
 		{23D64AF8-7728-416A-B143-3E62A930517F} = {930AD04D-497A-4702-BDBB-35352AFE38BB}
 		{3B3C245A-BA7F-4B27-9EDA-1DF1BC9C32EB} = {66F77174-3F2A-457B-B931-2B434ADA7F3C}

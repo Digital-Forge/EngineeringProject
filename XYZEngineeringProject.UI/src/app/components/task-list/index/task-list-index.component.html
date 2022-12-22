@@ -2,69 +2,81 @@
     <div class="row mb-5">
         <h1 class="col-lg-7 ">{{ 'Task.taskLists' | translate }}</h1>
         <div class="col-lg-5 d-flex justify-content-end">
-            <a class="btn btn-md btn-primary me-2" [routerLink]="['/task-list', 'add']">
+            <button class="btn btn-md btn-primary me-2" [routerLink]="['/task-list', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTaskList' | translate }}
-            </a>
-            <a class="btn btn-md btn-primary" [routerLink]="['/task', 'add']">
+            </button>
+            <button class="btn btn-md btn-primary" [routerLink]="['/task', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTask' | translate }}
-            </a>
+            </button>
         </div>
     </div>
     <div class="card-columns">
         <div *ngFor="let taskList of taskLists; let i = index">
             <div class="card card-corner p-1 mb-4 mx-1">
                 <div class="card-body">
-
                     <div class="row mb-2">
-                        <div class="col-9">
-                            <p class="card-subtitle text-gray mb-2" [ngClass]="{
-                                'text-success': taskListStatuses[taskList.status] == 'New',
-                                'text-warning': taskListStatuses[taskList.status] == 'InProgress',
-                                'text-gray': taskListStatuses[taskList.status] == 'Done'}">
-                              {{('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
-                            </p>
-                            <h3 class="card-title  mb-2">{{taskList.name}}</h3>
-                            <p class="card-subtitle text-gray mb-2">
-                                {{ 'Task.created' | translate }} {{ taskList.createDate | dateCustom: 'fullShort' }}
-                            </p>
-                            <p class="card-subtitle text-gray mb-2" *ngIf="taskList.project">
-                                {{ 'Task.project' | translate}} {{taskList.project}}
-                            </p>
-                        </div>
-                        <div class="col-3">
-                            <div class="d-flex justify-content-end mb-3">
-                                <a class="btn btn-sm btn-light me-2" [routerLink]="['/task-list', taskList.id]">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a class="btn btn-sm btn-light me-2" [routerLink]="['/task-list', 'edit', taskList.id]">
-                                    <i class="bi bi-pencil-square "></i>
-                                </a>
-                                <a class="btn btn-sm btn-success-light" (click)="completeAllTasksOnList(taskList.id)">
-                                    <i class="bi bi-check2-square"></i>
-                                </a>
+                        <div class="col-12 col-lg-10">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-subtitle text-gray mb-2" [ngClass]="{
+                                        'text-success': taskListStatuses[taskList.status] == 'New',
+                                        'text-warning': taskListStatuses[taskList.status] == 'InProgress',
+                                        'text-gray': taskListStatuses[taskList.status] == 'Done'}">
+                                        {{('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
+                                    </p>
+                                    <h3 class="card-title  mb-2">{{taskList.name}}</h3>
+                                    <p class="card-subtitle text-gray mb-2">
+                                        {{ 'Task.created' | translate }} {{ taskList.createDate | dateCustom:
+                                        'fullShort' }}
+                                    </p>
+                                    <p class="card-subtitle text-gray mb-2" *ngIf="taskList.project">
+                                        {{ 'Task.project' | translate}} {{taskList.project}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- TODO wyciągnąć isComplete z backendu -->
+                                    <div *ngIf="taskList.tasks?.length; else noTasks">
+                                        <div *ngFor="let task of taskList.tasks">
+                                            <span *ngIf="task.isComplete; else checked">
+                                                <i class="bi bi-check-square" (click)="uncompleteTask(task.id)"></i>
+                                                <span class="ms-2 text-decoration-line-through">{{ task.title }}</span>
+                                            </span>
+                                            <ng-template #checked>
+                                                <span><i class="bi bi-square"
+                                                        (click)="completeTask(task.id)"></i></span>
+                                                <span class="ms-2">{{ task.title }}</span>
+                                            </ng-template>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <ng-template #noTasks>
+                                        <div class="row">
+                                            <span class="text-center text-gray">{{ 'Task.noTasks' | translate }}</span>
+                                        </div>
+                                    </ng-template>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- TODO wyciągnąć isComplete z backendu -->
-                    <div *ngIf="taskList.tasks?.length; else noTasks">
-                        <div *ngFor="let task of taskList.tasks">
-                            <span *ngIf="task.isComplete; else checked">
-                                <i class="bi bi-check-square" (click)="uncompleteTask(task.id)"></i>
-                                <span class="ms-2 text-decoration-line-through">{{ task.title }}</span>
-                            </span>
-                            <ng-template #checked>
-                                <span><i class="bi bi-square" (click)="completeTask(task.id)"></i></span>
-                                <span class="ms-2">{{ task.title }}</span>
-                            </ng-template>
-                            <br>
+                        <div class="col-12 col-lg-2 pe-0 pt-3 pt-lg-0 text-center">
+                            <button title="{{ 'Button.completeTaskList' | translate }}"
+                                class=" btn btn-sm btn-success-light mb-2 me-2 me-lg-0"
+                                (click)="completeAllTasksOnList(taskList.id)">
+                                <i class="bi bi-check2-square"></i>
+                            </button>
+                            <button title="{{ 'Button.showTaskList' | translate }}"
+                                class="btn btn-sm btn-light mb-2  me-2 me-lg-0"
+                                [routerLink]="['/task-list', taskList.id]">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button title="{{ 'Button.editTaskList' | translate }}"
+                                class=" btn btn-sm btn-light mb-2 me-2 me-lg-0"
+                                [routerLink]="['/task-list', 'edit', taskList.id]">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
                         </div>
                     </div>
-                    <ng-template #noTasks>
-                        <div class="row">
-                            <span class="text-center text-gray">{{ 'Task.noTasks' | translate }}</span>
-                        </div>
-                    </ng-template>
                 </div>
             </div>
         </div>

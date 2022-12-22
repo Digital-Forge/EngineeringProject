@@ -2,9 +2,9 @@
     <div class="row mb-5">
         <h1 class="col-lg-9">{{ 'Note.notes' | translate }}</h1>
         <div class="col-lg-3 d-flex justify-content-end">
-            <a class="btn btn-md btn-primary pe-4 py-2" [routerLink]="['/note', 'add']">
+            <button class="btn btn-md btn-primary pe-4 py-2" [routerLink]="['/note', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addNote' | translate }}
-            </a>
+            </button>
         </div>
     </div>
     <table class="table" *ngIf="notes && notes.length >0">
@@ -22,12 +22,12 @@
                 <td>{{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}</td> 
                 <td>{{note.title | slice: 0:300}}<span *ngIf="note.title!.length >= 300">...</span></td>
                 <td class="text-end">
-                    <a class="btn btn-sm btn-secondary me-2" [routerLink]="['/note', 'edit', note.id]">
+                    <button title="{{ 'Button.editNote' | translate }}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/note', 'edit', note.id]">
                         <i class="bi bi-pencil-fill"></i>
-                    </a>
-                    <a class="btn btn-sm btn-secondary me-2" [routerLink]="['/note', note.id]">
+                    </button>
+                    <button title="{{ 'Button.showNote' | translate }}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/note', note.id]">
                         <i class="bi bi-eye-fill"></i>
-                    </a>
+                    </button>
                 </td>
             </tr>
         </tbody>

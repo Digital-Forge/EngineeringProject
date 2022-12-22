@@ -1,3 +1,5 @@
+<div class="col-8 offset-2 form">
+
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()"  autocomplete="off" >
     <label for="userName">User Name</label>
     <input type="text" name="userName" id="userName" formControlName="userName" autocomplete="off"><br>
@@ -19,3 +21,4 @@
     <input type="number" name="phone" id="phone" formControlName="phone"><br>
     <button type="submit">{{buttonText}}</button>
 </form>
+</div>

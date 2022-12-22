@@ -2,6 +2,16 @@
     "Authorization": {
         "noAccess": "Nie masz dostępu do tej strony."
     },
+    "Login": {
+        "login": "Logowanie",
+        "rememberMe": "Zapamiętaj mnie",
+        "signIn": "Zaloguj",
+        "email": "Email",
+        "password": "Hasło"
+    },
+    "Alert": {
+        "deleteContactPerson": "Czy na pewno chcesz usunąć "
+    },
     "Button": {
         "view": "Zobacz",
         "edit": "Edytuj",
@@ -10,9 +20,19 @@
         "done": "Ukończone",
         "restore": "Przywróć",
         "addTaskList": "Dodaj listę zadań",
+        "editTaskList": "Edytuj listę zadań",
         "addTask": "Dodaj zadanie",
+        "editTask": "Edytuj zadanie",
+        "showTask": "Pokaż zadanie",
+        "completeTaks": "Ukończ zadanie",
         "addClient": "Dodaj klienta",
+        "editClient": "Edytuj klienta",
+        "showClient": "Pokaż klienta",
+        "showClientContacts": "Pokaż osoby",
+        "removeClientContact": "Usuń kontakt",
         "addNote": "Dodaj notatkę",
+        "editNote": "Edytuj notatkę",
+        "showNote": "Pokaż notatkę",
         "save": "Zapisz"
     },
     "Menu": {
@@ -78,6 +98,12 @@
         "noTasks": "Na tej liście nie ma jeszcze zadań",
         "status": "Status",
         "taskList": "Przypisz do listy zadań"       
+    },
+    "TaskList": {
+        "name": "Nazwa",
+        "project": "Projekt",
+        "status": "Status",
+        "noTasksYet": "Nie dodano jeszcze zadań"
     },
     "TaskListStatus": {
         "New": "Nowe",

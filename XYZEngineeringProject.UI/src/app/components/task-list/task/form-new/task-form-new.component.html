@@ -1,60 +1,59 @@
 <div class="container-fluid my-5">
-    <div *ngIf="formMode == FormMode.Edit ; else header" class="row mb-5 text-center">
+    <div *ngIf="formMode == FormMode.Edit; else header" class="row mb-5 text-center">
         <h1 class="col-12">{{ 'Task.editTask' | translate }}</h1>
-    </div>
+    </div>   
     <ng-template #header>
         <div class="row mb-5 text-center">
             <h1 class="col-12">{{ 'Task.addTask' | translate }}</h1>
         </div>
     </ng-template>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-md-6 form">
-            <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-                <div class="row mb-3" *ngIf="formMode == FormMode.Add">
-                    <div class="col">
-                        <label for="task-list" class="form-label">{{ 'Task.taskList' | translate }}</label><br>
-                        <select id="task-list" name="task-list" class="form-select" formControlName="listOfTasksId">
-                            <option *ngFor="let taskList of taskLists" aria-placeholder="" [value]="taskList.id">
-                                {{taskList.name}}
-                            </option>
-                        </select>
-                    </div>  
+  
+    <div class="col-8 offset-2 form">
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3" *ngIf="formMode == FormMode.Add">
+                <div class="col">
+                    <label for="task-list" class="form-label">{{ 'Task.taskList' | translate }}</label><br>
+                    <select id="task-list" name="task-list" class="form-control form-select" formControlName="listOfTasksId">
+                        <option *ngFor="let taskList of taskLists" aria-placeholder="" [value]="taskList.id">
+                            {{taskList.name}}
+                        </option>
+                    </select>
+                </div>  
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="title" class="form-label">{{ 'Task.title' | translate }}</label>
+                    <input type="text" class="form-control" id="title" name="title" formControlName="title">
                 </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="title" class="form-label">{{ 'Task.title' | translate }}</label>
-                        <input type="text" class="form-control" id="title" name="title" formControlName="title">
-                    </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="description" class="form-label">{{ 'Task.description' | translate }}</label>
+                    <textarea class="form-control" id="description" name="description" formControlName="description"></textarea>
+                </div>  
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6 col-12">
+                    <label for="priority" class="form-label">{{ 'Task.priority' | translate }}</label><br>
+                    <select class="form-select" id="priority" name="priority" aria-label="priority" formControlName="priority" [selectedIndex]="this.taskDetails.priority">
+                        <option *ngFor="let priority of taskPriorities" [ngValue]="priority">
+                            {{ 'Priority.' + priority | translate }}
+                        </option>
+                    </select>
                 </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="description" class="form-label">{{ 'Task.description' | translate }}</label>
-                        <textarea class="form-control" id="description" name="description" formControlName="description"></textarea>
-                    </div>  
+                <div class="col-lg-6 col-12">
+                        <label for="selectorDate" class="form-label">{{ 'Task.deadline' | translate }}</label>
+                        <input type="date" class="form-control" id="selectorDate" name="selectorDate"
+                            formControlName="deadline">
+                </div>                       
+            </div>
+            
+            <div class="row">
+                <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
+                    <button class="btn btn-md btn-primary" type="submit" [routerLink]="['/task-list']" *ngIf="formMode == FormMode.Edit">{{ 'Button.update' | translate }}</button>
+                    <button class="btn btn-md btn-primary" [routerLink]="['/task-list']" type="submit" *ngIf="formMode == FormMode.Add || formMode == FormMode.AddFromList">{{ 'Button.add' | translate }}</button>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-lg-6 col-12">
-                        <label for="priority" class="form-label">{{ 'Task.priority' | translate }}</label><br>
-                        <select class="form-select" id="priority" name="priority" aria-label="priority" formControlName="priority" [selectedIndex]="this.taskDetails.priority">
-                            <option *ngFor="let priority of taskPriorities" [ngValue]="priority">
-                                {{ 'Priority.' + priority | translate }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                            <label for="selectorDate" class="form-label">{{ 'Task.deadline' | translate }}</label>
-                            <input type="date" class="form-control" id="selectorDate" name="selectorDate"
-                                formControlName="deadline">
-                    </div>                       
-                </div>
-               
-                <div class="d-flex justify-content-end mt-4">                  
-                    <button [routerLink]="['/task-list']" type="submit" class="btn btn-success-light" *ngIf="formMode == FormMode.Edit">{{ 'Button.update' | translate }}</button>
-                    <button [routerLink]="['/task-list']" type="submit" class="btn btn-success-light" *ngIf="formMode == FormMode.Add || formMode == FormMode.AddFromList">{{ 'Button.add' | translate }}</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-3"></div>
+            </div>  
+        </form>
     </div>
 </div>

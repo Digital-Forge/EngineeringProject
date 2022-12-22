@@ -1,33 +1,77 @@
-<form [formGroup]="taskListForm" (ngSubmit)="onSubmit()">
-    <label for="name">name</label>
-    <input id="name" type="text" formControlName="name" required>
-    <label for="project">project</label>
-    <input id="project" type="text" formControlName="project">
-    <label for="status">status</label>
-    <select class="form-select" id="status" formControlName="status" [selectedIndex]="this.taskListDetails.status">
-        <option *ngFor="let status of taskListStatuses">
-            {{status}}
-        </option>
-    </select>
-    <ng-container formArrayName="tasks">
-        <h2>Tasks</h2>
-        <div *ngFor="let task of listTasks.controls; let i=index">
-            <ng-container [formGroupName]="i">
-                <label for="task-{{i}}-deadline">deadline</label>
-                <input id="task-{{i}}-deadline" type="date" formControlName="deadline">
-                <label for="task-{{i}}-priority">priority</label>
-                <select class="form-select" id="task-{{i}}-priority" formControlName="priority" [selectedIndex]="selectRightPriority(task)">
-                    <option *ngFor="let priority of taskPriorities">
-                        {{priority}}
-                    </option>
-                </select>
-                <label for="task-{{i}}-title">title</label>
-                <input id="task-{{i}}-title" type="text" formControlName="title">
-                <label for="task-{{i}}-description">description</label>
-                <input id="task-{{i}}-description" type="text" formControlName="description">
+<div class="container-fluid my-5">
+    <div *ngIf="editMode; else header" class="row mb-5 text-center">
+        <h1 class="mb-3 header">{{ 'TaskList.edit' | translate }}</h1>
+    </div>
+    <ng-template #header>
+        <h1 class="mb-3 header">{{ 'TaskList.add' | translate }}</h1>
+    </ng-template>
+
+    <div class="col-8 offset-2 form">
+        <form [formGroup]="taskListForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="label-form" for="name">{{ 'TaskList.name' | translate }}</label>
+                    <input class="form-control" id="name" type="text" formControlName="name" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-lg-6">
+                    <label class="label-form" for="project">{{ 'TaskList.project' | translate }}</label>
+                    <input class="form-control" id="project" type="text" formControlName="project">
+                </div>
+                <div class="col-12 col-lg-6">
+                    <label class="label-form" for="status">{{ 'TaskList.status' | translate }}</label>
+                    <select class="form-select" id="status" formControlName="status" [selectedIndex]="this.taskListDetails.status">
+                        <option *ngFor="let status of taskListStatuses">
+                            {{ 'TaskListStatus.' + status | translate }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <ng-container formArrayName="tasks">
+                <h3>{{ 'Task.tasks' | translate }}</h3>
+                <div *ngIf="listTasks.length > 0; else noTasks">
+                    <div class="border b-1 br-5 p-3 mb-3" *ngFor="let task of listTasks.controls; let i=index">
+                        <ng-container [formGroupName]="i">
+                            <button (click)="removeListTask(i)">Usuń</button>
+                            <div class="mb-3">
+                                <label class="label-form" for="task-{{i}}-deadline">{{ 'Task.deadline' | translate }}</label>
+                                <input class="form-control" id="task-{{i}}-deadline" type="date" formControlName="deadline">
+                            </div>
+                            <div class="mb-3">
+                                <label class="label-form" for="task-{{i}}-priority">{{ 'Task.priority' | translate }}</label>
+                                <select class="form-select" id="task-{{i}}-priority" formControlName="priority" [selectedIndex]="selectRightPriority(task)">
+                                    <option *ngFor="let priority of taskPriorities">
+                                        {{ 'Priority.' + priority | translate }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="label-form" for="task-{{i}}-title">{{ 'Task.title' | translate }}</label>
+                                <input class="form-control" id="task-{{i}}-title" type="text" formControlName="title">
+                            </div>
+                            <div class="mb-3">
+                                <label class="label-form" for="task-{{i}}-description">{{ 'Task.description' | translate }}</label>
+                                <input class="form-control" id="task-{{i}}-description" type="text" formControlName="description">
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <ng-template #noTasks>
+                    <div>{{ 'TaskList.noTasksYet' | translate }}</div>
+                </ng-template>
+                <div class="row my-3">
+                    <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
+                        <button class="btn btn-md btn-secondary" type="button" (click)="addListTask()">{{ 'Button.addTask' | translate }}</button>
+                    </div>
+                </div>
             </ng-container>
-        </div>
-        <button type="button" (click)="addListTask()">Add another task</button>
-    </ng-container>
-    <button type="submit" [disabled]="!taskListForm.valid">submit</button>
-</form>
+            <div class="row my-3">
+                <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
+                    <button class="btn btn-md btn-primary" type="submit" [disabled]="!taskListForm.valid">{{ 'Button.save' | translate }}</button>
+                </div>
+            </div>  
+        </form>
+    </div>
+   
+</div>

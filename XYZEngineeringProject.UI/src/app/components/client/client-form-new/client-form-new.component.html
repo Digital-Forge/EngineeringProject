@@ -8,11 +8,11 @@
         </div>
     </ng-template>
 
-    <div class="form">
+    <div class="col-8 offset-2 form">
         <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
             <div class="row mb-3">
                 <div class="col">
-                    <label for="name" class="form-label">{{ 'Client.name' | translate }}</label>
+                    <label for="name" class="form-label">{{ 'Client.name' | translate }} *</label>
                     <input id="name" type="text" formControlName="name" class="form-control" required>
                 </div>
             </div>
@@ -40,44 +40,51 @@
             </div>  
             <ng-container formArrayName="clientContacts">
                 <h3 class="mb-3">{{ 'Client.contactPersons' | translate }}</h3>
-                <div *ngIf="clientContacts.length > 0; else noContacts">
-                    <div class="border b-1 br-5 p-3 mb-3" *ngFor="let contact of clientContacts.controls; let i=index">
-                        <ng-container [formGroupName]="i">
-                            <div class="row mb-3">
-                                <div class="col-12 col-lg-6">
-                                    <label for="clientContact-{{i}}-firstName" class="form-label">{{ 'Client.firstname' | translate }}</label>
-                                    <input id="clientContact-{{i}}-firstName" type="text" formControlName="firstName" class="form-control">
+                <div class="border b-1 br-5 p-3 mb-3">
+                    <div *ngIf="clientContacts.length > 0; else noContacts">
+                        <div class="border b-1 br-5 p-3 mb-3" *ngFor="let contact of clientContacts.controls; let i=index">
+                            <ng-container [formGroupName]="i">                          
+                                <div class="row mb-3">
+                                    <div class="col-12 col-lg-6">
+                                        <label for="clientContact-{{i}}-firstName" class="form-label">{{ 'Client.firstname' | translate }} *</label>
+                                        <input id="clientContact-{{i}}-firstName" type="text" formControlName="firstName" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label for="clientContact-{{i}}-surname" class="form-label">{{ 'Client.surname' | translate }}</label>
+                                        <input id="clientContact-{{i}}-surname" type="text" formControlName="surname" class="form-control">
+                                    </div>
                                 </div>
-                                <div class="col-12 col-lg-6">
-                                    <label for="clientContact-{{i}}-surname" class="form-label">{{ 'Client.surname' | translate }}</label>
-                                    <input id="clientContact-{{i}}-surname" type="text" formControlName="surname" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-12 col-lg-6">
-                                    <label for="clientContact-{{i}}-phone" class="form-label">{{ 'Client.phone' | translate }}</label>
-                                    <input id="clientContact-{{i}}-phone" type="text" formControlName="phone" class="form-control">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-lg-6">
+                                        <label for="clientContact-{{i}}-phone" class="form-label">{{ 'Client.phone' | translate }}</label>
+                                        <input id="clientContact-{{i}}-phone" type="text" formControlName="phone" class="form-control">
+                                    </div>  
+                                    <div class="col-12 col-lg-6">
+                                        <label for="clientContact-{{i}}-email" class="form-label">{{ 'Client.email' | translate }}</label>
+                                        <input id="clientContact-{{i}}-email" type="text" formControlName="email" class="form-control">
+                                    </div>
                                 </div>  
-                                <div class="col-12 col-lg-6">
-                                    <label for="clientContact-{{i}}-email" class="form-label">{{ 'Client.email' | translate }}</label>
-                                    <input id="clientContact-{{i}}-email" type="text" formControlName="email" class="form-control">
-                                </div>
-                            </div>  
-                        </ng-container>
+                                <div class="row">
+                                    <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
+                                        <button class="btn btn-small btn-danger-light" (click)="removeClientContact(i)" title="{{ 'Button.removeClientContact' | translate}}"><i class="bi bi-trash3"></i></button>
+                                    </div>
+                                </div>  
+                            </ng-container>
+                        </div>
                     </div>
-                </div>
-                <ng-template #noContacts>
-                    <div>{{ 'Client.noContactsYet' | translate }}</div>
-                </ng-template>
-                <div class="row">
-                    <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end my-3">
-                        <button class="btn btn-md btn-secondary" type="button" (click)="addClientContact()">{{ 'Client.addContact' | translate }}</button>
+                    <ng-template #noContacts>
+                        <div>{{ 'Client.noContactsYet' | translate }}</div>
+                    </ng-template>
+                    <div class="row">
+                        <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end my-3">
+                            <button class="btn btn-md btn-secondary" type="button" (click)="addClientContact()">{{ 'Client.addContact' | translate }}</button>
+                        </div>
                     </div>
                 </div>
             </ng-container>
             <div class="row">
                 <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
-                    <button class="btn btn-md btn-primary" type="submit" [disabled]="!clientForm.valid">{{ 'Button.save' | translate }}</button>
+                    <button class="btn btn-md btn-primary" type="submit" [disabled]="!clientForm.valid || !clientContacts.valid">{{ 'Button.save' | translate }}</button>
                 </div>
             </div>
         </form>

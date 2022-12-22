@@ -61,6 +61,7 @@ export class TaskListFormNewComponent implements OnInit {
       }
     });
   }
+
   updateTaskListForm() {
     this.taskListForm.patchValue({
       name: this.taskListDetails.name,
@@ -107,7 +108,6 @@ export class TaskListFormNewComponent implements OnInit {
       }
     })
     this.taskListDetails.tasks = listTasksTemp;
-    
   }
 
   addListTask() {
@@ -122,6 +122,10 @@ export class TaskListFormNewComponent implements OnInit {
     this.listTasks.push(group);
   }
 
+  removeListTask(index: number) {
+    this.listTasks.removeAt(index);
+  }
+
   onSubmit() {
     this.updateTaskListDetails()
     if (this.editMode) {
@@ -131,6 +135,7 @@ export class TaskListFormNewComponent implements OnInit {
       this.addTaskList();
     }
   }
+
   addTaskList() {
     this.taskService.addListOfTasks(this.taskListDetails).subscribe({
       next: (res) => {
@@ -138,11 +143,13 @@ export class TaskListFormNewComponent implements OnInit {
       }
     })
   }
+
   saveChanges() {
     this.taskService.saveListOfTasks(this.taskListDetails).subscribe({
       next: (res) => {
         if (res == true) {
-          window.location.reload();
+          // window.location.reload();
+          this.router.navigate(['task-list', this.taskListDetails.id]);
         }
       }
     })

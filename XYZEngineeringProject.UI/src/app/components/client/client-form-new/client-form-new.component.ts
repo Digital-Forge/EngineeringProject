@@ -1,3 +1,5 @@
+import { ClientComponent } from './../clientIndex/client-index.component';
+import { TranslateService } from '@ngx-translate/core';
 import { environment } from './../../../../environments/environment';
 import { IClientContact } from './../../../models/client.model';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
@@ -41,6 +43,7 @@ export class ClientFormNewComponent implements OnInit {
     private route: ActivatedRoute,
     private clientService: ClientService,
     private router: Router,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +73,7 @@ export class ClientFormNewComponent implements OnInit {
     })
     const controls = this.clientDetails.contacts?.map(contact => {
       return this.fb.group({
-        firstName: [contact.firstname],
+        firstName: [contact.firstname, Validators.required],
         surname: [contact.surname],
         phone: [contact.phone],
         email: [contact.email],
@@ -88,6 +91,7 @@ export class ClientFormNewComponent implements OnInit {
     this.clientDetails.nip = this.clientForm.controls.nip.value || '';
     this.clientDetails.comments = this.clientForm.controls.comments.value || '';
     this.clientDetails.address = this.clientForm.controls.address.value || '';
+    
     let clientContactsTemp: IClientContact[] = [];
     this.clientForm.controls.clientContacts.controls.forEach(control => clientContactsTemp.push({
       id: control.get('id')?.value || environment.emptyGuid,
@@ -96,7 +100,10 @@ export class ClientFormNewComponent implements OnInit {
       email: control.get('email')?.value,
       phone: control.get('phone')?.value
     }));
+
     this.clientDetails.contacts = clientContactsTemp;
+    console.log(this.clientDetails.contacts);
+
   }
 
   addClientContact() {
@@ -111,6 +118,12 @@ export class ClientFormNewComponent implements OnInit {
     this.clientContacts.push(group);
   }
 
+  removeClientContact(index: number) {
+    if(confirm(this.translateService.instant('Alert.deleteContactPerson') + this.clientContacts.value[index].firstName + " " + this.clientContacts.value[index].surname + "?")) {
+      this.clientContacts.removeAt(index);
+    } 
+  }
+
   onSubmit() {
     this.updateClientDetails();
     if (this.editMode) {
@@ -120,6 +133,7 @@ export class ClientFormNewComponent implements OnInit {
       this.addClient();
     }
   }
+
   addClient() {
     this.clientService.addClient(this.clientDetails).subscribe({
       next: (res) => {
@@ -127,11 +141,13 @@ export class ClientFormNewComponent implements OnInit {
       }
     })
   }
+
   saveChanges() {
+    console.log(this.clientDetails);
     this.clientService.editClient(this.clientDetails).subscribe({
       next: (res) => {
         if (res == true) {
-          window.location.reload();
+          this.router.navigate(['clients']);
         }
       }
     })

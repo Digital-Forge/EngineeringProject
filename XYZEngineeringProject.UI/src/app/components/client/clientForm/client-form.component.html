@@ -1,12 +1,12 @@
-<div>
+<!-- <div>
     <div *ngIf="editMode;else header">
         <h1 class="mb-3 header">Edit Client</h1>
     </div>
     <ng-template #header>
         <h1 class="mb-3 header">Add New Cleint</h1>
     </ng-template>
-    <!-- <div class="row"> -->
-        <!-- <div class="col-3"></div> -->
+     <div class="row"> 
+         <div class="col-3"></div> -->
         <div class="form">
             <form #form="ngForm" [formGroup]="clientForm" (ngSubmit)="submit()">
                 <div class="row">
@@ -59,7 +59,7 @@
             </form>
         </div>
     <!-- </div> -->
-</div>
+<!-- </div> -->
 
 <ng-template #addNewClientContact>
     <h1>Add New Contact Section</h1>
@@ -80,4 +80,4 @@
         <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contactTemp.email">
     </div>
     <button type="button" class="btn btn-primary" (click)="addContact()">Add contact</button>
-</ng-template>
+</ng-template> -->

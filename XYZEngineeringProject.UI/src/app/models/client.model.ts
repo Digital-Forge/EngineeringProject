@@ -7,7 +7,7 @@ export interface Client {
     comments: string,
     nip: string,
     address:string,
-    contacts?: IClientContact[],
+    contacts?: ClientContact[],
     isContactsVisible?: boolean
 }
 

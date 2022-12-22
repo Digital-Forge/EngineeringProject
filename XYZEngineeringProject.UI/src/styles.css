@@ -249,6 +249,28 @@ thead {
     border: 1px solid var(--success-primary);
 }
 
+.btn-danger {
+    background-color: var(--danger-primary);
+    border: 1px solid var(--danger-primary);
+}
+
+.btn-danger:hover, .btn-danger:focus {
+    background-color: white;
+    color: var(--danger-primary);
+    border: 1px solid var(--danger-primary);
+}
+
+.btn-danger-light {
+    color: var(--danger-primary);
+    border: 1px solid var(--danger-primary);
+}
+
+.btn-danger-light:hover, .btn-danger:focus {
+    background-color: var(--danger-primary);
+    color: white;
+    border: 1px solid var(--danger-primary);
+}
+
 .form {
     box-shadow: var(--primary-box-shadow);
     border-radius: 5px;

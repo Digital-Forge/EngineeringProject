@@ -47,7 +47,7 @@ const routes: Routes = [
       // { path: 'add', component: TaskFormComponent},
       { path: 'add', component: TaskFormNewComponent },
       { path: 'add/:listId', component: TaskFormNewComponent },
-      { path: 'edit/:id', component: TaskFormNewComponent },
+      { path: 'edit/:taskId', component: TaskFormNewComponent },
     ],
     canActivate: [AuthGuard]
   },

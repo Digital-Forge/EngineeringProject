@@ -20,6 +20,7 @@ export class TaskFormNewComponent implements OnInit {
   FormMode = FormMode;
   taskLists: TaskList[] = [];
   taskListId: string | null;
+  taskId: string | null;
 
   taskDetails: Task = {
     id: '',
@@ -52,11 +53,11 @@ export class TaskFormNewComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (param) => {
-        this.taskListId = param.get('id');
-        console.log(this.taskListId);
+        this.taskListId = param.get('listId');
+        this.taskId = param.get('taskId');
 
-        if (this.taskListId) {
-          this.taskService.getTask(this.taskListId).subscribe({
+        if (this.taskId && this.isInUrl('/edit')) {
+          this.taskService.getTask(this.taskId).subscribe({
             next: (response) => {
               this.formMode = FormMode.Edit;
               this.taskDetails = response;
@@ -64,11 +65,10 @@ export class TaskFormNewComponent implements OnInit {
             }
           });
         }
-        else if (this.taskListId=='add') {
+        else if (!this.taskListId && this.isInUrl('/add')) {
           this.formMode = FormMode.Add;
         }
-        else if(!this.taskListId)
-        {
+        else if (this.taskListId && this.isInUrl('/add')) {
           this.formMode = FormMode.AddFromList;
         }
       }
@@ -133,4 +133,7 @@ export class TaskFormNewComponent implements OnInit {
   addTaskFromList() {
   }
 
+  isInUrl(text: string) {
+    return (this.router.url.indexOf(text) > -1);
+  }
 }

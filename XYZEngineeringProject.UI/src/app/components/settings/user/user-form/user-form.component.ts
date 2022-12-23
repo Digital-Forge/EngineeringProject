@@ -12,8 +12,6 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-
-  // public currentUser?: User;
   
   userDetails: User = {
     id: '',
@@ -32,12 +30,11 @@ export class UserFormComponent implements OnInit {
 
   userForm = this.fb.group({
     id: [''],
-    userName: [''],
+    userUserName: [''],
     userPassword: [''],
     name: [''],
     surname: ['', Validators.required],
     pesel: [''],
-    // addressId: [''],
     addressHome: [''],
     addressPost: [''],
     phone: [''],
@@ -46,7 +43,7 @@ export class UserFormComponent implements OnInit {
   formMode = FormMode.Add
   FormMode = FormMode;
 
-  currentUserId: string | null;
+  userId?: string | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,12 +56,11 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (param) => {
-        this.currentUserId = param.get('id');
+        this.userId = param.get('id')?.toUpperCase();
 
-        if (this.currentUserId && this.isInUrl('/edit')) {
-          this.authorizationService.currentUser().subscribe({
+        if (this.userId && this.isInUrl('/edit')) {
+          this.userService.getAppUser(this.userId).subscribe({
             next: (res) => {
-              // console.log(res);
 
               this.formMode = FormMode.Edit;
               this.userDetails = res;
@@ -103,7 +99,7 @@ export class UserFormComponent implements OnInit {
   }
 
   updateUserDetails() {
-    this.userDetails.userName = this.userForm.controls.userName.value || '';
+    this.userDetails.userName = this.userForm.controls.userUserName.value || '';
     this.userDetails.passwordHash = this.userForm.controls.userPassword.value || '';
     this.userDetails.name = this.userForm.controls.name.value || '';
     this.userDetails.surname = this.userForm.controls.surname.value || '';
@@ -114,25 +110,18 @@ export class UserFormComponent implements OnInit {
   }
 
   updateUserForm() {
-    console.log(this.userDetails.address.addressHome);
-    console.log(this.userForm.controls.addressHome.value);
 
     this.userForm.patchValue({
       id: this.userDetails.id,
-      userName: this.userDetails.userName,
+      userUserName: this.userDetails.userName,
       userPassword: this.userDetails.passwordHash,
       name: this.userDetails.name,
       surname: this.userDetails.surname,
       pesel: this.userDetails.pesel?.toString(),
-      addressHome: this.userDetails.address.addressHome
+      addressHome: this.userDetails.address?.addressHome
       // addressPost: this.userDetails.address.addressPost,
       // phone: this.userDetails.address.phone
     });
-
-    
-    console.log(this.userDetails.address.addressHome);
-    console.log(this.userForm.controls.addressHome.value);
-    console.log(this.userForm);
   }
 
   isInUrl(text: string) {

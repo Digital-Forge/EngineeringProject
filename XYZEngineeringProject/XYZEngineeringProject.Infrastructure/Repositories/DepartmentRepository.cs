@@ -230,6 +230,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 DepartmentId = departmentId,
                 UserId = userId
             });
+            _context.SaveChanges();
         }
 
         public void RemoveUserFromDepartment(AppUser user, Department department)

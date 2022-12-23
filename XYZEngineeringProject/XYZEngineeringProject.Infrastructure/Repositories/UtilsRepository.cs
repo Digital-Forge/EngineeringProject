@@ -60,7 +60,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         {
             _departmentRepository._Add(new Department
             {
-                Name = "Pustka",
+                Name = "Pustka"
             },
             _context.LogicCompanies.FirstOrDefault());
             _context.SaveChanges();
@@ -72,7 +72,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             {
                 _context.Roles.Add(new IdentityRole<Guid>
                 {
-                    Name = name,
+                    Name = name.ToUpper(),
                     NormalizedName = name.ToUpper()
                 });
                 _context.SaveChanges();

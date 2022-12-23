@@ -1,24 +1,96 @@
-<div class="col-8 offset-2 form">
+<!-- <div class="col-8 offset-2 form">
 
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()"  autocomplete="off" >
-    <label for="userName">User Name</label>
-    <input type="text" name="userName" id="userName" formControlName="userName" autocomplete="off"><br>
-    
-    <label for="password">password</label>
-    <input type="password" name="password" id="password" formControlName="password" autocomplete="off"><br>
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" formControlName="name"><br>
-    <label for="surname">Surname</label>
-    <input type="text" name="surname" id="surname" formControlName="surname"><br>
-    <label for="pesel">pesel</label>
-    <input type="number" name="pesel" id="pesel" formControlName="pesel"><br><br>
-    <label>address</label><br>
-    <label for="addressHome">Home Address</label>
-    <input type="text" name="addressHome" id="addressHome" formControlName="addressHome"><br>
-    <label for="addressPost">Post Address</label>
-    <input type="text" name="addressPost" id="addressPost" formControlName="addressPost"><br>
-    <label for="phone">Phone</label>
-    <input type="number" name="phone" id="phone" formControlName="phone"><br>
-    <button type="submit">{{buttonText}}</button>
-</form>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <label class="form-label" for="userName">User Name</label>
+        <input class="form-control" type="text" name="userName" id="userName" formControlName="userName" autocomplete="off">
+
+        <label class="form-label" for="password">password</label>
+        <input class="form-control" type="password" name="password" id="password" formControlName="password" autocomplete="off">
+
+        <label class="form-label" for="name">Name</label>
+        <input class="form-control" type="text" name="name" id="name" formControlName="name">
+        <label class="form-label" for="surname">Surname</label>
+        <input class="form-control" type="text" name="surname" id="surname" formControlName="surname">
+
+        <label class="form-label" for="pesel">pesel</label>
+        <input class="form-control" type="number" name="pesel" id="pesel" formControlName="pesel">
+        <label class="form-label">address</label>
+        <label class="form-label" for="addressHome">Home Address</label>
+        <input class="form-control" type="text" name="addressHome" id="addressHome" formControlName="addressHome">
+        <label class="form-label" for="addressPost">Post Address</label>
+        <input class="form-control" type="text" name="addressPost" id="addressPost" formControlName="addressPost">
+        <label class="form-label" for="phone">Phone</label>
+        <input class="form-control" type="number" name="phone" id="phone" formControlName="phone">
+        <button type="submit">{{buttonText}}</button>
+    </form>
+</div> -->
+
+
+<div class="container-fluid my-5">
+    <div *ngIf="formMode == FormMode.Edit; else header" class="row mb-5 text-center">
+        <h1 class="mb-3 col-12">{{ 'User.editUser' | translate }}</h1>
+    </div>
+    <ng-template #header>
+        <div class="row text-center">
+            <h1 class="mb-3 col-12">{{ 'User.addUser' | translate }}</h1>
+        </div>
+    </ng-template>
+
+    <div class="col-8 offset-2 form">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col-12 col-lg-6">
+                    <label class="form-label" for="userUserName">{{ 'User.userName' | translate }}</label>
+                    <input class="form-control" type="text" id="userUserName" formControlName="userUserName">
+                </div>
+                <div class="mb-3 col-12 col-lg-6">
+                    <label class="form-label" for="userPassword">{{ 'User.password' | translate }}</label>
+                    <input class="form-control" type="password" id="userPassword" formControlName="userPassword">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-12 col-lg-6">
+                    <label class="form-label" for="name">{{ 'User.name' | translate }}</label>
+                    <input class="form-control" type="text" id="name" formControlName="name">
+                </div>
+                <div class="mb-3 col-12 col-lg-6">
+                    <label class="form-label" for="surname">{{ 'User.surname' | translate }} *</label>
+                    <input class="form-control" type="text" id="surname" formControlName="surname">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-12 col-lg-6">
+                    <label class="form-label" for="phone">{{ 'User.phone' | translate }}</label>
+                    <input class="form-control" type="number" id="phone" formControlName="phone">
+                </div>
+                <div class="mb-3 col-12 col-lg-6">
+                    <label class="form-label" for="pesel">{{ 'User.pesel' | translate }}</label>
+                    <input class="form-control" type="number" id="pesel" formControlName="pesel">
+                </div>
+            </div> 
+
+            <h3 class="form-label">{{ 'User.address' | translate }}</h3>
+            <div class="row">
+                <div class="mb-3 col-12">
+                    <label class="form-label" for="addressHome">{{ 'User.homeAddress' | translate }}</label>
+                    <input class="form-control" type="text" id="addressHome" formControlName="addressHome">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-12">
+                    <label class="form-label" for="addressPost">{{ 'User.postAddress' | translate }}</label>
+                    <input class="form-control" type="text" id="addressPost" formControlName="addressPost">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col text-center text-sm-end">
+                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" *ngIf="formMode == FormMode.Edit">{{
+                        'Button.save' | translate}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" *ngIf="formMode == FormMode.Add">{{
+                        'Button.addUser' | translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

@@ -9,51 +9,55 @@
             </button>
         </div>
     </div>
-    <table class="table text-left" *ngIf="clients && clients.length > 0">
-        <thead>
-            <tr>
-                <th colspan="">{{ 'Client.name' | translate }}</th>
-                <th colspan="">{{ 'Client.description' | translate }}</th>
-                <th>{{ 'Client.comment' | translate }}</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let client of clients">
-            <tr>
-                <td>{{ client.name }}</td>
-                <td>{{ client.description }}</td>
-                <td>{{ client.comments | slice: 0:150 }}<span *ngIf="client.comments!.length >= 150">...</span></td>
-                <td class="text-end">
-                    <button title="{{ 'Button.editClient' | translate}}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/clients', 'edit', client.id]"><i
-                            class="bi bi-pencil-fill"></i></button>
-                    <button title="{{ 'Button.showClient' | translate}}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/clients', client.id]"><i
-                            class="bi bi-eye-fill"></i></button>
-                    <button title="{{ 'Button.showClientContacts' | translate}}" class="btn btn-sm btn-light me-2" [routerLink]="[]" (click)="toggleContacts(client)"><i
-                            class="bi bi-person-lines-fill"></i></button>
-                </td>
-            </tr>
-            <tr *ngIf="(client.contacts!.length > 0) && client.isContactsVisible">
-                <td colspan="4" class="b-0 p-0">
-                    <table class="table table-borderless m-0 px-0 bg-light">
-                        <thead>
-                            <tr>
-                                <th>{{ 'Client.contactPerson' | translate }}</th>
-                                <th>{{ 'Client.phone' | translate }}</th>
-                                <th>{{ 'Client.email' | translate }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="nested" *ngFor="let contact of client.contacts">
-                                <td>{{contact.firstname}} {{contact.surname}}</td>
-                                <td>{{contact.phone}}</td>
-                                <td>{{contact.email}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <span class="table-responsive">
+
+        <table class="table text-nowrap text-left" *ngIf="clients && clients.length > 0">
+            <thead>
+                <tr>
+                    <th colspan="">{{ 'Client.name' | translate }}</th>
+                    <th colspan="">{{ 'Client.description' | translate }}</th>
+                    <th>{{ 'Client.comment' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let client of clients">
+                <tr>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.description }}</td>
+                    <td>{{ client.comments | slice: 0:150 }}<span *ngIf="client.comments!.length >= 150">...</span></td>
+                    <td class="text-end">
+                        <button title="{{ 'Button.editClient' | translate}}" class="btn btn-sm btn-secondary me-2"
+                            [routerLink]="['/clients', 'edit', client.id]"><i class="bi bi-pencil-fill"></i></button>
+                        <button title="{{ 'Button.showClient' | translate}}" class="btn btn-sm btn-secondary me-2"
+                            [routerLink]="['/clients', client.id]"><i class="bi bi-eye-fill"></i></button>
+                        <button title="{{ 'Button.showClientContacts' | translate}}" class="btn btn-sm btn-light me-2"
+                            [routerLink]="[]" (click)="toggleContacts(client)"><i
+                                class="bi bi-person-lines-fill"></i></button>
+                    </td>
+                </tr>
+                <tr *ngIf="(client.contacts!.length > 0) && client.isContactsVisible">
+                    <td colspan="4" class="b-0 p-0">
+                        <table class="table text-nowrap table-borderless m-0 px-0 bg-light">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'Client.contactPerson' | translate }}</th>
+                                    <th>{{ 'Client.phone' | translate }}</th>
+                                    <th>{{ 'Client.email' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="nested" *ngFor="let contact of client.contacts">
+                                    <td>{{contact.firstname}} {{contact.surname}}</td>
+                                    <td>{{contact.phone}}</td>
+                                    <td>{{contact.email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </span>
     <p *ngIf="!clients || clients.length <= 0">No notes found</p>
 </div>
 <router-outlet></router-outlet>

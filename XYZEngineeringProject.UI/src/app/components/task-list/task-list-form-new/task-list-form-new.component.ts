@@ -87,9 +87,12 @@ export class TaskListFormNewComponent implements OnInit {
   }
 
   updateTaskListDetails() {
-    this.taskListDetails.name = this.taskListForm.controls.name.value || '',
-      this.taskListDetails.project = this.taskListForm.controls.project.value || '',
-      this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New);
+    this.taskListDetails.name = this.taskListForm.controls.name.value || '';
+    this.taskListDetails.project = this.taskListForm.controls.project.value || '';
+    console.log(this.taskListForm.controls.status.value);
+    this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New); //TODO
+    // this.taskListDetails.status = TaskListStatus. [this.taskListForm.controls.status.value || TaskListStatus.New]
+
     let listTasksTemp: Task[] = [];
     this.taskListForm.controls.tasks.controls.forEach(control => {
       if (control.get('deadline')?.value && control.get('title')?.value && control.get('description')?.value) {
@@ -154,6 +157,7 @@ export class TaskListFormNewComponent implements OnInit {
       }
     })
   }
+  
   selectRightPriority(control: AbstractControl) {
     //TODO  temporary hack 
     control.get('priority')?.setValue(control.get('priority')?.value||this.taskPriorities[0])    

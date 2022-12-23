@@ -1,1 +1,17 @@
-<button type="button" (click)="goToUsers()">Users</button>
+<div class="container-fluid my-5">
+    <div class="mb-5 text-center">
+        <h1>{{'Settings.settings' | translate }}</h1>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <!--  *ngIf="(currentUserRole == UserRole.Management) || (currentUserRole == UserRole.Moderator)"  -->
+        <div class="tile mb-5 me-5" [routerLink]="['users']">
+            <i class="bi bi-people-fill"></i>
+            <h4>{{ 'User.users' | translate }}</h4>
+        </div>
+        <div class="tile mb-5 me-5" [routerLink]="['/settings/users/edit', currentUserId]">
+            <i class="bi bi-person-circle"></i>
+            <h4>{{ 'User.myData' | translate }}</h4>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

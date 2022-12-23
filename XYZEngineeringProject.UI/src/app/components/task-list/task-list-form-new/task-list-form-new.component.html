@@ -1,16 +1,18 @@
 <div class="container-fluid my-5">
     <div *ngIf="editMode; else header" class="row mb-5 text-center">
-        <h1 class="mb-3 header">{{ 'TaskList.edit' | translate }}</h1>
+        <h1 class="col-12">{{ 'TaskList.edit' | translate }}</h1>
     </div>
     <ng-template #header>
-        <h1 class="mb-3 header">{{ 'TaskList.add' | translate }}</h1>
+        <div class="row mb-5 text-center">
+            <h1 class="col-12">{{ 'TaskList.add' | translate }}</h1>
+        </div>
     </ng-template>
 
     <div class="col-8 offset-2 form">
         <form [formGroup]="taskListForm" (ngSubmit)="onSubmit()">
             <div class="row mb-3">
                 <div class="col">
-                    <label class="label-form" for="name">{{ 'TaskList.name' | translate }}</label>
+                    <label class="label-form" for="name">{{ 'TaskList.name' | translate }} *</label>
                     <input class="form-control" id="name" type="text" formControlName="name" required>
                 </div>
             </div>
@@ -21,8 +23,8 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <label class="label-form" for="status">{{ 'TaskList.status' | translate }}</label>
-                    <select class="form-select" id="status" formControlName="status" [selectedIndex]="this.taskListDetails.status">
-                        <option *ngFor="let status of taskListStatuses">
+                    <select class="form-select" id="status" formControlName="status" [selectedIndex]="this.taskListDetails.status || 1">
+                        <option *ngFor="let status of taskListStatuses" [value]="status">
                             {{ 'TaskListStatus.' + status | translate }}
                         </option>
                     </select>
@@ -33,27 +35,34 @@
                 <div *ngIf="listTasks.length > 0; else noTasks">
                     <div class="border b-1 br-5 p-3 mb-3" *ngFor="let task of listTasks.controls; let i=index">
                         <ng-container [formGroupName]="i">
-                            <button (click)="removeListTask(i)">Usuń</button>
-                            <div class="mb-3">
-                                <label class="label-form" for="task-{{i}}-deadline">{{ 'Task.deadline' | translate }}</label>
-                                <input class="form-control" id="task-{{i}}-deadline" type="date" formControlName="deadline">
+                            <!-- <button (click)="removeListTask(i)">Usuń</button> -->
+                           
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label class="label-form" for="task-{{i}}-title">{{ 'Task.title' | translate }}</label>
+                                    <input class="form-control" id="task-{{i}}-title" type="text" formControlName="title">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="label-form" for="task-{{i}}-priority">{{ 'Task.priority' | translate }}</label>
-                                <select class="form-select" id="task-{{i}}-priority" formControlName="priority" [selectedIndex]="selectRightPriority(task)">
-                                    <option *ngFor="let priority of taskPriorities">
-                                        {{ 'Priority.' + priority | translate }}
-                                    </option>
-                                </select>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label class="label-form" for="task-{{i}}-description">{{ 'Task.description' | translate }}</label>
+                                    <textarea class="form-control" id="task-{{i}}-description" type="text" formControlName="description"></textarea>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="label-form" for="task-{{i}}-title">{{ 'Task.title' | translate }}</label>
-                                <input class="form-control" id="task-{{i}}-title" type="text" formControlName="title">
-                            </div>
-                            <div class="mb-3">
-                                <label class="label-form" for="task-{{i}}-description">{{ 'Task.description' | translate }}</label>
-                                <input class="form-control" id="task-{{i}}-description" type="text" formControlName="description">
-                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6 mb-3">
+                                    <label class="label-form" for="task-{{i}}-deadline">{{ 'Task.deadline' | translate }}</label>
+                                    <input class="form-control" id="task-{{i}}-deadline" type="date" formControlName="deadline">
+                                </div>
+                                <div class="col-12 col-lg-6 mb-3">
+                                    <label class="label-form" for="task-{{i}}-priority">{{ 'Task.priority' | translate }}</label>
+                                    <select class="form-select" id="task-{{i}}-priority" formControlName="priority" [selectedIndex]="selectRightPriority(task)">
+                                        <option *ngFor="let priority of taskPriorities">
+                                            {{ 'Priority.' + priority | translate }}
+                                        </option>
+                                    </select>
+                                </div>
+                                </div>
                         </ng-container>
                     </div>
                 </div>

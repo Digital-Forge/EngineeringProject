@@ -2,11 +2,11 @@
     <h1 class="float-start">
         <a [routerLink]="['/clients']">{{ 'Client.clients' | translate }}</a>
         <i class="bi bi-arrow-right-short mx-1"></i>
-    </h1> 
+    </h1>
     <h1 class="mb-3">{{ clientDetails.name }}</h1>
-    
+
     <hr>
-    
+
     <h3>{{ 'Client.description' | translate }}</h3>
     <p class="mb-3 text-justify">{{ clientDetails.description || '-'}}</p>
 
@@ -15,29 +15,32 @@
 
     <h3>{{ 'Client.address' | translate }}</h3>
     <p class="mb-3">{{ clientDetails.address || '-' }}</p>
- 
+
     <h3>{{ 'Client.nip' | translate }}</h3>
     <p class="mb-3">{{ clientDetails.nip || '-' }}</p>
-    
+
     <hr>
 
     <h2 class="my-3">{{ 'Client.contactPersons' | translate }}</h2>
-    <table class="table table-borderless no-shadow">
-        <thead>
-            <tr>
-                <th>{{ 'Client.firstname' | translate }}</th>
-                <th>{{ 'Client.surname' | translate }}</th>
-                <th>{{ 'Client.phone' | translate }}</th>
-                <th>{{ 'Client.email' | translate }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="nested" *ngFor="let contact of clientDetails.contacts">
-                <td>{{contact.firstname}}</td>
-                <td>{{contact.surname}}</td>
-                <td>{{contact.phone}}</td>
-                <td>{{contact.email}}</td>
-            </tr>
-        </tbody>
-    </table> 
+    <span class="table-responsive">
+
+        <table class="table text-nowrap table-borderless no-shadow">
+            <thead>
+                <tr>
+                    <th>{{ 'Client.firstname' | translate }}</th>
+                    <th>{{ 'Client.surname' | translate }}</th>
+                    <th>{{ 'Client.phone' | translate }}</th>
+                    <th>{{ 'Client.email' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="nested" *ngFor="let contact of clientDetails.contacts">
+                    <td>{{contact.firstname}}</td>
+                    <td>{{contact.surname}}</td>
+                    <td>{{contact.phone}}</td>
+                    <td>{{contact.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </span>
 </div>

@@ -1,13 +1,10 @@
 import { User } from './../../../../models/user.model';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { FormMode } from './../../../../models/form-mode.enum';
-import { Address } from './../../../../models/address.model';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientService } from 'src/app/services/client/client.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-user-form',
@@ -17,20 +14,7 @@ import { first } from 'rxjs';
 export class UserFormComponent implements OnInit {
 
   // public currentUser?: User;
-
-  userForm = this.fb.group({
-    id: [''],
-    userName: [''],
-    password: [''],
-    name: [''],
-    surname: [''],
-    pesel: [''],
-    addressId: [''],
-    addressHome: [''],
-    addressPost: [''],
-    phone: [''],
-  });
-
+  
   userDetails: User = {
     id: '',
     userName: '',
@@ -46,25 +30,54 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  buttonText: string = 'Dodaj użytkownika';
+  userForm = this.fb.group({
+    id: [''],
+    userName: [''],
+    userPassword: [''],
+    name: [''],
+    surname: ['', Validators.required],
+    pesel: [''],
+    // addressId: [''],
+    addressHome: [''],
+    addressPost: [''],
+    phone: [''],
+  });
+
   formMode = FormMode.Add
   FormMode = FormMode;
 
+  currentUserId: string | null;
+
   constructor(
     private route: ActivatedRoute,
-    private clientService: ClientService,
     private router: Router,
     private fb: FormBuilder,
     private userService: UserService,
-    private authService: AuthorizationService,
+    private authorizationService: AuthorizationService,
   ) { }
 
   ngOnInit(): void {
-    if (this.formMode == FormMode.Edit) {
-      this.buttonText = 'Zapisz';
-    }
+    this.route.paramMap.subscribe({
+      next: (param) => {
+        this.currentUserId = param.get('id');
 
-   
+        if (this.currentUserId && this.isInUrl('/edit')) {
+          this.authorizationService.currentUser().subscribe({
+            next: (res) => {
+              // console.log(res);
+
+              this.formMode = FormMode.Edit;
+              this.userDetails = res;
+              this.updateUserForm();
+            }
+          });
+        }
+       
+      },
+      error: (res) => {
+        console.log(res);
+      }
+    });   
   }
 
   onSubmit() {
@@ -84,14 +97,14 @@ export class UserFormComponent implements OnInit {
   addUser() {
     this.userService.addAppUser(this.userDetails).subscribe({
       next: (res) => {
-        this.router.navigate(['users']);
+        this.router.navigate(['settings/users']);
       }
     });
   }
 
   updateUserDetails() {
     this.userDetails.userName = this.userForm.controls.userName.value || '';
-    this.userDetails.passwordHash = this.userForm.controls.password.value || '';
+    this.userDetails.passwordHash = this.userForm.controls.userPassword.value || '';
     this.userDetails.name = this.userForm.controls.name.value || '';
     this.userDetails.surname = this.userForm.controls.surname.value || '';
     this.userDetails.pesel = Number(this.userForm.controls.pesel.value) || 0;
@@ -101,18 +114,29 @@ export class UserFormComponent implements OnInit {
   }
 
   updateUserForm() {
+    console.log(this.userDetails.address.addressHome);
+    console.log(this.userForm.controls.addressHome.value);
+
     this.userForm.patchValue({
       id: this.userDetails.id,
       userName: this.userDetails.userName,
-      password: this.userDetails.passwordHash,
+      userPassword: this.userDetails.passwordHash,
       name: this.userDetails.name,
       surname: this.userDetails.surname,
-      pesel: this.userDetails.pesel.toString(),
-      addressId: this.userDetails.address.id,
-      addressHome: this.userDetails.address.addressHome,
-      addressPost: this.userDetails.address.addressPost,
-      phone: this.userDetails.address.phone.toString()
+      pesel: this.userDetails.pesel?.toString(),
+      addressHome: this.userDetails.address.addressHome
+      // addressPost: this.userDetails.address.addressPost,
+      // phone: this.userDetails.address.phone
     });
+
+    
+    console.log(this.userDetails.address.addressHome);
+    console.log(this.userForm.controls.addressHome.value);
+    console.log(this.userForm);
+  }
+
+  isInUrl(text: string) {
+    return (this.router.url.indexOf(text) > -1);
   }
 
 }

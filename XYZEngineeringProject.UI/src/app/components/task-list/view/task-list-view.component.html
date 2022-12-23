@@ -1,8 +1,8 @@
 <div class="container-fluid my-5">
-    <div class="row mb-5">
+    <div class="row mb-3">
         <div class="col-12 col-lg-6 d-flex justify-content-lg-start justify-content-center">
-            <h1 class="float-start d-none d-lg-flex text-capitalize">
-                <a [routerLink]="['/task-list']">{{ 'Task.tasks' | translate }}</a>
+            <h1 class="float-start mobile">
+                <a [routerLink]="['/task-list']">{{ 'Task.taskLists' | translate }}</a>
                 <i class="bi bi-arrow-right mx-2 mt-2"></i>
             </h1>
             <h1 class="float-start">{{ taskListDetails.name }}</h1>
@@ -16,16 +16,33 @@
             </button>
         </div>
     </div>
+    <div class="row mb-5">
+        <div class="col">
+            <h3>{{ 'TaskList.project' | translate }}: {{ taskListDetails.project || '-' }}</h3>
+        </div>
+    </div>
     <div>
         <div class="card-columns">
             <div *ngFor="let task of taskListDetails.tasks">
-                <div class="card card-corner p-1 mb-3" *ngIf="!task.isComplete; else done">
+                complete: {{task.isComplete}}
+
+                <div class="card card-corner p-1 mb-3" *ngIf="(task.isComplete == false); else done">
                     <div class="card-body">
-                       complete: {{task.isComplete}}
+                        <!-- <div class="card-subtitle d-flex justify-content-around text-center mb-2">
+                            <div>
+                                {{ 'Task.createDate' | translate}} <br>
+                                {{task.createDate | dateCustom:'fullShort'}}
+                            </div>
+                            <div>
+                                {{ 'Task.deadline' | translate }} <br>
+                                {{task.deadline | dateCustom:'fullShort'}}
+                            </div>                      
+                        </div> -->
                         <div class="card-subtitle text-center mb-2">
-                            {{task.deadline | dateCustom:'fullShort'}}
+                            <div class="text-secondary">
+                                {{task.createDate | dateCustom:'short'}} - {{task.deadline | dateCustom:'short'}}
+                            </div>                      
                         </div>
-                        {{taskPriorities[task.priority]}}
                         <div class="note-priority" [ngClass]="{
                             'bg-success': taskPriorities[task.priority] == 'Low',
                             'bg-warning': taskPriorities[task.priority] == 'Medium',
@@ -47,10 +64,14 @@
                     </div>
                 </div>
                 <ng-template #done>
-                    complete: {{task.isComplete}}
 
                     <div class="card text-secondary p-1 mb-3">
                         <div class="card-body">
+                            <div class="card-subtitle text-center mb-2">
+                                <div class="text-secondary">
+                                    {{task.createDate | dateCustom:'short'}} - {{task.deadline | dateCustom:'short'}}
+                                </div>                      
+                            </div>
                             <div class="card-subtitle text-center">{{task.deadline | dateCustom:'fullShort'}}</div>
                             <div class="note-corner bg-secondary"></div>
 
@@ -66,7 +87,7 @@
                 </ng-template>
             </div>
         </div>
-        <p *ngIf="!tasks || tasks.length <= 0">No tasks found</p>
+        <p *ngIf="!tasks || tasks.length <= 0">{{ 'Task.noTasks' | translate }}</p>
     </div>
     <router-outlet></router-outlet>
 </div>

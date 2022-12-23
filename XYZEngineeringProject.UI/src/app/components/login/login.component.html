@@ -1,28 +1,31 @@
 <div class="row h-100">
     <div class=" align-self-center">
-    <div class="col-4 offset-4 form">
-        <div class="row mb-5 text-center">
-            <h1 class="">{{ 'Login.login' | translate }}</h1>
-        </div>
-        <form #form="ngForm" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-                <input type="email" class="form-control" placeholder="{{ 'Login.email' | translate }}" id="email" name="email"
-                    [(ngModel)]="login.email">
+        <div class="col-4 offset-4 form">
+            <div class="mb-3 text-center">
+                <h1>{{ 'Login.login' | translate }}</h1>
             </div>
-            <div class="mb-3 ">
-                <input type="password" class="form-control" placeholder="{{ 'Login.password' | translate }}" id="password" name="password"
-                    [(ngModel)]="login.password">
-            </div>
-            <div class="form-check mb-5">
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="{{ 'Login.email' | translate }}" id="email"
+                        name="email" [(ngModel)]="login.email">
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="{{ 'Login.password' | translate }}"
+                        id="password" name="password" [(ngModel)]="login.password">
+                </div>
+                <!-- <div class="form-check mb-5">
                 <label>
                     <input type="checkbox" class="form-check-input" value="remember-me" [(ngModel)]="login.rememberMe"
                         name="rememberMe">
                     <label class="form-check-label" for="rememberMe">{{ 'Login.rememberMe' | translate }}</label>
                 </label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">{{ 'Login.signIn' | translate }}</button>
-            <p class="mt-3 mb-3 text-muted text-center">&copy; 2017–2022</p>
-        </form>
+            </div> -->
+
+                <div class="text-center">
+                    <button class=" mt-3 btn btn-md btn-primary" type="submit">{{ 'Login.signIn' | translate }}</button>
+                </div>
+                <!-- <p class="mt-3 mb-3 text-muted text-center">&copy; 2017–2022</p> -->
+            </form>
+        </div>
     </div>
 </div>
-</div>  

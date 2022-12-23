@@ -4,6 +4,7 @@ import { Task, TaskList, TaskListResponse } from 'src/app/models/task.model';
 import { Priority } from 'src/app/models/priority.enum';
 import { TaskListStatus } from 'src/app/models/taskListStatus.enum';
 import { ConsoleLogger } from '@angular/compiler-cli';
+import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'task-list-index',
@@ -51,15 +52,49 @@ export class TaskListComponent implements OnInit {
   }
 
   completeAllTasksOnList(id: string) {
-    // TODO dodać potwierdzenie ukończenia wszystkich zadań z listy
-    alert('na to kliknięcie wszystkie zadania z listy będą oznaczane jako ukończone');
+    
+    let taskListDetails: TaskList = {
+      id: '',
+      name: '',
+      project: '',
+      createDate: new Date(),
+      status: TaskListStatus.New,
+      tasks: []
+    }
+    
+    this.taskService.getTaskListById(id).subscribe({
+      next: (res) => {
+        console.log('completing all tasks on list ' + res.name);
+
+        taskListDetails = res;
+        // taskListDetails.tasks = res.tasks;
+        taskListDetails.tasks?.forEach(task => {
+          task.isComplete = true;
+        })
+                
+        console.log(taskListDetails);
+        this.taskService.saveListOfTasks(taskListDetails).subscribe({
+          next: (res) => {
+            if (res == true) {
+              window.location.reload();
+              // this.router.navigate(['task-list', taskListDetails.id]);
+            }
+          }
+        })      
+      }
+    });
   }
 
   completeTask(id: string) {
-    alert('na to kliknięcie zadanie będzie oznaczane jako ukończone');
+    console.log('na to kliknięcie zadanie będzie oznaczane jako ukończone');
+
+
   }
 
   uncompleteTask(id: string) {
-    alert('na to kliknięcie zadanie będzie oznaczane jako nieukończone');
+    console.log('na to kliknięcie zadanie będzie oznaczane jako nieukończone');
   }
+  
+  // deleteTaskList(index: number) {
+  // }
 }

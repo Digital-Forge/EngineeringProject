@@ -16,7 +16,9 @@ export class DateCustom implements PipeTransform {
     else if (type == 'fullShort') {
       datePiped = new Date(date).getDate().toString() + ' ' + this.translateService.instant('Month.' + (new Date(date).getUTCMonth() + 1).toString()) + ' \'' + new Date(date).getFullYear().toString().substring(2);
     }
-
+    else if (type == 'short') {
+      datePiped = new Date(date).getDate().toString().padStart(2, "0") + '.' + (new Date(date).getUTCMonth() + 1).toString().padStart(2, "0")+ '.' + new Date(date).getFullYear().toString();
+    }
     else if (type == 'dayMonth') {
       datePiped = new Date(date).getDate().toString() + ' ' + this.translateService.instant('Month.' + (new Date(date).getUTCMonth() + 1).toString());
     }

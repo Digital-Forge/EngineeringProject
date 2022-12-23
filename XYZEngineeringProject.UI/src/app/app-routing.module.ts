@@ -1,3 +1,4 @@
+import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
 import { DocumentComponent } from './components/document/document.component';
 import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
 import { UserComponent } from './components/settings/user/user.component';
@@ -24,6 +25,7 @@ import { NoteViewComponent } from './components/note/note-view/note-view.compone
 import { TaskListFormNewComponent } from './components/task-list/task-list-form-new/task-list-form-new.component';
 import { TaskListViewComponent } from './components/task-list/view/task-list-view.component';
 import { TaskFormNewComponent } from './components/task-list/task/form-new/task-form-new.component';
+import { UserIndexComponent } from './components/settings/user/user-index/user-index.component';
 
 const routes: Routes = [
 
@@ -87,8 +89,10 @@ const routes: Routes = [
       {
         path: 'users',
         children: [
-          { path: '', component: UserComponent },
-          { path: 'add', component: UserFormComponent }
+          { path: 'add', component: UserFormComponent },
+          { path: 'edit/:id', component: UserFormComponent },
+          { path: ':id', component: UserViewComponent },
+          { path: '', component: UserIndexComponent }
         ]
       }
     ]

@@ -1,7 +1,7 @@
 import { FormMode } from 'src/app/models/form-mode.enum';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Priority } from 'src/app/models/priority.enum';
 import { TaskService } from 'src/app/services/tasks/task.service';
@@ -36,7 +36,7 @@ export class TaskFormNewComponent implements OnInit {
   }
 
   taskForm = this.fb.group({
-    title: [''],
+    title: ['', Validators.required],
     description: [''],
     priority: [''],
     deadline: [''],
@@ -95,7 +95,7 @@ export class TaskFormNewComponent implements OnInit {
       this.taskDetails.description = this.taskForm.controls.description.value || '',
       this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || ''),
       this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority?.value || Priority.No),
-      this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || undefined
+      this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
   }
 
   onSubmit() {
@@ -110,13 +110,18 @@ export class TaskFormNewComponent implements OnInit {
       this.addTaskFromList();
     }
 
-    this.router.navigate(['task-list/' + this.taskListId]);
+    if (this.taskListId) { 
+      this.router.navigate(['task-list/' + this.taskListId]);
+    }
+    else {
+      this.router.navigate(['task-list']);
+    }
   }
 
   addTask() {
     this.taskService.addTask(this.taskDetails).subscribe({
       next: (task) => {
-        this.router.navigate(['task-list']);
+        // this.router.navigate(['task-list']);
       }
     });
   }
@@ -124,7 +129,7 @@ export class TaskFormNewComponent implements OnInit {
   saveChanges() {
     this.taskService.saveChanges(this.taskDetails).subscribe({
       next: (response) => {
-        window.location.reload();
+        // window.location.reload();
       }
     });
   }

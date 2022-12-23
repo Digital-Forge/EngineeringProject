@@ -33,6 +33,10 @@
         "addNote": "Dodaj notatkę",
         "editNote": "Edytuj notatkę",
         "showNote": "Pokaż notatkę",
+        "addUser": "Dodaj użytkownika",
+        "editUser": "Edytuj użytkownika",
+        "showUser": "Pokaż użytkownika",
+        "deleteUser": "Usuń użytkownika",
         "save": "Zapisz"
     },
     "Menu": {
@@ -97,13 +101,15 @@
         "created": "Utworzono",
         "noTasks": "Na tej liście nie ma jeszcze zadań",
         "status": "Status",
-        "taskList": "Przypisz do listy zadań"       
+        "taskList": "Przypisz do listy zadań",
+        "createDate": "Utworzono"       
     },
     "TaskList": {
         "name": "Nazwa",
         "project": "Projekt",
         "status": "Status",
-        "noTasksYet": "Nie dodano jeszcze zadań"
+        "noTasksYet": "Nie dodano jeszcze zadań",
+        "add": "Dodaj listę zadań"
     },
     "TaskListStatus": {
         "New": "Nowe",
@@ -132,6 +138,25 @@
         "Medium": "Średni",
         "High": "Wysoki",
         "Done": "Wykonane"
+    },
+    "Settings": {
+        "settings": "Ustawienia"
+    },
+    "User": {
+        "users": "Użytkownicy",
+        "myData": "Moje dane",
+        "editUser": "Edytuj użytkownika",
+        "addUser": "Dodaj użytkownika",
+        "noUsers": "Nie znaleziono użytkowników",
+        "name": "Imię",
+        "surname": "Nazwisko",
+        "userName": "Nazwa użytkownika",
+        "password": "Hasło",
+        "address": "Adres",
+        "pesel": "PESEL",
+        "phone": "Telefon",
+        "homeAddress": "Adres zamieszkania",
+        "postAddress": "Adres korespondencyjny"
     },
     "Month": {
         "1": "stycznia",

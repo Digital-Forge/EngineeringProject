@@ -1,3 +1,4 @@
+import { AuthorizationService } from './../../services/authorization/authorization.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,15 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
   
+  currentUserRole: any;
+  currentUserId: string;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private authorizationService: AuthorizationService
   ) { }
   
   ngOnInit(): void {
-  }
-  
-  goToUsers() {
-  this.router.navigate(['users'],{relativeTo: this.route});
+    this.authorizationService.currentUser().subscribe({
+      next: (res) => {
+        this.currentUserId = res.id;
+        //TODO przypisać role
+
+      }
+    })
   }
 }

@@ -41,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocumentComponent } from './components/document/document.component';
 import { DateCustom } from './shared/pipes/dateLong.pipe';
 import { DateShort } from './shared/pipes/dateShort.pipe';
+import { UserIndexComponent } from './components/settings/user/user-index/user-index.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { DateShort } from './shared/pipes/dateShort.pipe';
     UserViewComponent,
     DocumentComponent,
     DateCustom,
-    DateShort
+    DateShort,
+    UserIndexComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-import { ClientComponent } from './../clientIndex/client-index.component';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from './../../../../environments/environment';
 import { IClientContact } from './../../../models/client.model';

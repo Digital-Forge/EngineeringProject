@@ -63,7 +63,7 @@
                 </ng-template>
             </div>
         </div>
-        <p *ngIf="!tasks || tasks.length <= 0">No tasks found</p>
+        <p *ngIf="!tasks || tasks.length <= 0">{{ 'Task.noTasks' | translate }}</p>
     </div>
     <router-outlet></router-outlet>
 </div> -->

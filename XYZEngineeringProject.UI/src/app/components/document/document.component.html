@@ -1,6 +1,6 @@
 <div>
     {{selectedDirectory.name}}
-    <div *ngIf="selectedDirectory.id!=fileStructure.id">
+    <div *ngIf="selectedDirectory.id != fileStructure.id">
         <button (click)="goUp()">Go up</button>
     </div>
     <div style="margin-left: 30px;">
@@ -40,7 +40,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="addFile">
+<!-- <div *ngIf="addFile"> -->
     <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" formControlName="name">
@@ -49,4 +49,4 @@
             (change)="onFileChange($event)">
         <button type="submit"> Submit</button>
     </form>
-</div>
+<!-- </div> -->

@@ -124,7 +124,6 @@ export class TaskFormComponent implements OnInit {
     this.taskService.saveChanges(this.taskDetails).subscribe({
       next: (response) => {
         
-
       }
     })
   }

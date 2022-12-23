@@ -14,7 +14,7 @@ import { forkJoin, first, pipe, map } from 'rxjs';
 export class TaskListViewComponent implements OnInit {
   taskListStatuses = Object.values(TaskListStatus).filter(value => typeof value === "string");
   taskPriorities = Object.values(Priority).filter(value => typeof value === "string")
- 
+
   tasks: Task[] = [];
   taskListDetails: TaskList = {
     id: '',
@@ -34,35 +34,34 @@ export class TaskListViewComponent implements OnInit {
   }
 
   getData() {
-
     this.route.paramMap.subscribe({
       next: (param) => {
-          const id = param.get('id');
-          if (id) {
-              forkJoin([
-                  this.taskService.getTaskByTaskListId(id),
-                  this.taskService.getTaskListById(id)
-              ]).pipe(map(([
-                  tasks, taskList
-              ]) => {
-                  return {
-                      tasks, taskList
-                  };
-              })).pipe(first()).subscribe({
-                  next: (res: {
-                      tasks: Task[], taskList: TaskList
-                  }) => {
-                      this.tasks = res.tasks;
-                      this.taskListDetails = res.taskList;
-                  },
-                  error: (response) => {
-                      console.log(response);
-                  }
-              });
-          }
+        const id = param.get('id');
+        if (id) {
+          forkJoin([
+            this.taskService.getTaskByTaskListId(id),
+            this.taskService.getTaskListById(id)
+          ]).pipe(map(([
+            tasks, taskList
+          ]) => {
+            return {
+              tasks, taskList
+            };
+          })).pipe(first()).subscribe({
+            next: (res: {
+              tasks: Task[], taskList: TaskList
+            }) => {
+              this.tasks = res.tasks;
+              console.log(this.tasks);
+              this.taskListDetails = res.taskList;
+            },
+            error: (response) => {
+              console.log(response);
+            }
+          });
+        }
       }
-  });
-
+    });
 
     this.route.paramMap.subscribe({
       next: (param) => {
@@ -79,15 +78,15 @@ export class TaskListViewComponent implements OnInit {
   }
 
   completeTask(id: string) {
-    //TODO jak będzie pole w bazie - podmienić na zmianę isComplete na true i poprawić html
     let task: Task;
-    console.log('id ');
+
     this.taskService.getTask(id).subscribe({
-      next: (response) => {
-        task = response;
+      next: (res) => {
+        task = res;
         task.isComplete = true;
+        //TODO nie działa zapisywanie i odczyt isComplete
         this.taskService.saveChanges(task).subscribe({
-          next: (response) => {
+          next: (res) => {
             this.getData();
           }
         });

@@ -1,6 +1,6 @@
 <div class="container-fluid my-5">
     <div class="row mb-5">
-        <h1 class="col-lg-7 ">{{ 'Task.taskLists' | translate }}</h1>
+        <h1 class="col-lg-7">{{ 'Task.taskLists' | translate }}</h1>
         <div class="col-lg-5 d-flex justify-content-end">
             <button class="btn btn-md btn-primary me-2" [routerLink]="['/task-list', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTaskList' | translate }}
@@ -22,7 +22,7 @@
                                         'text-success': taskListStatuses[taskList.status] == 'New',
                                         'text-warning': taskListStatuses[taskList.status] == 'InProgress',
                                         'text-gray': taskListStatuses[taskList.status] == 'Done'}">
-                                        {{('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
+                                        {{ ('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
                                     </p>
                                     <h3 class="card-title  mb-2">{{taskList.name}}</h3>
                                     <p class="card-subtitle text-gray mb-2">
@@ -53,7 +53,7 @@
                                     </div>
                                     <ng-template #noTasks>
                                         <div class="row">
-                                            <span class="text-center text-gray">{{ 'Task.noTasks' | translate }}</span>
+                                            <span class="text-gray">{{ 'Task.noTasks' | translate }}</span>
                                         </div>
                                     </ng-template>
                                 </div>
@@ -75,6 +75,11 @@
                                 [routerLink]="['/task-list', 'edit', taskList.id]">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
+                            <!-- <button title="{{ 'Button.deleteTaskList' | translate }}"
+                                class=" btn btn-sm btn-danger-light mb-2 me-2 me-lg-0"
+                                (click)="deleteTaskList(i)">
+                                <i class="bi bi-trash3"></i>
+                            </button> -->
                         </div>
                     </div>
                 </div>

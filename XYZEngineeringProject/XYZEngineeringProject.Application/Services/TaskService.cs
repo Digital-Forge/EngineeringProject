@@ -148,6 +148,7 @@ namespace XYZEngineeringProject.Application.Services
         {
             return _taskRepository.GetListOfTasksByIdAsQuerable(id)
                 .SelectMany(x => x.Task)
+                .Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
                 .Select(e => new TaskVM
                 {
                     Id = e.Id,
@@ -160,6 +161,16 @@ namespace XYZEngineeringProject.Application.Services
                     AssignerUserId = e.AssignFromUserId,
                     ListOfTasksId = e.ListOfTasksId,
                 }).ToList();
+        }
+
+        public bool DeleteTaskById(Guid id)
+        {
+            return _taskRepository.Remove(id);
+        }
+
+        public bool DeleteTaskListById(Guid id)
+        {
+            return _taskRepository.RemoveListOfTasksById(id);
         }
     }
 }

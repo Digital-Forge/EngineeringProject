@@ -35,7 +35,7 @@
                 <div *ngIf="listTasks.length > 0; else noTasks">
                     <div class="border b-1 br-5 p-3 mb-3" *ngFor="let task of listTasks.controls; let i=index">
                         <ng-container [formGroupName]="i">
-                            <!-- <button (click)="removeListTask(i)">Usuń</button> -->
+                            <button (click)="removeListTask(i)">Usuń</button>
                            
                             <div class="row">
                                 <div class="col mb-3">

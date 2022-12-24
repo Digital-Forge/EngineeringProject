@@ -32,17 +32,6 @@ export class TaskListComponent implements OnInit {
       next: (res) => {
         for (let i = 0; i < res.length; i++) {
           this.taskLists[i] = res[i];
-          //Przeniosłem to do backendu
-          // this.taskService.getTaskByTaskListId(res[i].id).subscribe({
-          //   next: (tasksRes) => {
-          //     this.tasks = tasksRes;
-          //     this.taskLists[i].tasks = tasksRes;
-          //     console.log(this.taskLists[i].tasks);
-          //   },
-          //   error: (response) => {
-          //     console.log(response);
-          //   }
-          // });
         }
       },
       error: (response) => {
@@ -95,6 +84,12 @@ export class TaskListComponent implements OnInit {
     console.log('na to kliknięcie zadanie będzie oznaczane jako nieukończone');
   }
   
-  // deleteTaskList(index: number) {
-  // }
+  deleteTaskList(index: number) {
+    if(this.taskLists[index])
+    this.taskService.deleteTaskListById(this.taskLists[index]).subscribe({
+      next: (res) => {
+        window.location.reload();
+      }
+    })
+  }
 }

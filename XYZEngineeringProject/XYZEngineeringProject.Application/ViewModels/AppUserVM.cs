@@ -18,7 +18,7 @@ namespace XYZEngineeringProject.Application.ViewModels
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public int PESEL { get; set; }
+        public string PESEL { get; set; }
 
         public AddressVM? Address { get; set; }
 

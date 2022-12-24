@@ -126,6 +126,11 @@ export class TaskListFormNewComponent implements OnInit {
   }
 
   removeListTask(index: number) {
+    if (this.editMode==true && this.taskListDetails.tasks)
+    this.taskService.deleteTaskById(this.taskListDetails.tasks[index]).subscribe({
+      next: (res)=> {
+      }      
+    })
     this.listTasks.removeAt(index);
   }
 

@@ -12,5 +12,7 @@ namespace XYZEngineeringProject.Application.Interfaces
         public List<ClientVM> GetAllClients();
         public bool AddClient (ClientVM clientVM);
         public bool EditClient(ClientVM clientVM);
+        bool DeleteClient(ClientVM client);
+        bool DeleteClientContact(ClientContactVM contact);
     }
 }

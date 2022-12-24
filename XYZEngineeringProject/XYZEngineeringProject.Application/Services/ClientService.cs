@@ -87,7 +87,8 @@ namespace XYZEngineeringProject.Application.Services
                 NIP= x.NIP,
                 Address = x.Address,
                 Comments= x.Comments,
-                Contacts = x.ClientContacts.Select(y => new ClientContactVM
+                Contacts = x.ClientContacts.Where(x=>x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete)
+                .Select(y => new ClientContactVM
                 {
                     Firstname = y.Firstname,
                     Id = y.Id,
@@ -96,6 +97,16 @@ namespace XYZEngineeringProject.Application.Services
                     Surname= y.Surname
                 }).ToList()
             }).ToList();
+        }
+
+        public bool DeleteClient(ClientVM client)
+        {
+            return _clientRepository.RemoveClient(client.Id);
+        }
+
+        public bool DeleteClientContact(ClientContactVM contact)
+        {
+            return _clientRepository.RemoveClientContact(contact.Id);
         }
     }
 }

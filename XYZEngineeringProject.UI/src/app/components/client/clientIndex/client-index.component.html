@@ -33,6 +33,7 @@
                         <button title="{{ 'Button.showClientContacts' | translate}}" class="btn btn-sm btn-light me-2"
                             [routerLink]="[]" (click)="toggleContacts(client)"><i
                                 class="bi bi-person-lines-fill"></i></button>
+                        <button title="{{ 'Button.deleteClient' | translate}}" class="btn btn-sm btn-danger-light me-2" (click)="deleteClient(client)"><i class="bi bi-trash3"></i></button>
                     </td>
                 </tr>
                 <tr *ngIf="(client.contacts!.length > 0) && client.isContactsVisible">

@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 })
 export class ClientService {
 
+  baseApiUrl: string = environment.baseApiUrl;
   emptyGuid: string = environment.emptyGuid;
   constructor(
     protected readonly http: HttpClient,
@@ -34,23 +35,15 @@ export class ClientService {
     return this.http.put<Client>(`${environment.baseApiUrl}Client/EditClient`, editClientRequest);
   }
 
-  //STARE NA RAZIE NIE USUWAĆ
-  // getAllGroups(): Observable<Group[]> {
-  //   return this.http.get<Group[]>(`${environment.baseApiUrl}Client/GetAllGroups`);
-  // }
+  deleteClient(client: Client): Observable<any> {
+    return this.http.put<Client>(this.baseApiUrl+'Client/DeleteClient',client);
+  }
 
-  // getGroup(id:string): Observable<Group> {
-  //   return this.http.get<Group>(`${environment.baseApiUrl}Client/EditGroup/${id}`);
-  // }
-
-  // addGroup(addGroupRequest: Group): Observable<Group> {
-  //   addGroupRequest.id = this.emptyGuid
-  //   return this.http.post<Group>(`${environment.baseApiUrl}Client/AddGroup`,addGroupRequest);
-  // }
-
-  // editGroup(editGroupRequest: Group): Observable<any> {
-  //   return this.http.put<Group>(`${environment.baseApiUrl}Client/EditGroup`,editGroupRequest);
-  // }
+  deleteClientContact(client: Client, index: number):Observable<any> {
+    if(client.contacts)
+    return this.http.put(this.baseApiUrl+'Client/DeleteClientContact',client.contacts[index]);
+    return new Observable();
+  }
   
 
 }

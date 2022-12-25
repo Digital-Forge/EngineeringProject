@@ -44,10 +44,10 @@ export class DocumentService {
   }
 
   deleteFile(id: string): Observable<any> {
-    return this.httpClient.get(this.baseUrl+'File/DeleteFile/'+id);
+    return this.httpClient.get(this.baseUrl+'File/DeleteFile/' + id);
   }
 
   deleteDirectory(id:string){
-    return this.httpClient.get(this.baseUrl+'File/DeleteDirectory/'+id);
+    return this.httpClient.get(this.baseUrl+'File/DeleteDirectory/' + id);
   }
 }

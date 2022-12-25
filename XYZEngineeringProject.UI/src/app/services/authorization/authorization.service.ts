@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Login } from './../../models/login.model';
 import { HttpClient } from '@angular/common/http';
@@ -18,14 +19,21 @@ export class AuthorizationService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private translateService: TranslateService
   ) { }
 
   login(login: Login) {
     return this.http.post<Login>(this.baseApiUrl + 'Authorization/Login', login).subscribe({
       next: (res: any) => {
+        document.getElementById('login-spinner')?.classList.remove('d-none');
+
         localStorage.setItem('token', res.token);
         this.router.navigate(['/dashboard']);
+      },
+      error: (res) =>
+      {
+        document.getElementById('login-error')?.classList.remove('d-none');
       }
     });
   }

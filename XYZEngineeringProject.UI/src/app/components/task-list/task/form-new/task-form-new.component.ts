@@ -14,8 +14,10 @@ import { Task, TaskList } from 'src/app/models/task.model'
   styleUrls: ['./task-form-new.component.css']
 })
 export class TaskFormNewComponent implements OnInit {
+
   taskPriorities = Object.values(Priority).filter(value => typeof value === "string");
   public pipe = new DatePipe('en-GB');
+
   formMode = FormMode.Edit;
   FormMode = FormMode;
   taskLists: TaskList[] = [];
@@ -37,9 +39,9 @@ export class TaskFormNewComponent implements OnInit {
 
   taskForm = this.fb.group({
     title: ['', Validators.required],
-    description: [''],
-    priority: [''],
-    deadline: [''],
+    description: ['', Validators.required],
+    priority: [Priority.No],
+    deadline: [this.pipe.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
     listOfTasksId: ['']
   });
 
@@ -61,7 +63,6 @@ export class TaskFormNewComponent implements OnInit {
             next: (response) => {
               this.formMode = FormMode.Edit;
               this.taskDetails = response;
-              this.updateTaskForm();
             }
           });
         }
@@ -71,6 +72,9 @@ export class TaskFormNewComponent implements OnInit {
         else if (this.taskListId && this.isInUrl('/add')) {
           this.formMode = FormMode.AddFromList;
         }
+
+        this.updateTaskForm();
+
       }
     });
     this.taskService.getAllTaskLists().subscribe({
@@ -81,10 +85,13 @@ export class TaskFormNewComponent implements OnInit {
   }
 
   updateTaskForm() {
+    console.log(this.taskDetails.priority);
+
     this.taskForm.patchValue({
       title: this.taskDetails.title,
       description: this.taskDetails.description,
       deadline: this.pipe.transform(this.taskDetails.deadline, 'yyyy-MM-dd'),
+      priority: this.taskDetails.priority,
       listOfTasksId: this.taskDetails.listOfTasksId
     })
 
@@ -92,10 +99,10 @@ export class TaskFormNewComponent implements OnInit {
 
   updateTaskDetails() {
     this.taskDetails.title = this.taskForm.controls.title.value || '',
-      this.taskDetails.description = this.taskForm.controls.description.value || '',
-      this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || ''),
-      this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority?.value || Priority.No),
-      this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
+    this.taskDetails.description = this.taskForm.controls.description.value || '',
+    this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || ''),
+    this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority?.value || Priority.No),
+    this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
   }
 
   onSubmit() {
@@ -121,7 +128,7 @@ export class TaskFormNewComponent implements OnInit {
   addTask() {
     this.taskService.addTask(this.taskDetails).subscribe({
       next: (task) => {
-        // this.router.navigate(['task-list']);
+        this.router.navigate(['task-list']);
       }
     });
   }
@@ -129,6 +136,8 @@ export class TaskFormNewComponent implements OnInit {
   saveChanges() {
     this.taskService.saveChanges(this.taskDetails).subscribe({
       next: (response) => {
+        this.router.navigate(['task-list']);
+
         // window.location.reload();
       }
     });

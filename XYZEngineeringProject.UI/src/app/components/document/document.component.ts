@@ -37,7 +37,7 @@ export class DocumentComponent implements OnInit {
   constructor(
     private documentService: DocumentService,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   fileStructure: FileStructure = {
     id: '',

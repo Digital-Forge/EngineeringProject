@@ -7,7 +7,8 @@
         "rememberMe": "Zapamiętaj mnie",
         "signIn": "Zaloguj",
         "email": "Email",
-        "password": "Hasło"
+        "password": "Hasło",
+        "wrongLoginOrPassword": "Nieprawidłowy login lub hasło"
     },
     "Alert": {
         "deleteContactPerson": "Czy na pewno chcesz usunąć "

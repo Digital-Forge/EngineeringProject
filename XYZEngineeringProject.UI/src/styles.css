@@ -464,6 +464,10 @@ td {
 
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 /* breakpoint xlg */
 @media only screen and (max-width: 1200px) {
     .card-columns{ 

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Infrastructure.Utils;
 using XYZEngineeringProject.Web.Models;
 
 namespace XYZEngineeringProject.Web.Controllers
@@ -9,10 +11,14 @@ namespace XYZEngineeringProject.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IDepartmentRepository _departmentRepository;
+        private readonly Infrastructure.Utils.InfrastructureUtils _utilsRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IDepartmentRepository departmentRepository, Context context, IHttpContextAccessor contextAccessor)
         {
             _logger = logger;
+            _departmentRepository = departmentRepository;
+            _utilsRepository = new Infrastructure.Utils.InfrastructureUtils(context, contextAccessor);
         }
 
         [AllowAnonymous]
@@ -40,9 +46,19 @@ namespace XYZEngineeringProject.Web.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "ADM")]
+        [Authorize]
         public IActionResult RoleCheck()
         {
+            var department = _departmentRepository.Add(new Domain.Models.Department
+            {
+                Name = "department"         
+            });
+
+            var user = _utilsRepository.GetUserIdFormHttpContext();
+
+
+            _departmentRepository.AddUserToDepartment(user.Value, department);
+
             return Ok();
         }
     }

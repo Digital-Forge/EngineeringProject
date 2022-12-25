@@ -18,5 +18,7 @@ namespace XYZEngineeringProject.Application.Interfaces
         List<ListOfTasksVM> GetAllListOfTasks();
         bool EditListOfTasks(ListOfTasksVM editListOfTasksRequest);
         List<TaskVM> GetTasksByList(Guid id);
+        bool DeleteTaskById(Guid id);
+        bool DeleteTaskListById(Guid id);
     }
 }

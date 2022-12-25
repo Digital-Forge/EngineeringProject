@@ -72,7 +72,7 @@ export class TaskListFormNewComponent implements OnInit {
         this.taskListForm.patchValue({
             name: this.taskListDetails.name,
             project: this.taskListDetails.project
-        })
+        });
         
         const controls = this.taskListDetails.tasks?.map(task => {
             return this.fb.group({
@@ -87,11 +87,27 @@ export class TaskListFormNewComponent implements OnInit {
                 createDate: [task.createDate],
                 isComplete: [task.isComplete]
             })
-        })
+        });
+
         controls?.forEach(control => {
             this.tasks.push(control)
-        })
-    }
+        });      
+
+ }
+
+
+  removeListTask(index: number) {
+
+    // removeListTask(index: number) {
+    //     this.tasks.removeAt(index);
+    // }
+    if (this.editMode==true && this.taskListDetails.tasks)
+    this.taskService.deleteTaskById(this.taskListDetails.tasks[index]).subscribe({
+      next: (res)=> {
+      }      
+    })
+    this.tasks.removeAt(index);
+  }   
 
     updateTaskListDetails() {
         this.taskListDetails.name = this.taskListForm.controls.name.value || '';
@@ -121,6 +137,7 @@ export class TaskListFormNewComponent implements OnInit {
     }
 
     addListTask() {
+
         const group = this.fb.group({
             deadline: [this.pipe.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
             priority: [Priority.No],
@@ -130,11 +147,7 @@ export class TaskListFormNewComponent implements OnInit {
         })
 
         this.tasks.push(group);
-    }
-
-    removeListTask(index: number) {
-        this.tasks.removeAt(index);
-    }
+    } 
 
     onSubmit() {
         this.updateTaskListDetails()
@@ -169,5 +182,4 @@ export class TaskListFormNewComponent implements OnInit {
         //TODO  temporary hack 
         control.get('priority')?.setValue(control.get('priority')?.value || this.taskPriorities[0])
     }
-
 }

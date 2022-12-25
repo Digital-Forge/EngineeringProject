@@ -65,6 +65,18 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok();
         }
+
+        [HttpPut]
+        public IActionResult DeleteClient([FromBody] ClientVM client)
+        {
+            return Ok(_clientService.DeleteClient(client));
+        }
+
+        [HttpPut]
+        public IActionResult DeleteClientContact([FromBody] ClientContactVM contact)
+        {
+            return Ok(_clientService.DeleteClientContact(contact));
+        }
         #endregion
     }
 }

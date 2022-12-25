@@ -78,5 +78,17 @@ namespace XYZEngineeringProject.Web.Controllers
 
             return list != null ? Ok(list) : BadRequest();
         }
+
+        [HttpPut]
+        public IActionResult DeleteTaskById([FromBody] TaskVM task)
+        {
+            return Ok(_taskService.DeleteTaskById(task.Id));
+        }
+
+        [HttpPut]
+        public IActionResult DeleteTaskListById([FromBody] ListOfTasksVM list)
+        {
+            return Ok(_taskService.DeleteTaskListById(list.Id));
+        }
     }
 }

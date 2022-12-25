@@ -144,7 +144,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                     && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete
                     && x.CompanyId == user.CompanyId);
 
-            if (directory == null) return;
+            if (directory == null || directory.DeepLevel < 2) return;
 
             if (directory.Files != null)
             {
@@ -397,7 +397,8 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
                 Name = department.Name,
                 DeepLevel = 1,
                 Path = $"\\{company.Id}\\",
-                PathMask = $"\\{company.Id}\\{department.Name}"
+                PathMask = $"\\{company.Id}\\{department.Name}",
+                CompanyId= company.Id,
             };
 
             _context.Directories.Add(dir);

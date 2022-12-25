@@ -12,8 +12,6 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-
-  // public currentUser?: User;
   
   userDetails: User = {
     id: '',
@@ -63,7 +61,6 @@ export class UserFormComponent implements OnInit {
         if (this.userId && this.isInUrl('/edit')) {
           this.userService.getAppUser(this.userId).subscribe({
             next: (res) => {
-              console.log(res);
               this.formMode = FormMode.Edit;
               this.userDetails = res;
               this.updateUserForm();
@@ -122,7 +119,7 @@ export class UserFormComponent implements OnInit {
       pesel: this.userDetails.pesel,
       addressHome: this.userDetails.address?.addressHome,
       addressPost: this.userDetails.address?.addressPost,
-      // phone: this.userDetails.address.phone.toString()
+      phone: this.userDetails.address.phone.toString()
     });
 
     console.log(this.userForm);

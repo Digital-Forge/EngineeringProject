@@ -53,4 +53,12 @@ export class TaskService {
   saveListOfTasks(editListOfTasksReuqest: TaskList): Observable<any> {
     return this.http.put<TaskList>(this.baseApiUrl + 'Task/EditListOfTasks', editListOfTasksReuqest);
   }
+
+  deleteTaskById(task: Task): Observable<Task> {
+    return this.http.put<Task>(this.baseApiUrl+'Task/DeleteTaskById',task);
+  }
+
+  deleteTaskListById(taskList: TaskList):Observable<TaskList>{
+    return this.http.put<TaskList>(this.baseApiUrl + 'Task/DeleteTaskListById',taskList);
+  }
 }

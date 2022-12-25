@@ -38,7 +38,8 @@
         "editUser": "Edytuj użytkownika",
         "showUser": "Pokaż użytkownika",
         "deleteUser": "Usuń użytkownika",
-        "save": "Zapisz"
+        "save": "Zapisz",
+        "deleteClient": "Usuń klienta"
     },
     "Menu": {
         "dashboard": "Pulpit",

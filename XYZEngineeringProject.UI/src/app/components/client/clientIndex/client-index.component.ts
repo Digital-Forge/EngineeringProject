@@ -28,4 +28,13 @@ export class ClientComponent implements OnInit {
     client.isContactsVisible = !client.isContactsVisible;
   }
 
+  removeClient(client:Client) {
+    console.log(client);
+    this.clientService.deleteClient(client).subscribe({
+      next: (res) => {
+        window.location.reload();
+      }
+    })
+  }
+
 }

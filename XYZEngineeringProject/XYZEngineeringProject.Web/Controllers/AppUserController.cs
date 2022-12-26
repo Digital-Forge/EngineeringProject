@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
+using XYZEngineeringProject.Domain.Interfaces;
 
 namespace XYZEngineeringProject.Web.Controllers
 {
@@ -10,11 +11,13 @@ namespace XYZEngineeringProject.Web.Controllers
     {
         private readonly ILogger<TaskController> _logger;
         private readonly IAppUserService _appUserService;
+        private readonly IUserRepository _userRepository;
 
-        public AppUserController(ILogger<TaskController> logger, IAppUserService appUserService)
+        public AppUserController(ILogger<TaskController> logger, IAppUserService appUserService, IUserRepository userRepository)
         {
             _logger = logger;
             _appUserService = appUserService;
+            _userRepository = userRepository;
         }
 
         public IActionResult Index()
@@ -43,6 +46,12 @@ namespace XYZEngineeringProject.Web.Controllers
         public IActionResult GetUser(string id)
         {
             return Ok(_appUserService.GetAllUsers().ToList().FirstOrDefault(x => x.Id == id));
+        }
+        
+        [HttpGet]
+        public IActionResult GetUserRoles(string id)
+        {
+            return Ok(_userRepository.GetUserRoles(new Guid(id)));
         }
     }
 }

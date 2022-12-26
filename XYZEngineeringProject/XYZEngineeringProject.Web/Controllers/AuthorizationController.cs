@@ -34,5 +34,12 @@ namespace XYZEngineeringProject.Web.Controllers
             _authorizationService.Logout();
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAllRoles()
+        {
+            return Ok(_authorizationService.GetAllRoles());
+        }
     }
 }

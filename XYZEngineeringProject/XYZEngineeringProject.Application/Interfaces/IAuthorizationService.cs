@@ -13,5 +13,7 @@ namespace XYZEngineeringProject.Application.Interfaces
         string GenerateJsonWebToken(LoginVM input);
 
         void Logout();
+
+        List<string> GetAllRoles();
     }
 }

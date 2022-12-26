@@ -262,5 +262,13 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.UserRoles.Remove(buff);
             _context.SaveChanges();
         }
+
+        public List<string> GetUserRoles(Guid? userId)
+        {
+            if (userId == null || userId == Guid.Empty) return new List<string>();
+
+            var roles = _context.UserRoles.Where(x => x.UserId == userId).ToList();
+            return _context.Roles.Where(x => roles.Any(a => a.RoleId == x.Id)).Select(x => x.Name).ToList();
+        }
     }
 }

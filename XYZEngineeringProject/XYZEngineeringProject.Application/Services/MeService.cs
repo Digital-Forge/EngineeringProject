@@ -26,6 +26,7 @@ namespace XYZEngineeringProject.Application.Services
             _userRepository = userRepository;
             _departmentRepository = departmentRepository;
             _infrastructureUtils = new InfrastructureUtils(context, httpContextAccessor);
+            //_context = context;
         }
 
         public LogicCompany? GetMyCompany()
@@ -38,9 +39,7 @@ namespace XYZEngineeringProject.Application.Services
 
         public MyDataVM GetMyData()
         {
-            var me = _userRepository.GetUserByIdAsQuerable(_infrastructureUtils.GetUserIdFormHttpContext().Value);
-
-            return me.Select(x => new MyDataVM
+            var me = _userRepository.GetUserByIdAsQuerable(_infrastructureUtils.GetUserIdFormHttpContext().Value).Select(x => new MyDataVM
             {
                 Id = x.Id,
                 Name = x.Firstname,
@@ -48,6 +47,10 @@ namespace XYZEngineeringProject.Application.Services
                 Email = x.Email,
                 Phone = x.PhoneNumber
             }).FirstOrDefault();
+
+            me.Roles = _userRepository.GetUserRoles(me?.Id);
+
+            return me;
         }
 
         public List<Department> GetMyDepartments()

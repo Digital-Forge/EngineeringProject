@@ -28,5 +28,7 @@ namespace XYZEngineeringProject.Domain.Interfaces
         void RemoveRole(AppUser user, string role);
         void RemoveRole(Guid userId, string role);
         void RemoveRole(Guid userId, Guid roleId);
+
+        List<string> GetUserRoles(Guid? userId);
     }
 }

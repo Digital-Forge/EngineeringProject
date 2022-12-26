@@ -64,7 +64,8 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         {
             _departmentRepository._Add(new Department
             {
-                Name = "FirstDepartment"
+                Name = "FirstDepartment",
+                CompanyId = _context.LogicCompanies.FirstOrDefault().Id
             },
             _context.LogicCompanies.FirstOrDefault());
             _context.SaveChanges();

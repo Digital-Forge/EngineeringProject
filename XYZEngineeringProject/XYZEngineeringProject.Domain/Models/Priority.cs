@@ -12,6 +12,6 @@ namespace XYZEngineeringProject.Domain.Models
         Low, 
         Medium, 
         High, 
-        Done
+        //Done
     }
 }

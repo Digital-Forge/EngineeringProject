@@ -39,16 +39,10 @@
                                     <!-- TODO wyciągnąć isComplete z backendu -->
                                     <div *ngIf="taskList.tasks?.length; else noTasks">
                                         <div *ngFor="let task of taskList.tasks">
-                                            <span *ngIf="task.isComplete; else checked">
-                                                <i class="bi bi-check-square" (click)="uncompleteTask(task.id)"></i>
-                                                <span class="ms-2 text-decoration-line-through">{{ task.title }}</span>
+                                            <i class="bi" [ngClass]="{ 'bi-check-square': task.isComplete, 'bi-square': !task.isComplete}" (click)="uncompleteTask(task.id)"></i>
+                                            <span class="ms-2" [ngClass]="{ 'text-decoration-line-through': task.isComplete}">
+                                                {{ task.title }}  <span class="text-nowrap">({{ task.deadline | dateCustom: 'dayMonth' }})</span>
                                             </span>
-                                            <ng-template #checked>
-                                                <span><i class="bi bi-square"
-                                                        (click)="completeTask(task.id)"></i></span>
-                                                <span class="ms-2">{{ task.title }}</span>
-                                            </ng-template>
-                                            <br>
                                         </div>
                                     </div>
                                     <ng-template #noTasks>

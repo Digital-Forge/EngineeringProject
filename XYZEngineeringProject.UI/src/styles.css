@@ -266,6 +266,7 @@ thead {
     padding: 0.3em 1em 0.3em 1em;
     /* text-transform: uppercase; */
     box-shadow: 0 0 5px 1px var(--light-gray);
+    outline: none;
 }
 
 .btn:focus{
@@ -283,6 +284,18 @@ thead {
     border: 1px solid var(--primary);
 }
 
+.btn-primary-light {
+    background-color: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-primary-light:hover, .btn-primary-light:focus {
+    color: white;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
 .btn-secondary {
     background-color: white;
     color: var(--primary);
@@ -292,6 +305,18 @@ thead {
 .btn-secondary:hover, .btn-secondary:focus {
     background-color: var(--secondary);
     color: white;  
+    border: 1px solid var(--secondary);
+}
+
+.btn-secondary-dark {
+    color: white;
+    background-color: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+
+.btn-secondary-dark:hover, .btn-secondary-dark:focus {
+    color: var(--primary);
+    background-color: white;  
     border: 1px solid var(--secondary);
 }
 
@@ -466,6 +491,10 @@ td {
 
 .hidden {
     visibility: hidden;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 /* breakpoint xlg */

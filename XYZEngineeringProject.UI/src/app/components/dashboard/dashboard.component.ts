@@ -9,6 +9,7 @@ import { Task } from 'src/app/models/task.model';
 import { Note } from 'src/app/models/note.model';
 import { NoteStatus } from 'src/app/models/noteStatus.enum';
 import { Priority } from 'src/app/models/priority.enum';
+
 @Component({
     selector: 'dashboard',
     templateUrl: './dashboard.component.html',
@@ -81,10 +82,10 @@ export class DashboardComponent implements OnInit {
                                 console.log('wysoki przyszłe');
                                 this.highPastTasks.push(task);
                             }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(this.today))) {
+                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
                                 this.highTodayTasks.push(task);
                             }
-                            else if (this.greaterThan(this.getDate(task.deadline), this.getDate(new Date()))) {
+                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
                                 this.highFutureTasks.push(task);
                             }
                         }
@@ -92,10 +93,10 @@ export class DashboardComponent implements OnInit {
                             if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
                                 this.mediumPastTasks.push(task);
                             }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(this.today))) {
+                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
                                 this.mediumTodayTasks.push(task);
                             }
-                            else if (this.greaterThan(this.getDate(task.deadline), this.getDate(new Date()))) {
+                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
                                 this.mediumFutureTasks.push(task);
                             }
                         }
@@ -103,10 +104,10 @@ export class DashboardComponent implements OnInit {
                             if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
                                 this.lowPastTasks.push(task);
                             }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(this.today))) {
+                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
                                 this.lowTodayTasks.push(task);
                             }
-                            else if (this.greaterThan(this.getDate(task.deadline), this.getDate(new Date()))) {
+                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
                                 this.lowFutureTasks.push(task);
                             }
                         }
@@ -114,10 +115,10 @@ export class DashboardComponent implements OnInit {
                             if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
                                 this.noPastTasks.push(task);
                             }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(this.today))) {
+                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
                                 this.noTodayTasks.push(task);
                             }
-                            else if (this.greaterThan(this.getDate(task.deadline), this.getDate(new Date()))) {
+                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
                                 this.noFutureTasks.push(task);
                             }
                         }
@@ -137,6 +138,13 @@ export class DashboardComponent implements OnInit {
 
     public greaterThan(subj: any, num: any) {
         if (subj && num && (subj > num)) {
+            return true;
+        }
+        else return false;
+    }
+    
+    public lessThan(subj: any, num: any) {
+        if (subj && num && (subj < num)) {
             return true;
         }
         else return false;

@@ -97,10 +97,10 @@ export class TaskListViewComponent implements OnInit {
   restoreTask(id: string) {
     //TODO jak będzie pole w bazie - podmienić na zmianę isComplete na false i poprawić html
     let task: Task;
-    console.log('id ');
+
     this.taskService.getTask(id).subscribe({
-      next: (response) => {
-        task = response;
+      next: (res) => {
+        task = res;
         //TODO nie zapisuje isComplete :( 
         task.isComplete = false;
         this.taskService.saveChanges(task).subscribe({

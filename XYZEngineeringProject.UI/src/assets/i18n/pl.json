@@ -11,7 +11,9 @@
         "wrongLoginOrPassword": "Nieprawidłowy login lub hasło"
     },
     "Alert": {
-        "deleteContactPerson": "Czy na pewno chcesz usunąć "
+        "deleteContactPerson": "Czy na pewno chcesz usunąć ",
+        "deleteFile": "Czy na pewno chcesz usunąć plik?",
+        "deleteDirectory": "Czy na pewno chcesz usunąć katalog?"
     },
     "Button": {
         "view": "Zobacz",
@@ -39,7 +41,8 @@
         "showUser": "Pokaż użytkownika",
         "deleteUser": "Usuń użytkownika",
         "save": "Zapisz",
-        "deleteClient": "Usuń klienta"
+        "deleteClient": "Usuń klienta",
+        "previousDirectory": "Poprzedni katalog"
     },
     "Menu": {
         "dashboard": "Pulpit",
@@ -140,6 +143,18 @@
         "Medium": "Średni",
         "High": "Wysoki",
         "Done": "Wykonane"
+    },
+    "Documents": {
+        "name": "Nazwa",
+        "currentFolder": "Bieżący katalog",
+        "noFiles": "Brak elementów do wyświetlenia",
+        "selectFile": "Wybierz plik",
+        "saveAs": "Zapisz jako",
+        "directoryName": "Nazwa nowego katalogu",
+        "goToDirectory": "Otwórz katalog",
+        "changeName": "Zmień nazwę",
+        "deleteDirectory": "Usuń katalog",
+        "deleteFile": "Usuń plik"
     },
     "Settings": {
         "settings": "Ustawienia"

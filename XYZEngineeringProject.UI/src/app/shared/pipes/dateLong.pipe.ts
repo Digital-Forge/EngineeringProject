@@ -11,16 +11,16 @@ export class DateCustom implements PipeTransform {
     let datePiped = '';
 
     if (type == 'fullLong') {
-      datePiped = this.translateService.instant('Weekday.'+ new Date(date).getDay().toString()) + ', ' + date.getUTCDate() + ' ' + this.translateService.instant('Month.' + (new Date(date).getUTCMonth() + 1).toString()) + ' ' + new Date(date).getFullYear().toString();
+      datePiped = this.translateService.instant('Weekday.'+ new Date(date).getDay().toString()) + ', ' + date.getDate() + ' ' + this.translateService.instant('Month.' + (new Date(date).getMonth() + 1).toString()) + ' ' + new Date(date).getFullYear().toString();
     }
     else if (type == 'fullShort') {
-      datePiped = new Date(date).getDate().toString() + ' ' + this.translateService.instant('Month.' + (new Date(date).getUTCMonth() + 1).toString()) + ' \'' + new Date(date).getFullYear().toString().substring(2);
+      datePiped = new Date(date).getDate().toString() + ' ' + this.translateService.instant('Month.' + (new Date(date).getMonth() + 1).toString()) + ' \'' + new Date(date).getFullYear().toString().substring(2);
     }
     else if (type == 'short') {
-      datePiped = new Date(date).getDate().toString().padStart(2, "0") + '.' + (new Date(date).getUTCMonth() + 1).toString().padStart(2, "0")+ '.' + new Date(date).getFullYear().toString();
+      datePiped = new Date(date).getDate().toString().padStart(2, "0") + '.' + (new Date(date).getMonth() + 1).toString().padStart(2, "0")+ '.' + new Date(date).getFullYear().toString();
     }
     else if (type == 'dayMonth') {
-      datePiped = new Date(date).getDate().toString() + ' ' + this.translateService.instant('Month.' + (new Date(date).getUTCMonth() + 1).toString());
+      datePiped = new Date(date).getDate().toString() + ' ' + this.translateService.instant('Month.' + (new Date(date).getMonth() + 1).toString());
     }
 
     return datePiped;

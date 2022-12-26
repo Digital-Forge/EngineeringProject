@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { FormMode } from 'src/app/models/form-mode.enum';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -40,8 +41,8 @@ export class TaskFormNewComponent implements OnInit {
   taskForm = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
-    priority: [Priority.No],
-    deadline: [this.pipe.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
+    priority: [''],
+    deadline: ['', Validators.required],
     listOfTasksId: ['']
   });
 
@@ -50,6 +51,7 @@ export class TaskFormNewComponent implements OnInit {
     private taskService: TaskService,
     private route: ActivatedRoute,
     private router: Router,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -58,23 +60,26 @@ export class TaskFormNewComponent implements OnInit {
         this.taskListId = param.get('listId');
         this.taskId = param.get('taskId');
 
+        console.log(this.taskPriorities);
+
         if (this.taskId && this.isInUrl('/edit')) {
           this.taskService.getTask(this.taskId).subscribe({
-            next: (response) => {
+            next: (res) => {
               this.formMode = FormMode.Edit;
-              this.taskDetails = response;
+              this.taskDetails = res;
+              console.log(res);
+              this.updateTaskForm();
             }
           });
         }
         else if (!this.taskListId && this.isInUrl('/add')) {
           this.formMode = FormMode.Add;
+          this.emptyTaskForm();
         }
         else if (this.taskListId && this.isInUrl('/add')) {
           this.formMode = FormMode.AddFromList;
+          this.emptyTaskForm();
         }
-
-        this.updateTaskForm();
-
       }
     });
     this.taskService.getAllTaskLists().subscribe({
@@ -85,23 +90,34 @@ export class TaskFormNewComponent implements OnInit {
   }
 
   updateTaskForm() {
-    console.log(this.taskDetails.priority);
 
     this.taskForm.patchValue({
       title: this.taskDetails.title,
       description: this.taskDetails.description,
       deadline: this.pipe.transform(this.taskDetails.deadline, 'yyyy-MM-dd'),
-      priority: this.taskDetails.priority,
+      priority: (this.taskDetails.priority < 0) ? this.taskPriorities[0].toString() : this.taskPriorities[this.taskDetails.priority].toString(),
       listOfTasksId: this.taskDetails.listOfTasksId
     })
+  }
 
+  emptyTaskForm() {
+    this.taskForm.patchValue({
+      title: '',
+      description: '',
+      deadline: this.pipe.transform(new Date(), 'yyyy-MM-dd'),
+      priority: this.taskPriorities[0].toString(),
+      listOfTasksId: this.taskListId || ''
+    })
   }
 
   updateTaskDetails() {
+
+    console.log('saving: ' + this.taskForm.controls.priority.value);
+    
     this.taskDetails.title = this.taskForm.controls.title.value || '',
     this.taskDetails.description = this.taskForm.controls.description.value || '',
-    this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || ''),
-    this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority?.value || Priority.No),
+    this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || new Date()),
+    this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority.value || 0),
     this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
   }
 
@@ -142,7 +158,16 @@ export class TaskFormNewComponent implements OnInit {
       }
     });
   }
-
+  
+  completeTask() {
+    this.taskDetails.isComplete = true;
+    //TODO nie działa zapisywanie i odczyt isComplete
+    this.taskService.saveChanges(this.taskDetails).subscribe({
+      next: (res) => {
+        this.router.navigate(['/task-list', this.taskListId]);
+      }
+    });   
+  }
 
   addTaskFromList() {
   }

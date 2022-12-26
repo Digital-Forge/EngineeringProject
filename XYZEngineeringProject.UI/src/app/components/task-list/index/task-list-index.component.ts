@@ -75,13 +75,37 @@ export class TaskListComponent implements OnInit {
   }
 
   completeTask(id: string) {
-    console.log('na to kliknięcie zadanie będzie oznaczane jako ukończone');
+    let task: Task;
 
-
+    this.taskService.getTask(id).subscribe({
+      next: (res) => {
+        task = res;
+        task.isComplete = true;
+        //TODO nie działa zapisywanie i odczyt isComplete
+        this.taskService.saveChanges(task).subscribe({
+          next: (res) => {
+            this.getData();
+          }
+        });
+      }
+    });
   }
 
   uncompleteTask(id: string) {
-    console.log('na to kliknięcie zadanie będzie oznaczane jako nieukończone');
+    let task: Task;
+
+    this.taskService.getTask(id).subscribe({
+      next: (res) => {
+        task = res;
+        task.isComplete = false;
+        //TODO nie działa zapisywanie i odczyt isComplete
+        this.taskService.saveChanges(task).subscribe({
+          next: (res) => {
+            this.getData();
+          }
+        });
+      }
+    });  
   }
   
   deleteTaskList(index: number) {

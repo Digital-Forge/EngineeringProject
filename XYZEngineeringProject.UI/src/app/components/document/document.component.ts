@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { FileModel } from './../../models/file.model';
 import { FileStructure } from './../../models/fileStructure.model';
 import { FormBuilder } from '@angular/forms';
@@ -5,6 +6,7 @@ import { DocumentService } from './../../services/document/document.service';
 import { Observable, ReplaySubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { TypeCheckScopeRegistry } from '@angular/compiler-cli/src/ngtsc/scope';
 
 @Component({
   selector: 'app-document',
@@ -36,7 +38,8 @@ export class DocumentComponent implements OnInit {
   fileInfos: Observable<any> | null = null;
   constructor(
     private documentService: DocumentService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private translateService: TranslateService
   ) {}
 
   fileStructure: FileStructure = {
@@ -65,9 +68,9 @@ export class DocumentComponent implements OnInit {
   }
 
   addFile: boolean = false;
-
   editFile: boolean = false;
 
+  addDirectory: boolean = false;
   editDirectory: boolean = false;
 
   editingFile: number = 0;
@@ -107,7 +110,21 @@ export class DocumentComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  goToDirectory(targetDirectory: FileStructure) {
+    this.parentDirectoryId = this.selectedDirectory.id;
+    this.selectedDirectory = targetDirectory;
+  }
+
+  toggleAddFile(directoryId: string) {
+    this.addDirectory = false;
+
+    if (!this.addFile) {
+      this.fileData.directoryId = directoryId;
+    }
+    this.addFile = !this.addFile;
+  }
+
+  addFileToDirectory() {
     const formData = new FormData();
     formData.append('file', this.documentForm.get('fileSource')?.value || '');
     this.fileData.id = environment.emptyGuid
@@ -118,14 +135,9 @@ export class DocumentComponent implements OnInit {
     })
   }
 
-  goToDirectory(targetDirectory: FileStructure) {
-    this.parentDirectoryId = this.selectedDirectory.id;
-    this.selectedDirectory = targetDirectory;
-  }
-
-  addFileToDirectory(directoryId: string) {
-    this.fileData.directoryId = directoryId;
-    this.addFile = true;
+  toggleAddDirectory() {
+    this.addFile = false;
+    this.addDirectory = !this.addDirectory;
   }
 
   addDirectoryToDirectory() {
@@ -154,7 +166,11 @@ export class DocumentComponent implements OnInit {
 
   editFileName(i: number) {
     this.editingFile = i;
-    this.editFile = true;
+    this.editFile = !this.editFile;
+  }
+
+  cancelEditFileName(i: number) {
+    this.editFile = false;
   }
 
   changeFileName(id: string) {
@@ -171,7 +187,11 @@ export class DocumentComponent implements OnInit {
 
   editDirectoryName(i: number) {
     this.editingDirectory = i;
-    this.editDirectory = true;
+    this.editDirectory = !this.editDirectory;
+  }
+
+  cancelEditDirectoryName(i: number) {
+    this.editDirectory = false;
   }
 
   changeDirectoryName(id: string) {
@@ -187,19 +207,22 @@ export class DocumentComponent implements OnInit {
   }
 
   deleteFile(id: string) {
-    this.documentService.deleteFile(id).subscribe({
-      next: (res) => {
-        window.location.reload();
-      }
-    });
+    if (confirm(this.translateService.instant('Alert.deleteFile'))) {
+      this.documentService.deleteFile(id).subscribe({
+        next: (res) => {
+          window.location.reload();
+        }
+      });
+    }
   }
 
   deleteDirectory(id: string) {
-    this.documentService.deleteDirectory(id).subscribe({
-      next: (res) => {
-        window.location.reload();
-      }
-    })
+    if (confirm(this.translateService.instant('Alert.deleteDirectory'))) {
+      this.documentService.deleteDirectory(id).subscribe({
+        next: (res) => {
+          window.location.reload();
+        }
+      })
+    }
   }
-
 }

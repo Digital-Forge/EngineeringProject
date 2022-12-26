@@ -52,11 +52,9 @@ export class TaskListViewComponent implements OnInit {
               tasks: Task[], taskList: TaskList
             }) => {
               this.tasks = res.tasks;
-              console.log(this.tasks);
               this.taskListDetails = res.taskList;
             },
             error: (response) => {
-              console.log(response);
             }
           });
         }
@@ -97,7 +95,6 @@ export class TaskListViewComponent implements OnInit {
   restoreTask(id: string) {
     //TODO jak będzie pole w bazie - podmienić na zmianę isComplete na false i poprawić html
     let task: Task;
-    console.log('id ');
     this.taskService.getTask(id).subscribe({
       next: (response) => {
         task = response;

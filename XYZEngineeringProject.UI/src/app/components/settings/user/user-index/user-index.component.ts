@@ -21,16 +21,13 @@ export class UserIndexComponent implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         this.users = res;
-        console.log(this.users);
       },
       error: (res) => {
-        console.log(res);
       }
     })
   }
 
   deleteUser(id: string) {
-    console.log(id);
   }
 
 }

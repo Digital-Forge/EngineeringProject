@@ -101,7 +101,6 @@ export class ClientFormNewComponent implements OnInit {
     }));
 
     this.clientDetails.contacts = clientContactsTemp;
-    console.log(this.clientDetails.contacts);
 
   }
 
@@ -150,7 +149,6 @@ export class ClientFormNewComponent implements OnInit {
   }
 
   saveChanges() {
-    console.log(this.clientDetails);
     this.clientService.editClient(this.clientDetails).subscribe({
       next: (res) => {
         if (res == true) {

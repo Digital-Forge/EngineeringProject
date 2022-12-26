@@ -18,10 +18,8 @@ export class NoteIndexComponent implements OnInit {
     this.noteService.getAllNotes().subscribe({
       next: (notes) => {
         this.notes = notes;
-        console.log(this.noteStatuses[3]);
       },
-      error: (res) => {
-        console.log(res);        
+      error: (res) => {      
       }
     })
   }

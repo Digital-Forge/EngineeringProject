@@ -5,19 +5,14 @@ import { UserComponent } from './components/settings/user/user.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
-import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
-import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
 import { ClientComponent } from './components/client/clientIndex/client-index.component';
-import { ClientFormComponent } from './components/client/clientForm/client-form.component';
 import { ClientViewComponent } from './components/client/clientView/client-view.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { TaskComponent } from './components/task-list/task/index/task-index.component';
 import { TaskListComponent } from './components/task-list/index/task-list-index.component';
 import { AuthGuard } from './services/auth.guard';
-import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
 import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
@@ -33,11 +28,8 @@ const routes: Routes = [
     path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
     children: [
       { path: '', component: TaskListComponent },
-      // { path: 'add', component: TaskListFormComponent },
       { path: 'add', component: TaskListFormNewComponent },
       { path: ':id', component: TaskListViewComponent },
-      // { path: ':id', component: TaskComponent },
-      // { path: 'edit/:id', component: TaskListFormComponent },
       { path: 'edit/:id', component: TaskListFormNewComponent },
     ],
     canActivate: [AuthGuard]
@@ -45,8 +37,6 @@ const routes: Routes = [
   {
     path: 'task',
     children: [
-      // { path: ':id', component: TaskComponent},
-      // { path: 'add', component: TaskFormComponent},
       { path: 'add', component: TaskFormNewComponent },
       { path: 'add/:listId', component: TaskFormNewComponent },
       { path: 'edit/:taskId', component: TaskFormNewComponent },
@@ -77,8 +67,6 @@ const routes: Routes = [
     path: 'calendar',
     children: [
       { path: '', component: CalendarComponent },
-      // { path: 'add', component: UserTaskFormComponent },
-      // { path: 'edit/:id', component: UserTaskFormComponent },
     ],
     canActivate: [AuthGuard]
   },

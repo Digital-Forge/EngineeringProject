@@ -19,7 +19,6 @@ export class ClientComponent implements OnInit {
         this.clients = res;
       },
       error: (res) => {
-        console.log(res);
       }
     })
   }

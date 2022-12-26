@@ -35,7 +35,6 @@ export class TaskListComponent implements OnInit {
         }
       },
       error: (response) => {
-        console.log(response);
       }
     });
   }
@@ -53,15 +52,11 @@ export class TaskListComponent implements OnInit {
     
     this.taskService.getTaskListById(id).subscribe({
       next: (res) => {
-        console.log('completing all tasks on list ' + res.name);
 
         taskListDetails = res;
-        // taskListDetails.tasks = res.tasks;
         taskListDetails.tasks?.forEach(task => {
           task.isComplete = true;
         })
-                
-        console.log(taskListDetails);
         this.taskService.saveListOfTasks(taskListDetails).subscribe({
           next: (res) => {
             if (res == true) {

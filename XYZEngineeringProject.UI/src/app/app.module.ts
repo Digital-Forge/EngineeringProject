@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
-import { ClientFormComponent } from './components/client/clientForm/client-form.component';
 import { ClientViewComponent } from './components/client/clientView/client-view.component';
 import { ClientComponent } from './components/client/clientIndex/client-index.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -17,14 +16,10 @@ import { AuthorizationComponent } from './components/authorization/authorization
 import { ClientFiltersComponent } from './components/client/clientFilters/filters.component';
 import { NoteFilterComponent } from './components/note/note-filter/note-filter.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
-import { NoteFormComponent } from './components/note/note-form/note-form.component';
 import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TaskListComponent } from './components/task-list/index/task-list-index.component';
-import { TaskListFormComponent } from './components/task-list/form/task-list-form.component';
 import { TaskListFiltersComponent } from './components/task-list/filters/task-list-filters.component';
-// import { TaskComponent } from './components/task-list/task/index/task-index.component';
-import { TaskFormComponent } from './components/task-list/task/form/task-form.component';
 import { TaskFiltersComponent } from './components/task-list/task/filters/task-filters.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
@@ -48,21 +43,16 @@ import { UserIndexComponent } from './components/settings/user/user-index/user-i
     AppComponent,
     AuthorizationComponent,
     LoginComponent,
-    ClientFormComponent,
     ClientViewComponent,
     ClientComponent,
     ClientFiltersComponent,
     NavbarComponent,
     NoteFilterComponent,
     NoteIndexComponent,
-    NoteFormComponent,
     CalendarComponent,
     DashboardComponent,
     TaskListComponent,
-    TaskListFormComponent,
     TaskListFiltersComponent,
-    // TaskComponent,
-    TaskFormComponent,
     TaskFiltersComponent,
     HomePageComponent,
     TaskFiltersComponent,

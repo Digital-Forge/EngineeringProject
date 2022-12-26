@@ -20,7 +20,6 @@ export class HomePageComponent implements OnInit {
           this.router.navigate(['/dashboard']);
       },
       error: (res) => {
-          // console.log(res);
       }
   });   
   }

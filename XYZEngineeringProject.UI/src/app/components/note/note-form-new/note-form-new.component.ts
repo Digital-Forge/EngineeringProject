@@ -60,8 +60,7 @@ export class NoteFormNewComponent implements OnInit {
   }
 
   onSubmit() {    
-    this.updateNoteDetails()    
-    console.log(this.noteDetails);
+    this.updateNoteDetails()
     if (this.editMode) {
       this.saveChanges();
     }

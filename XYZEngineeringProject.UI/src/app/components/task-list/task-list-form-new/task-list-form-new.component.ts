@@ -89,7 +89,6 @@ export class TaskListFormNewComponent implements OnInit {
   updateTaskListDetails() {
     this.taskListDetails.name = this.taskListForm.controls.name.value || '';
     this.taskListDetails.project = this.taskListForm.controls.project.value || '';
-    console.log(this.taskListForm.controls.status.value);
     this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New); //TODO
     // this.taskListDetails.status = TaskListStatus. [this.taskListForm.controls.status.value || TaskListStatus.New]
 

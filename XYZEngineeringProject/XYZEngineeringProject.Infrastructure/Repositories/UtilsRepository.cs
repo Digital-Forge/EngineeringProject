@@ -51,8 +51,12 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         public void InitHelloWorld()
         {
             AddRole("ADM");
+            AddRole("MANAGEMENT");
+            AddRole("MANAGER");
+            AddRole("MODERATOR");
+            AddRole("EMPLOYEE");
 
-            _context.LogicCompanies.Add(new Domain.Models.EntityUtils.LogicCompany { Name = "Nicość" });
+            _context.LogicCompanies.Add(new Domain.Models.EntityUtils.LogicCompany { Name = "CompanyName" });
             _context.SaveChanges();
         }
 
@@ -60,7 +64,7 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         {
             _departmentRepository._Add(new Department
             {
-                Name = "Pustka"
+                Name = "FirstDepartment"
             },
             _context.LogicCompanies.FirstOrDefault());
             _context.SaveChanges();

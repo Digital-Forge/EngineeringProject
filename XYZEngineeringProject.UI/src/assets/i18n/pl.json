@@ -42,7 +42,11 @@
         "deleteUser": "Usuń użytkownika",
         "save": "Zapisz",
         "deleteClient": "Usuń klienta",
+<<<<<<< HEAD
         "previousDirectory": "Poprzedni katalog"
+=======
+        "deleteNote": "Usuń notatkę"
+>>>>>>> 9fa7a935b36a6d855dfb60fc1a2378f24af807cc
     },
     "Menu": {
         "dashboard": "Pulpit",

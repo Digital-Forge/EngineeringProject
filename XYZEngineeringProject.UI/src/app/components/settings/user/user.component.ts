@@ -18,13 +18,6 @@ export class UserComponent implements OnInit {
   ) { }
   
   ngOnInit(): void {
-    // this.userService.getAllUsers().subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //     // this.currentUser = res;
-    //   }
-    // });
-
     this.authService.getMyId().subscribe({
     next: (res) => {
       // this.currentUser = res;

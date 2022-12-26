@@ -68,12 +68,12 @@ export class TaskListFormNewComponent implements OnInit {
         });
     }
 
-    updateTaskListForm() {   
+    updateTaskListForm() {
         this.taskListForm.patchValue({
             name: this.taskListDetails.name,
             project: this.taskListDetails.project
         });
-        
+
         const controls = this.taskListDetails.tasks?.map(task => {
             return this.fb.group({
                 id: [task.id],
@@ -91,24 +91,10 @@ export class TaskListFormNewComponent implements OnInit {
 
         controls?.forEach(control => {
             this.tasks.push(control)
-        });      
+        });
 
- }
-
-
-  removeListTask(index: number) {
-
-    // removeListTask(index: number) {
-    //     this.tasks.removeAt(index);
-    // }
-    if (this.editMode==true && this.taskListDetails.tasks)
-    this.taskService.deleteTaskById(this.taskListDetails.tasks[index]).subscribe({
-      next: (res)=> {
-      }      
-    })
-    this.tasks.removeAt(index);
-  }   
-
+    }
+    
     updateTaskListDetails() {
         this.taskListDetails.name = this.taskListForm.controls.name.value || '';
         this.taskListDetails.project = this.taskListForm.controls.project.value || '';
@@ -136,8 +122,18 @@ export class TaskListFormNewComponent implements OnInit {
         this.taskListDetails.tasks = tasksTemp;
     }
 
-    addListTask() {
+    //   addListTask() {
+    //     const group = this.fb.group({
+    //       deadline: [''],
+    //       priority: [''],
+    //       title: [''],
+    //       description: [''],
+    //       listOfTasksId:[this.taskListDetails.id||null]
+    //     })
+    //   }
 
+
+    addListTask() {
         const group = this.fb.group({
             deadline: [this.pipe.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
             priority: [Priority.No],
@@ -147,7 +143,20 @@ export class TaskListFormNewComponent implements OnInit {
         })
 
         this.tasks.push(group);
-    } 
+    }
+
+    removeListTask(index: number) {
+
+        // removeListTask(index: number) {
+        //     this.tasks.removeAt(index);
+        // }
+        if (this.editMode == true && this.taskListDetails.tasks)
+            this.taskService.deleteTaskById(this.taskListDetails.tasks[index]).subscribe({
+                next: (res) => {
+                }
+            })
+        this.tasks.removeAt(index);
+    }
 
     onSubmit() {
         this.updateTaskListDetails()

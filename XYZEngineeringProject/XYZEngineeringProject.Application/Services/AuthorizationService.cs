@@ -72,5 +72,10 @@ namespace XYZEngineeringProject.Application.Services
         {
             _signInManager.SignOutAsync().Wait();
         }
+
+        public List<string> GetAllRoles()
+        {
+            return _context.Roles.Select(x => x.Name).ToList();
+        }
     }
 }

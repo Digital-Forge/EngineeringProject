@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from 'src/app/models/note.model';
@@ -10,12 +11,14 @@ import { NoteService } from 'src/app/services/notes/note.service';
   styleUrls: ['./note-view.component.css']
 })
 export class NoteViewComponent implements OnInit {
+  emptyGuid = environment.emptyGuid
   noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
   noteDetails: Note = {
     id: '',
     title: '',
     date: new Date(),
     noteStatus: NoteStatus.Own,
+    createdBy: this.emptyGuid
   }
 
   constructor(

@@ -13,5 +13,7 @@ namespace XYZEngineeringProject.Application.ViewModels
         public string Title { get; set; }
         public NoteStatus NoteStatus { get; set; }
         public DateTime Date { get; set; }
+
+        public string CreatedBy { get; set; }
     }
 }

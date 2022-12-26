@@ -77,9 +77,7 @@ export class DashboardComponent implements OnInit {
                 res.tasks.forEach((task: Task) => {
                     if(!task.isComplete) {
                         if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.High]) {
-                            console.log('wysoki');
                             if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                console.log('wysoki przyszłe');
                                 this.highPastTasks.push(task);
                             }
                             else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {

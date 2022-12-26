@@ -40,5 +40,11 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_noteService.EditNote(editNoteRequest));
         }
+
+        [HttpPut]
+        public IActionResult DeleteNote([FromBody] NoteVM note)
+        {
+            return Ok(_noteService.DeleteNote(note));
+        }
     }
 }

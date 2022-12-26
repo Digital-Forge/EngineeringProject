@@ -29,4 +29,8 @@ export class NoteService {
   saveChanges(editNoteRequest: Note): Observable<any> {
     return this.http.put(this.baseApiUrl + 'Note/EditNote', editNoteRequest);
   }
+
+  deleteNote(note: Note): Observable<any> {
+    return this.http.put(this.baseApiUrl+'Note/DeleteNote', note);
+  }
 }

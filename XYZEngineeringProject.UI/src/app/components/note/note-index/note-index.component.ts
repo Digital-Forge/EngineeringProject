@@ -18,10 +18,20 @@ export class NoteIndexComponent implements OnInit {
     this.noteService.getAllNotes().subscribe({
       next: (notes) => {
         this.notes = notes;
-        console.log(this.noteStatuses[3]);
       },
-      error: (res) => {
-        console.log(res);        
+      error: (res) => {      
+      }
+    })
+  }
+
+  deleteNote(note: Note){
+    this.noteService.deleteNote(note).subscribe({
+      next: (res) => {
+        window.location.reload();
+      },
+      error: (error) => {
+        let msg = '{{deleteError | translate}}'
+        window.alert(msg);
       }
     })
   }

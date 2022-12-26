@@ -19,7 +19,6 @@ export class ClientComponent implements OnInit {
         this.clients = res;
       },
       error: (res) => {
-        console.log(res);
       }
     })
   }
@@ -33,6 +32,10 @@ export class ClientComponent implements OnInit {
     this.clientService.deleteClient(client).subscribe({
       next: (res) => {
         window.location.reload();
+      },
+      error: (error) => {
+        let msg = 'Error'
+        window.alert(msg);
       }
     })
   }

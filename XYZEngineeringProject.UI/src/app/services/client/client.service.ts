@@ -30,7 +30,6 @@ export class ClientService {
   }
 
   editClient(editClientRequest: Client): Observable<any> {
-    //console.log(editClientRequest);
     
     return this.http.put<Client>(`${environment.baseApiUrl}Client/EditClient`, editClientRequest);
   }

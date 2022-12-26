@@ -21,6 +21,5 @@ namespace XYZEngineeringProject.Application.ViewModels
         public string PESEL { get; set; }
 
         public AddressVM? Address { get; set; }
-
     }
 }

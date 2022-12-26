@@ -11,9 +11,10 @@
         "wrongLoginOrPassword": "Nieprawidłowy login lub hasło"
     },
     "Alert": {
-        "deleteContactPerson": "Czy na pewno chcesz usunąć ",
+        "deleteContactPerson": "Czy na pewno chcesz usunąć osobę ",
         "deleteFile": "Czy na pewno chcesz usunąć plik?",
-        "deleteDirectory": "Czy na pewno chcesz usunąć katalog?"
+        "deleteDirectory": "Czy na pewno chcesz usunąć katalog?",
+        "deleteNote": "Czy na pewno chcesz usunąć notatkę "
     },
     "Button": {
         "view": "Zobacz",
@@ -36,17 +37,14 @@
         "addNote": "Dodaj notatkę",
         "editNote": "Edytuj notatkę",
         "showNote": "Pokaż notatkę",
+        "deleteNote": "Usuń notatkę",
         "addUser": "Dodaj użytkownika",
         "editUser": "Edytuj użytkownika",
         "showUser": "Pokaż użytkownika",
         "deleteUser": "Usuń użytkownika",
         "save": "Zapisz",
         "deleteClient": "Usuń klienta",
-<<<<<<< HEAD
         "previousDirectory": "Poprzedni katalog"
-=======
-        "deleteNote": "Usuń notatkę"
->>>>>>> 9fa7a935b36a6d855dfb60fc1a2378f24af807cc
     },
     "Menu": {
         "dashboard": "Pulpit",

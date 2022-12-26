@@ -34,8 +34,7 @@ export class UserFormComponent implements OnInit {
     userPassword: [''],
     name: [''],
     surname: ['', Validators.required],
-    pesel: [0],
-    // addressId: [''],
+    pesel: [''],
     addressHome: [''],
     addressPost: [''],
     phone: [''],
@@ -50,7 +49,8 @@ export class UserFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private authorizationService: AuthorizationService,
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +61,7 @@ export class UserFormComponent implements OnInit {
         if (this.userId && this.isInUrl('/edit')) {
           this.userService.getAppUser(this.userId).subscribe({
             next: (res) => {
+
               this.formMode = FormMode.Edit;
               this.userDetails = res;
               this.updateUserForm();
@@ -76,6 +77,7 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     this.updateUserDetails();
+    
     if (this.formMode == FormMode.Add) {
       this.addUser();
     }
@@ -115,13 +117,11 @@ export class UserFormComponent implements OnInit {
       userPassword: this.userDetails.passwordHash,
       name: this.userDetails.name,
       surname: this.userDetails.surname,
-      pesel: this.userDetails.pesel,
-      addressHome: this.userDetails.address?.addressHome,
-      addressPost: this.userDetails.address?.addressPost,
-      phone: this.userDetails.address.phone.toString()
+      pesel: this.userDetails.pesel?.toString(),
+      addressHome: this.userDetails.address?.addressHome
+      // addressPost: this.userDetails.address.addressPost,
+      // phone: this.userDetails.address.phone
     });
-
-    console.log(this.userForm);
   }
 
   isInUrl(text: string) {

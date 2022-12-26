@@ -56,8 +56,14 @@ namespace XYZEngineeringProject.Application.Services
                 Date = x.Date,
                 Title = x.Title,
                 Id = x.Id,
-                NoteStatus = x.NoteStatus
+                NoteStatus = x.NoteStatus,
+                CreatedBy = x.CreateBy.ToString()
             }).ToList();
+        }
+
+        public bool DeleteNote(NoteVM noteVM)
+        {
+            return _noteRepository.Remove(noteVM.Id);
         }
     }
 }

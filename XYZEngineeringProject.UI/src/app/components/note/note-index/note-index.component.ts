@@ -26,4 +26,16 @@ export class NoteIndexComponent implements OnInit {
     })
   }
 
+  deleteNote(note: Note){
+    this.noteService.deleteNote(note).subscribe({
+      next: (res) => {
+        window.location.reload();
+      },
+      error: (error) => {
+        let msg = '{{deleteError | translate}}'
+        window.alert(msg);
+      }
+    })
+  }
+
 }

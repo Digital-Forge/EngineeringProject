@@ -5,4 +5,5 @@ export interface Note {
     title: string,
     noteStatus: NoteStatus,
     date: Date
+    createdBy: string
 }

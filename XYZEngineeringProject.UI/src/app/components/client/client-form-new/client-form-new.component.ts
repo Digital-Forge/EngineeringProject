@@ -121,9 +121,13 @@ export class ClientFormNewComponent implements OnInit {
     if(confirm(this.translateService.instant('Alert.deleteContactPerson') + this.clientContacts.value[index].firstName + " " + this.clientContacts.value[index].surname + "?")) {
       this.clientService.deleteClientContact(this.clientDetails, index).subscribe({
         next: (res) => {
+          this.clientContacts.removeAt(index);
+        },
+        error: (error) => {
+          let msg = 'Error'
+          window.alert(msg);
         }
       })      
-      this.clientContacts.removeAt(index);
     } 
   }
 

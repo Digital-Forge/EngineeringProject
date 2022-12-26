@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Note } from './../../../models/note.model';
 import { Component, OnInit } from '@angular/core';
 import { NoteStatus } from 'src/app/models/noteStatus.enum';
@@ -13,13 +14,15 @@ import { DatePipe } from '@angular/common';
 })
 export class NoteFormNewComponent implements OnInit {
   editMode: boolean = false
+  emptyGuid = environment.emptyGuid
   noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
   pipe = new DatePipe('en-GB');
   noteDetails: Note = {
     id: '',
     title: '',
     date: new Date(),
-    noteStatus: NoteStatus.Own
+    noteStatus: NoteStatus.Own,
+    createdBy: this.emptyGuid
   }
 
   noteForm = this.fb.group({

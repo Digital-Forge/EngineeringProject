@@ -47,11 +47,24 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_appUserService.GetAllUsers().ToList().FirstOrDefault(x => x.Id == id));
         }
-        
-        [HttpGet]
-        public IActionResult GetUserRoles(string id)
+
+        [HttpPost]
+        public IActionResult GetUserRoles([FromBody] AppUserVM user)
         {
-            return Ok(_userRepository.GetUserRoles(new Guid(id)));
+            return Ok(_userRepository.GetUserRoles(Guid.Parse(user.Id)));
+        }
+
+        [HttpGet]
+        [Route("AppUser/AddUserRole/{id}/{roleName}")]
+        public IActionResult AddUserRole(string id, string roleName)
+        {
+            return Ok(_appUserService.AddUserRole(Guid.Parse(id), roleName));
+        }
+        [HttpGet]
+        [Route("AppUser/DeleteUserRole/{id}/{roleName}")]
+        public IActionResult DeleteUserRole(string id,string roleName)
+        {
+            return Ok(_appUserService.RemoveUserRole(Guid.Parse(id),roleName));
         }
     }
 }

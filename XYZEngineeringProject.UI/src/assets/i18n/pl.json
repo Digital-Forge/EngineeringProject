@@ -175,7 +175,8 @@
         "pesel": "PESEL",
         "phone": "Telefon",
         "homeAddress": "Adres zamieszkania",
-        "postAddress": "Adres korespondencyjny"
+        "postAddress": "Adres korespondencyjny",
+        "roles": "Role użytkownika"
     },
     "Month": {
         "1": "stycznia",

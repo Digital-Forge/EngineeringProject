@@ -54,4 +54,8 @@ export class AuthorizationService {
   currentUser(): Observable<User> {
     return this.http.get<User>(this.baseApiUrl + 'Me/GetMyData');
   }
+
+  getAllRoles() {
+    return this.http.get(this.baseApiUrl+'Authorization/GetAllRoles');
+  }
 }

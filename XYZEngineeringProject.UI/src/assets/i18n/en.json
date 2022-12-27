@@ -164,7 +164,9 @@
     "Settings": {
         "settings": "Settings",
         "departments": "Departments",
-        "selectLanguage": "Select language"
+        "selectLanguage": "Select language",
+        "polish": "Polish",
+        "english": "English"
     },
     "User": {
         "users": "Users",

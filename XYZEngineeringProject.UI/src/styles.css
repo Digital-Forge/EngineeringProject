@@ -231,6 +231,19 @@ thead {
     border-radius: 5px;
 }
 
+.border-language {
+    height: 4rem;
+    width: 4rem;
+    margin-left: 3rem;
+    padding-top: 1rem;
+    color: var(--primary);
+    font-weight: bold;
+    border-color: var(--primary) !important;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 100%;
+}
+
 .text-success {
     color: var(--success-primary) !important;
 }

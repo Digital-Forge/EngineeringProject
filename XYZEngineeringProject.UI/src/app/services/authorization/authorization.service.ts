@@ -31,7 +31,8 @@ export class AuthorizationService {
       },
       error: (res) =>
       {
-        document.getElementById('login-error')?.classList.remove('d-none');
+        document.getElementById('login-spinner')?.classList.add('d-none');
+        document.getElementById('login-error')?.classList.remove('d-none');        
       }
     });
   }

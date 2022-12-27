@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using XYZEngineeringProject.Domain.Models;
 using XYZEngineeringProject.Domain.Models.EntityUtils;
+using XYZEngineeringProject.Domain.Models.Forum;
 
 namespace XYZEngineeringProject.Infrastructure.Utils
 {
@@ -32,6 +33,10 @@ namespace XYZEngineeringProject.Infrastructure.Utils
         public DbSet<Domain.Models.File.File> Files { get; set; }
         public DbSet<Domain.Models.File.Directory> Directories { get; set; }
         public DbSet<Domain.Models.File.AccessDirectory> AccessDirectories { get; set; }
+
+        //Forum
+        public DbSet<Forum> Forums { get; set; }
+        public DbSet<ForumMessage> ForumMessages { get; set; }
 
         //logger
         public DbSet<Log> Logs { get; set; }
@@ -85,6 +90,12 @@ namespace XYZEngineeringProject.Infrastructure.Utils
                 .HasOne(u => u.ParentDirectory)
                 .WithMany(u => u.ChildDirectories)
                 .HasForeignKey(u => u.ParentDirectoryId);
+
+            //////////////////////////////////////// ForumMessage many to one Forum
+            builder.Entity<ForumMessage>()
+                .HasOne(u => u.Forum)
+                .WithMany(u => u.ForumMessages)
+                .HasForeignKey(u => u.ForumId);
 
             //////////////////////////////////////// AppUser many to one LogicCompany
             builder.Entity<AppUser>()

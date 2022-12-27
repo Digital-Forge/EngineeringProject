@@ -20,6 +20,7 @@ namespace XYZEngineeringProject.Application
             services.AddTransient<IMeService, MeService>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IForumService, ForumService>();
             //services.AddTransient<I, >();
             
             // FluentValidation Dependency Injection

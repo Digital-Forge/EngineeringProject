@@ -6,6 +6,6 @@ export interface User {
     passwordHash: string,
     name: string,
     surname: string,
-    pesel: number,
+    pesel: string,
     address: Address
 }

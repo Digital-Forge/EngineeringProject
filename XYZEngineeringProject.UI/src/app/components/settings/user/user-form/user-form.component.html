@@ -1,31 +1,3 @@
-<!-- <div class="col-8 offset-2 form">
-
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" autocomplete="off">
-        <label class="form-label" for="userName">User Name</label>
-        <input class="form-control" type="text" name="userName" id="userName" formControlName="userName" autocomplete="off">
-
-        <label class="form-label" for="password">password</label>
-        <input class="form-control" type="password" name="password" id="password" formControlName="password" autocomplete="off">
-
-        <label class="form-label" for="name">Name</label>
-        <input class="form-control" type="text" name="name" id="name" formControlName="name">
-        <label class="form-label" for="surname">Surname</label>
-        <input class="form-control" type="text" name="surname" id="surname" formControlName="surname">
-
-        <label class="form-label" for="pesel">pesel</label>
-        <input class="form-control" type="number" name="pesel" id="pesel" formControlName="pesel">
-        <label class="form-label">address</label>
-        <label class="form-label" for="addressHome">Home Address</label>
-        <input class="form-control" type="text" name="addressHome" id="addressHome" formControlName="addressHome">
-        <label class="form-label" for="addressPost">Post Address</label>
-        <input class="form-control" type="text" name="addressPost" id="addressPost" formControlName="addressPost">
-        <label class="form-label" for="phone">Phone</label>
-        <input class="form-control" type="number" name="phone" id="phone" formControlName="phone">
-        <button type="submit">{{buttonText}}</button>
-    </form>
-</div> -->
-
-
 <div class="container-fluid my-5">
     <div *ngIf="formMode == FormMode.Edit; else header" class="row mb-5 text-center">
         <h1 class="mb-3 col-12">{{ 'User.editUser' | translate }}</h1>
@@ -76,7 +48,7 @@
                     <label class="form-label" for="pesel">{{ 'User.pesel' | translate }}</label>
                     <input class="form-control" type="number" id="pesel" formControlName="pesel">
                 </div>
-            </div> 
+            </div>
 
             <h3 class="form-label">{{ 'User.address' | translate }}</h3>
             <div class="row">
@@ -91,12 +63,41 @@
                     <input class="form-control" type="text" id="addressPost" formControlName="addressPost">
                 </div>
             </div>
+            <h3 class="form-label">{{'User.roles' | translate}}</h3>
+            <ng-container formArrayName="roles" *ngIf="formMode==FormMode.Edit">
+                <div class="row">
+                    <table>
+                        <tr>
+                            <th>Role</th>
+                            <th>action</th>                            
+                        </tr>
+                    <div *ngFor="let role of userRoles; let i = index">
+                            <ng-container [formGroupName]="i">
+                                <tr>
+                                    <td>{{role}}</td>
+                                    <td><button (click)="deleteRole(i)">DeleteRole</button></td>
+                                </tr>
+                            </ng-container>
+                        </div>
+                    </table>
+                </div>
+            </ng-container>
+            <div *ngIf="allRoles.length>0">
+                <select formControlName="newRole" id="newRole">
+                    <option *ngFor="let role of allRoles">
+                        {{role.toString()}}
+                    </option>
+                </select>
+                <button (click)="addRole()">Add Role</button>
+            </div>
 
             <div class="row">
                 <div class="col text-center text-sm-end">
-                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" *ngIf="formMode == FormMode.Edit">{{
+                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid"
+                        *ngIf="formMode == FormMode.Edit">{{
                         'Button.save' | translate}}</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" *ngIf="formMode == FormMode.Add">{{
+                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid"
+                        *ngIf="formMode == FormMode.Add">{{
                         'Button.addUser' | translate}}</button>
                 </div>
             </div>

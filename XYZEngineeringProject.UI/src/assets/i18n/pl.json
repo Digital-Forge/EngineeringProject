@@ -16,7 +16,8 @@
         "deleteFile": "Czy na pewno chcesz usunąć plik?",
         "deleteDirectory": "Czy na pewno chcesz usunąć katalog?",
         "deleteNote": "Czy na pewno chcesz usunąć notatkę ",
-        "deleteTaskList": "Czy na pewno chcesz usunąć listę zadań?"
+        "deleteTaskList": "Czy na pewno chcesz usunąć listę zadań?",
+        "deleteRole": "Czy na pewno chcesz usunąć rolę?"
 
     },
     "Button": {
@@ -186,7 +187,8 @@
         "homeAddress": "Adres zamieszkania",
         "postAddress": "Adres korespondencyjny",
         "department": "Dział",
-        "role": "Stanowisko"
+        "role": "Stanowisko",
+        "roles": "Role użytkownika"
     },
     "Month": {
         "1": "stycznia",

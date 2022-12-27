@@ -16,7 +16,8 @@
         "deleteFile": "Are you sure you want to delete file?",
         "deleteDirectory": "Are you sure you want to delete directory?",
         "deleteNote": "Are you sure you want to delete note ",
-        "deleteTaskList": "Are you sure you want to delete task list?"
+        "deleteTaskList": "Are you sure you want to delete task list?",
+        "deleteRole": "Are you sure you want to delete role?"
 
     },
     "Button": {
@@ -166,7 +167,8 @@
         "departments": "Departments",
         "selectLanguage": "Select language",
         "polish": "Polish",
-        "english": "English"
+        "english": "English",
+        "roles": "Roles"
     },
     "User": {
         "users": "Users",

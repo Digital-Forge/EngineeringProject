@@ -52,5 +52,22 @@ namespace XYZEngineeringProject.Application.Services
 
             return true;
         }
+
+        public bool UpdateUser(AppUserVM appUser)
+        {
+            return _userRepository.Update(_userRepository.GetUserById(Guid.Parse(appUser.Id)));
+        }
+
+        public bool AddUserRole(Guid id, string roleName)
+        {
+            _userRepository.AddRole(_userRepository.GetUserById(id), roleName);
+            return true;
+        }
+
+        public bool RemoveUserRole(Guid id, string roleName)
+        {
+            _userRepository.RemoveRole(_userRepository.GetUserById(id),roleName);
+            return true;
+        }
     }
 }

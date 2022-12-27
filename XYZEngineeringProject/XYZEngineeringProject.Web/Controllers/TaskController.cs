@@ -18,11 +18,6 @@ namespace XYZEngineeringProject.Web.Controllers
             _taskService = taskService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult GetAllTasks()
         {

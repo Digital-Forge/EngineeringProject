@@ -1,8 +1,12 @@
+import { TranslateService } from '@ngx-translate/core';
+import { Roles } from './../../../../models/roles.enum';
+import { DepartmentService } from './../../../../services/department/department.service';
+import { Department } from './../../../../models/department.model';
 import { User } from './../../../../models/user.model';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { FormMode } from './../../../../models/form-mode.enum';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -38,14 +42,28 @@ export class UserFormComponent implements OnInit {
     addressHome: [''],
     addressPost: [''],
     phone: [''],
+    departments: this.fb.array([]),
+    roles: this.fb.array([]),
+    newRole: ['']
   });
 
-  formMode = FormMode.Add
+  get userFormDepartments() {
+    return this.userForm.get('departments') as FormArray
+  }
+
+  get userFormRoles() {
+    return this.userForm.get('roles') as FormArray
+  }
+
+  formMode = FormMode.Add;
   FormMode = FormMode;
-
   isPasswordVisible: boolean = false;
-
+  allDepartments: Department[] = [];
+  userDepartments: Department[] = [];
+  allRoles: Roles[] = [];
+  userRoles: Roles[] = [];
   userId?: string | null;
+  index: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +71,8 @@ export class UserFormComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private authorizationService: AuthorizationService,
+    private departmentService: DepartmentService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -61,16 +81,35 @@ export class UserFormComponent implements OnInit {
         this.userId = param.get('id')?.toUpperCase();
 
         if (this.userId && this.isInUrl('/edit')) {
+          this.authorizationService.getAllRoles().subscribe({
+           next: (res) => {
+             this.allRoles = res as Roles[]                              
+           }
+          })
+          this.departmentService.getAllDepartments().subscribe({
+           next: (res) => {
+             this.allDepartments = res          
+           }
+          })
           this.userService.getAppUser(this.userId).subscribe({
             next: (res) => {
 
               this.formMode = FormMode.Edit;
               this.userDetails = res;
+
+              this.userService.getAppUserRoles(this.userDetails).subscribe({
+                next: (res) => {
+                  this.userRoles = res
+                  this.userRoles.forEach(role => {
+                    this.allRoles = this.allRoles.filter(s => s!=role)
+                  })
+                  this.updateUserForm();
+                }
+              })
               this.updateUserForm();
             }
           });
         }
-       
       },
       error: (res) => {
       }
@@ -123,8 +162,18 @@ export class UserFormComponent implements OnInit {
       pesel: this.userDetails.pesel?.toString(),
       addressHome: this.userDetails.address?.addressHome,
       addressPost: this.userDetails.address?.addressPost,
-      phone: this.userDetails.address?.phone.toString()
+      phone: this.userDetails.address?.phone.toString(),
+      newRole: this.allRoles[0]
     });
+    const controls = this.userRoles.map(role => {
+      return this.fb.group({
+        name: [role]
+      })
+    })
+    controls?.forEach(control => {
+      this.userFormRoles.push(control)
+      
+    })
   }
 
   isInUrl(text: string) {
@@ -133,6 +182,27 @@ export class UserFormComponent implements OnInit {
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  deleteRole(index: number)
+  {
+    if(confirm(this.translateService.instant('Alert.deleteRole'))) {
+      this.userService.deleteAppUserRole(this.userDetails,this.userRoles[index]).subscribe({
+        next: (res) => {
+          window.location.reload();
+        }
+      })
+    }
+  }
+
+  addRole()
+  {
+    if (this.userForm.controls.newRole.value)
+    this.userService.addAppUserRole(this.userDetails,this.userForm.controls.newRole.value).subscribe({
+      next: (res)=>{
+        window.location.reload();
+      }
+    })
   }
 
 }

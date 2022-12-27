@@ -37,7 +37,20 @@ export class DashboardComponent implements OnInit {
     public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
     public messages: [] = []
     public today: Date;
-    public user: User;
+    public user: User = {
+        id: '',
+        name: '',
+        passwordHash: '',
+        pesel: '',
+        surname: '',
+        userName: '',
+        address: {
+            addressHome: '',
+            addressPost: '',
+            id: '',
+            phone: 0
+        }
+    };
 
     constructor(
         private authorizationService: AuthorizationService,

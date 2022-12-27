@@ -10,6 +10,9 @@ namespace XYZEngineeringProject.Application.Interfaces
     public interface IAppUserService
     {
         bool AddNewUser(AppUserVM appUser);
+        bool AddUserRole(Guid id, string roleName);
         public List<AppUserVM> GetAllUsers();
+        bool RemoveUserRole(Guid id, string roleName);
+        bool UpdateUser(AppUserVM appUser);
     }
 }

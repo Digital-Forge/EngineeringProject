@@ -19,7 +19,7 @@ export class UserFormComponent implements OnInit {
     passwordHash: '',
     name: '',
     surname: '',
-    pesel: 0,
+    pesel: '',
     address: {
       id: '',
       addressHome: '',
@@ -103,7 +103,7 @@ export class UserFormComponent implements OnInit {
     this.userDetails.passwordHash = this.userForm.controls.userPassword.value || '';
     this.userDetails.name = this.userForm.controls.name.value || '';
     this.userDetails.surname = this.userForm.controls.surname.value || '';
-    this.userDetails.pesel = Number(this.userForm.controls.pesel.value) || 0;
+    this.userDetails.pesel = this.userForm.controls.pesel.value || '';
     this.userDetails.address.addressHome = this.userForm.controls.addressHome.value || '',
     this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
     this.userDetails.address.phone = Number(this.userForm.controls.phone.value) || 0

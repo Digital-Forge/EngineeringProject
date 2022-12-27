@@ -60,20 +60,23 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+       
         forkJoin([
             this.taskService.getAllTasks(),
-            this.noteService.getAllNotes()
+            this.noteService.getAllNotes(),
+            this.authorizationService.currentUser()
         ]).pipe(map(([ 
-                tasks, notes 
+                tasks, notes, user
             ]) => {
             return {
-                tasks, notes
+                tasks, notes, user
             };
         })).pipe(first()).subscribe({
             next: (res: {
-                tasks: Task[], notes: Note[]
+                tasks: Task[], notes: Note[], user: User
             }) => {
+                this.user = res.user;
+
                 res.tasks.forEach((task: Task) => {
                     if(!task.isComplete) {
                         if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.High]) {
@@ -127,11 +130,7 @@ export class DashboardComponent implements OnInit {
              }
             });
         
-        this.authorizationService.currentUser().subscribe({
-            next: (user) => {
-                this.user = user;
-            }
-        })
+       
     }
 
     public greaterThan(subj: any, num: any) {

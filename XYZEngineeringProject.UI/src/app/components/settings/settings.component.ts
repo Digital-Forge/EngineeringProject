@@ -1,6 +1,8 @@
-import { AuthorizationService } from './../../services/authorization/authorization.service';
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { GlobalComponent } from 'src/app/global-component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
@@ -15,7 +17,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private translate: TranslateService
   ) { }
   
   ngOnInit(): void {
@@ -26,5 +29,10 @@ export class SettingsComponent implements OnInit {
 
       }
     })
+  }
+
+  changeLanguage(language: string) {
+    localStorage.setItem('language', language);
+    window.location.reload();
   }
 }

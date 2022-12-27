@@ -121,9 +121,9 @@ export class UserFormComponent implements OnInit {
       name: this.userDetails.name,
       surname: this.userDetails.surname,
       pesel: this.userDetails.pesel?.toString(),
-      addressHome: this.userDetails.address?.addressHome
-      // addressPost: this.userDetails.address.addressPost,
-      // phone: this.userDetails.address.phone
+      addressHome: this.userDetails.address?.addressHome,
+      addressPost: this.userDetails.address?.addressPost,
+      phone: this.userDetails.address?.phone.toString()
     });
   }
 

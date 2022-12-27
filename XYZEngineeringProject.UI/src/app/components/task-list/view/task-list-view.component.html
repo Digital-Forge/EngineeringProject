@@ -16,7 +16,7 @@
             </button>
         </div>
     </div>
-    <div class="row mb-5">
+    <div class="row mb-5" *ngIf="taskListDetails.project">
         <div class="col">
             <h3>{{ 'TaskList.project' | translate }}: {{ taskListDetails.project || '-' }}</h3>
         </div>

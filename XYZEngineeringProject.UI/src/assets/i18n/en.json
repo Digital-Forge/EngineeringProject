@@ -1,11 +1,212 @@
 {
-    "Client": {
-        "name": "Name",
+    "Authorization": {
+        "noAccess": "You don't have access to this page."
+    },
+    "Login": {
+        "login": "Sign in",
+        "rememberMe": "Remember me",
+        "signIn": "Sign in",
         "email": "Email",
-        "emails": "Email addresses",
+        "password": "Password",
+        "wrongLoginOrPassword": "Incorrect login or password"
+    },
+    "Alert": {
+        "deleteContactPerson": "Are you sure you want to delete person ",
+        "deleteClient": "Are you sure you want to delete client ",
+        "deleteFile": "Are you sure you want to delete file?",
+        "deleteDirectory": "Are you sure you want to delete directory?",
+        "deleteNote": "Are you sure you want to delete note ",
+        "deleteTaskList": "Are you sure you want to delete task list?"
+
+    },
+    "Button": {
+        "view": "View",
+        "edit": "Edit",
+        "add": "Add",
+        "update": "Update",
+        "done": "Done",
+        "restore": "Restore",
+        "addTaskList": "Add task list",
+        "editTaskList": "Edit task list",
+        "addTask": "Add task",
+        "editTask": "Edit task",
+        "showTask": "Show task",
+        "completeTaks": "Complete task",
+        "addClient": "Add client",
+        "editClient": "Edit client",
+        "showClient": "Show client",
+        "showClientContacts": "Show people",
+        "removeClientContact": "Delete contact",
+        "addNote": "Add note",
+        "editNote": "Edit note",
+        "showNote": "Show note",
+        "deleteNote": "Delete note",
+        "addUser": "Add user",
+        "editUser": "Edit user",
+        "showUser": "Show user",
+        "deleteUser": "Delete user",
+        "save": "Save",
+        "deleteClient": "Delete client",
+        "previousDirectory": "Previous directory"
+    },
+    "Menu": {
+        "dashboard": "Dashboard",
+        "note": "Notes",
+        "tasks": "Tasks",
+        "clients": "Clients",
+        "documents": "Documents",
+        "chat": "Chat",
+        "settings": "Settings",
+        "logout": "Logout"
+    },
+    "Dashboard": {
+        "dashboard": "Dashboard",
+        "notes": "Notes",
+        "tasks": "Tasks",
+        "chat": "Messages",
+        "todayIs": "Todaz:",
+        "welcome": "Wolcome",
+        "seeAll": "View all",
+        "pastTasks": "Overdue",
+        "todayTasks": "Today",
+        "futureTasks": "Future",
+        "latestNotes": "Newest notes",
+        "messages": "Messages"
+    },
+    "Client": {
+        "clients": "Clients",
+        "editClient": "Edit client",
+        "addClient": "Add client",
+        "name": "Name",
+        "description": "Description",
+        "comment": "Comment",      
+        "email": "Email",
+        "emails": "Email adresses",
         "phone": "Phone",
-        "phones": "Phone numbers",
-        "firstName": "First name",
-        "lastName": "Last name"
+        "phones": "Phones",
+        "firstname": "First name",
+        "surname": "Last name",
+        "contactPerson": "Person",
+        "contactPersons": "People",
+        "address": "Adresss",
+        "nip": "NIP",
+        "addContact": "Add person",
+        "noContactsYet": "No poeple have been added yet."
+    },
+    "ClientFilters": {
+        "firstName": "First name"
+    },
+    "Task": {
+        "tasks": "Tasks",
+        "taskLists": "Task lists",
+        "addTask": "Add task",
+        "editTask": "Edit task",
+        "addTaskList": "Add task list",
+        "editTaskList": "Edit task list",
+        "id": "ID",
+        "deadline": "Deadline",
+        "title": "Title",
+        "description": "Description",
+        "priority": "Priority",
+        "created": "Created",
+        "noTasks": "No tasks have been added to this list yet.",
+        "status": "Status",
+        "taskList": "Add to task lists",
+        "createDate": "Created"       
+    },
+    "TaskList": {
+        "name": "Name",
+        "project": "Project",
+        "status": "Status",
+        "noTasksYet": "No tasks have been added yet.",
+        "add": "Add task list"
+    },
+    "TaskListStatus": {
+        "New": "New",
+        "InProgress": "In progress",
+        "Done": "Done"
+    },
+    "Note": {
+        "addNote": "Add note",
+        "editNote": "Edit note",
+        "notes": "Notes",
+        "title": "Note",
+        "status": "Status",
+        "date": "Data",
+        "noNotesFound": "No notes have been added yet."
+    },
+    "NoteStatus": {
+        "Own": "Own",
+        "Department": "Department",
+        "Company": "Company",
+        "Now": "Now",
+        "Archive": "Archive"
+    },
+    "Priority": {
+        "No": "No",
+        "Low": "Low",
+        "Medium": "Medium",
+        "High": "High",
+        "Done": "Done"
+    },
+    "Documents": {
+        "name": "Name",
+        "currentFolder": "Current directory",
+        "noFiles": "No files have been added yet.",
+        "selectFile": "Select file",
+        "saveAs": "Save as",
+        "directoryName": "New directory name",
+        "goToDirectory": "Open directory",
+        "changeName": "Change name",
+        "deleteDirectory": "Delete directory",
+        "deleteFile": "Delete file"
+    },
+    "Settings": {
+        "settings": "Settings",
+        "departments": "Departments",
+        "selectLanguage": "Select language"
+    },
+    "User": {
+        "users": "Users",
+        "myData": "My data",
+        "editUser": "Edit user",
+        "addUser": "Add user",
+        "noUsers": "No users have been added yet.",
+        "name": "First name",
+        "surname": "Last name",
+        "userName": "Username",
+        "password": "Password",
+        "setPassword": "Set hasło",
+        "changePassword": "Change hasło",
+        "address": "Adress",
+        "pesel": "PESEL",
+        "phone": "Phone",
+        "homeAddress": "Home adress",
+        "postAddress": "Post adress",
+        "department": "Department",
+        "role": "Role"
+    },
+    "Month": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "Weekday": {
+        "1": "Monday",
+        "2": "Tuesday",
+        "3": "Wednesday",
+        "4": "Thursday",
+        "5": "Friday",
+        "6": "Saturday",
+        "0": "Sunday"
     }
 }

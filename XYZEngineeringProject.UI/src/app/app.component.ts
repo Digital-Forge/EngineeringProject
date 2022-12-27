@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/cor
 import { TranslateService } from "@ngx-translate/core";
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { Router } from '@angular/router';
+import { GlobalComponent } from './global-component';
 
 @Component({
   selector: 'app-root',
@@ -15,16 +16,21 @@ export class AppComponent implements OnInit {
   title = 'XYZEngineeringProject.UI';
   isAuthorized: boolean = false;
 
+  language = GlobalComponent.language;
+
   constructor(
     private translate: TranslateService,
     private authorizationService: AuthorizationService,
     private router: Router
   ) {
     //TODO ustawić tłumaczenie na wybrane przez użytkownika
-    translate.setDefaultLang('pl');
-    translate.use('pl');
+    this.translate.addLangs(['en', 'pl']);
+    console.log(localStorage.getItem('language'));
+    this.translate.use(localStorage.getItem('language') || 'en');
+  
     
   }
+
 
   ngOnInit(): void {
    this.router.events.subscribe(val => {
@@ -43,5 +49,4 @@ export class AppComponent implements OnInit {
     this.authorizationService.logout();
     this.isAuthorized = false;
   }
-
 }

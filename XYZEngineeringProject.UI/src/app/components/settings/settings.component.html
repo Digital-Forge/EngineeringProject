@@ -2,9 +2,9 @@
     <div class="mb-5 text-center">
         <h1>{{'Settings.settings' | translate }}</h1>
     </div>
-    <div class="container d-flex justify-content-center">
+    <div class="container justify-content-center d-flex flex-wrap">
         <!--  *ngIf="(currentUserRole == UserRole.Management) || (currentUserRole == UserRole.Moderator)"  -->
-        <div class="tile mb-5 me-5" [routerLink]="['users']">
+        <div class="tile mb-5 me-5" [routerLink]="['/settings/users']">
             <i class="bi bi-people-fill"></i>
             <h4>{{ 'User.users' | translate }}</h4>
         </div>
@@ -12,6 +12,25 @@
             <i class="bi bi-person-circle"></i>
             <h4>{{ 'User.myData' | translate }}</h4>
         </div>
+        <div class="tile mb-5 me-5" [routerLink]="['/settings/departments', 'edit', currentUserId]">
+            <i class="bi bi-briefcase-fill"></i>
+            <h4>{{ 'Settings.departments' | translate }}</h4>
+        </div>
+    </div>
+    <div class="mb-5 text-center">
+        <h1>{{'Settings.selectLanguage' | translate }}</h1>
+    </div>
+    <div class="container justify-content-center d-flex flex-wrap">
+        <!--  *ngIf="(currentUserRole == UserRole.Management) || (currentUserRole == UserRole.Moderator)"  -->
+        <div class="tile mb-5 me-5" (click)="changeLanguage('en')">
+            <h4>EN</h4>
+            <h4>{{ 'Settings.english' | translate }}</h4>
+        </div>
+        <div class="tile mb-5 me-5" (click)="changeLanguage('pl')">
+            <h4>PL</h4>
+            <h4>{{ 'Settings.polish' | translate }}</h4>
+        </div>
+    
     </div>
 </div>
 <router-outlet></router-outlet>

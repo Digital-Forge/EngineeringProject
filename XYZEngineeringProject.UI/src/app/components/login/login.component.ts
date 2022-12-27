@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
      }
 
     onSubmit() {
+        document.getElementById('login-spinner')?.classList.remove('d-none');
         this.authorizationService.login(this.login);        
     }
 

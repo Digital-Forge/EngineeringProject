@@ -26,8 +26,6 @@ export class AuthorizationService {
   login(login: Login) {
     return this.http.post<Login>(this.baseApiUrl + 'Authorization/Login', login).subscribe({
       next: (res: any) => {
-        document.getElementById('login-spinner')?.classList.remove('d-none');
-
         localStorage.setItem('token', res.token);
         this.router.navigate(['/dashboard']);
       },

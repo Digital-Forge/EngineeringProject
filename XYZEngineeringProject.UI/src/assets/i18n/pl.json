@@ -171,11 +171,15 @@
         "surname": "Nazwisko",
         "userName": "Nazwa użytkownika",
         "password": "Hasło",
+        "setPassword": "Ustaw hasło",
+        "changePassword": "Zmień hasło",
         "address": "Adres",
         "pesel": "PESEL",
         "phone": "Telefon",
         "homeAddress": "Adres zamieszkania",
-        "postAddress": "Adres korespondencyjny"
+        "postAddress": "Adres korespondencyjny",
+        "department": "Dział",
+        "role": "Stanowisko"
     },
     "Month": {
         "1": "stycznia",

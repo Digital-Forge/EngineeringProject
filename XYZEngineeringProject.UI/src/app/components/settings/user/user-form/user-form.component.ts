@@ -43,6 +43,8 @@ export class UserFormComponent implements OnInit {
   formMode = FormMode.Add
   FormMode = FormMode;
 
+  isPasswordVisible: boolean = false;
+
   userId?: string | null;
 
   constructor(
@@ -77,7 +79,6 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     this.updateUserDetails();
-    
     if (this.formMode == FormMode.Add) {
       this.addUser();
     }
@@ -91,6 +92,8 @@ export class UserFormComponent implements OnInit {
   }
 
   addUser() {
+    console.log(this.userDetails);
+
     this.userService.addAppUser(this.userDetails).subscribe({
       next: (res) => {
         this.router.navigate(['settings/users']);
@@ -114,7 +117,7 @@ export class UserFormComponent implements OnInit {
     this.userForm.patchValue({
       id: this.userDetails.id,
       userUserName: this.userDetails.userName,
-      userPassword: this.userDetails.passwordHash,
+      userPassword: '',
       name: this.userDetails.name,
       surname: this.userDetails.surname,
       pesel: this.userDetails.pesel?.toString(),
@@ -126,6 +129,10 @@ export class UserFormComponent implements OnInit {
 
   isInUrl(text: string) {
     return (this.router.url.indexOf(text) > -1);
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
 }

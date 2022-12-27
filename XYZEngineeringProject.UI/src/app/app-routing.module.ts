@@ -82,6 +82,15 @@ const routes: Routes = [
           { path: ':id', component: UserViewComponent },
           { path: '', component: UserIndexComponent }
         ]
+      },
+      {
+        path: 'departments',
+        children: [
+          { path: 'add', component: UserFormComponent },
+          { path: 'edit/:id', component: UserFormComponent },
+          { path: ':id', component: UserViewComponent },
+          { path: '', component: UserIndexComponent }
+        ]
       }
     ]
   },

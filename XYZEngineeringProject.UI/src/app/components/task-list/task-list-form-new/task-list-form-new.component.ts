@@ -71,7 +71,8 @@ export class TaskListFormNewComponent implements OnInit {
     updateTaskListForm() {
         this.taskListForm.patchValue({
             name: this.taskListDetails.name,
-            project: this.taskListDetails.project
+            project: this.taskListDetails.project,
+            status: (this.taskListDetails.status < 0) ?  this.taskListStatuses[0].toString() : this.taskListStatuses[this.taskListDetails.status].toString()
         });
 
         const controls = this.taskListDetails.tasks?.map(task => {

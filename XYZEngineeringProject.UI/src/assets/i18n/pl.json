@@ -12,9 +12,13 @@
     },
     "Alert": {
         "deleteContactPerson": "Czy na pewno chcesz usunąć osobę ",
+        "deleteClient": "Czy na pewno chcesz usunąć klienta ",
         "deleteFile": "Czy na pewno chcesz usunąć plik?",
         "deleteDirectory": "Czy na pewno chcesz usunąć katalog?",
-        "deleteNote": "Czy na pewno chcesz usunąć notatkę "
+        "deleteNote": "Czy na pewno chcesz usunąć notatkę ",
+        "deleteTaskList": "Czy na pewno chcesz usunąć listę zadań?",
+        "deleteRole": "Czy na pewno chcesz usunąć rolę?"
+
     },
     "Button": {
         "view": "Zobacz",
@@ -159,7 +163,11 @@
         "deleteFile": "Usuń plik"
     },
     "Settings": {
-        "settings": "Ustawienia"
+        "settings": "Ustawienia",
+        "departments": "Działy",
+        "selectLanguage": "Wybierz język",        
+        "polish": "Polski",
+        "english": "Angielski"
     },
     "User": {
         "users": "Użytkownicy",
@@ -171,11 +179,15 @@
         "surname": "Nazwisko",
         "userName": "Nazwa użytkownika",
         "password": "Hasło",
+        "setPassword": "Ustaw hasło",
+        "changePassword": "Zmień hasło",
         "address": "Adres",
         "pesel": "PESEL",
         "phone": "Telefon",
         "homeAddress": "Adres zamieszkania",
         "postAddress": "Adres korespondencyjny",
+        "department": "Dział",
+        "role": "Stanowisko",
         "roles": "Role użytkownika"
     },
     "Month": {

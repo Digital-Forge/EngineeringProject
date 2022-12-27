@@ -18,9 +18,7 @@ export class NavbarComponent implements OnInit {
     private authorizationService: AuthorizationService,
     private router: Router
 
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
   

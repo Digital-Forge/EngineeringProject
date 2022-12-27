@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Component, OnInit } from '@angular/core';
 import { Task, TaskList, TaskListResponse } from 'src/app/models/task.model';
@@ -20,7 +21,8 @@ export class TaskListComponent implements OnInit {
   // taskExample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed leo neque, lacinia id dapibus ac, hendrerit sit amet nisl. Etiam pulvinar eros ut nunc tristique, in viverra ipsum feugiat. Nunc hendrerit blandit nisl vulputate consectetur. Vestibulum et faucibus leo, sit amet sodales ex. Quisque id tellus dolor. Nullam est nisi, malesuada sit amet arcu eu, luctus suscipit tortor. Mauris sodales posuere magna, dapibus condimentum libero tristique a. Cras nec lacus at metus varius porta mattis vitae eros. Mauris tempor urna vitae nulla imperdiet feugiat. Proin vulputate eget nulla nec aliquet. Morbi pulvinar lacinia augue. Curabitur mattis malesuada nunc, a vestibulum enim convallis eget. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.';
 
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class TaskListComponent implements OnInit {
   }
 
   completeAllTasksOnList(id: string) {
-    
+
     let taskListDetails: TaskList = {
       id: '',
       name: '',
@@ -49,7 +51,7 @@ export class TaskListComponent implements OnInit {
       status: TaskListStatus.New,
       tasks: []
     }
-    
+
     this.taskService.getTaskListById(id).subscribe({
       next: (res) => {
 
@@ -64,7 +66,7 @@ export class TaskListComponent implements OnInit {
               // this.router.navigate(['task-list', taskListDetails.id]);
             }
           }
-        })      
+        })
       }
     });
   }
@@ -100,15 +102,18 @@ export class TaskListComponent implements OnInit {
           }
         });
       }
-    });  
+    });
   }
-  
+
   deleteTaskList(index: number) {
-    if(this.taskLists[index])
-    this.taskService.deleteTaskListById(this.taskLists[index]).subscribe({
-      next: (res) => {
-        window.location.reload();
+    if (confirm(this.translateService.instant('Alert.deleteTaskList'))) {
+      if (this.taskLists[index]) {
+        this.taskService.deleteTaskListById(this.taskLists[index]).subscribe({
+          next: (res) => {
+            window.location.reload();
+          }
+        })
       }
-    })
+    }
   }
 }

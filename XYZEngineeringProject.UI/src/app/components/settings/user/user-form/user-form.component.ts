@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Roles } from './../../../../models/roles.enum';
 import { DepartmentService } from './../../../../services/department/department.service';
 import { Department } from './../../../../models/department.model';
@@ -54,17 +55,15 @@ export class UserFormComponent implements OnInit {
     return this.userForm.get('roles') as FormArray
   }
 
-  formMode = FormMode.Add
+  formMode = FormMode.Add;
   FormMode = FormMode;
-
-  allDepartments: Department[] = []
-  userDepartments: Department[] = []
-  allRoles: Roles[] = []
+  isPasswordVisible: boolean = false;
+  allDepartments: Department[] = [];
+  userDepartments: Department[] = [];
+  allRoles: Roles[] = [];
   userRoles: Roles[] = [];
-
   userId?: string | null;
-
-  index:number
+  index: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -72,7 +71,8 @@ export class UserFormComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private authorizationService: AuthorizationService,
-    private departmentService: DepartmentService
+    private departmentService: DepartmentService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -118,7 +118,6 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     this.updateUserDetails();
-    
     if (this.formMode == FormMode.Add) {
       this.addUser();
     }
@@ -132,6 +131,8 @@ export class UserFormComponent implements OnInit {
   }
 
   addUser() {
+    console.log(this.userDetails);
+
     this.userService.addAppUser(this.userDetails).subscribe({
       next: (res) => {
         this.router.navigate(['settings/users']);
@@ -155,13 +156,13 @@ export class UserFormComponent implements OnInit {
     this.userForm.patchValue({
       id: this.userDetails.id,
       userUserName: this.userDetails.userName,
-      userPassword: this.userDetails.passwordHash,
+      userPassword: '',
       name: this.userDetails.name,
       surname: this.userDetails.surname,
       pesel: this.userDetails.pesel?.toString(),
       addressHome: this.userDetails.address?.addressHome,
-      // addressPost: this.userDetails.address.addressPost,
-      // phone: this.userDetails.address.phone.toString(),
+      addressPost: this.userDetails.address?.addressPost,
+      phone: this.userDetails.address?.phone.toString(),
       newRole: this.allRoles[0]
     });
     const controls = this.userRoles.map(role => {
@@ -179,14 +180,19 @@ export class UserFormComponent implements OnInit {
     return (this.router.url.indexOf(text) > -1);
   }
 
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
   deleteRole(index: number)
   {
-    this.userService.deleteAppUserRole(this.userDetails,this.userRoles[index]).subscribe({
-      next: (res) => {
-        window.location.reload();
-      }
-    })
-
+    if(confirm(this.translateService.instant('Alert.deleteRole'))) {
+      this.userService.deleteAppUserRole(this.userDetails,this.userRoles[index]).subscribe({
+        next: (res) => {
+          window.location.reload();
+        }
+      })
+    }
   }
 
   addRole()

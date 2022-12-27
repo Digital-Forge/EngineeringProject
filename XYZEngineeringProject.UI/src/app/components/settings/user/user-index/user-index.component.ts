@@ -21,6 +21,7 @@ export class UserIndexComponent implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         this.users = res;
+        console.log(res);
       },
       error: (res) => {
       }

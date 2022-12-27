@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Client } from './../../../models/client.model';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,10 @@ import { empty } from 'rxjs';
 export class ClientComponent implements OnInit {
 
   clients: Client[] = [];
-  constructor(private clientService: ClientService) { }
+  constructor(
+    private clientService: ClientService,
+    private translateService: TranslateService
+    ) { }
 
   ngOnInit(): void {
     this.clientService.getAllClients().subscribe({
@@ -27,17 +31,18 @@ export class ClientComponent implements OnInit {
     client.isContactsVisible = !client.isContactsVisible;
   }
 
-  removeClient(client:Client) {
-    console.log(client);
-    this.clientService.deleteClient(client).subscribe({
-      next: (res) => {
-        window.location.reload();
-      },
-      error: (error) => {
-        let msg = 'Error'
-        window.alert(msg);
-      }
-    })
+  removeClient(client: Client) {
+    if (confirm(this.translateService.instant('Alert.deleteClient') + client.name + "?")) {
+      this.clientService.deleteClient(client).subscribe({
+        next: (res) => {
+          window.location.reload();
+        },
+        error: (error) => {
+          let msg = 'Error'
+          window.alert(msg);
+        }
+      })
+    }
   }
 
 }

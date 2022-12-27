@@ -1,17 +1,15 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using XYZEngineeringProject.Domain.Models;
-using XYZEngineeringProject.Application;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using XYZEngineeringProject.Infrastructure.Utils;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Text.Json;
-using Microsoft.AspNetCore.Http.Json;
+using System.Text.Json.Serialization;
+using XYZEngineeringProject.Application;
 using XYZEngineeringProject.Application.Middleware;
+using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +23,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false) // change
     .AddEntityFrameworkStores<Context>();
 
-builder.Services.AddControllersWithViews()
-    .AddFluentValidation(fv => fv.DisableDataAnnotationsValidation = true);
+builder.Services.AddControllersWithViews();
 
 // DependencyInjection
 builder.Services.AddApplication();
@@ -90,7 +87,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors(x => 
+app.UseCors(x =>
     x.AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());

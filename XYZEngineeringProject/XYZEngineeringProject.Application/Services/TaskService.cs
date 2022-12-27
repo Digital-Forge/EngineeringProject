@@ -9,18 +9,19 @@ using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Application.Services
 {
     public class TaskService : ITaskService
     {
         private readonly ITaskRepository _taskRepository;
-        private readonly IMapper _mapper;
+        private readonly Context _context;
 
-        public TaskService(ITaskRepository taskRepository, IMapper mapper)
+        public TaskService(ITaskRepository taskRepository, Context context)
         {
             _taskRepository = taskRepository;
-            _mapper = mapper;
+            _context = context;
         }
 
         public bool AddTask(TaskVM taskRequest)
@@ -68,7 +69,25 @@ namespace XYZEngineeringProject.Application.Services
             task.Deadline = editTaskRequest.Deadline;
             task.IsComplete = editTaskRequest.IsComplete;
 
-            return _taskRepository.Update(task);
+            var status = _taskRepository.Update(task);
+
+            if (status)
+            {
+                if (task.ListOfTasksId != null && task.ListOfTasksId != Guid.Empty)
+                {
+                    var isNoComplete = _taskRepository
+                        .GetListOfTasksByIdAsQuerable(task.ListOfTasksId.Value)
+                        .SelectMany(sm => sm.Task).Any(a => !a.IsComplete);
+
+                    if (!isNoComplete)
+                    {
+                        var list = _taskRepository.GetListOfTasksById(task.ListOfTasksId.Value);
+                        list.Status = StatusListOfTask.Finish;
+                        _taskRepository.Update(list);
+                    }
+                }
+            }
+            return status;
         }
 
 
@@ -138,9 +157,7 @@ namespace XYZEngineeringProject.Application.Services
                 {
                     EditTask(taskVM);
                 }
-                
             }
-
             return _taskRepository.Update(list);
         }
 

@@ -1,4 +1,4 @@
-import { DateShort } from './../../../shared/pipes/dateShort.pipe';
+import { TranslateService } from '@ngx-translate/core';
 import { Task } from 'src/app/models/task.model';
 import { Priority } from './../../../models/priority.enum';
 import { TaskList } from './../../../models/task.model';
@@ -46,6 +46,7 @@ export class TaskListFormNewComponent implements OnInit {
         private route: ActivatedRoute,
         private taskService: TaskService,
         private router: Router,
+        private translateService: TranslateService
     ) { }
 
     ngOnInit(): void {
@@ -147,16 +148,14 @@ export class TaskListFormNewComponent implements OnInit {
     }
 
     removeListTask(index: number) {
-
-        // removeListTask(index: number) {
-        //     this.tasks.removeAt(index);
-        // }
+     if(confirm(this.translateService.instant('Alert.deleteTask'))) {
         if (this.editMode == true && this.taskListDetails.tasks)
             this.taskService.deleteTaskById(this.taskListDetails.tasks[index]).subscribe({
                 next: (res) => {
                 }
             })
         this.tasks.removeAt(index);
+     }
     }
 
     onSubmit() {

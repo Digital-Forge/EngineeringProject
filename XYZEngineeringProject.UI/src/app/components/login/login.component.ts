@@ -36,5 +36,9 @@ export class LoginComponent implements OnInit {
         document.getElementById('login-spinner')?.classList.remove('d-none');
         this.authorizationService.login(this.login);        
     }
-
+    
+    changeLanguage(language: string) {
+        localStorage.setItem('language', language);
+        window.location.reload();
+    }    
 }

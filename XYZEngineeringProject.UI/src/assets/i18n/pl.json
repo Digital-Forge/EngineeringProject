@@ -2,13 +2,18 @@
     "Authorization": {
         "noAccess": "Nie masz dostępu do tej strony."
     },
+    "Other": {
+        "commingSoon": "Ta strona będzie dostępna wkrótce"
+    },
     "Login": {
         "login": "Logowanie",
         "rememberMe": "Zapamiętaj mnie",
         "signIn": "Zaloguj",
         "email": "Email",
         "password": "Hasło",
-        "wrongLoginOrPassword": "Nieprawidłowy login lub hasło"
+        "wrongLoginOrPassword": "Nieprawidłowy login lub hasło",
+        "noAccount": "Twoja firma nie ma jeszcze konta?",
+        "registerNow": "Załóż konto teraz!"
     },
     "Alert": {
         "deleteContactPerson": "Czy na pewno chcesz usunąć osobę ",
@@ -17,6 +22,7 @@
         "deleteDirectory": "Czy na pewno chcesz usunąć katalog?",
         "deleteNote": "Czy na pewno chcesz usunąć notatkę ",
         "deleteTaskList": "Czy na pewno chcesz usunąć listę zadań?",
+        "deleteTask": "Czy na pewno chcesz usunąć zadanie?",
         "deleteRole": "Czy na pewno chcesz usunąć rolę?"
 
     },
@@ -29,15 +35,17 @@
         "restore": "Przywróć",
         "addTaskList": "Dodaj listę zadań",
         "editTaskList": "Edytuj listę zadań",
+        "deleteTaskList": "Usuń listę zadań",
         "addTask": "Dodaj zadanie",
         "editTask": "Edytuj zadanie",
         "showTask": "Pokaż zadanie",
+        "deleteTask": "Usuń zadanie",
         "completeTaks": "Ukończ zadanie",
         "addClient": "Dodaj klienta",
         "editClient": "Edytuj klienta",
         "showClient": "Pokaż klienta",
         "showClientContacts": "Pokaż osoby",
-        "removeClientContact": "Usuń kontakt",
+        "deleteClientContact": "Usuń kontakt",
         "addNote": "Dodaj notatkę",
         "editNote": "Edytuj notatkę",
         "showNote": "Pokaż notatkę",
@@ -120,7 +128,8 @@
         "project": "Projekt",
         "status": "Status",
         "noTasksYet": "Nie dodano jeszcze zadań",
-        "add": "Dodaj listę zadań"
+        "add": "Dodaj listę zadań",
+        "edit": "Edytuj listę zadań"
     },
     "TaskListStatus": {
         "New": "Nowe",

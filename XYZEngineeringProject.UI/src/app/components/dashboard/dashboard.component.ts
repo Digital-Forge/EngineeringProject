@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
     public noFutureTasks: Task[] = [];
 
     taskPriorities = Object.values(Priority).filter(value => typeof value === "string")
+    public tasks: Task[] = [];
     public notes: Note[] = [];  
     public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
     public messages: [] = []
@@ -89,6 +90,8 @@ export class DashboardComponent implements OnInit {
                 tasks: Task[], notes: Note[], user: User
             }) => {
                 this.user = res.user;
+                this.tasks = res.tasks;
+                this.notes = res.notes;
 
                 res.tasks.forEach((task: Task) => {
                     if(!task.isComplete) {
@@ -139,7 +142,6 @@ export class DashboardComponent implements OnInit {
                     }                
                 });
                 
-                this.notes = res.notes;
              }
             });
         

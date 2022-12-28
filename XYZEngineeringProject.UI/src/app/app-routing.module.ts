@@ -1,3 +1,4 @@
+import { ForumComponent } from './components/forum/forum.component';
 import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
 import { DocumentComponent } from './components/document/document.component';
 import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
@@ -63,12 +64,18 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuard]
   },
+  // {
+  //   path: 'calendar',
+  //   children: [
+  //     { path: '', component: CalendarComponent },
+  //   ],
+  //   canActivate: [AuthGuard]
+  // },
   {
-    path: 'calendar',
-    children: [
-      { path: '', component: CalendarComponent },
-    ],
+    path: 'forum',
+    component: ForumComponent,
     canActivate: [AuthGuard]
+    
   },
   {
     path: 'settings',
@@ -92,13 +99,15 @@ const routes: Routes = [
           { path: '', component: UserIndexComponent }
         ]
       }
-    ]
+    ],
+    canActivate: [AuthGuard]
   },
   {
     path: 'documents',
     children: [
-      {path:'', component:DocumentComponent},
-    ]
+      {path:'', component: DocumentComponent},
+    ],
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -111,7 +120,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomePageComponent
+    component: LoginComponent
   }
 ];
 

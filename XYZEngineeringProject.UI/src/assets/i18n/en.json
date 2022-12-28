@@ -2,13 +2,18 @@
     "Authorization": {
         "noAccess": "You don't have access to this page."
     },
+    "Other": {
+        "commingSoon": "This page will be available soon"
+    },
     "Login": {
         "login": "Sign in",
         "rememberMe": "Remember me",
         "signIn": "Sign in",
         "email": "Email",
         "password": "Password",
-        "wrongLoginOrPassword": "Incorrect login or password"
+        "wrongLoginOrPassword": "Incorrect login or password",
+        "noAccount": "You company doesn't have an account?",
+        "registerNow": "Sign up now!"
     },
     "Alert": {
         "deleteContactPerson": "Are you sure you want to delete person ",
@@ -17,6 +22,7 @@
         "deleteDirectory": "Are you sure you want to delete directory?",
         "deleteNote": "Are you sure you want to delete note ",
         "deleteTaskList": "Are you sure you want to delete task list?",
+        "deleteTask": "Are you sure you want to delete task?",
         "deleteRole": "Are you sure you want to delete role?"
 
     },
@@ -29,15 +35,17 @@
         "restore": "Restore",
         "addTaskList": "Add task list",
         "editTaskList": "Edit task list",
+        "deleteTaskList": "Delete task list",
         "addTask": "Add task",
         "editTask": "Edit task",
+        "deleteTask": "Delete task",
         "showTask": "Show task",
         "completeTaks": "Complete task",
         "addClient": "Add client",
         "editClient": "Edit client",
         "showClient": "Show client",
         "showClientContacts": "Show people",
-        "removeClientContact": "Delete contact",
+        "deleteClientContact": "Delete contact",
         "addNote": "Add note",
         "editNote": "Edit note",
         "showNote": "Show note",
@@ -120,7 +128,8 @@
         "project": "Project",
         "status": "Status",
         "noTasksYet": "No tasks have been added yet.",
-        "add": "Add task list"
+        "add": "Add task list",
+        "edit": "Edit task list"
     },
     "TaskListStatus": {
         "New": "New",

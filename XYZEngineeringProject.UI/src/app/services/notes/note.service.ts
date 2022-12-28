@@ -11,7 +11,10 @@ export class NoteService {
 
   baseApiUrl: string = environment.baseApiUrl;
   emptyGuid: string = environment.emptyGuid;
-  constructor(private http: HttpClient) { }
+  
+  constructor(
+    private http: HttpClient
+  ) {}
 
   getAllNotes(): Observable<Note[]> {
     return this.http.get<Note[]>(this.baseApiUrl + 'Note/GetAllNotes')

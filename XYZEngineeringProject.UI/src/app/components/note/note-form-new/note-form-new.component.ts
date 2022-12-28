@@ -73,17 +73,24 @@ export class NoteFormNewComponent implements OnInit {
     this.noteService.addNote(this.noteDetails).subscribe({
       next: (res) => {
         this.router.navigate(['note']);
+      },
+      error: (res) => {
+        window.location.reload();
       }
     });  
   }
+
   saveChanges() {
     this.noteService.saveChanges(this.noteDetails).subscribe({
       next: (res) =>
       {
         if(res == true)
         {
-          window.location.reload();
+          this.router.navigate(['note']);
         }
+      },
+      error: (res) => {
+        window.location.reload();
       }
     });
   }

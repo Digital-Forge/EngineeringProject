@@ -34,9 +34,10 @@ import { UserFormComponent } from './components/settings/user/user-form/user-for
 import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocumentComponent } from './components/document/document.component';
-import { DateCustom } from './shared/pipes/dateLong.pipe';
-import { DateShort } from './shared/pipes/dateShort.pipe';
+import { DateCustom } from './shared/pipes/dateCustom.pipe';
 import { UserIndexComponent } from './components/settings/user/user-index/user-index.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ForumComponent } from './components/forum/forum.component';
 
 @NgModule({
   declarations: [
@@ -68,8 +69,9 @@ import { UserIndexComponent } from './components/settings/user/user-index/user-i
     UserViewComponent,
     DocumentComponent,
     DateCustom,
-    DateShort,
-    UserIndexComponent
+    UserIndexComponent,
+    RegisterComponent,
+    ForumComponent
   ],
   imports: [
     BrowserModule,

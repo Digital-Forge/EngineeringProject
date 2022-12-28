@@ -32,7 +32,7 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
+    color: var(--primary);
 }
 
 a:hover {
@@ -468,6 +468,10 @@ thead {
     color: var(--primary);
 }
 
+.messages {
+    height: calc(100vh - 125px);
+}
+
 .shadow-primary {
     box-shadow: var(--primary-box-shadow);
 }
@@ -528,6 +532,10 @@ td {
 @media only screen and (max-width: 768px) {
     .card-columns{ 
         columns: 1;
+    }
+
+    .messages {
+        height: calc(100vh - 180px);
     }
 }
 

@@ -1,6 +1,6 @@
 <div class="mx-5 my-0 px-5 py-5 h-100 shadow-primary">
     <h1 class="float-start">
-        <a [routerLink]="['/notes']">{{ 'Note.notes' | translate }}</a>
+        <a [routerLink]="['/note']">{{ 'Note.notes' | translate }}</a>
         <i class="bi bi-arrow-right-short mx-1"></i>
     </h1>
     <h1 class="mb-3">{{ noteDetails.title | slice: 0:30}}<span *ngIf="noteDetails.title!.length >= 30">...</span></h1>

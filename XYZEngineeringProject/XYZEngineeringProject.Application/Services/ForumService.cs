@@ -72,12 +72,23 @@ namespace XYZEngineeringProject.Application.Services
                 .Select(s => new ForumMessageVM
                 {
                     Id = s.Id,
-                    Author = s.Author,
+                    Author = GetAuthor(s.CreateBy),
+                    AuthorId = s.CreateBy,
                     Text = s.Content,
                     Date = s.CreateDate
                 }).ToList(); ;
                 
             return query;
+        }
+
+        public string GetAuthor(Guid? id)
+        {
+            if (id == null) return string.Empty;
+            
+            var user = _context.AppUsers.FirstOrDefault(x => x.Id == id);
+            if (user == null) return string.Empty;
+
+            return user.Firstname + " " + user.Surname;
         }
 
         public void PostMessage(PostForumMessageVM post)
@@ -88,7 +99,7 @@ namespace XYZEngineeringProject.Application.Services
 
             _forumRepository.AddMessage(new ForumMessage
             {
-                Author = user.Firstname + " " + user.Surname,
+                CreateBy = post.UserId,
                 Content = post.Text,
                 ForumId = post.ForumId,
             });

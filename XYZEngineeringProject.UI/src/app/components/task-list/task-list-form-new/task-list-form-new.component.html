@@ -63,7 +63,7 @@
                                     <label class="form-label" for="task-{{i}}-priority">{{ 'Task.priority' | translate
                                         }}</label>
                                     <select class="form-select" id="task-{{i}}-priority" formControlName="priority">
-                                        <option *ngFor="let priority of taskPriorities">
+                                        <option *ngFor="let priority of taskPriorities" [value]="priority">
                                             {{ 'Priority.' + priority | translate }}
                                         </option>
                                     </select>

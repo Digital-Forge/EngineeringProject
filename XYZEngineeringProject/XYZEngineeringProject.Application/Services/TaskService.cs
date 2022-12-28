@@ -177,6 +177,7 @@ namespace XYZEngineeringProject.Application.Services
                     AssigneeUserId = e.AssignToUserId,
                     AssignerUserId = e.AssignFromUserId,
                     ListOfTasksId = e.ListOfTasksId,
+                    IsComplete= e.IsComplete,
                 }).ToList();
         }
 

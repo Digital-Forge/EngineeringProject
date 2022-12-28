@@ -8,6 +8,7 @@ using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
 using XYZEngineeringProject.Domain.Models.EntityUtils;
 using XYZEngineeringProject.Infrastructure.Utils;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace XYZEngineeringProject.Infrastructure.Repositories
 {
@@ -17,13 +18,21 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
         private readonly InfrastructureUtils _infrastructureUtils;
         private readonly Logger _logger;
         private readonly IFileRepository _fileRepository;
+        private readonly IForumRepository _forumRepository;
 
-        public DepartmentRepository(Context context, IHttpContextAccessor httpContextAccessor, Logger logger, IFileRepository fileRepository)
+        public DepartmentRepository(
+            Context context, 
+            IHttpContextAccessor 
+            httpContextAccessor, 
+            Logger logger, 
+            IFileRepository fileRepository,
+            IForumRepository forumRepository)
         {
             _context = context;
             _infrastructureUtils = new InfrastructureUtils(context, httpContextAccessor);
             _logger = logger;
             _fileRepository = fileRepository;
+            _forumRepository = forumRepository;
         }
 
         public Guid Add(Department department)
@@ -32,6 +41,13 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.SaveChanges();
 
             _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add department - {department.Id}");
+
+            //create forum
+            department.Forum = _forumRepository.AddForum(new Domain.Models.Forum.Forum
+            {
+                Name = department.Name,
+            });
+            _context.SaveChanges();
 
             //create directory from departmnet
             _fileRepository._CreateDepartmentDirectory(_context.Departments.FirstOrDefault(x => x.Id == department.Id));
@@ -45,6 +61,14 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.SaveChanges();
 
             _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add department - {department.Id}");
+
+            //create forum
+            department.Forum = _forumRepository.AddForum(new Domain.Models.Forum.Forum
+            {
+                Name = department.Name,
+                CompanyId = company.Id,
+            });
+            _context.SaveChanges();
 
             //create directory from departmnet
             _fileRepository._CreateDepartmentDirectory(_context.Departments.FirstOrDefault(x => x.Id == department.Id), company);

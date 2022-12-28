@@ -75,7 +75,7 @@
                             <ng-container [formGroupName]="i">
                                 <tr>
                                     <td>{{role}}</td>
-                                    <td><button (click)="deleteRole(i)">DeleteRole</button></td>
+                                    <td><button (click)="deleteRole(i)" *ngIf="role.toString()!='EMPLOYEE'">DeleteRole</button></td>
                                 </tr>
                             </ng-container>
                         </div>

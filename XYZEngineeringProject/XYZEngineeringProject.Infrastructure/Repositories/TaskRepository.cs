@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -289,12 +290,24 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
             try
             {
-                var buff = GetListOfTasksById(listOfTasksId);
+                //var buff = GetListOfTasksById(listOfTasksId);
+                var buff = _context.ListTasks
+                    .Include(i => i.Task.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete))
+                    .FirstOrDefault(x =>
+                        x.Id == listOfTasksId
+                        && x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete);
+
                 if (buff == null)
                 {
                     _logger.Log(Logger.Source.Repository, Logger.InfoType.Warning, "Trying to remove list of tasks, that doesn't exist or is deleted");
                     return false;
                 }
+
+                if (buff.Task != null)
+                    foreach (var item in buff.Task)
+                    {
+                        _context.Tasks.Remove(item);
+                    }
 
                 _context.ListTasks.Remove(buff);
                 _context.SaveChanges();

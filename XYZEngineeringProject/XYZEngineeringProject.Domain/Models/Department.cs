@@ -12,6 +12,8 @@ namespace XYZEngineeringProject.Domain.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public Guid? Manager { get; set; }
+        public Guid? Forum { get; set; }
 
         //relations
         public Guid? IdDepartmentUp { get; set; }

@@ -10,7 +10,6 @@ namespace XYZEngineeringProject.Domain.Models.Forum
     public class ForumMessage : ISoftDataEntity
     {
         public Guid Id { get; set; }
-        public string Author { get; set; }
         public string Content { get; set; }
 
         //Relation

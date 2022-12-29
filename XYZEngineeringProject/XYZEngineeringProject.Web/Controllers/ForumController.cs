@@ -26,7 +26,7 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(PostForumMessageVM post)
+        public IActionResult Post([FromBody] PostForumMessageVM post)
         {
             _forumService.PostMessage(post);
             return Ok();
@@ -51,6 +51,12 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             _forumService.DeleteForumMessage(id);
             return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult GetUserForums(Guid userId)
+        {
+            return Ok(_forumService.GetUserForums(userId));
         }
     }
 }

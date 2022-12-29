@@ -12,10 +12,8 @@ import { GlobalComponent } from './global-component';
 export class AppComponent implements OnInit {
 
   isLogout: boolean;
-
   title = 'XYZEngineeringProject.UI';
   isAuthorized: boolean = false;
-
   language = GlobalComponent.language;
 
   constructor(
@@ -23,14 +21,9 @@ export class AppComponent implements OnInit {
     private authorizationService: AuthorizationService,
     private router: Router
   ) {
-    //TODO ustawić tłumaczenie na wybrane przez użytkownika
     this.translate.addLangs(['en', 'pl']);
-    console.log(localStorage.getItem('language'));
-    this.translate.use(localStorage.getItem('language') || 'en');
-  
-    
+    this.translate.use(localStorage.getItem('language') || 'en');   
   }
-
 
   ngOnInit(): void {
    this.router.events.subscribe(val => {

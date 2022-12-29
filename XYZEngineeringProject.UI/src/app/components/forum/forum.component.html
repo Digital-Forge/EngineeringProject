@@ -4,7 +4,7 @@
                 {{ 'Forum.messages' | translate }}
             </h1>
         <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-md-end">
-            <button class="btn btn-md btn-primary pe-4 py-2" (click)="reload()">                
+            <button class="btn btn-md btn-primary py-auto" (click)="reload()">                
                 <i class="bi bi-arrow-repeat me-2"></i>{{ 'Button.refresh' | translate }}
             </button>
         </div>
@@ -31,9 +31,9 @@
             </div>
         </div>
         <!-- p-4 -->
-        <div class="col-12 col-md-10 border-panel-right p-3 pb-1">
-            <div *ngFor="let message of forumMessages">
-                <div class="row">
+        <div class="col-12 col-md-10 border-panel-right p-3 pb-1" id="messages">
+            <div *ngFor="let message of forumMessages; let i=index">
+                <div class="row" id="message-{{i}}">
                     <div class="col">
                         <div class="d-inline-block" [ngClass]="{'float-start': !isAuthor(message), 'float-end': isAuthor(message)}">
                             <span class="text-secondary ps-3">{{ message.author }} {{ message.date | dateCustom: 'shortTime'}}</span>
@@ -47,20 +47,22 @@
             <div *ngIf="forumMessages.length == 0" class="text-center">
                 <p>{{ 'Forum.noMessages' | translate }}</p>
             </div>
-
-                <form [formGroup]="messageForm" (ngSubmit)="sendMessageToForum()" class="message-form mt-3 me-5">
-                    <div class="row">
-                        <div class="col-11">
-                            <textarea type="text" name="message" id="message" formControlName="message" class="form-control" placeholder="{{ 'Forum.typeYourMessage' | translate }}"></textarea>
-                        </div>
-                        <div class="col-1 my-auto">
-                            <button title="{{ 'Button.sendMessage' | translate }}" class="btn btn-md btn-success" type="submit"><i class="bi bi-send"></i></button>
-                        </div>
-                    </div>
-                </form>
         </div>
     </div>
-
+    <div class="row message-form mx-1 mt-3">
+        <div class="col col-md-10 offset-md-2">
+            <form [formGroup]="messageForm" (ngSubmit)="sendMessageToForum()">
+                <div class="row">
+                    <div class="col-11">
+                        <input type="text" name="message" id="message" formControlName="message" class="form-control" placeholder="{{ 'Forum.typeYourMessage' | translate }}">
+                    </div>
+                    <div class="col-1 my-auto">
+                        <button title="{{ 'Button.sendMessage' | translate }}" class="btn btn-md btn-success" type="submit"><i class="bi bi-send"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <ng-template #notAuthorized>

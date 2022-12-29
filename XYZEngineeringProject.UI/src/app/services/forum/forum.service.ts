@@ -17,6 +17,13 @@ export class ForumService {
     private http: HttpClient
   ) {}
 
+  getAllMessages(): Observable <Message[]> {
+    return this.http.get<Message[]>(this.baseApiUrl + 'Forum/GetAllForumsContent');
+  }
+  getAllForums(): Observable <Forum[]> {
+    return this.http.get<Forum[]>(this.baseApiUrl + 'Forum/GetAllForums');
+  }
+
   getForumById(id: string): Observable<Forum> {
     return this.http.get<Forum>(this.baseApiUrl + 'Forum/GetForum/' + id);
   }

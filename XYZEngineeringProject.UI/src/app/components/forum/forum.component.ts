@@ -2,7 +2,7 @@ import { NewMessage } from './../../models/forum.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from './../../services/user/user.service';
 import { ForumService } from './../../services/forum/forum.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { forkJoin, map, first } from 'rxjs';
 import { Forum, Message } from 'src/app/models/forum.model';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.css']
 })
-export class ForumComponent implements OnInit {
+export class ForumComponent implements OnInit, AfterViewChecked {
 
   public isAuthorized: boolean = false;    
 
@@ -23,7 +23,7 @@ export class ForumComponent implements OnInit {
   public activeForumId: string;
 
   public messageForm = this.fb.group({
-    text: ['', Validators.required]
+    message: ['', Validators.required]
   });
 
   constructor(
@@ -47,6 +47,8 @@ export class ForumComponent implements OnInit {
 
   ngOnInit(): void {
 
+  
+
     forkJoin([
       //tu będzie getForumsByUser czy coś takiego, a w nim będzie dopiero pobierane forum
       this.forumService.getForumById('241d4f03-40c8-4b30-3e14-08dae81f7b7a'),
@@ -61,6 +63,7 @@ export class ForumComponent implements OnInit {
       next: (res: {
         forum1: Forum, forum2: Forum
       }) => {
+
         this.forums.push(res.forum1);
         this.forums.push(res.forum2);
         
@@ -71,6 +74,13 @@ export class ForumComponent implements OnInit {
         console.log(res);
       }
     })
+  }
+
+  ngAfterViewChecked() {
+    var element = document.getElementById('messages');
+    if (element) {
+      element.scrollTop = Math.max(0, element.scrollHeight - element.offsetHeight);
+    }
   }
 
   isAuthor(message: Message) {
@@ -95,12 +105,10 @@ export class ForumComponent implements OnInit {
 
   sendMessageToForum() {
     let message: NewMessage = {
-      text: this.messageForm.controls.text.value || 'No message',
+      text: this.messageForm.controls.message.value || 'No message',
       forumId: this.activeForumId,
       userId: this.currentUserId
     };
-
-    console.log(message);
 
     this.forumService.addMessage(message).subscribe({
       next: (res) => {

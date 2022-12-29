@@ -1,3 +1,4 @@
+import { ForumService } from './../../services/forum/forum.service';
 import { forkJoin, map, first } from 'rxjs';
 import { User } from './../../models/user.model';
 import { NoteService } from './../../services/notes/note.service';
@@ -9,6 +10,7 @@ import { Task } from 'src/app/models/task.model';
 import { Note } from 'src/app/models/note.model';
 import { NoteStatus } from 'src/app/models/noteStatus.enum';
 import { Priority } from 'src/app/models/priority.enum';
+import { Forum, Message } from 'src/app/models/forum.model';
 
 @Component({
     selector: 'dashboard',
@@ -36,7 +38,7 @@ export class DashboardComponent implements OnInit {
     public tasks: Task[] = [];
     public notes: Note[] = [];  
     public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
-    public messages: [] = []
+    public messages: Message[] = []
     public today: Date;
     public user: User = {
         id: '',
@@ -57,7 +59,8 @@ export class DashboardComponent implements OnInit {
         private authorizationService: AuthorizationService,
         private router: Router,
         private taskService: TaskService,
-        private noteService: NoteService
+        private noteService: NoteService,
+        private forumService: ForumService
     ) {
         this.today = new Date();
 
@@ -78,20 +81,22 @@ export class DashboardComponent implements OnInit {
         forkJoin([
             this.taskService.getAllTasks(),
             this.noteService.getAllNotes(),
+            this.forumService.getAllMessages(),
             this.authorizationService.currentUser()
         ]).pipe(map(([ 
-                tasks, notes, user
+                tasks, notes, messages, user
             ]) => {
             return {
-                tasks, notes, user
+                tasks, notes, messages, user
             };
         })).pipe(first()).subscribe({
             next: (res: {
-                tasks: Task[], notes: Note[], user: User
+                tasks: Task[], notes: Note[], messages: Message[], user: User
             }) => {
                 this.user = res.user;
                 this.tasks = res.tasks;
                 this.notes = res.notes;
+                this.messages = res.messages;
 
                 res.tasks.forEach((task: Task) => {
                     if(!task.isComplete) {

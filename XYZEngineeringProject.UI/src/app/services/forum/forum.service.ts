@@ -1,3 +1,4 @@
+import { NewMessage } from './../../models/forum.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -24,4 +25,7 @@ export class ForumService {
     return this.http.get<Message[]>(this.baseApiUrl + 'Forum/GetForumContent/' + id);
   }
   
+  addMessage(message: NewMessage): Observable<NewMessage> {
+    return this.http.post<NewMessage>(this.baseApiUrl + 'Forum/Post', message);
+  }
 }

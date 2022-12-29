@@ -21,7 +21,7 @@
     --secondary-box-shadow: 0px 0px 10px 1px var(--secondary);
     --gray-box-shadow: 0px 0px 10px -2px var(--gray);
     --note-border: 1px solid var(--light-gray);
-    --background-color: #ffffff;
+    --background-color: white;
 }
 
 body {
@@ -129,7 +129,7 @@ thead {
 }
 
 .bg-primary {
-    background-color: var(--gray) !important;
+    background-color: var(--primary) !important;
 }
 
 .bg-secondary {
@@ -271,6 +271,19 @@ thead {
 
 .br-5 {
     border-radius: 5px;
+}
+
+.br-ts-5 {
+    border-top-left-radius: 5px;
+}
+.br-te-5 {
+    border-top-right-radius: 5px;
+}
+.br-be-5 {
+    border-bottom-right-radius: 5px;
+}
+.br-bs-5 {
+    border-bottom-left-radius: 5px;
 }
 
 .btn {
@@ -468,9 +481,66 @@ thead {
     color: var(--primary);
 }
 
-.messages {
-    height: calc(100vh - 125px);
+.border-panels {
+    /* position: absolute;
+    top: 8rem;
+    bottom: 2rem;
+    left: calc(65px + 2.5rem);
+    right: 2.5rem; */
+    height: calc(100vh - 160px);
+
+
 }
+.border-panel-right,
+.border-panel-left {
+    border-style: solid;
+    border-color: var(--light-gray);
+}
+
+.border-panel-left {
+    border-width: 1px 0px 1px 1px;
+    border-radius: 5px 0 0 5px;
+}
+
+.border-panel-right {
+    position: relative;
+    border-width: 1px;
+    border-radius: 0 5px 5px 0;
+}
+
+.message-form {
+    position: absolute;
+    bottom: 0.5rem;
+    width: calc(100% - 1rem);
+}
+
+#message {
+    height: 2rem;
+    max-height: 5rem;
+}
+
+/* breakpoint sm */
+@media only screen and (max-width: 768px) {
+    .border-panels { 
+        height: fit-content;
+    }
+
+    .border-panel-left {
+        border-width: 1px 1px 0px 1px;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .border-panel-right {
+        border-radius: 0 0 5px;
+    }
+    
+    .message-form {
+        position: relative;
+        width: auto;
+
+    }
+}
+
 
 .shadow-primary {
     box-shadow: var(--primary-box-shadow);
@@ -532,10 +602,6 @@ td {
 @media only screen and (max-width: 768px) {
     .card-columns{ 
         columns: 1;
-    }
-
-    .messages {
-        height: calc(100vh - 180px);
     }
 }
 

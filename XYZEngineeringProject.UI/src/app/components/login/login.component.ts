@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         this.authorizationService.getMyId().subscribe({
             next: (res) => {
-                this.router.navigate(['/']);
+                this.router.navigate(['/dashboard']);
             },
             error: (res) => {
             }

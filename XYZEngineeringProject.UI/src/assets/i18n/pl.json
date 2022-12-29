@@ -56,7 +56,9 @@
         "deleteUser": "Usuń użytkownika",
         "save": "Zapisz",
         "deleteClient": "Usuń klienta",
-        "previousDirectory": "Poprzedni katalog"
+        "previousDirectory": "Poprzedni katalog",
+        "refresh": "Odśwież",
+        "sendMessage": "Wyślij wiadomość"
     },
     "Menu": {
         "dashboard": "Pulpit",
@@ -100,7 +102,7 @@
         "address": "Adres",
         "nip": "NIP",
         "addContact": "Dodaj osobę",
-        "noContactsYet":   "Nie dodano jeszcze osób"
+        "noContactsYet":  "Nie dodano jeszcze osób"
     },
     "ClientFilters": {
         "firstName": "Imię"
@@ -170,6 +172,13 @@
         "changeName": "Zmień nazwę",
         "deleteDirectory": "Usuń katalog",
         "deleteFile": "Usuń plik"
+    },
+    "Forum": {
+        "messages": "Wiadomości",
+        "forums": "Grupy",
+        "noForums": "Nie należysz jeszcze do żadnej grupy",
+        "noMessages": "Ta grupa nie ma jeszcze żadnych wiadomości",
+        "typeYourMessage": "Napisz wiadomość..."
     },
     "Settings": {
         "settings": "Ustawienia",

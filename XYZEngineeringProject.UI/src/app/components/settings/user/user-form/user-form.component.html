@@ -63,25 +63,21 @@
                     <input class="form-control" type="text" id="addressPost" formControlName="addressPost">
                 </div>
             </div>
-            <h3 class="form-label">{{'User.roles' | translate}}</h3>
-            <ng-container formArrayName="roles" *ngIf="formMode==FormMode.Edit">
-                <div class="row">
+            <h3 class="form-label" *ngIf="formMode==FormMode.Edit">{{'User.roles' | translate}}</h3>
+                <div class="row" *ngIf="formMode==FormMode.Edit">
                     <table>
                         <tr>
                             <th>Role</th>
                             <th>action</th>                            
                         </tr>
                     <div *ngFor="let role of userRoles; let i = index">
-                            <ng-container [formGroupName]="i">
                                 <tr>
                                     <td>{{role}}</td>
                                     <td><button (click)="deleteRole(i)" *ngIf="role.toString()!='EMPLOYEE'">DeleteRole</button></td>
                                 </tr>
-                            </ng-container>
                         </div>
                     </table>
                 </div>
-            </ng-container>
             <div *ngIf="allRoles.length>0">
                 <select formControlName="newRole" id="newRole">
                     <option *ngFor="let role of allRoles">

@@ -9,4 +9,6 @@ public class DepartmentVM
 {
     public string Id { get; set; }
     public string Name { get; set; }
+    public string ManagerId { get; set; }
+    public ICollection<AppUserVM> Users { get; set; }
 }

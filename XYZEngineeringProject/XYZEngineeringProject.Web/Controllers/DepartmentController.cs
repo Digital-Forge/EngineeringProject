@@ -20,4 +20,10 @@ public class DepartmentController : Controller
     {
         return Ok(_departmentService.GetAllDepartments().ToList());
     }
+
+    [HttpGet]
+    public IActionResult GetDepartmentById(string id)
+    {
+        return Ok(_departmentService.GetAllDepartments().FirstOrDefault(x => x.Id == id));
+    }
 }

@@ -1,11 +1,10 @@
+import { DepartmentIndexComponent } from './components/settings/department/department-index/department-index.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
 import { DocumentComponent } from './components/document/document.component';
 import { UserFormComponent } from './components/settings/user/user-form/user-form.component';
-import { UserComponent } from './components/settings/user/user.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
 import { ClientComponent } from './components/client/clientIndex/client-index.component';
 import { ClientViewComponent } from './components/client/clientView/client-view.component';
@@ -22,6 +21,8 @@ import { TaskListFormNewComponent } from './components/task-list/task-list-form-
 import { TaskListViewComponent } from './components/task-list/view/task-list-view.component';
 import { TaskFormNewComponent } from './components/task-list/task/form-new/task-form-new.component';
 import { UserIndexComponent } from './components/settings/user/user-index/user-index.component';
+import { DepartmentViewComponent } from './components/settings/department/department-view/department-view.component';
+import { DepartmentFormComponent } from './components/settings/department/department-form/department-form.component';
 
 const routes: Routes = [
 
@@ -93,10 +94,10 @@ const routes: Routes = [
       {
         path: 'departments',
         children: [
-          { path: 'add', component: UserFormComponent },
-          { path: 'edit/:id', component: UserFormComponent },
-          { path: ':id', component: UserViewComponent },
-          { path: '', component: UserIndexComponent }
+          { path: 'add', component: DepartmentFormComponent },
+          { path: 'edit/:id', component: DepartmentFormComponent },
+          { path: ':id', component: DepartmentViewComponent },
+          { path: '', component: DepartmentIndexComponent }
         ]
       }
     ],

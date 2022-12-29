@@ -19,4 +19,13 @@ export class DepartmentService {
   getAllDepartments(): Observable<Department[]> {
     return this.http.get<Department[]>(this.baseApiUrl+'Department/GetAllDepartments')
   }
+  getDepartmentById(id:string): Observable<Department> {
+    return this.http.get<Department>(this.baseApiUrl+'Department/GetDepartmentById/' + id);
+  }
+  addDepartment(department:Department): Observable<Department>{
+    return this.http.post<Department>(this.baseApiUrl+'Department/AddDepartment',department);
+  }
+  editDepartment(department:Department):Observable<Department>{
+    return this.http.put<Department>(this.baseApiUrl+'Department/EditDepartment',department);
+  }
 }

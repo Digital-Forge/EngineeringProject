@@ -39,7 +39,7 @@
                                     <!-- TODO wyciągnąć isComplete z backendu -->
                                     <div *ngIf="taskList.tasks?.length; else noTasks">
                                         <div *ngFor="let task of taskList.tasks">
-                                            <i class="bi" [ngClass]="{ 'bi-check-square': task.isComplete, 'bi-square': !task.isComplete}" (click)="uncompleteTask(task.id)"></i>
+                                            <i class="bi" [ngClass]="{ 'bi-check-square': task.isComplete, 'bi-square': !task.isComplete}" (click)="toggleCompleteTask(task.id)"></i>
                                             <span class="ms-2" [ngClass]="{ 'text-decoration-line-through': task.isComplete}">
                                                 {{ task.title }}  <span class="text-nowrap">({{ task.deadline | dateCustom: 'dayMonth' }})</span>
                                             </span>

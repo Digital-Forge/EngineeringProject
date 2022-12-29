@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,6 +109,24 @@ namespace XYZEngineeringProject.Application.Services
                 Content = post.Text,
                 ForumId = post.ForumId,
             });
+        }
+
+        public Dictionary<Guid, string> GetUserForums(Guid userId)
+        {
+            var listForums = _context.AppUsers
+                .Include(i => i.UsersToDepartments)
+                    .ThenInclude(i => i.Departments)
+                .Where(x => x.Id == userId)
+                .SelectMany(x => x.UsersToDepartments)
+                .Select(x => x.Departments)
+                .Select(x => x.Forum)
+                .ToList();
+
+            var forums = _context.Forums
+                .Where(x => listForums.Any(a => a.Value == x.Id))
+                .ToDictionary(d => d.Id, d => d.Name);
+
+            return forums;
         }
     }
 }

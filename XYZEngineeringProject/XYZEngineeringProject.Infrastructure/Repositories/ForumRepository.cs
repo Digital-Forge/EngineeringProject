@@ -31,6 +31,10 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public Guid? AddMessage(ForumMessage post)
         {
+            if (post == null) return null;
+            if (post.Content == null)
+                post.Content = "";
+
             _context.ForumMessages.Add(post);
             _context.SaveChanges();
             return post.Id;

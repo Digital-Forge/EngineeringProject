@@ -26,7 +26,7 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(PostForumMessageVM post)
+        public IActionResult Post([FromBody] PostForumMessageVM post)
         {
             _forumService.PostMessage(post);
             return Ok();

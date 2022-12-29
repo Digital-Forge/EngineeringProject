@@ -72,12 +72,17 @@ namespace XYZEngineeringProject.Application.Services
                 .Select(s => new ForumMessageVM
                 {
                     Id = s.Id,
-                    Author = "autor", //GetAuthor(s.CreateBy),
+                    //Author = GetAuthor(s.CreateBy),
                     AuthorId = s.CreateBy,
                     Text = s.Content,
                     Date = s.CreateDate
                 }).ToList(); ;
-                
+
+            foreach (var item in query)
+            {
+                item.Author = GetAuthor(item.AuthorId);
+            }
+
             return query;
         }
 

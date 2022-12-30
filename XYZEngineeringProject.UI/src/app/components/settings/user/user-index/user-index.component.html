@@ -25,11 +25,12 @@
                     <td>{{ user.surname || '-' }}</td>
                     <td>{{ user.userName || '-' }}</td>
                     <td></td>
+                    <td></td>
                     <!-- <td>{{ user.department || '-' }}</td> -->
-                    <td>
+                    <!-- <td>
                         <div *ngFor="let userRole of user.roles">{{ ('Role.' + userRole | translate) }}</div>
                         <div *ngIf="user.roles.length == 0">-</div>
-                    </td>
+                    </td> -->
                     <td class="text-end ">
                         <button title="{{ 'Button.editUser' | translate}}" class="btn btn-sm btn-secondary me-2"
                             [routerLink]="['/settings/users', 'edit', user.id]"><i

@@ -178,8 +178,12 @@
         "messages": "Messages",
         "forums": "Groups",
         "noForums": "You are not in any group yet",
-        "noMessages": "This group has no messages yet",
-        "typeYourMessage": "Type your message here..."
+        "noMessages": "This group has no messages yet or no older messages could be found",
+        "typeYourMessage": "Type your message here...",
+        "loadMore": "See older messages",
+        "loadNewest": "Skip to newest messages",
+        "autoRefresh": "Automatic messages refresh every {{interval}} minutes.",
+        "refreshNow": "Refresh messages now"
     },
     "Settings": {
         "settings": "Settings",

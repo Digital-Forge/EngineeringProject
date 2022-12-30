@@ -53,8 +53,8 @@ namespace XYZEngineeringProject.Web.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public IActionResult GetUserForums(Guid userId)
+        [HttpGet("Forum/GetUserForums/{userId}")]
+        public IActionResult GetUserForums([FromRoute] Guid userId)
         {
             return Ok(_forumService.GetUserForums(userId));
         }

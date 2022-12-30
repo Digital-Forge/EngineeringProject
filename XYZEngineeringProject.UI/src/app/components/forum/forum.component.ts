@@ -1,126 +1,162 @@
+import { User } from './../../models/user.model';
 import { NewMessage } from './../../models/forum.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from './../../services/user/user.service';
 import { ForumService } from './../../services/forum/forum.service';
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
-import { forkJoin, map, first } from 'rxjs';
+import { forkJoin, map, first, interval, Subscription } from 'rxjs';
 import { Forum, Message } from 'src/app/models/forum.model';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-forum',
-  templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.css']
+    selector: 'app-forum',
+    templateUrl: './forum.component.html',
+    styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit, AfterViewChecked {
 
-  public isAuthorized: boolean = false;    
+    public isAuthorized: boolean = false;
 
-  public forums: Forum[] = [];
-  public forumMessages: Message[] = [];
-  public currentUserId: any;
-  public activeForumId: string;
+    public forums: Forum[] = [];
+    public forumMessages: Message[] = [];
+    public messagesLoadCount: number = 20;
+    public messagesSkipCount: number = 0;;
+    public currentUser: User;
+    public activeForumId: string;
+    public refreshInterval: any;
+    public intervalMinutes: number = 5;
 
-  public messageForm = this.fb.group({
-    message: ['', Validators.required]
-  });
+    public messageForm = this.fb.group({
+        message: ['', Validators.required]
+    });
 
-  constructor(
-    private authorizationService: AuthorizationService,
-    private router: Router,
-    private forumService: ForumService,
-    private fb: FormBuilder
-  ) {
-    this.router.events.subscribe(val => {
-      this.authorizationService.getMyId().subscribe({
-          next: (res) => {
-              this.isAuthorized = true;
-              this.currentUserId = res;
-          },
-          error: () => {
-              this.isAuthorized = false;
-          }
-      });
-  });
-   }
-
-  ngOnInit(): void {
-
-  
-
-    forkJoin([
-      //tu będzie getForumsByUser czy coś takiego, a w nim będzie dopiero pobierane forum
-      this.forumService.getForumById('241d4f03-40c8-4b30-3e14-08dae81f7b7a'),
-      this.forumService.getForumById('241c9f03-40c8-4b30-3e14-08dae81f7b7a'),
-    ]).pipe(map(([
-      forum1, forum2
-    ]) => {
-      return {
-        forum1, forum2
-      };
-    }) ).pipe(first()).subscribe({
-      next: (res: {
-        forum1: Forum, forum2: Forum
-      }) => {
-
-        this.forums.push(res.forum1);
-        this.forums.push(res.forum2);
-        
-        this.activeForumId = this.forums[0].id;
-        this.showForum(this.forums[0]);
-      },
-      error: (res) => {
-        console.log(res);
-      }
-    })
-  }
-
-  ngAfterViewChecked() {
-    var element = document.getElementById('messages');
-    if (element) {
-      element.scrollTop = Math.max(0, element.scrollHeight - element.offsetHeight);
+    constructor(
+        private authorizationService: AuthorizationService,
+        private router: Router,
+        private forumService: ForumService,
+        private fb: FormBuilder
+    ) {
+        this.router.events.subscribe(val => {
+            this.authorizationService.getMyId().subscribe({
+                next: (res) => {
+                    this.isAuthorized = true;
+                },
+                error: () => {
+                    this.isAuthorized = false;
+                }
+            });
+        });
     }
-  }
 
-  isAuthor(message: Message) {
-    return message.authorId == this.currentUserId;
-  }
-
-  showForum(forum: Forum) {
-    this.forumService.getForumMessagesByForumId(forum.id).subscribe({
-      next: (res) => {
-        this.forumMessages = res;
-        this.activeForumId = forum.id;
-      },
-      error: (res) => {
-        console.log(res);
+    ngOnDestroy(): void {
+        clearInterval(this.refreshInterval);
       }
-    })
-  }
 
-  isForumActive(forum: Forum) {
-    return forum.id == this.activeForumId;
-  }
+    ngOnInit(): void {
+        this.getData();
+           
+        this.refreshInterval = setInterval(()=>{
+            this.getData();
+        }, this.intervalMinutes * 6000);
+    }
 
-  sendMessageToForum() {
-    let message: NewMessage = {
-      text: this.messageForm.controls.message.value || 'No message',
-      forumId: this.activeForumId,
-      userId: this.currentUserId
-    };
+    getData() {
+        this.authorizationService.currentUser().subscribe({
+            next: (res) => {
+                this.currentUser = res;
 
-    this.forumService.addMessage(message).subscribe({
-      next: (res) => {
-        window.location.reload();
-      },
-      error: (res) => {
-        console.log(res);
-      }
-    })
-  }
+                this.forumService.getUserForums(this.currentUser.id).subscribe({
+                    next: (res) => {
+                        this.forums = res;
+                        this.activeForumId = this.forums[0].id;
+                        this.showForum(this.activeForumId);
+                    },
+                    error: (res) => {
+                        console.log(res);
+                    }
+                });
+            },
+            error: (res) => {
+                console.log(res);
+            }
+        });
 
-  reload() {
-    window.location.reload();
-  }
+    }
+
+    ngAfterViewChecked() {
+        if (this.messagesLoadCount <= 20 ) {
+            var element = document.getElementById('messages');
+            if (element) {
+                element.scrollTop = Math.max(0, element.scrollHeight - element.offsetHeight);
+            }
+        }
+    }
+
+    isAuthor(message: Message) {
+        return message.authorId == this.currentUser.id;
+    }
+
+    showForum(forumId: string) {
+        this.forumService.getForumMessagesByForumId(forumId, this.messagesLoadCount, this.messagesSkipCount).subscribe({
+            next: (res) => {
+                this.forumMessages = res;
+                this.activeForumId = forumId;
+            },
+            error: (res) => {
+                console.log(res);
+            }
+        })
+    }
+
+    isForumActive(forum: Forum) {
+        return forum.id == this.activeForumId;
+    }
+
+    sendMessageToForum() {
+        let message: NewMessage = {
+            text: this.messageForm.controls.message.value || '',
+            forumId: this.activeForumId,
+            userId: this.currentUser.id
+        };
+
+        this.forumService.addMessage(message).subscribe({
+            next: (res) => {
+                window.location.reload();
+            },
+            error: (res) => {
+                console.log(res);
+            }
+        })
+    }
+
+    loadOlderMessages() {
+        this.messagesLoadCount += 20;
+        
+        if (this.messagesLoadCount > 500) {
+            this.messagesSkipCount += 250;
+        }
+
+        if (this.messagesLoadCount > 20) {
+            document.getElementById("see-new-messages")?.classList.remove("d-none");
+        }
+
+        this.showForum(this.activeForumId);
+    }
+
+    loadNewestMessages() {
+        var element = document.getElementById('messages');
+        if (element) {
+            element.scrollTop = Math.max(0, element.scrollHeight - element.offsetHeight);
+        }
+
+        // this.messagesLoadCount = 20;
+        // this.messagesSkipCount = 0;
+        // this.showForum(this.activeForumId);
+        document.getElementById("see-new-messages")?.classList.add("d-none");
+    }
+
+    reload() {
+        this.showForum(this.activeForumId);
+    }
 }

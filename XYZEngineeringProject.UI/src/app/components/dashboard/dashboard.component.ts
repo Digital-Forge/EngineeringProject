@@ -38,9 +38,10 @@ export class DashboardComponent implements OnInit {
     public tasks: Task[] = [];
     public notes: Note[] = [];  
     public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
-    public messages: Message[] = []
+    public forums: Forum[] = [];
+    public messages: Message[] = [];
     public today: Date;
-    public user: User = {
+    public currentUser: User = {
         id: '',
         name: '',
         passwordHash: '',
@@ -79,78 +80,90 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit(): void {
        
-        forkJoin([
-            this.taskService.getAllTasks(),
-            this.noteService.getAllNotes(),
-            this.forumService.getAllMessages(),
-            this.authorizationService.currentUser()
-        ]).pipe(map(([ 
-                tasks, notes, messages, user
-            ]) => {
-            return {
-                tasks, notes, messages, user
-            };
-        })).pipe(first()).subscribe({
-            next: (res: {
-                tasks: Task[], notes: Note[], messages: Message[], user: User
-            }) => {
-                this.user = res.user;
-                this.tasks = res.tasks;
-                this.notes = res.notes;
-                this.messages = res.messages;
+        this.authorizationService.currentUser().subscribe({
+            next: (res) => {
+                this.currentUser = res;
 
-                res.tasks.forEach((task: Task) => {
-                    if(!task.isComplete) {
-                        if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.High]) {
-                            if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.highPastTasks.push(task);
+
+                forkJoin([
+                    this.taskService.getAllTasks(),
+                    this.noteService.getAllNotes(),
+                    this.forumService.getUserForums(this.currentUser.id),
+                ]).pipe(map(([
+                    tasks, notes, forums
+                ]) => {
+                    return {
+                        tasks, notes, forums
+                    };
+                })).pipe(first()).subscribe({
+                    next: (res: {
+                        tasks: Task[], notes: Note[], forums: Forum[]
+                    }) => {
+                        this.tasks = res.tasks;
+                        this.notes = res.notes;
+                        this.forums = res.forums;
+
+                        this.forums.forEach((forum: Forum) => {
+                            this.forumService.getForumMessagesByForumId(forum.id).subscribe({
+                                next: (res) => {
+                                    forum.messages = res;
+                                }
+                            });
+                        });
+
+                        res.tasks.forEach((task: Task) => {
+                            if (!task.isComplete) {
+                                if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.High]) {
+                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.highPastTasks.push(task);
+                                    }
+                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                        this.highTodayTasks.push(task);
+                                    }
+                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.highFutureTasks.push(task);
+                                    }
+                                }
+                                else if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.Medium]) {
+                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.mediumPastTasks.push(task);
+                                    }
+                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                        this.mediumTodayTasks.push(task);
+                                    }
+                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.mediumFutureTasks.push(task);
+                                    }
+                                }
+                                else if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.Low]) {
+                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.lowPastTasks.push(task);
+                                    }
+                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                        this.lowTodayTasks.push(task);
+                                    }
+                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.lowFutureTasks.push(task);
+                                    }
+                                }
+                                else if ((this.taskPriorities[task.priority] == this.taskPriorities[Priority.No]) || (task.priority == undefined)) {
+                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.noPastTasks.push(task);
+                                    }
+                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                        this.noTodayTasks.push(task);
+                                    }
+                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                        this.noFutureTasks.push(task);
+                                    }
+                                }
                             }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
-                                this.highTodayTasks.push(task);
-                            }
-                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.highFutureTasks.push(task);
-                            }
-                        }
-                        else  if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.Medium]) {
-                            if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.mediumPastTasks.push(task);
-                            }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
-                                this.mediumTodayTasks.push(task);
-                            }
-                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.mediumFutureTasks.push(task);
-                            }
-                        }
-                        else if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.Low]) {
-                            if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.lowPastTasks.push(task);
-                            }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
-                                this.lowTodayTasks.push(task);
-                            }
-                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.lowFutureTasks.push(task);
-                            }
-                        }
-                        else  if ((this.taskPriorities[task.priority] == this.taskPriorities[Priority.No]) || (task.priority == undefined)) {
-                            if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.noPastTasks.push(task);
-                            }
-                            else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
-                                this.noTodayTasks.push(task);
-                            }
-                            else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
-                                this.noFutureTasks.push(task);
-                            }
-                        }
-                    }                
+                        });
+
+                    }
                 });
-                
-             }
-            });
-        
+            }
+        })
        
     }
 

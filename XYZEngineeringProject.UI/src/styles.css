@@ -244,6 +244,10 @@ thead {
     border-radius: 100%;
 }
 
+.text-primary {
+    color: var(--primary) !important;
+}
+
 .text-success {
     color: var(--success-primary) !important;
 }
@@ -271,6 +275,10 @@ thead {
 
 .br-5 {
     border-radius: 5px;
+}
+
+.br-15 {
+    border-radius: 15px;
 }
 
 .br-ts-5 {
@@ -496,6 +504,7 @@ thead {
 .border-panel-left {
     border-style: solid;
     border-color: var(--light-gray);
+    max-height: calc(100vh - 15rem);
 }
 
 .border-panel-left {
@@ -511,15 +520,25 @@ thead {
 }
 
 .message-form {
-    position: relative;
-    /* bottom: 0.5rem; */
-    /* width: calc(100% - 1rem); */
+    position: absolute;
+    bottom: 0.5rem;
+    width: calc(100% - 5rem);
 }
 
 #message {
     height: 2rem;
     max-height: 5rem;
 }
+/* 
+#see-new-messages {
+    position: absolute; 
+    bottom: 0;  
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 100%;
+} */
 
 @media only screen and (max-width: 768px) {
     .border-panels { 

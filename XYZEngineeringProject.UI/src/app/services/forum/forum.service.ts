@@ -1,12 +1,13 @@
+import { User } from './../../models/user.model';
 import { NewMessage } from './../../models/forum.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Forum, Message } from 'src/app/models/forum.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+providedIn: 'root'
 })
 export class ForumService {
   
@@ -17,19 +18,21 @@ export class ForumService {
     private http: HttpClient
   ) {}
 
-  getAllMessages(): Observable <Message[]> {
-    return this.http.get<Message[]>(this.baseApiUrl + 'Forum/GetAllForumsContent');
-  }
-  getAllForums(): Observable <Forum[]> {
-    return this.http.get<Forum[]>(this.baseApiUrl + 'Forum/GetAllForums');
+  getUserForums(userId: string): Observable<Forum[]> {
+    console.log('service ' + userId);
+
+    return this.http.get<Forum[]>(this.baseApiUrl + 'Forum/GetUserForums/' + userId);
   }
 
-  getForumById(id: string): Observable<Forum> {
-    return this.http.get<Forum>(this.baseApiUrl + 'Forum/GetForum/' + id);
+  getForumById(forumId: string): Observable<Forum> {
+    return this.http.get<Forum>(this.baseApiUrl + 'Forum/GetForum/' + forumId);
   }
 
-  getForumMessagesByForumId(id: string): Observable<Message[]> {
-    return this.http.get<Message[]>(this.baseApiUrl + 'Forum/GetForumContent/' + id);
+  getForumMessagesByForumId(forumId: string, take: number = 20, skip: number = 0): Observable<Message[]> {
+  
+    let queryParams = new HttpParams({ fromObject: {"id": forumId, "take": take, "skip": skip}});
+
+    return this.http.get<Message[]>(this.baseApiUrl + 'Forum/GetForumContent', { params: queryParams });
   }
   
   addMessage(message: NewMessage): Observable<NewMessage> {

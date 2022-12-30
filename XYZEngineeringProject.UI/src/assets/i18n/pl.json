@@ -178,8 +178,12 @@
         "messages": "Wiadomości",
         "forums": "Grupy",
         "noForums": "Nie należysz jeszcze do żadnej grupy",
-        "noMessages": "Ta grupa nie ma jeszcze żadnych wiadomości",
-        "typeYourMessage": "Napisz wiadomość..."
+        "noMessages": "Ta grupa nie ma jeszcze żadnych wiadomości lub nie znaleziono starszych wiadmości",
+        "typeYourMessage": "Napisz wiadomość...",
+        "loadMore": "Zobacz starsze wiadmości",
+        "loadNewest": "Przejdź do najnowszych",
+        "autoRefresh": "Automatyczne pobieranie nowych wiadmości co {{interval}} minut.",
+        "refreshNow": "Pobierz nowe wiadomości teraz"
     },
     "Settings": {
         "settings": "Ustawienia",

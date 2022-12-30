@@ -208,7 +208,7 @@
         "postAddress": "Post adress",
         "department": "Department",
         "role": "Role",
-        "roles": "User's roles"
+        "roles": "Roles"
     },
     "Role": {
         "EMPLOYEE": "Employee",

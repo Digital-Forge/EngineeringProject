@@ -207,7 +207,7 @@
         "postAddress": "Adres korespondencyjny",
         "department": "Dział",
         "role": "Rola",
-        "roles": "Role użytkownika"
+        "roles": "Role"
     },
     "Role": {
         "EMPLOYEE": "Pracownik",

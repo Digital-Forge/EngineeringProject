@@ -35,8 +35,8 @@ export class UserFormComponent implements OnInit {
 
   userForm = this.fb.group({
     id: [''],
-    userUserName: [''],
-    userPassword: [''],
+    userUserName: ['', Validators.required],
+    userPassword: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('.*[A-Za-z].*')])],
     name: [''],
     surname: ['', Validators.required],
     pesel: [''],
@@ -44,11 +44,16 @@ export class UserFormComponent implements OnInit {
     addressPost: [''],
     phone: [''],
     departments: this.fb.array([]),
+    roles: this.fb.array([]),
     newRole: ['']
   });
 
   get userFormDepartments() {
     return this.userForm.get('departments') as FormArray
+  }
+
+  get userFormRoles() {
+    return this.userForm.get('roles') as FormArray
   }
 
   formMode = FormMode.Add;
@@ -57,9 +62,11 @@ export class UserFormComponent implements OnInit {
   allDepartments: Department[] = [];
   userDepartments: Department[] = [];
   allRoles: Roles[] = [];
+  allRolesNoAdmin: Roles[] = [];
   userRoles: Roles[] = [];
   userId?: string | null;
   currentUser: User;
+  isCurrentUserAdmin: boolean = false;
   index: number;
 
   constructor(
@@ -92,7 +99,8 @@ export class UserFormComponent implements OnInit {
 
           this.authorizationService.currentUser().subscribe({
             next: (res) => {
-                this.currentUser = res          
+                this.currentUser = res;
+                this.isCurrentUserAdmin = this.currentUser.roles.includes('ADM');          
               }
           });
 
@@ -110,14 +118,15 @@ export class UserFormComponent implements OnInit {
                     this.allRoles = this.allRoles.filter(s => s!=role)
                   });
 
-                  console.log(this.currentUser.roles.includes('ADM'));
-                  if (!this.currentUser.roles.includes('ADM')) {
-                    this.allRoles.forEach(role => {
-                        this.allRoles = this.allRoles.filter(s => s.toString() != 'ADM')
-                      });
-                      console.log(this.allRoles);
-                  }
 
+                    if (!this.isCurrentUserAdmin) {
+                        this.allRoles.forEach(role => {
+                            this.allRolesNoAdmin = this.allRoles.filter(s => s.toString() != 'ADM')
+                        });
+                        console.log()
+                        this.allRoles = this.allRolesNoAdmin;
+                    }
+  
                   this.updateUserForm();
                 }
               })
@@ -132,25 +141,31 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.updateUserDetails();
+
     if (this.formMode == FormMode.Add) {
       this.addUser();
     }
     else if (this.formMode == FormMode.Edit) {
-      this.saveChanges();
+        this.saveChanges();
     }
-  }
+}
 
   saveChanges() {
     throw new Error('Method not implemented.');
   }
 
   addUser() {
-    console.log(this.userDetails);
 
     this.userService.addAppUser(this.userDetails).subscribe({
       next: (res) => {
-        this.router.navigate(['settings/users']);
+        console.log(this.userDetails);
+
+        this.router.navigate(['/settings/users']);
+      },
+      error: (res) => {
+        console.log(res);
       }
     });
   }
@@ -180,6 +195,15 @@ export class UserFormComponent implements OnInit {
       phone: this.userDetails.address?.phone.toString(),
       newRole: this.allRoles[0]
     });
+    const controls = this.userRoles.map(role => {
+      return this.fb.group({
+        name: [role]
+      })
+    })
+    controls?.forEach(control => {
+      this.userFormRoles.push(control)
+      
+    })
   }
 
   isInUrl(text: string) {
@@ -197,18 +221,20 @@ export class UserFormComponent implements OnInit {
         next: (res) => {
           window.location.reload();
         }
-      })
+      });
     }
   }
 
   addRole()
   {
-    if (this.userForm.controls.newRole.value)
-    this.userService.addAppUserRole(this.userDetails,this.userForm.controls.newRole.value).subscribe({
-      next: (res)=>{
-        window.location.reload();
-      }
-    })
-  }
+    console.log(this.userForm.controls.newRole.value);
 
+    if (this.userForm.controls.newRole.value) {
+        this.userService.addAppUserRole(this.userDetails, this.userForm.controls.newRole.value).subscribe({
+            next: (res) => {
+                window.location.reload();
+            }
+        })
+    }
+  }
 }

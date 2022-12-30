@@ -21,7 +21,15 @@ export class UserIndexComponent implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         this.users = res;
-        console.log(res);
+
+        this.users.forEach(user => {
+          this.userService.getAppUserRoles(user).subscribe({
+            next: (res) => {
+              user.roles = res;
+            }
+          })
+        });
+        
       },
       error: (res) => {
       }

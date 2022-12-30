@@ -18,6 +18,6 @@ namespace XYZEngineeringProject.Application.Interfaces
         void DeleteForum(Guid id);
         void DeleteForumMessage(Guid id);
 
-        Dictionary<Guid, string> GetUserForums(Guid userId);
+        List<ForumVM> GetUserForums(Guid userId);
     }
 }

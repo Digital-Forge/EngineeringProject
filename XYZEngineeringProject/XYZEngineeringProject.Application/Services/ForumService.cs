@@ -111,7 +111,7 @@ namespace XYZEngineeringProject.Application.Services
             });
         }
 
-        public Dictionary<Guid, string> GetUserForums(Guid userId)
+        public List<ForumVM> GetUserForums(Guid userId)
         {
             var listForums = _context.AppUsers
                 .Include(i => i.UsersToDepartments)
@@ -120,11 +120,16 @@ namespace XYZEngineeringProject.Application.Services
                 .SelectMany(x => x.UsersToDepartments)
                 .Select(x => x.Departments)
                 .Select(x => x.Forum)
+                .Where(x => x != null && x != Guid.Empty)
                 .ToList();
 
             var forums = _context.Forums
-                .Where(x => listForums.Any(a => a.Value == x.Id))
-                .ToDictionary(d => d.Id, d => d.Name);
+                .Where(x => listForums.Any(a => a == x.Id))
+                .Select(s => new ForumVM
+                {
+                    Id = s.Id,
+                    Name = s.Name
+                }).ToList();
 
             return forums;
         }

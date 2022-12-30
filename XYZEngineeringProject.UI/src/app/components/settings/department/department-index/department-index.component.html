@@ -1,0 +1,43 @@
+<div class="container-fluid my-5">
+    <div class="row mb-5">
+        <h1 class="col-lg-9">{{ 'Department.departments' | translate }}</h1>
+        <div class="col-lg-3 d-flex justify-content-end">
+            <button class="btn btn-md btn-primary pe-4 py-2" [routerLink]="['/settings/departments', 'add']">
+                <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addDepartment' | translate }}
+            </button>
+        </div>
+    </div>
+    <span class="table-responsive">
+        <table class="table" *ngIf="departments && departments.length >0">
+            <thead>
+                <tr>
+                    <th>{{ 'Department.name' | translate }}</th>
+                    <th>{{ 'Department.managerName' | translate }}</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let department of departments">
+                    <td>{{department.name}}</td>
+                    <td>{{department.managerId}}</td>
+
+                    <td class="text-end">
+                        <button title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
+                            [routerLink]="['/settings/departments', 'edit', department.id]">
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+                        <button title="{{ 'Button.showDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
+                            [routerLink]="['/settings/departments', department.id]">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                        <button *ngIf="canDelete(department)" title="{{ 'Button.deleteDepartment' | translate}}"
+                            class="btn btn-sm btn-danger-light me-2" (click)="deleteDepartment(department)"><i
+                                class="bi bi-trash3"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </span>
+    <p *ngIf="!departments || departments.length <= 0">{{ 'Departments.noDepartmentsFound' | translate }}</p>
+</div>
+<router-outlet></router-outlet>

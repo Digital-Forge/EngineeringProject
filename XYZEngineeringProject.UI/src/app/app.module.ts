@@ -38,6 +38,8 @@ import { DateCustom } from './shared/pipes/dateCustom.pipe';
 import { UserIndexComponent } from './components/settings/user/user-index/user-index.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForumComponent } from './components/forum/forum.component';
+import { DepartmentIndexComponent } from './components/settings/department/department-index/department-index.component';
+import { DepartmentFormComponent } from './components/settings/department/department-form/department-form.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,10 @@ import { ForumComponent } from './components/forum/forum.component';
     DateCustom,
     UserIndexComponent,
     RegisterComponent,
-    ForumComponent
+    ForumComponent,
+    UserIndexComponent,
+    DepartmentIndexComponent,
+    DepartmentFormComponent
   ],
   imports: [
     BrowserModule,

@@ -44,16 +44,11 @@ export class UserFormComponent implements OnInit {
     addressPost: [''],
     phone: [''],
     departments: this.fb.array([]),
-    roles: this.fb.array([]),
     newRole: ['']
   });
 
   get userFormDepartments() {
     return this.userForm.get('departments') as FormArray
-  }
-
-  get userFormRoles() {
-    return this.userForm.get('roles') as FormArray
   }
 
   formMode = FormMode.Add;
@@ -185,15 +180,6 @@ export class UserFormComponent implements OnInit {
       phone: this.userDetails.address?.phone.toString(),
       newRole: this.allRoles[0]
     });
-    const controls = this.userRoles.map(role => {
-      return this.fb.group({
-        name: [role]
-      })
-    })
-    controls?.forEach(control => {
-      this.userFormRoles.push(control)
-      
-    })
   }
 
   isInUrl(text: string) {

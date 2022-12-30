@@ -52,5 +52,11 @@ namespace XYZEngineeringProject.Web.Controllers
             _forumService.DeleteForumMessage(id);
             return Ok();
         }
+
+        [HttpGet]
+        public IActionResult GetUserForums(Guid userId)
+        {
+            return Ok(_forumService.GetUserForums(userId));
+        }
     }
 }

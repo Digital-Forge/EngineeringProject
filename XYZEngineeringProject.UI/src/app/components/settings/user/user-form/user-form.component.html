@@ -64,15 +64,16 @@
                 </div>
             </div>
 
-            <h3 class="form-label">{{'User.roles' | translate}}</h3>
+            <h3 class="form-label" *ngIf="formMode==FormMode.Edit">{{'User.roles' | translate}}</h3>
             <ng-container formArrayName="roles" *ngIf="formMode==FormMode.Edit">
                 <!-- <div class="row"> -->
-                    <table class="table">
+                    <table class="table">                                        
                         <thead>
-                        <tr>
-                            <th class="p-2">{{ 'User.role' | translate }}</th>
-                            <th></th>                            
-                        </tr>
+                            <tr>
+                                <th class="p-2">{{ 'User.role' | translate }}</th>
+                                <th></th>                            
+                            </tr>
+<<<<<<< HEAD
                         </thead>
                         <tbody>
                         <tr *ngFor="let role of userRoles; let i = index">
@@ -114,6 +115,21 @@
                 <div class="col-12 col-lg-2 text-end mt-3 mt-lg-0 pt-1">
                     <button class="btn btn-sm btn-success-light" (click)="addRole()">{{ 'Button.assignRole' | translate }}</button>
                 </div>
+                    <!-- <div *ngFor="let role of userRoles; let i = index">
+                                <tr>
+                                    <td>{{role}}</td>
+                                    <td><button (click)="deleteRole(i)" *ngIf="role.toString()!='EMPLOYEE'">DeleteRole</button></td>
+                                </tr>
+                        </div>
+                    </table>
+                </div>
+            <div *ngIf="allRoles.length>0">
+                <select formControlName="newRole" id="newRole">
+                    <option *ngFor="let role of allRoles">
+                        {{role.toString()}}
+                    </option>
+                </select>
+                <button (click)="addRole()">Add Role</button> -->
             </div>
 
             <div class="row">

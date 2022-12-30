@@ -54,7 +54,6 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             AddRole("MANAGEMENT");
             AddRole("MANAGER");
             AddRole("MODERATOR");
-            AddRole("EMPLOYEE");
 
             _context.LogicCompanies.Add(new Domain.Models.EntityUtils.LogicCompany { Name = "CompanyName" });
             _context.SaveChanges();

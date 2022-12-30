@@ -1,0 +1,29 @@
+<div class="container-fluid my-5">
+    <div *ngIf="formMode==FormMode.Edit; else header" class="row mb-5 text-center">
+        <h1 class="col-12">{{ 'Department.editDepartment' | translate }}</h1>
+    </div>
+    <ng-template #header>
+        <div class="row mb-3 text-center">
+            <h1 class="col-12">{{ 'Department.addDepartment' | translate }}</h1>
+        </div>
+    </ng-template>
+
+    <div class="col-8 offset-2 form">
+        <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="name" class="label-form">{{ 'Department.name' | translate }}</label>
+                    <input type="text" class="form-control" id="name" name="name" formControlName="name" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
+                    <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid" *ngIf="formMode==FormMode.Edit">{{
+                        'Button.save' | translate}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid" *ngIf="formMode==FormMode.Add">{{
+                        'Button.addDepartment' | translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

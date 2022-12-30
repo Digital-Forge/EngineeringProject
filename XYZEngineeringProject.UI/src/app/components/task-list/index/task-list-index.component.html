@@ -5,10 +5,13 @@
             <button class="btn btn-md btn-primary me-2" [routerLink]="['/task-list', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTaskList' | translate }}
             </button>
-            <button class="btn btn-md btn-primary" [routerLink]="['/task', 'add']">
+            <button *ngIf="taskLists.length > 0" class="btn btn-md btn-primary" [routerLink]="['/task', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTask' | translate }}
             </button>
         </div>
+    </div>
+    <div>
+        <p *ngIf="taskLists.length == 0">{{ 'TaskList.noTaskLists' | translate }}</p>
     </div>
     <div class="card-columns">
         <div *ngFor="let taskList of taskLists; let i = index">

@@ -83,7 +83,7 @@
         "todayTasks": "Dzisiejsze",
         "futureTasks": "Przyszłe",
         "latestNotes": "Najnowsze notatki",
-        "messages": "Wiadomości"
+        "messages": "Ostatnie wiadomości"
     },
     "Client": {
         "clients": "Klienci",
@@ -131,6 +131,7 @@
         "project": "Projekt",
         "status": "Status",
         "noTasksYet": "Nie dodano jeszcze zadań",
+        "noTaskLists": "Nie masz jeszcze żadnej listy zadań. Dodaj swoją pierwszą listę teraz!",
         "add": "Dodaj listę zadań",
         "edit": "Edytuj listę zadań"
     },

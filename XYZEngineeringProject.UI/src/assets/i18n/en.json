@@ -83,7 +83,7 @@
         "todayTasks": "Today",
         "futureTasks": "Future",
         "latestNotes": "Newest notes",
-        "messages": "Messages"
+        "messages": "Latest messages"
     },
     "Client": {
         "clients": "Clients",
@@ -131,6 +131,7 @@
         "project": "Project",
         "status": "Status",
         "noTasksYet": "No tasks have been added yet.",
+        "noTaskLists": "You don't have any task lists. Create one now!",
         "add": "Add task list",
         "edit": "Edit task list"
     },

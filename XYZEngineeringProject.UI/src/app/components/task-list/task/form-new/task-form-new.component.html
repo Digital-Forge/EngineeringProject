@@ -1,14 +1,16 @@
 <div class="container-fluid my-5">
-    <div *ngIf="formMode == FormMode.Edit; else header" class="row mb-5 text-center">
-        <h1 class="col-12">{{ 'Task.editTask' | translate }}</h1>
-    </div>   
-    <ng-template #header>
-        <div class="row mb-5 text-center">
-            <h1 class="col-12">{{ 'Task.addTask' | translate }}</h1>
-        </div>
-    </ng-template>
+    <span *ngIf="taskLists.length > 0">
+        <div *ngIf="formMode == FormMode.Edit; else header" class="row mb-5 text-center">
+            <h1 class="col-12">{{ 'Task.editTask' | translate }}</h1>
+        </div>   
+        <ng-template #header>
+            <div class="row mb-5 text-center">
+                <h1 class="col-12">{{ 'Task.addTask' | translate }}</h1>
+            </div>
+        </ng-template>
+    </span>
   
-    <div class="col-8 offset-2 form">
+    <div *ngIf="taskLists.length > 0" class="col-8 offset-2 form">
         <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
             <div class="row mb-3" *ngIf="formMode == FormMode.Add">
                 <div class="col">
@@ -56,5 +58,11 @@
                 </div>
             </div>  
         </form>
+    </div>
+    <div *ngIf="taskLists.length == 0" class="col-8 offset-2 text-center form">
+        <p>{{ 'TaskList.noTaskLists' | translate }}</p>
+        <button class="btn btn-md btn-primary" [routerLink]="['/task-list', 'add']">
+            <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTaskList' | translate }}
+        </button>
     </div>
 </div>

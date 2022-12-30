@@ -16,7 +16,7 @@
         <div class="col-12 col-lg-6">
             <div class="shadow-primary br-5 p-3 my-2 m-lg-0 h-100">
                 <h3>{{ "Dashboard.latestNotes" | translate }} ({{ notes.length }})</h3>
-                <div *ngFor="let note of notes | slice: 0:12">
+                <div *ngFor="let note of notes | slice: 0:10">
                     <span [routerLink]="['/note', note.id]" class="cursor-pointer">
                     <i class="bi" [ngClass]="{ 'bi-sticky': noteStatuses[note.noteStatus] == 'Own' || 'undefined',
                                                 'bi-briefcase': noteStatuses[note.noteStatus] == 'Department',
@@ -27,7 +27,7 @@
                     ({{ note.date | dateCustom: 'dayMonth' }})
                     </span>
                 </div>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end mt-3">
                     <button class="btn btn-sm btn-secondary" [routerLink]="['/note']">{{ 'Dashboard.seeAll' | translate
                         }}</button>
                 </div>
@@ -35,12 +35,16 @@
         </div>
         <div class="col-12 col-lg-6">
             <div class="shadow-primary br-5 p-3 my-2 m-lg-0 h-100">
-                <h3 [routerLink]="['/forum']" class="cursor-pointer">{{ "Dashboard.messages" | translate }} ({{ messages.length }})</h3>
-                <div *ngFor="let forum of forums">
-                    <span class="fw-bold">{{ forum.name | slice: 0:100 }}<span *ngIf="forum.name.length > 50">...</span></span>
-                    <div *ngFor="let message of forum.messages | slice: 0:10">
+                <h3 class="cursor-pointer">{{ "Dashboard.messages" | translate }}</h3>
+                <div *ngFor="let forum of forums" class="border br-5 p-2">
+                    <h4 class="border-bottom p-1">{{ forum.name | slice: 0:50 }}<span *ngIf="forum.name.length > 50">...</span></h4>
+                    <div *ngFor="let message of forum.messages | slice: 0:5">
                         <span class="text-secondary">({{message.author}} {{ message.date | dateCustom: 'shortTime'}})</span>  {{ message.text | slice: 0:200}}<span *ngIf="message.text.length > 50">...</span>
                     </div>
+                </div>
+                <div class="d-flex justify-content-end mt-3">
+                    <button class="btn btn-sm btn-secondary" [routerLink]="['/forum']">{{ 'Dashboard.seeAll' | translate
+                        }}</button>
                 </div>
             </div>
         </div>

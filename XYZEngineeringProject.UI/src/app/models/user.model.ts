@@ -7,5 +7,6 @@ export interface User {
     name: string,
     surname: string,
     pesel: string,
-    address: Address
+    address: Address,
+    roles: string[]
 }

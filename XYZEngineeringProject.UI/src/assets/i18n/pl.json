@@ -58,7 +58,8 @@
         "deleteClient": "Usuń klienta",
         "previousDirectory": "Poprzedni katalog",
         "refresh": "Odśwież",
-        "sendMessage": "Wyślij wiadomość"
+        "sendMessage": "Wyślij wiadomość",
+        "assignRole": "Przypisz rolę"
     },
     "Menu": {
         "dashboard": "Pulpit",
@@ -205,8 +206,15 @@
         "homeAddress": "Adres zamieszkania",
         "postAddress": "Adres korespondencyjny",
         "department": "Dział",
-        "role": "Stanowisko",
+        "role": "Rola",
         "roles": "Role użytkownika"
+    },
+    "Role": {
+        "EMPLOYEE": "Pracownik",
+        "MANAGEMENT": "Zarząd",
+        "MANAGER": "Kierownik",
+        "MODERATOR": "Moderator",
+        "ADM": "Administrator"
     },
     "Month": {
         "1": "stycznia",

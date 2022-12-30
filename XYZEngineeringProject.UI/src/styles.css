@@ -487,7 +487,7 @@ thead {
     /* bottom: 2rem; */
     /* left: calc(65px + 2.5rem); */
     /* right: 2.5rem; */
-    height: calc(100vh - 200px);
+    height: calc(100vh - 11rem);
     
 
 
@@ -523,7 +523,7 @@ thead {
 
 @media only screen and (max-width: 768px) {
     .border-panels { 
-        /* height: fit-content; */
+        height: fit-content;
     }
 
     .border-panel-left {

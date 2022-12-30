@@ -58,7 +58,8 @@
         "deleteClient": "Delete client",
         "previousDirectory": "Previous directory",
         "refresh": "Refresh",
-        "sendMessage": "Send message"
+        "sendMessage": "Send message",
+        "assignRole": "Assign role"
     },
     "Menu": {
         "dashboard": "Dashboard",
@@ -206,7 +207,15 @@
         "homeAddress": "Home adress",
         "postAddress": "Post adress",
         "department": "Department",
-        "role": "Role"
+        "role": "Role",
+        "roles": "User's roles"
+    },
+    "Role": {
+        "EMPLOYEE": "Employee",
+        "MANAGEMENT": "Management",
+        "MANAGER": "Manager",
+        "MODERATOR": "Moderator",
+        "ADM": "Administrator"
     },
     "Month": {
         "1": "January",

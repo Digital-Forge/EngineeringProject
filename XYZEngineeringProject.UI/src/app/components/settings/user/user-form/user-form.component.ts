@@ -29,7 +29,8 @@ export class UserFormComponent implements OnInit {
       addressHome: '',
       addressPost: '',
       phone: 0
-    }
+    },
+    roles: []
   }
 
   userForm = this.fb.group({
@@ -63,6 +64,7 @@ export class UserFormComponent implements OnInit {
   allRoles: Roles[] = [];
   userRoles: Roles[] = [];
   userId?: string | null;
+  currentUser: User;
   index: number;
 
   constructor(
@@ -85,12 +87,20 @@ export class UserFormComponent implements OnInit {
            next: (res) => {
              this.allRoles = res as Roles[]                              
            }
-          })
+          });
+
           this.departmentService.getAllDepartments().subscribe({
            next: (res) => {
              this.allDepartments = res          
            }
-          })
+          });
+
+          this.authorizationService.currentUser().subscribe({
+            next: (res) => {
+                this.currentUser = res          
+              }
+          });
+
           this.userService.getAppUser(this.userId).subscribe({
             next: (res) => {
 
@@ -100,9 +110,19 @@ export class UserFormComponent implements OnInit {
               this.userService.getAppUserRoles(this.userDetails).subscribe({
                 next: (res) => {
                   this.userRoles = res
+                  
                   this.userRoles.forEach(role => {
                     this.allRoles = this.allRoles.filter(s => s!=role)
-                  })
+                  });
+
+                  console.log(this.currentUser.roles.includes('ADM'));
+                  if (!this.currentUser.roles.includes('ADM')) {
+                    this.allRoles.forEach(role => {
+                        this.allRoles = this.allRoles.filter(s => s.toString() != 'ADM')
+                      });
+                      console.log(this.allRoles);
+                  }
+
                   this.updateUserForm();
                 }
               })

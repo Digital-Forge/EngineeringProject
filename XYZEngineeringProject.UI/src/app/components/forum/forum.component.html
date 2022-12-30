@@ -1,5 +1,5 @@
 <div class="container-fluid my-5" *ngIf="isAuthorized; else notAuthorized">
-    <div class="row mb-5">
+    <div class="row mb-3">
             <h1 class="col-12 col-md-9 text-center text-md-start">
                 {{ 'Forum.messages' | translate }}
             </h1>
@@ -15,13 +15,11 @@
         <!-- mb-3 mb-md-0 p-2 p-md-0 pt-md-2 -->
         <div class="col-12 col-md-2 p-0 border-panel-left bg-light">
             <div class="border-bottom p-2">
-                <!--  mx-md-3 -->
                 <h4 class="d-inline d-md-block text-break">{{ 'Forum.forums' | translate }}</h4>
             </div>
-            <!-- pt-2 pt-md-3 -->
-            <div class="border-bottom p-2 cursor-pointer" *ngFor="let forum of forums" (click)="showForum(forum)" [ngClass]="{'fw-bold bg-background': isForumActive(forum)}">
+            <div class="border-bottom p-2 pb-md-0 cursor-pointer" *ngFor="let forum of forums" (click)="showForum(forum)" [ngClass]="{'fw-bold bg-background': isForumActive(forum)}">
                 <!-- mx-md-3 -->
-                <p class="d-inline d-md-block  text-break">
+                <p class="d-inline d-md-block text-break">
                     {{ forum.name | slice: 0:50}}
                     <span *ngIf="forum.name.length > 50">...</span>
                 </p>
@@ -32,7 +30,7 @@
         </div>
         <!-- p-4 -->
         <div class="col-12 col-md-10 border-panel-right p-3 pb-1" id="messages">
-            <div *ngFor="let message of forumMessages; let i=index">
+            <div *ngFor="let message of forumMessages.reverse(); let i=index">
                 <div class="row" id="message-{{i}}">
                     <div class="col">
                         <div class="d-inline-block" [ngClass]="{'float-start': !isAuthor(message), 'float-end': isAuthor(message)}">
@@ -52,7 +50,7 @@
     <div class="row message-form mx-1 mt-3">
         <div class="col col-md-10 offset-md-2">
             <form [formGroup]="messageForm" (ngSubmit)="sendMessageToForum()">
-                <div class="row">
+                <div class="row pe-5 pe-md-0 mb-3">
                     <div class="col-11">
                         <input type="text" name="message" id="message" formControlName="message" class="form-control" placeholder="{{ 'Forum.typeYourMessage' | translate }}">
                     </div>

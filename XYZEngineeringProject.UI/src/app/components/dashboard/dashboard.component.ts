@@ -52,7 +52,8 @@ export class DashboardComponent implements OnInit {
             addressPost: '',
             id: '',
             phone: 0
-        }
+        },
+        roles: []
     };
 
     constructor(

@@ -63,32 +63,57 @@
                     <input class="form-control" type="text" id="addressPost" formControlName="addressPost">
                 </div>
             </div>
+
             <h3 class="form-label">{{'User.roles' | translate}}</h3>
             <ng-container formArrayName="roles" *ngIf="formMode==FormMode.Edit">
-                <div class="row">
-                    <table>
+                <!-- <div class="row"> -->
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <th>Role</th>
-                            <th>action</th>                            
+                            <th class="p-2">{{ 'User.role' | translate }}</th>
+                            <th></th>                            
                         </tr>
-                    <div *ngFor="let role of userRoles; let i = index">
-                            <ng-container [formGroupName]="i">
-                                <tr>
-                                    <td>{{role}}</td>
-                                    <td><button (click)="deleteRole(i)" *ngIf="role.toString()!='EMPLOYEE'">DeleteRole</button></td>
-                                </tr>
-                            </ng-container>
-                        </div>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let role of userRoles; let i = index">
+                            <!-- <div *ngFor="let role of userRoles; let i = index"> -->
+                                    <!-- <ng-container [formGroupName]="i"> -->
+                                        <!-- <tr> -->
+                            <td>{{ ('Role.' + role) | translate }}</td>
+                            <td class="text-end">
+                                <!-- <span> -->
+                                <button class="btn btn-sm btn-danger-light my-auto" (click)="deleteRole(i)" *ngIf="role.toString()!='EMPLOYEE'">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            <!-- </span> -->
+                            </td>
+                                        <!-- </tr> -->
+                                    <!-- </ng-container> -->
+                            <!-- </di> -->
+                        </tr>
+                        </tbody>
                     </table>
-                </div>
+                <!-- </div> -->
             </ng-container>
-            <div *ngIf="allRoles.length>0">
-                <select formControlName="newRole" id="newRole">
-                    <option *ngFor="let role of allRoles">
-                        {{role.toString()}}
-                    </option>
-                </select>
-                <button (click)="addRole()">Add Role</button>
+            <div class="row mb-3" *ngIf="allRoles.length>0">
+                <div class="col-12 col-lg-6">
+                    <!-- *ngIf="currentUser.role.toString() == 'ADM'; else rolesNoAdmin" -->
+                    <select formControlName="newRole" id="newRole" class="form-select">
+                        <option *ngFor="let role of allRoles" >
+                            {{ ('Role.' + role.toString()) | translate }}
+                        </option>
+                    </select>
+                    <!-- <ng-container #rolesNoAdmin> -->
+                        <!-- <select formControlName="newRole" id="newRole" class="form-select">
+                            <option *ngFor="let role of allRolesNoAdmin">
+                                {{ ('Role.' + role.toString()) | translate }}
+                            </option>
+                        </select> -->
+                    <!-- </ng-container> -->
+                </div>
+                <div class="col-12 col-lg-2 text-end mt-3 mt-lg-0 pt-1">
+                    <button class="btn btn-sm btn-success-light" (click)="addRole()">{{ 'Button.assignRole' | translate }}</button>
+                </div>
             </div>
 
             <div class="row">

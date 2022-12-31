@@ -8,7 +8,7 @@
         </div>
     </div>
     <span class="table-responsive">
-        <table class="table" *ngIf="departments && departments.length >0">
+        <table class="table" *ngIf="departmentsMan && departmentsMan.length >0">
             <thead>
                 <tr>
                     <th>{{ 'Department.name' | translate }}</th>
@@ -24,24 +24,23 @@
                         {{ departmentMan.manager.surname}}
                         <span *ngIf="!departmentMan.manager">-</span>
                     </td>
-
                     <td class="text-end">
-                        <!-- <button title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
-                            [routerLink]="['/settings/departments', 'edit', department.id]">
+                        <button title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
+                            [routerLink]="['/settings/departments', 'edit', departmentMan.department.id]">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
                         <button title="{{ 'Button.showDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
-                            [routerLink]="['/settings/departments', department.id]">
+                            [routerLink]="['/settings/departments', departmentMan.department.id]">
                             <i class="bi bi-eye-fill"></i>
                         </button>
-                        <button *ngIf="canDelete(department)" title="{{ 'Button.deleteDepartment' | translate}}"
-                            class="btn btn-sm btn-danger-light me-2" (click)="deleteDepartment(department)"><i
-                                class="bi bi-trash3"></i></button> -->
+                        <button *ngIf="canDelete(departmentMan.department)" title="{{ 'Button.deleteDepartment' | translate}}"
+                            class="btn btn-sm btn-danger-light me-2" (click)="deleteDepartment(departmentMan.department)"><i
+                                class="bi bi-trash3"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </span>
-    <p *ngIf="!departments || departments.length <= 0">{{ 'Departments.noDepartmentsFound' | translate }}</p>
+    <p *ngIf="!departmentsMan || departmentsMan.length <= 0">{{ 'Departments.noDepartmentsFound' | translate }}</p>
 </div>
 <router-outlet></router-outlet>

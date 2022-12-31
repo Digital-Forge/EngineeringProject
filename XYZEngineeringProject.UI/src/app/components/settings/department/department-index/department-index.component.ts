@@ -35,7 +35,6 @@ export class DepartmentIndexComponent implements OnInit {
             dep.manager = res;
             
             this.departmentsMan.push(dep);
-            console.log(this.departmentsMan);
 
             // this.managers.push(res);
           },

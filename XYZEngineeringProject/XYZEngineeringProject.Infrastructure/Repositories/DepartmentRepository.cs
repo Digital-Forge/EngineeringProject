@@ -271,5 +271,10 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.UsersToDepartments.Remove(buff);
             _context.SaveChanges();
         }
+
+        public ICollection<AppUser> GetDepartmentUsers(Guid departmentId)
+        {
+            return _context.UsersToDepartments.Where(x => x.DepartmentId == (Guid)departmentId).Select(x => x.User).ToList();
+        }
     }
 }

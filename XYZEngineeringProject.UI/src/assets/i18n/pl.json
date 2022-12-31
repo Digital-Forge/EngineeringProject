@@ -59,7 +59,10 @@
         "previousDirectory": "Poprzedni katalog",
         "refresh": "Odśwież",
         "sendMessage": "Wyślij wiadomość",
-        "assignRole": "Przypisz rolę"
+        "assignRole": "Przypisz rolę",
+        "addDepartment":"Dodaj dział",
+        "editDepartment": "Edytuj dział",
+        "setAsManager": "Ustaw jako managera"
     },
     "Menu": {
         "dashboard": "Pulpit",
@@ -243,5 +246,15 @@
         "5": "Piątek",
         "6": "Sobota",
         "0": "Niedziela"
+    },
+    "Department": {
+        "editDepartment": "Edytuj dział",
+        "addDepartment": "Dodaj dział",
+        "name": "Nazwa działu",
+        "manager": "Manager działu",
+        "users": "Użytkownicy działu",
+        "addUserToDepartment": "Dodaj użytkownika do działu",
+        "departments": "Działy",
+        "managerName": "Manager"
     }
 }

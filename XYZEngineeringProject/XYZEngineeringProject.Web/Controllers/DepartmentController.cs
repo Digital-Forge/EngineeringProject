@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using XYZEngineeringProject.Application.Interfaces;
+using XYZEngineeringProject.Application.ViewModels;
 
 namespace XYZEngineeringProject.Web.Controllers;
 
@@ -25,5 +26,29 @@ public class DepartmentController : Controller
     public IActionResult GetDepartmentById(string id)
     {
         return Ok(_departmentService.GetAllDepartments().FirstOrDefault(x => x.Id == id));
+    }
+
+    [HttpGet]
+    public IActionResult GetDepartmentUsers(string id)
+    {
+        return Ok(_departmentService.GetDepartmentUsers(Guid.Parse(id)));
+    }
+
+    [HttpPost]
+    public IActionResult AddDepartment([FromBody] DepartmentVM department)
+    {
+        return Ok(_departmentService.AddDepartment(department));
+    }
+
+    [HttpPut]
+    public IActionResult EditDepartment([FromBody] DepartmentVM department)
+    {
+        return Ok(_departmentService.EditDepartment(department));
+    }
+
+    [HttpPut]
+    public IActionResult DeleteDepartment([FromBody] DepartmentVM department)
+    {
+        return Ok(_departmentService.DeleteDepartment(department));
     }
 }

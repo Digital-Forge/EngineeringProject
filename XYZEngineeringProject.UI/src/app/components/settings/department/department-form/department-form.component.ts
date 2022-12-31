@@ -1,3 +1,4 @@
+import { forkJoin, first } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,16 +23,19 @@ export class DepartmentFormComponent implements OnInit {
   departmentDetails: Department = {
     id: '',
     name: '',
-    managerId: ''
+    managerId: '',
+    users:[]
   }
 
   departmentForm = this.fb.group({
     name: ['', Validators.required],
     managerId:[''],
     managerName: [''],
+    newUserId: ['']
   })
 
   users: User[] = []
+  availableUsers: User[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -44,7 +48,8 @@ export class DepartmentFormComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe({
       next: (res)=>{
-        this.users = res;
+        this.users = res.filter(user=>user.name!=="admin");
+        this.updateAvailableUsers();
       }
     })
 
@@ -56,6 +61,13 @@ export class DepartmentFormComponent implements OnInit {
             next: (res)=>{
               this.formMode = FormMode.Edit
               this.departmentDetails = res;
+              this.departmentService.getDepartmentUsers(id).subscribe({
+                next: (res) => {
+                  this.departmentDetails.users = res;
+                  this.updateAvailableUsers();
+                  this.updateDepartmentForm();
+                }
+              })              
               this.updateDepartmentForm();
             }
           })
@@ -79,7 +91,7 @@ export class DepartmentFormComponent implements OnInit {
   addDepartment(){
     this.departmentService.addDepartment(this.departmentDetails).subscribe({
       next: (res)=> {
-        this.router.navigate(['department']);
+        this.router.navigate(['settings/departments']);
       }
     })
   }
@@ -118,6 +130,42 @@ export class DepartmentFormComponent implements OnInit {
       }
     })
     return result;
+  }
+
+  updateAvailableUsers() {
+    if(this.users.length>0)
+    {
+      this.availableUsers = this.users.filter(user => user?.id != this.departmentDetails?.managerId && !this.departmentDetails?.users.some(x => x['id']==user.id))
+      this.departmentForm.controls.newUserId.setValue(this.availableUsers[0]?.id)
+    }
+  }
+
+  addUserToDepartment() {
+    console.log(this.departmentForm.controls.newUserId.value);
+    
+    if(this.departmentForm.controls.newUserId.value){
+      this.userService.getAppUser(this.departmentForm.controls.newUserId.value).subscribe({
+        next: (res) => {
+          this.departmentDetails.users.push(res);
+          this.updateAvailableUsers();
+        }
+      })
+    }
+  }
+
+  selectedManager(){
+    this.departmentDetails.managerId = this.departmentForm.controls.managerId.value as string
+    this.departmentDetails.users.push(this.users.find(user => user.id == this.departmentForm.controls.managerId.value) as User)
+    this.updateAvailableUsers();
+  }
+
+  setAsManager(id:string) {
+    this.departmentDetails.managerId = id;
+    this.departmentForm.controls.managerId.setValue(id);
+  }
+
+  deleteUserFromDepartment(user:User){
+    this.departmentDetails.users = this.departmentDetails.users.filter(x => x.id != user.id)
   }
 
 }

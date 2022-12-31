@@ -227,8 +227,6 @@ export class UserFormComponent implements OnInit {
 
   addRole()
   {
-    console.log(this.userForm.controls.newRole.value);
-
     if (this.userForm.controls.newRole.value) {
         this.userService.addAppUserRole(this.userDetails, this.userForm.controls.newRole.value).subscribe({
             next: (res) => {

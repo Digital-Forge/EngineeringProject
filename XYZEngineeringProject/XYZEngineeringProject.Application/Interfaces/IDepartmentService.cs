@@ -4,6 +4,10 @@ namespace XYZEngineeringProject.Application.Interfaces
 {
     public interface IDepartmentService
     {
+        bool AddDepartment(DepartmentVM departmentVM);
+        bool DeleteDepartment(DepartmentVM department);
+        bool EditDepartment(DepartmentVM departmentVM);
         public List<DepartmentVM> GetAllDepartments();
+        List<AppUserVM> GetDepartmentUsers(Guid departmentId);
     }
 }

@@ -16,6 +16,58 @@
                     <input type="text" class="form-control" id="name" name="name" formControlName="name" required>
                 </div>
             </div>
+            <div class="row mb-3" *ngIf="!departmentDetails.managerId">
+                <div class="col">
+                    <label for="managerId" class="label-form"> {{'Department.manager' | translate}}</label>
+                    <select name="managerId" id="managerId" class="form-select" formControlName="managerId" (change)="selectedManager()">
+                        <option *ngFor="let user of users" [value]="user.id">
+                            {{user.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" *ngIf="departmentDetails.users.length>0">
+                <h3>{{'Department.users' | translate}}</h3>
+                <table class="table text-nowrap text-left">
+                    <thead>                        
+                        <th>
+                            {{'User.name' | translate}}
+                        </th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of departmentDetails.users">
+                            <td [style.font-weight]="departmentDetails.managerId.toLowerCase()==user.id.toLowerCase()?'bold':null">
+                                {{user.name}} 
+                                <label *ngIf="departmentDetails.managerId.toLowerCase()==user.id.toLowerCase()">
+                                    {{'Department.manager' | translate}}
+                                </label>
+                            </td>
+                            <td class="text-end">
+                                <button title="{{ 'Button.showUser' | translate}}" class="btn btn-sm btn-secondary me-2"
+                                [routerLink]="['/settings/users', user.id]"><i class="bi bi-eye-fill"></i></button>
+                                <button *ngIf="user.id!=departmentDetails.managerId"
+                                title="{{'Button.setAsManager'|translate}}" 
+                                class="btn btn-sm btn-secondary me-2" type="button" 
+                                (click)="setAsManager(user.id)">
+                                    {{'Button.setAsManager'|translate}}
+                                </button>
+                                <button class="btn btn-sm btn-secondary me-2" type="button"
+                                (click)="deleteUserFromDepartment(user)"><i class="bi bi-trash3"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" *ngIf="availableUsers.length>0">
+                <h3>{{'Department.addUserToDepartment'|translate}}</h3>
+                    <select name="newUserId" id="newUserId" formControlName="newUserId" class="form-select">
+                        <option *ngFor="let user of availableUsers; let i = index" [value]="user.id">
+                            {{user.name}}
+                        </option>
+                    </select>
+                    <button type="button" class="btn btn-sm btn-secondary me-2" (click)="addUserToDepartment()">{{'Button.add' | translate}}</button>
+                </div>
             <div class="row">
                 <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
                     <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid" *ngIf="formMode==FormMode.Edit">{{

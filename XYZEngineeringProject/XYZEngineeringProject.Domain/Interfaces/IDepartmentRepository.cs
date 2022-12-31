@@ -28,5 +28,6 @@ namespace XYZEngineeringProject.Domain.Interfaces
         void AddUserToDepartment(Guid userId, Guid departmentId);
         void RemoveUserFromDepartment(AppUser user, Department department);
         void RemoveUserFromDepartment(Guid userId, Guid departmentId);
+        ICollection<AppUser> GetDepartmentUsers(Guid departmentId);
     }
 }

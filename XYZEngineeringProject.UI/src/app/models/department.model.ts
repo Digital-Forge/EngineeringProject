@@ -6,3 +6,9 @@ export interface Department {
     managerId:string
     users: User[]
 }
+
+export interface DepartmentManager {
+    department: Department,
+    manager: User
+}
+

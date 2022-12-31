@@ -17,12 +17,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let department of departments; let i = index">
-                    <td>{{department.name}}</td>
-                    <td><div *ngIf="managers.length>0">{{managers[i].name}}</div></td>
+                <tr *ngFor="let departmentMan of departmentsMan; let i = index">
+                    <td>{{departmentMan.department.name}}</td>
+                    <td>
+                        <span *ngIf="departmentMan.manager.name">{{ departmentMan.manager.name }} </span>
+                        {{ departmentMan.manager.surname}}
+                        <span *ngIf="!departmentMan.manager">-</span>
+                    </td>
 
                     <td class="text-end">
-                        <button title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
+                        <!-- <button title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
                             [routerLink]="['/settings/departments', 'edit', department.id]">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
@@ -32,7 +36,7 @@
                         </button>
                         <button *ngIf="canDelete(department)" title="{{ 'Button.deleteDepartment' | translate}}"
                             class="btn btn-sm btn-danger-light me-2" (click)="deleteDepartment(department)"><i
-                                class="bi bi-trash3"></i></button>
+                                class="bi bi-trash3"></i></button> -->
                     </td>
                 </tr>
             </tbody>

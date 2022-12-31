@@ -1,7 +1,8 @@
+import { DepartmentManager } from './../../../../models/department.model';
+import { Department } from 'src/app/models/department.model';
 import { User } from 'src/app/models/user.model';
 import { UserService } from './../../../../services/user/user.service';
 import { DepartmentService } from './../../../../services/department/department.service';
-import { Department } from './../../../../models/department.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,6 +13,9 @@ import { Component, OnInit } from '@angular/core';
 export class DepartmentIndexComponent implements OnInit {
 
   departments: Department[] = [];
+
+  departmentsMan: DepartmentManager[] = [];
+
   managers: User[] = []
 
   constructor(
@@ -23,14 +27,27 @@ export class DepartmentIndexComponent implements OnInit {
     this.departmentService.getAllDepartments().subscribe({
       next: (res) => {
         this.departments = res;
-        this.departments.forEach(departament => this.userService.getAppUser(departament.managerId).subscribe({
+        
+        this.departments.forEach(department => this.userService.getAppUser(department.managerId).subscribe({
           next: (res) => {
-            this.managers.push(res)
+            let dep: DepartmentManager = {} as DepartmentManager;
+            dep.department = department;
+            dep.manager = res;
+            
+            this.departmentsMan.push(dep);
+            console.log(this.departmentsMan);
+
+            // this.managers.push(res);
           },
           error: (res) => {
-            this.managers.push({id:'',name:'',pesel:'',roles:[],surname:'',userName:'',passwordHash:'',address:{addressHome:'',addressPost:'',id:'',phone:0}});
+            console.log(res);
+            // this.managers.push({id:'',name:'',pesel:'',roles:[],surname:'',userName:'',passwordHash:'',address:{addressHome:'',addressPost:'',id:'',phone:0}});
           }
-        }))
+        }));
+
+
+
+        // console.log(this.managers);
       }
     })
   }

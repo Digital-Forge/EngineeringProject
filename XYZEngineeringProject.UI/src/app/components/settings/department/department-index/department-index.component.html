@@ -19,7 +19,10 @@
             <tbody>
                 <tr *ngFor="let department of departments; let i = index">
                     <td>{{department.name}}</td>
-                    <td><div *ngIf="managers.length>0">{{managers[i].name}}</div></td>
+                    <td>
+                        <!-- <div *ngIf="managers.length>0">{{managers[i].name}}</div> -->
+                        {{department.managerId}}
+                    </td>
 
                     <td class="text-end">
                         <button title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"

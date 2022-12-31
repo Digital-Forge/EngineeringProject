@@ -52,7 +52,7 @@
                                 (click)="setAsManager(user.id)">
                                     {{'Button.setAsManager'|translate}}
                                 </button>
-                                <button class="btn btn-sm btn-secondary me-2" type="button"
+                                <button class="btn btn-sm btn-secondary me-2" type="button" *ngIf="departmentDetails.managerId != user.id"
                                 (click)="deleteUserFromDepartment(user)"><i class="bi bi-trash3"></i></button>
                             </td>
                         </tr>

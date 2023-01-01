@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
+using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Web.Controllers;
 
@@ -10,10 +12,12 @@ public class DepartmentController : Controller
 {
     private readonly ILogger<DepartmentController> _logger;
     private readonly IDepartmentService _departmentService;
-    public DepartmentController(IDepartmentService departmentService, ILogger<DepartmentController> logger)
+    private readonly IUserRepository _userRepository;
+    public DepartmentController(IDepartmentService departmentService, ILogger<DepartmentController> logger, IUserRepository userRepository)
     {
         _departmentService = departmentService;
         _logger = logger;
+        _userRepository = userRepository;
     }
 
     [HttpGet]
@@ -50,5 +54,21 @@ public class DepartmentController : Controller
     public IActionResult DeleteDepartment([FromBody] DepartmentVM department)
     {
         return Ok(_departmentService.DeleteDepartment(department));
+    }
+
+    [HttpGet]
+    public IActionResult GetAllCompanyDepartmentsByUser(Guid userId)
+    {
+        var user = _userRepository.GetUserById(userId);
+
+        if (user == null) return BadRequest();
+
+        return Ok(_departmentService.GetAllCompanyDepartmentsByCompany(user.CompanyId.Value));
+    }
+    
+    [HttpGet]
+    public IActionResult GetAllCompanyDepartmentsByCompany(Guid companyId)
+    {
+        return Ok(_departmentService.GetAllCompanyDepartmentsByCompany(companyId));
     }
 }

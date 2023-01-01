@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels.File;
+using XYZEngineeringProject.Domain.Interfaces;
 
 namespace XYZEngineeringProject.Web.Controllers;
 
@@ -11,10 +12,12 @@ public class FileController : Controller
 {
     private readonly ILogger<FileController> _logger;
     private readonly IFileService _fileService;
-    public FileController(ILogger<FileController> logger, IFileService fileService)
+    private readonly IUserRepository _userRepository;
+    public FileController(ILogger<FileController> logger, IFileService fileService, IUserRepository userRepository)
     {
         _logger = logger;
         _fileService = fileService;
+        _userRepository = userRepository;
     }
 
     [HttpPost, DisableRequestSizeLimit]
@@ -103,5 +106,21 @@ public class FileController : Controller
     {
         var vm = _fileService.Download(new Guid(id));
         return Ok(vm);
+    }
+
+    [HttpGet]
+    public IActionResult GetAllCompanyDirectoryByUser(Guid userId)
+    {
+        var user = _userRepository.GetUserById(userId);
+
+        if (user == null) return BadRequest();
+
+        return Ok(_fileService.GetAllCompanyDirectoryByCompany(user.CompanyId.Value));
+    }
+
+    [HttpGet]
+    public IActionResult GetAllCompanyDirectoryByCompany(Guid companyId)
+    {
+        return Ok(_fileService.GetAllCompanyDirectoryByCompany(companyId));
     }
 }

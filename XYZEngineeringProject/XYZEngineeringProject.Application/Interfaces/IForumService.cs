@@ -19,5 +19,7 @@ namespace XYZEngineeringProject.Application.Interfaces
         void DeleteForumMessage(Guid id);
 
         List<ForumVM> GetUserForums(Guid userId);
+
+        List<ForumVM> GetAllCompanyForumsByCompany(Guid id);
     }
 }

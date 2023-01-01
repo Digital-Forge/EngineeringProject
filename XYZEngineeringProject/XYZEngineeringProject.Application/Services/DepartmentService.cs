@@ -7,15 +7,18 @@ using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Application.Services;
 public class DepartmentService : IDepartmentService
 {
     private readonly IDepartmentRepository _departmentRepository;
+    private readonly Context _context;
 
-    public DepartmentService(IDepartmentRepository departmentRepository)
+    public DepartmentService(IDepartmentRepository departmentRepository, Context context)
     {
         _departmentRepository = departmentRepository;
+        _context = context;
     }
 
     public List<DepartmentVM> GetAllDepartments()
@@ -88,5 +91,17 @@ public class DepartmentService : IDepartmentService
         }
         _departmentRepository.Remove(Guid.Parse(department.Id));
         return true;
+    }
+
+    public List<DepartmentVM> GetAllCompanyDepartmentsByCompany(Guid id)
+    {
+        if (id == null || id == Guid.Empty) return new List<DepartmentVM>();
+
+        return _context.Departments.Where(x => x.CompanyId == id).Select(s => new DepartmentVM
+        {
+            Id = s.Id.ToString(),
+            ManagerId = s.Manager.ToString(),
+            Name = s.Name
+        }).ToList();
     }
 }

@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels.Forum;
+using XYZEngineeringProject.Domain.Interfaces;
 
 namespace XYZEngineeringProject.Web.Controllers
 {
     public class ForumController : Controller
     {
         private readonly IForumService _forumService;
+        private readonly IUserRepository _userRepository;
 
-        public ForumController(IForumService forumService)
+        public ForumController(IForumService forumService, IUserRepository userRepository)
         {
             _forumService = forumService;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -57,6 +60,22 @@ namespace XYZEngineeringProject.Web.Controllers
         public IActionResult GetUserForums([FromRoute] Guid userId)
         {
             return Ok(_forumService.GetUserForums(userId));
+        }
+
+        [HttpGet]
+        public IActionResult GetAllCompanyForumsByUser(Guid userId)
+        {
+            var user = _userRepository.GetUserById(userId);
+
+            if (user == null) return BadRequest();
+
+            return Ok(_forumService.GetAllCompanyForumsByCompany(user.CompanyId.Value));
+        }
+
+        [HttpGet]
+        public IActionResult GetAllCompanyForumsByCompany(Guid companyId)
+        {
+            return Ok(_forumService.GetAllCompanyForumsByCompany(companyId));
         }
     }
 }

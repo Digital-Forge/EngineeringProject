@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Application.ViewModels.File;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.File;
 
 namespace XYZEngineeringProject.Application.Interfaces
 {
@@ -23,5 +24,7 @@ namespace XYZEngineeringProject.Application.Interfaces
 
         void _AddDepartmentDirectory(Department department);
         void _AddDepartmentDirectory(Guid departmentId);
+
+        List<FileStructureVM> GetAllCompanyDirectoryByCompany(Guid id);
     }
 }

@@ -133,5 +133,16 @@ namespace XYZEngineeringProject.Application.Services
 
             return forums;
         }
+
+        public List<ForumVM> GetAllCompanyForumsByCompany(Guid id)
+        {
+            if (id == null || id == Guid.Empty) return new List<ForumVM>();
+
+            return _context.Forums.Where(x => x.CompanyId == id).Select(s => new ForumVM
+            {
+                Id = s.Id,
+                Name = s.Name
+            }).ToList();
+        }
     }
 }

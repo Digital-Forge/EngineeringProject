@@ -230,5 +230,19 @@ namespace XYZEngineeringProject.Application.Services
             
             return vm;
         }
+
+        public List<FileStructureVM> GetAllCompanyDirectoryByCompany(Guid id)
+        {
+            if (id == null || id == Guid.Empty) return new List<FileStructureVM>();
+
+            return _context.Directories
+                .Where(x => x.CompanyId == id && x.DeepLevel == 1)
+                .Select(s => new FileStructureVM
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Path = s.Path
+                }).ToList();
+        }
     }
 }

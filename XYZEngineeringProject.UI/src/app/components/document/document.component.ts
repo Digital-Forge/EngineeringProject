@@ -224,4 +224,13 @@ export class DocumentComponent implements OnInit {
       })
     }
   }
+
+  downloadFile(id:string) {
+    this.documentService.downloadFile(id).subscribe({
+      next: (res)=>{
+        console.log(res);
+        
+      }
+    })
+  }
 }

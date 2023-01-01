@@ -50,4 +50,8 @@ export class DocumentService {
   deleteDirectory(id:string){
     return this.httpClient.get(this.baseUrl+'File/DeleteDirectory/' + id);
   }
+
+  downloadFile(id: string) {
+    return this.httpClient.get(this.baseUrl+'File/DownloadFile/'+id);
+  }
 }

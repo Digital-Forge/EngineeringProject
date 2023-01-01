@@ -97,4 +97,11 @@ public class FileController : Controller
         _fileService.DeleteDirectory(Guid.Parse(id));
         return Ok();
     }
+
+    [HttpGet]
+    public IActionResult Download(string id)
+    {
+        var vm = _fileService.Download(new Guid(id));
+        return Ok(vm);
+    }
 }

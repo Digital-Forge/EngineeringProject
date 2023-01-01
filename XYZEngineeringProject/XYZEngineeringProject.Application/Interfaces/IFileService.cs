@@ -19,6 +19,7 @@ namespace XYZEngineeringProject.Application.Interfaces
         void DeleteDirectory(Guid id);
         Guid? CreateDirectory(Guid paretntDictionaryId, string name);
         FileStream? GetFile(Guid id);
+        FileVM Download(Guid id);
 
         void _AddDepartmentDirectory(Department department);
         void _AddDepartmentDirectory(Guid departmentId);

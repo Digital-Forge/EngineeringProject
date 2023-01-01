@@ -14,12 +14,16 @@ namespace XYZEngineeringProject.Application.Services
         private readonly IFileRepository _fileRepository;
         private readonly IMeService _meService;
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly Context _context;
+        private readonly Logger _logger;
 
-        public FileService(IFileRepository fileRepository, IMeService meService, IDepartmentRepository departmentRepository)
+        public FileService(IFileRepository fileRepository, IMeService meService, IDepartmentRepository departmentRepository, Context context, Logger logger)
         {
             _fileRepository = fileRepository;
             _meService = meService;
             _departmentRepository = departmentRepository;
+            _context = context;
+            _logger = logger;
         }
 
         public void ChangeDirectoryName(Guid id, string name)
@@ -182,6 +186,49 @@ namespace XYZEngineeringProject.Application.Services
             if (department == null) return;
 
             _fileRepository._CreateDepartmentDirectory(department);
+        }
+
+        public FileVM Download(Guid id)
+        {
+            var file = _context.Files.FirstOrDefault(x => x.Id == id);
+            var obj = GetFile(id);
+
+            if (file == null || obj == null || !obj.CanRead) return new FileVM
+            {
+                Id = id,
+                Format = string.Empty,
+                Path = string.Empty,
+                Name = string.Empty,
+                DirectoryId = string.Empty,
+                ObjectBase64 = string.Empty,
+            };
+
+            var vm = new FileVM
+            {
+                Id = file.Id,
+                DirectoryId = file.DirectoryId.ToString(),
+                Name = file.Name,
+                Path = file.PathMask,
+                Format = file.Format
+            };
+
+            using (var stream = new MemoryStream())
+            {
+                obj.CopyTo(stream);
+                vm.ObjectBase64 = Convert.ToBase64String(stream.ToArray());
+            }
+
+            try
+            {
+                obj.Close();
+                obj.Dispose();
+            }
+            catch (Exception e)
+            {
+                _logger.Log(Logger.Source.Service, Logger.InfoType.Error, $"Nie można zamknąć lub zwolinć zasobu - {e.Message}");
+            }
+            
+            return vm;
         }
     }
 }

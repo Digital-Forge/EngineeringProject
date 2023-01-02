@@ -224,10 +224,9 @@ namespace XYZEngineeringProject.Infrastructure.Utils
 
                 switch (entry.State)
                 {
-                    case EntityState.Detached:
-                        break;
                     case EntityState.Unchanged:
                         break;
+                    case EntityState.Detached:
                     case EntityState.Deleted:
                         entry.Entity.UpdateDate = DateTime.Now;
                         entry.Entity.UpdateBy = currentUser?.Id;

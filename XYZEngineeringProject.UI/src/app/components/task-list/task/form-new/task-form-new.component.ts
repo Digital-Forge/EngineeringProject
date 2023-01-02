@@ -113,15 +113,14 @@ export class TaskFormNewComponent implements OnInit {
     })
   }
 
-  updateTaskDetails() {
-
-    console.log('saving: ' + this.taskForm.controls.priority.value);
-    
+  updateTaskDetails() {    
     this.taskDetails.title = this.taskForm.controls.title.value || '',
     this.taskDetails.description = this.taskForm.controls.description.value || '',
     this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || new Date()),
     this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority.value || 0),
     this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
+
+    console.log(this.taskDetails);
   }
 
   onSubmit() {
@@ -129,11 +128,8 @@ export class TaskFormNewComponent implements OnInit {
     if (this.formMode == FormMode.Edit) {
       this.saveChanges();
     }
-    else if (this.formMode == FormMode.Add) {
+    else if (this.formMode == FormMode.Add || this.formMode == FormMode.AddFromList) {
       this.addTask();
-    }
-    else if (this.formMode == FormMode.AddFromList) {
-      this.addTaskFromList();
     }
 
     if (this.taskListId) { 
@@ -170,9 +166,6 @@ export class TaskFormNewComponent implements OnInit {
         this.router.navigate(['/task-list', this.taskListId]);
       }
     });   
-  }
-
-  addTaskFromList() {
   }
 
   isInUrl(text: string) {

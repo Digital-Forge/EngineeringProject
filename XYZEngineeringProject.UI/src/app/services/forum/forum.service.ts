@@ -17,6 +17,10 @@ export class ForumService {
   constructor(
     private http: HttpClient
   ) {}
+  
+  getAllForumsByUserId(userId: string): Observable<Forum[]> {
+    return this.http.get<Forum[]>(this.baseApiUrl + 'Forum/GetAllCompanyForumsByUser/' + userId);
+  }
 
   getUserForums(userId: string): Observable<Forum[]> {
     return this.http.get<Forum[]>(this.baseApiUrl + 'Forum/GetUserForums/' + userId);

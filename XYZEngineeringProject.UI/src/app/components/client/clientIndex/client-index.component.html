@@ -2,16 +2,16 @@
 
 <div class="container-fluid my-5">
     <div class="row mb-5">
-        <h1 class="col-lg-9">{{'Client.clients' | translate }}</h1>
-        <div class="col-lg-3 d-flex justify-content-end">
+        <h1 class="col-12 col-lg-9 text-center text-lg-start">{{'Client.clients' | translate }}</h1>
+        <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
             <button class="btn btn-md btn-primary" [routerLink]="['/clients', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addClient' | translate }}
             </button>
         </div>
     </div>
 
-    <span class="table table-responsive">
-        <table class="table text-nowrap text-left" *ngIf="clients && clients.length > 0">
+    <span class="table-responsive">
+        <table class="table text-left" *ngIf="clients && clients.length > 0">
             <thead>
                 <tr>
                     <th>{{ 'Client.name' | translate }}</th>
@@ -22,10 +22,10 @@
             </thead>
             <tbody *ngFor="let client of clients">
                 <tr>
-                    <td>{{ client.name }}</td>
-                    <td class="text-wrap">{{ client.description }}</td>
-                    <td class="text-wrap">{{ client.comments | slice: 0:150 }}<span *ngIf="client.comments!.length >= 150">...</span></td>
-                    <td class="text-end">
+                    <td class="text-wrap min-width-100">{{ client.name }}</td>
+                    <td class="text-wrap min-width-100">{{ client.description }}</td>
+                    <td class="text-wrap min-width-100">{{ client.comments | slice: 0:150 }}<span *ngIf="client.comments!.length >= 150">...</span></td>
+                    <td class="text-end text-nowrap">
                         <button title="{{ 'Button.editClient' | translate}}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/clients', 'edit', client.id]"><i class="bi bi-pencil-fill"></i></button>
                         <button title="{{ 'Button.showClient' | translate}}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/clients', client.id]"><i class="bi bi-eye-fill"></i></button>
                         <button title="{{ 'Button.showClientContacts' | translate}}" class="btn btn-sm btn-light me-2" [routerLink]="[]" (click)="toggleContacts(client)"><i class="bi bi-person-lines-fill"></i></button>

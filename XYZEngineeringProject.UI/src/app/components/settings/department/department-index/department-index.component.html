@@ -1,7 +1,7 @@
 <div class="container-fluid my-5">
     <div class="row mb-5">
-        <h1 class="col-lg-9">{{ 'Department.departments' | translate }}</h1>
-        <div class="col-lg-3 d-flex justify-content-end">
+        <h1 class="col-12 col-lg-9 text-center text-lg-start">{{ 'Department.departments' | translate }}</h1>
+        <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
             <button class="btn btn-md btn-primary pe-4 py-2" [routerLink]="['/settings/departments', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addDepartment' | translate }}
             </button>
@@ -18,13 +18,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let departmentMan of departmentsMan; let i = index">
-                    <td>{{departmentMan.department.name}}</td>
-                    <td>
-                        <span *ngIf="departmentMan.manager.name">{{ departmentMan.manager.name }} </span>
+                    <td class="min-width-200">{{departmentMan.department.name}}</td>
+                    <td class="min-width-200">
+                        <span *ngIf="departmentMan.manager">{{ departmentMan.manager.name }} </span>
                         {{ departmentMan.manager.surname}}
-                        <span *ngIf="!departmentMan.manager">-</span>
+                        <span *ngIf="(departmentMan.manager | keyvalue)?.length == 0">-</span>
                     </td>
-                    <td class="text-end">
+                    <td class="text-end text-nowrap">
                         <button title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"
                             [routerLink]="['/settings/departments', 'edit', departmentMan.department.id]">
                             <i class="bi bi-pencil-fill"></i>

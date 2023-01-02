@@ -13,7 +13,7 @@ import { forkJoin, first, pipe, map } from 'rxjs';
 })
 export class TaskListViewComponent implements OnInit {
   taskListStatuses = Object.values(TaskListStatus).filter(value => typeof value === "string");
-  taskPriorities = Object.values(Priority).filter(value => typeof value === "string")
+  taskPriorities = Object.values(Priority).filter(value => typeof value === "string");
 
   tasks: Task[] = [];
   taskListDetails: TaskList = {

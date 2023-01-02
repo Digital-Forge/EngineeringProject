@@ -21,5 +21,6 @@ namespace XYZEngineeringProject.Application.Interfaces
         List<ForumVM> GetUserForums(Guid userId);
 
         List<ForumVM> GetAllCompanyForumsByCompany(Guid id);
+
     }
 }

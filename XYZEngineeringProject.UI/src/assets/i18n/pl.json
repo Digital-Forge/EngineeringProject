@@ -34,6 +34,9 @@
         "done": "Ukończone",
         "restore": "Przywróć",
         "addTaskList": "Dodaj listę zadań",
+        "showTaskList": "Pokaż listę zadań",
+        "completeTaskList": "Ukończ wszystkie zadania na liście",
+        "uncompleteTaskList": "Oznacz wszystkie zadania na liście jako nieukończone",
         "editTaskList": "Edytuj listę zadań",
         "deleteTaskList": "Usuń listę zadań",
         "addTask": "Dodaj zadanie",
@@ -85,8 +88,11 @@
         "pastTasks": "Zaległe",
         "todayTasks": "Dzisiejsze",
         "futureTasks": "Przyszłe",
-        "latestNotes": "Najnowsze notatki",
-        "messages": "Ostatnie wiadomości"
+        "latestPublicNotes": "Najnowsze notatki firmowe",
+        "latestPrivateNotes": "Ostatnie prywatne notatki",
+        "messages": "Ostatnie wiadomości",
+        "noMessages": "Ta grupa nie ma jeszcze żadnych wiadomości"
+
     },
     "Client": {
         "clients": "Klienci",
@@ -148,16 +154,13 @@
         "editNote": "Edytuj notatkę",
         "notes": "Notatki",
         "title": "Treść",
-        "status": "Status",
+        "status": "Przypisane",
         "date": "Data",
         "noNotesFound": "Nie znaleziono notatek"
     },
     "NoteStatus": {
-        "Own": "Własne",
-        "Department": "Dział",
-        "Company": "Cała firma",
-        "Now": "Teraz",
-        "Archive": "Archiwalne"
+        "Own": "Prywatne",
+        "Company": "Cała firma"
     },
     "Priority": {
         "No": "Brak",

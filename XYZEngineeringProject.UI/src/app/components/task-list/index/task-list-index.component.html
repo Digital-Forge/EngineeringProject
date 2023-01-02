@@ -1,11 +1,11 @@
 <div class="container-fluid my-5">
     <div class="row mb-5">
-        <h1 class="col-lg-7">{{ 'Task.taskLists' | translate }}</h1>
-        <div class="col-lg-5 d-flex justify-content-end">
-            <button class="btn btn-md btn-primary me-2" [routerLink]="['/task-list', 'add']">
+        <h1 class="col-12 col-lg-6 text-center text-lg-start">{{ 'Task.taskLists' | translate }}</h1>
+        <div class="col-12 col-lg-6 d-flex flex-wrap justify-content-center justify-content-lg-end">
+            <button class="btn btn-md btn-primary me-2 mb-2 mb-lg-0" [routerLink]="['/task-list', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTaskList' | translate }}
             </button>
-            <button *ngIf="taskLists.length > 0" class="btn btn-md btn-primary" [routerLink]="['/task', 'add']">
+            <button *ngIf="taskLists.length > 0" class="btn btn-md btn-primary mb-2 mb-lg-0" [routerLink]="['/task', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTask' | translate }}
             </button>
         </div>
@@ -27,7 +27,7 @@
                                         'text-gray': taskListStatuses[taskList.status] == 'Done'}">
                                         {{ ('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
                                     </p>
-                                    <h3 class="card-title  mb-2">{{taskList.name}}</h3>
+                                    <h3 class="card-title mb-2 cursor-pointer" [routerLink]="['/task-list', taskList.id]">{{taskList.name}}</h3>
                                     <p class="card-subtitle text-gray mb-2">
                                         {{ 'Task.created' | translate }} {{ taskList.createDate | dateCustom:
                                         'fullShort' }}
@@ -42,7 +42,7 @@
                                     <!-- TODO wyciągnąć isComplete z backendu -->
                                     <div *ngIf="taskList.tasks?.length; else noTasks">
                                         <div *ngFor="let task of taskList.tasks">
-                                            <i class="bi" [ngClass]="{ 'bi-check-square': task.isComplete, 'bi-square': !task.isComplete}" (click)="toggleCompleteTask(task.id)"></i>
+                                            <i class="cursor-pointer bi" [ngClass]="{ 'bi-check-square': task.isComplete, 'bi-square': !task.isComplete}" (click)="toggleCompleteTask(task.id)"></i>
                                             <span class="ms-2" [ngClass]="{ 'text-decoration-line-through': task.isComplete}">
                                                 {{ task.title }}  <span class="text-nowrap">({{ task.deadline | dateCustom: 'dayMonth' }})</span>
                                             </span>
@@ -57,10 +57,15 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-2 pe-0 pt-3 pt-lg-0 text-center">
-                            <button title="{{ 'Button.completeTaskList' | translate }}"
+                            <button *ngIf="taskListStatuses[taskList.status] != 'Done'" title="{{ 'Button.completeTaskList' | translate }}"
                                 class=" btn btn-sm btn-success-light mb-2 me-2 me-lg-0"
-                                (click)="completeAllTasksOnList(taskList.id)">
+                                (click)="toggleCompleteAllTasksOnList(taskList.id, true)">
                                 <i class="bi bi-check2-square"></i>
+                            </button>
+                            <button *ngIf="taskListStatuses[taskList.status] == 'Done'" title="{{ 'Button.uncompleteTaskList' | translate }}"
+                                class=" btn btn-sm btn-success-light mb-2 me-2 me-lg-0"
+                                (click)="toggleCompleteAllTasksOnList(taskList.id, false)">
+                                <i class="bi bi-x-square"></i>
                             </button>
                             <button title="{{ 'Button.showTaskList' | translate }}"
                                 class="btn btn-sm btn-light mb-2  me-2 me-lg-0"

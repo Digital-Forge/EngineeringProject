@@ -34,6 +34,9 @@
         "done": "Done",
         "restore": "Restore",
         "addTaskList": "Add task list",
+        "showTaskList": "Show task list",
+        "completeTaskList": "Complete all tasks on list",
+        "uncompleteTaskList": "Uncomplete all tasks on list",
         "editTaskList": "Edit task list",
         "deleteTaskList": "Delete task list",
         "addTask": "Add task",
@@ -82,8 +85,11 @@
         "pastTasks": "Overdue",
         "todayTasks": "Today",
         "futureTasks": "Future",
-        "latestNotes": "Newest notes",
-        "messages": "Latest messages"
+        "latestPublicNotes": "Newest company notes",
+        "latestPrivateNotes": "Latest private notes",
+        "messages": "Latest messages",
+        "noMessages": "This group has no messages yet"
+
     },
     "Client": {
         "clients": "Clients",
@@ -145,16 +151,13 @@
         "editNote": "Edit note",
         "notes": "Notes",
         "title": "Note",
-        "status": "Status",
+        "status": "Assigned",
         "date": "Data",
         "noNotesFound": "No notes have been added yet."
     },
     "NoteStatus": {
-        "Own": "Own",
-        "Department": "Department",
-        "Company": "Company",
-        "Now": "Now",
-        "Archive": "Archive"
+        "Own": "Private",
+        "Company": "Company"       
     },
     "Priority": {
         "No": "No",

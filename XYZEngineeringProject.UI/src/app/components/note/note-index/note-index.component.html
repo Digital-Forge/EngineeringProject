@@ -1,7 +1,7 @@
-<div class="container-fluid my-5">
+<div class="container-fluid overflow-auto my-5">
     <div class="row mb-5">
-        <h1 class="col-12 col-md-9 text-center text-md-start">{{ 'Note.notes' | translate }}</h1>
-        <div class="col012 col-lg-3 d-flex justify-content-center justify-content-lg-end">
+        <h1 class="col-12 col-lg-9 text-center text-lg-start">{{ 'Note.notes' | translate }}</h1>
+        <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
             <button class="btn btn-md btn-primary pe-4 py-2" [routerLink]="['/note', 'add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addNote' | translate }}
             </button>
@@ -19,26 +19,28 @@
             </thead>
             <tbody>
                 <!-- <tr *ngFor="let note of notesResponse"> -->
-                <tr *ngFor="let note of notes">
-                    <td>{{note.date | dateCustom:'fullShort'}}</td>
+                <tr *ngFor="let noteResponse of notesResponse">
+                    <td class="text-nowrap">{{noteResponse.note.date | dateCustom:'fullShort'}}</td>
                     <!--  TODO -->
-                    <!-- <td>{{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}</td> -->
-                    <td>{{note.title | slice: 0:300}}<span *ngIf="note.title!.length >= 300">...</span></td>
-                    <td class="text-end">
+                    <td>{{ noteResponse.statusName }}</td>
+                    <td class="min-width-200">{{noteResponse.note.title | slice: 0:300}}<span *ngIf="noteResponse.note.title!.length >= 300">...</span></td>
+                    <td class="text-end text-nowrap">
                         <button title="{{ 'Button.editNote' | translate }}" class="btn btn-sm btn-secondary me-2"
-                            [routerLink]="['/note', 'edit', note.id]">
+                            [routerLink]="['/note', 'edit', noteResponse.note.id]">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
                         <button title="{{ 'Button.showNote' | translate }}" class="btn btn-sm btn-secondary me-2"
-                            [routerLink]="['/note', note.id]">
+                            [routerLink]="['/note', noteResponse.note.id]">
                             <i class="bi bi-eye-fill"></i>
                         </button>
-                        <button *ngIf="canDelete(note)" title="{{ 'Button.deleteNote' | translate}}" class="btn btn-sm btn-danger-light me-2" (click)="deleteNote(note)"><i class="bi bi-trash3"></i></button>
+                        <button *ngIf="canDelete(noteResponse.note)" title="{{ 'Button.deleteNote' | translate}}" class="btn btn-sm btn-danger-light me-2" (click)="deleteNote(noteResponse.note)"><i class="bi bi-trash3"></i></button>
                     </td>
+                </tr>
+                <tr *ngIf="!notesResponse || notesResponse.length <= 0">
+                    <td colspan="4">{{ 'Note.noNotesFound' | translate }}</td>
                 </tr>
             </tbody>
         </table>
     </span>
-    <p *ngIf="!notes || notes.length <= 0">{{ 'Note.noNotesFound' | translate }}</p>
 </div>
 <router-outlet></router-outlet>

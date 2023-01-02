@@ -33,22 +33,36 @@ export class NoteIndexComponent implements OnInit {
 
     ngOnInit(): void {
         this.noteService.getAllNotes().subscribe({
-            next: (notesResponse) => {
-                this.notes = notesResponse;
-                console.log(notesResponse);
+            next: (notes) => {
+                this.notes = notes;
+                
+                console.log(this.translateService.instant('NoteStatus.'+ NoteStatus.Own.toString()));
+                console.log(this.translateService.instant('NoteStatus.'+ NoteStatus.Company.toString()));
 
-                // TODO jak będzie zmieniona struktura bazy i backu
-                // this.notesResponse.forEach(noteResponse => {
-                //     noteResponse.note = notesResponse;
-                //     if (note.noteStatus) {
-                //         this.departmentService.getDepartmentById(noteResponse.note.noteStatus).subscribe({
-                //             next: (departmentResponse) => {
-                //                 noteResponse.department = departmentResponse
-                //             }
-                //         })
-                //     }
-                // });
+                this.notes.forEach(note => {
+                    let noteResponse = {} as NoteResponse;
+                    noteResponse.note = note;
 
+
+                    if (note.isCompany == true) {
+                        noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Company.toString());
+                    }
+                    else if (note.isCompany == false && note.noteStatus == null) {
+                        noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Own.toString());
+                    }
+                    else if (note.isCompany == false && note.noteStatus != null) {
+                        this.departmentService.getDepartmentById(note.noteStatus).subscribe({
+                            next: (department) => {
+                                noteResponse.statusName = department.name;
+                            }
+                        })
+                    }
+
+                    // console.log(noteResponse.statusName);
+
+                    this.notesResponse.push(noteResponse);
+                });
+            
             },
             error: (res) => {
                 console.log(res);

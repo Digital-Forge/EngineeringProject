@@ -1,3 +1,4 @@
+import { Roles } from './../../models/roles.enum';
 import { User } from './../../models/user.model';
 import { NewMessage } from './../../models/forum.model';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -8,6 +9,7 @@ import { forkJoin, map, first, interval, Subscription } from 'rxjs';
 import { Forum, Message } from 'src/app/models/forum.model';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { Router } from '@angular/router';
+import { RolesDB } from 'src/app/models/roles.enum';
 
 @Component({
     selector: 'app-forum',
@@ -23,6 +25,7 @@ export class ForumComponent implements OnInit, AfterViewChecked {
     public messagesLoadCount: number = 20;
     public messagesSkipCount: number = 0;;
     public currentUser: User;
+    public currentUserRoles: string[];
     public activeForumId: string;
     public refreshInterval: any;
     public intervalMinutes: number = 5;
@@ -63,19 +66,33 @@ export class ForumComponent implements OnInit, AfterViewChecked {
 
     getData() {
         this.authorizationService.currentUser().subscribe({
-            next: (res) => {
-                this.currentUser = res;
+            next: (currentUser) => {
+                this.currentUser = currentUser;
+                this.currentUserRoles = currentUser.roles;
 
-                this.forumService.getUserForums(this.currentUser.id).subscribe({
-                    next: (res) => {
-                        this.forums = res;
-                        this.activeForumId = this.forums[0].id;
-                        this.showForum(this.activeForumId);
-                    },
-                    error: (res) => {
-                        console.log(res);
-                    }
-                });
+                if (this.currentUserRoles.includes(RolesDB.Admin) || this.currentUserRoles.includes(RolesDB.Moderator) || this.currentUserRoles.includes(RolesDB.Management)) {
+                    this.forumService.getAllForumsByUserId(this.currentUser.id).subscribe({
+                        next: (res) => {
+                            this.forums = res;
+                        },
+                        error: (res) => {
+                            console.log(res);
+                        }
+                    });
+                }
+                else {
+                    this.forumService.getUserForums(this.currentUser.id).subscribe({
+                        next: (res) => {
+                            this.forums = res;                           
+                        },
+                        error: (res) => {
+                            console.log(res);
+                        }
+                    });
+                }
+
+                this.activeForumId = this.forums[0].id;
+                this.showForum(this.activeForumId);
             },
             error: (res) => {
                 console.log(res);

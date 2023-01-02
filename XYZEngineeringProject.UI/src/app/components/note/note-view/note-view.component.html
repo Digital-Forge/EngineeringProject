@@ -3,19 +3,31 @@
         <a [routerLink]="['/note']">{{ 'Note.notes' | translate }}</a>
         <i class="bi bi-arrow-right-short mx-1"></i>
     </h1>
-    <h1 class="mb-3">{{ noteDetails.title | slice: 0:30}}<span *ngIf="noteDetails.title!.length >= 30">...</span></h1>
+    <h1 class="mb-3">{{ noteResponse.note.title | slice: 0:30}}<span
+            *ngIf="noteResponse.note.title!.length >= 30">...</span></h1>
     <hr>
+
     <div class="row mb-3">
-        <div class="col">
-            <!-- TODO -->
-            <!-- <h3 >{{ ('NoteStatus.' + (noteStatuses[noteDetails.noteStatus]) | translate) || '-'}}</h3> -->
-            <h3>{{ (noteDetails.date | dateCustom:'fullShort') || '-' }}</h3>
-        </div>        
+        <div class="col-12 col-lg-4 text-center text-lg-start">
+            <p class="mb-1">{{ noteResponse.author }}</p>
+        </div>
+        <div class="col-12 col-lg-4 text-center">
+            <h4>{{ noteResponse.statusName | slice: 0:50}}</h4>
+        </div>
+        <div class="col-12 col-lg-4 text-center text-lg-end">
+            <p class="text-secondary mb-1">
+                {{ (noteResponse.note.date | dateCustom:'fullShort') || '-' }}
+            </p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-center">
+        </div>
     </div>
     <div class="row">
         <div class="col">
-            <h3>{{ 'Note.title' | translate }}:</h3>
-            <p>{{ noteDetails.title || '-'}}</p>
+            <!-- <h3>{{ 'Note.title' | translate }}:</h3> -->
+            <p>{{ noteResponse.note.title || '-'}}</p>
         </div>
-    </div>  
+    </div>
 </div>

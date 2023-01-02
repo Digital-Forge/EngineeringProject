@@ -8,7 +8,7 @@
         </div>
     </ng-template>
 
-    <div class="col-8 offset-2 form">
+    <div class="col-12 col-lg-8 offset-lg-2 form form-sm">
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="mb-3 col-12 col-lg-6">
@@ -97,13 +97,13 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-12 col-lg-2 text-end pt-1">
+                <div class="col-12 col-lg-6 text-center text-lg-start pt-1 mt-2 mt-lg-0">
                     <button class="btn btn-sm btn-success-light" (click)="addRole()">{{ 'Button.assignRole' | translate }}</button>
                 </div>
             </div>       
             
             <div class="row">
-                <div class="col text-center text-sm-end">
+                <div class="col text-center text-sm-end mt-3">
                     <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid"
                         *ngIf="formMode == FormMode.Edit">{{ 'Button.save' | translate }}</button>
                     <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid"

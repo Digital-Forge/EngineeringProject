@@ -28,6 +28,7 @@ body {
     font-weight: 400 !important;
     letter-spacing: 0rem;
     font-size: 14px;
+    overflow-x:unset;
 }
 
 a {
@@ -83,6 +84,10 @@ thead {
     /* text-transform: lowercase; */
     /* background-color: var(--secondary); */
     font-weight: 400;
+}
+
+.navbar {
+    background-color: var(--background-color);
 }
 
 .nav-link > .bi {
@@ -504,7 +509,7 @@ thead {
 .border-panel-left {
     border-style: solid;
     border-color: var(--light-gray);
-    max-height: calc(100vh - 15rem);
+    max-height: calc(100vh - 14em);
 }
 
 .border-panel-left {
@@ -516,13 +521,13 @@ thead {
     position: relative;
     border-width: 1px;
     border-radius: 0 5px 5px 0;
-    
+    /* max-height: calc(100vh - 30em); */
 }
 
 .message-form {
-    position: absolute;
+    position: relative;
     bottom: 0.5rem;
-    width: calc(100% - 5rem);
+    /* width: calc(100% - 5rem); */
 }
 
 #message {
@@ -604,6 +609,18 @@ td {
     cursor: pointer;
 }
 
+.min-width-100 {
+    min-width: 100px;
+}
+
+.min-width-200 {
+    min-width: 200px;
+}
+
+.mobile-only {
+    display: none;
+}
+
 /* breakpoint xlg */
 @media only screen and (max-width: 1200px) {
     .card-columns{ 
@@ -613,8 +630,12 @@ td {
 
 /* breakpoint lg */
 @media only screen and (max-width:992px) {
-    .mobile {
+    .mobile-d-none {
         display: none;
+    }
+
+    .mobile-only {
+        display: block;
     }
 }
 
@@ -622,6 +643,17 @@ td {
 @media only screen and (max-width: 768px) {
     .card-columns{ 
         columns: 1;
+    }
+
+    .form-sm {
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0rem;
+    }
+
+    .border-sm-none {
+        border: none !important;
+        padding: 0 !important;
     }
 }
 

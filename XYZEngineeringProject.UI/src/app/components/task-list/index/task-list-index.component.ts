@@ -41,8 +41,7 @@ export class TaskListComponent implements OnInit {
         });
     }
 
-    completeAllTasksOnList(id: string) {
-
+    toggleCompleteAllTasksOnList(id: string, isComplete: boolean) {
         let taskListDetails: TaskList = {
             id: '',
             name: '',
@@ -57,8 +56,10 @@ export class TaskListComponent implements OnInit {
 
                 taskListDetails = res;
                 taskListDetails.tasks?.forEach(task => {
-                    task.isComplete = true;
+                    task.isComplete = isComplete;
                 })
+                taskListDetails.status = isComplete ? TaskListStatus.Done : TaskListStatus.New;
+
                 this.taskService.saveListOfTasks(taskListDetails).subscribe({
                     next: (res) => {
                         if (res == true) {

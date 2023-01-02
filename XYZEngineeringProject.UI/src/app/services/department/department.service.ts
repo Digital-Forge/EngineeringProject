@@ -18,26 +18,30 @@ export class DepartmentService {
   ) { }
 
   getAllDepartments(): Observable<Department[]> {
-    return this.http.get<Department[]>(this.baseApiUrl+'Department/GetAllDepartments')
+    return this.http.get<Department[]>(this.baseApiUrl + 'Department/GetAllDepartments')
+  }
+
+  getAllCompanyDepartmentsByUserId(userId: string): Observable<Department[]> {
+    return this.http.get<Department[]>(this.baseApiUrl + 'Department/GetAllCompanyDepartmentsByUser/' + userId)
   }
 
   getDepartmentById(id:string): Observable<Department> {
-    return this.http.get<Department>(this.baseApiUrl+'Department/GetDepartmentById/' + id);
+    return this.http.get<Department>(this.baseApiUrl + 'Department/GetDepartmentById/' + id);
   }
 
   getDepartmentUsers(id:string):Observable<User[]> {
-    return this.http.get<User[]>(this.baseApiUrl+'Department/GetDepartmentUsers/'+id);
+    return this.http.get<User[]>(this.baseApiUrl + 'Department/GetDepartmentUsers/' + id);
   }
 
   addDepartment(department:Department): Observable<Department>{
-    return this.http.post<Department>(this.baseApiUrl+'Department/AddDepartment',department);
+    return this.http.post<Department>(this.baseApiUrl + 'Department/AddDepartment', department);
   }
   
   editDepartment(department:Department):Observable<Department>{
-    return this.http.put<Department>(this.baseApiUrl+'Department/EditDepartment',department);
+    return this.http.put<Department>(this.baseApiUrl + 'Department/EditDepartment', department);
   }
 
   deleteDepartment(department: Department):Observable<Department>{
-    return this.http.put<Department>(this.baseApiUrl+'Department/DeleteDepartment',department);
+    return this.http.put<Department>(this.baseApiUrl + 'Department/DeleteDepartment', department);
   }
 }

@@ -1,4 +1,4 @@
-<div class="container-fluid my-5" *ngIf="isAuthorized; else notAuthorized">
+<div class="container-fluid overflow-auto my-5" *ngIf="isAuthorized; else notAuthorized">
     <div class="row mb-3">
             <h1 class="col-12 col-md-9 text-center text-md-start">
                 {{ 'Forum.messages' | translate }}
@@ -55,12 +55,12 @@
     <div class="row message-form mx-1 mt-3">
         <div class="col col-md-10 offset-md-2">
             <form [formGroup]="messageForm" (ngSubmit)="sendMessageToForum()">
-                <div class="row pe-5 pe-md-0 mb-3">
-                    <div class="col-11">
+                <div class="row pe-0 pe-md-0 mb-3">
+                    <div class="col-12 col-sm-10">
                         <textarea type="text" name="message" id="message" formControlName="message" class="form-control" placeholder="{{ 'Forum.typeYourMessage' | translate }}"></textarea>
                     </div>
-                    <div class="col-1 my-auto">
-                        <button title="{{ 'Button.sendMessage' | translate }}" class="btn btn-md btn-success" type="submit" [disabled]="!messageForm.valid"><i class="bi bi-send"></i></button>
+                    <div class="col-12 col-sm-2 text-center text-sm-end mt-2 mt-sm-0 px-sm-2 px-md-3 px-lg-4 my-auto">
+                        <button title="{{ 'Button.sendMessage' | translate }}" class="btn btn-md btn-success w-100" type="submit" [disabled]="!messageForm.valid"><i class="bi bi-send"></i></button>
                     </div>
                 </div>
             </form>

@@ -21,18 +21,20 @@ export class DepartmentIndexComponent implements OnInit {
   constructor(
     private departmentService: DepartmentService,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.departmentService.getAllDepartments().subscribe({
-      next: (res) => {
-        this.departments = res;
+      next: (departmentsResponse) => {
+        this.departments = departmentsResponse;
         
-        this.departments.forEach(department => this.userService.getAppUser(department.managerId).subscribe({
-          next: (res) => {
+        departmentsResponse.forEach(department => this.userService.getAppUser(department.managerId).subscribe({
+          next: (userResponse) => {
             let dep: DepartmentManager = {} as DepartmentManager;
             dep.department = department;
-            dep.manager = res;
+            dep.manager = userResponse || {};
+
+            console.log(dep);
             
             this.departmentsMan.push(dep);
 
@@ -43,10 +45,9 @@ export class DepartmentIndexComponent implements OnInit {
             // this.managers.push({id:'',name:'',pesel:'',roles:[],surname:'',userName:'',passwordHash:'',address:{addressHome:'',addressPost:'',id:'',phone:0}});
           }
         }));
-
-
-
-        // console.log(this.managers);
+      },
+      error: (res) => {
+        console.log(res);
       }
     })
   }

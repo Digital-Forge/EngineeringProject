@@ -1,4 +1,4 @@
-<div class="container-fluid my-5">
+<div class="container-fluid overflow-auto my-5">
     <div *ngIf="editMode; else header" class="row mb-5 text-center">
         <h1 class="col-12">{{ 'Client.editClient' | translate }}</h1>
     </div>
@@ -8,7 +8,7 @@
         </div>
     </ng-template>
 
-    <div class="col-8 offset-2 form">
+    <div class="col-12 col-lg-8 offset-lg-2 form form-sm">
         <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
             <div class="row mb-3">
                 <div class="col">
@@ -29,23 +29,23 @@
                 </div>
             </div>      
             <div class="row mb-3">
-                <div class="col col-lg-6">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                     <label for="address" class="form-label">{{ 'Client.address' | translate }}</label>
                     <input id="address" type="text" formControlName="address" class="form-control">
                 </div>  
-                <div class="col col-lg-6">
+                <div class="col-12 col-lg-6">
                     <label for="nip" class="form-label">{{ 'Client.nip' | translate }}</label>
                     <input id="nip" type="text" formControlName="nip" class="form-control">
                 </div>
             </div>  
             <ng-container formArrayName="clientContacts">
                 <h3 class="mb-3">{{ 'Client.contactPersons' | translate }}</h3>
-                <div class="border b-1 br-5 p-3 mb-3">
+                <div class="border border-sm-none b-1 br-5 p-3 p-lg-0 mb-3">
                     <div *ngIf="clientContacts.length > 0; else noContacts">
                         <div class="border b-1 br-5 p-3 mb-3" *ngFor="let contact of clientContacts.controls; let i=index">
                             <ng-container [formGroupName]="i">                          
                                 <div class="row mb-3">
-                                    <div class="col-12 col-lg-6">
+                                    <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                                         <label for="clientContact-{{i}}-firstName" class="form-label">{{ 'Client.firstname' | translate }} *</label>
                                         <input id="clientContact-{{i}}-firstName" type="text" formControlName="firstName" class="form-control">
                                     </div>
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-12 col-lg-6">
+                                    <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                                         <label for="clientContact-{{i}}-phone" class="form-label">{{ 'Client.phone' | translate }}</label>
                                         <input id="clientContact-{{i}}-phone" type="text" formControlName="phone" class="form-control">
                                     </div>  

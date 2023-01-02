@@ -21,7 +21,7 @@
                     <label for="managerId" class="label-form"> {{'Department.manager' | translate}}</label>
                     <select name="managerId" id="managerId" class="form-select" formControlName="managerId" (change)="selectedManager()">
                         <option *ngFor="let user of users" [value]="user.id">
-                            {{user.name}}
+                            {{ user.name }} {{ user.surname }} <span *ngIf="user.userName">({{ user.userName }}) </span>
                         </option>
                     </select>
                 </div>
@@ -38,8 +38,8 @@
                     <tbody>
                         <tr *ngFor="let user of departmentDetails.users">
                             <td [style.font-weight]="departmentDetails.managerId.toLowerCase()==user.id.toLowerCase()?'bold':null">
-                                {{user.name}} 
-                                <label *ngIf="departmentDetails.managerId.toLowerCase()==user.id.toLowerCase()">
+                                {{ user.name }} {{ user.surname }} <span *ngIf="user.userName">({{ user.userName }}) </span> 
+                                <label *ngIf="departmentDetails.managerId.toLowerCase() == user.id.toLowerCase()">
                                     {{'Department.manager' | translate}}
                                 </label>
                             </td>
@@ -59,11 +59,11 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row" *ngIf="availableUsers.length>0">
-                <h3>{{'Department.addUserToDepartment'|translate}}</h3>
+            <div class="row" *ngIf="availableUsers.length > 0">
+                <h3>{{ 'Department.addUserToDepartment' | translate }}</h3>
                     <select name="newUserId" id="newUserId" formControlName="newUserId" class="form-select">
                         <option *ngFor="let user of availableUsers; let i = index" [value]="user.id">
-                            {{user.name}}
+                            {{ user.name }} {{ user.surname }} <span *ngIf="user.userName">({{ user.userName }})</span>
                         </option>
                     </select>
                     <button type="button" class="btn btn-sm btn-secondary me-2" (click)="addUserToDepartment()">{{'Button.add' | translate}}</button>

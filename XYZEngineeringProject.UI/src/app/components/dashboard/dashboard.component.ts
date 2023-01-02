@@ -1,3 +1,6 @@
+import { DepartmentService } from './../../services/department/department.service';
+import { Department } from './../../models/department.model';
+import { NoteResponse } from './../../models/note.model';
 import { ForumService } from './../../services/forum/forum.service';
 import { forkJoin, map, first } from 'rxjs';
 import { User } from './../../models/user.model';
@@ -37,6 +40,8 @@ export class DashboardComponent implements OnInit {
     taskPriorities = Object.values(Priority).filter(value => typeof value === "string")
     public tasks: Task[] = [];
     public notes: Note[] = [];  
+    public publicNotes: Note[] = [];  
+    public privateNotes: Note[] = [];  
     public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
     public forums: Forum[] = [];
     public messages: Message[] = [];
@@ -62,7 +67,8 @@ export class DashboardComponent implements OnInit {
         private router: Router,
         private taskService: TaskService,
         private noteService: NoteService,
-        private forumService: ForumService
+        private forumService: ForumService,
+        private departmentService: DepartmentService
     ) {
         this.today = new Date();
 
@@ -99,9 +105,18 @@ export class DashboardComponent implements OnInit {
                     next: (res: {
                         tasks: Task[], notes: Note[], forums: Forum[]
                     }) => {
-                        this.tasks = res.tasks;
-                        this.notes = res.notes;
+                        this.tasks = res.tasks.filter(task => !task.isComplete);
                         this.forums = res.forums;
+
+                        res.notes.forEach(note => {
+                            if (!note.isCompany && note.noteStatus == null) {
+                                this.privateNotes.push(note);
+                            }
+                            else {
+                                this.publicNotes.push(note);
+                            }
+                        })
+
 
                         this.forums.forEach((forum: Forum) => {
                             this.forumService.getForumMessagesByForumId(forum.id).subscribe({
@@ -113,7 +128,7 @@ export class DashboardComponent implements OnInit {
                      
                         let today = new Date().getFullYear().toString() + (new Date().getMonth()+1).toString().padStart(2, '0') + new Date().getDate().toString().padStart(2, '0');
 
-                        res.tasks.forEach((task: Task) => {
+                        this.tasks.forEach((task: Task) => {
                             if (!task.isComplete) {
                                 if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.High]) {
                                     if (this.greaterThan(today, this.getDate(task.deadline))) {

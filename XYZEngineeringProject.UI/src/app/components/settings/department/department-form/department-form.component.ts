@@ -48,7 +48,7 @@ export class DepartmentFormComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe({
       next: (res)=>{
-        this.users = res.filter(user=>user.name!=="admin");
+        this.users = res;
         this.updateAvailableUsers();
       }
     })

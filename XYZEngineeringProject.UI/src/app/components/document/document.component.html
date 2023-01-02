@@ -1,6 +1,6 @@
-<div class="container-fluid my-5">
+<div class="container-fluid overflow-auto my-5">
     <div class="mb-3">
-        <h1 class="text-center text-lg-start">{{ 'Documents.currentFolder' | translate }}: {{ selectedDirectory.name }}</h1>
+        <h1 class="text-center text-lg-start"><span class="mobile-d-none"> {{ 'Documents.currentFolder' | translate }}: </span>{{ selectedDirectory.name }}</h1>
     </div>
     <div class="mb-3" *ngIf="selectedDirectory.id != fileStructure.id">
         <button title="{{ 'Button.previousDirectory' | translate }}" class="btn btn-sm btn-secondary-dark me-2" (click)="goUp()"><i class="bi bi-arrow-left"></i></button>
@@ -40,65 +40,65 @@
         </form>
     </div>
    
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>{{ 'Documents.name' | translate }}</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody *ngIf="(selectedDirectory.directories.length > 0) || (selectedDirectory.files.length > 0)">
-            <tr *ngFor="let directory of selectedDirectory.directories; index as i">
-                <td><i class="bi bi-folder me-2"></i>{{directory.name}}</td>                 
-                <td >
-                    <form *ngIf="editDirectory==true && editingDirectory==i" [formGroup]="editDirectoryForm" (ngSubmit)="changeDirectoryName(directory.id)">
-                        <div class="row justify-content-end">
-                            <div class="col-9">
-                                <input class="form-control" type="text" name="newDirectoryName" formControlName="newDirectoryName">
+    <span class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="3">{{ 'Documents.name' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="(selectedDirectory.directories.length > 0) || (selectedDirectory.files.length > 0)">
+                <tr *ngFor="let directory of selectedDirectory.directories; index as i">
+                    <td class="text-nowrap"><i class="bi bi-folder me-2"></i>{{directory.name}}</td>                 
+                    <td class="min-width-200">
+                        <form *ngIf="editDirectory==true && editingDirectory==i" [formGroup]="editDirectoryForm" (ngSubmit)="changeDirectoryName(directory.id)">
+                            <div class="row justify-content-end">
+                                <div class="col-12 col-md-8">
+                                    <input class="form-control" type="text" name="newDirectoryName" formControlName="newDirectoryName">
+                                </div>
+                                <div class="col-12 col-md-4 align-middle text-end text-md-start mt-2 mt-md-0">
+                                    <button title="{{ 'Button.save' | translate}}" class="btn btn-sm btn-success me-2" type="submit"><i class="bi bi-check"></i></button>
+                                    <button title="{{ 'Button.cancel' | translate }}" class="btn btn-sm btn-danger-light" (click)="cancelEditDirectoryName(i)"><i class="bi bi-x"></i></button>
+                                </div>
                             </div>
-                            <div class="col-3 align-middle">
-                                <button title="{{ 'Button.save' | translate}}" class="btn btn-sm btn-success me-2" type="submit"><i class="bi bi-check"></i></button>
-                                <button title="{{ 'Button.cancel' | translate }}" class="btn btn-sm btn-danger-light" (click)="cancelEditDirectoryName(i)"><i class="bi bi-x"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </td>
-                <td class="d-flex justify-content-end">
-                    <button title="{{ 'Button.goToDirectory' | translate }}" class="btn btn-sm btn-success-light me-2" (click)="goToDirectory(directory)"><i class="bi bi-folder2-open"></i></button>
-                    <button title="{{ 'Button.changeName' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="editDirectoryName(i)"><i class="bi bi-pencil-fill"></i></button>
-                    <button title="{{ 'Button.deleteDirectory' | translate }}" class="btn btn-sm btn-danger-light" (click)="deleteDirectory(directory.id)"><i class="bi bi-trash3"></i></button>
-                </td>
-            </tr>
-            
-            <tr *ngFor="let file of selectedDirectory.files; index as i">
-                <td><i class="bi bi-file-earmark me-2"></i>{{file.name}}</td>
-                <td>
-                    <form *ngIf="editFile==true && i==editingFile" [formGroup]="editFileForm" (ngSubmit)="changeFileName(file.id)">
-                        <div class="row justify-content-end">
-                            <div class="col-9">
-                                <input class="form-control" type="text" name="newFileName" formControlName="newFileName">
-                            </div>
-                            <div class="col-3">
-                                <button title="{{ 'Button.save' | translate}}" class="btn btn-sm btn-success me-2" type="submit"><i class="bi bi-check"></i></button>
-                                <button title="{{ 'Button.cancel' | translate }}" class="btn btn-sm btn-danger-light" (click)="cancelEditFileName(i)"><i class="bi bi-x"></i></button>
+                        </form>
+                    </td>
+                    <td class="d-flex justify-content-end">
+                        <button title="{{ 'Button.goToDirectory' | translate }}" class="btn btn-sm btn-success-light me-2" (click)="goToDirectory(directory)"><i class="bi bi-folder2-open"></i></button>
+                        <button title="{{ 'Button.changeName' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="editDirectoryName(i)"><i class="bi bi-pencil-fill"></i></button>
+                        <button title="{{ 'Button.deleteDirectory' | translate }}" class="btn btn-sm btn-danger-light me-2" (click)="deleteDirectory(directory.id)"><i class="bi bi-trash3"></i></button>
+                    </td>
+                </tr>
+                
+                <tr *ngFor="let file of selectedDirectory.files; index as i">
+                    <td><i class="bi bi-file-earmark me-2"></i>{{file.name}}</td>
+                    <td>
+                        <form *ngIf="editFile==true && i==editingFile" [formGroup]="editFileForm" (ngSubmit)="changeFileName(file.id)">
+                            <div class="row justify-content-end">
+                                <div class="col-9">
+                                    <input class="form-control" type="text" name="newFileName" formControlName="newFileName">
+                                </div>
+                                <div class="col-3">
+                                    <button title="{{ 'Button.save' | translate}}" class="btn btn-sm btn-success me-2" type="submit"><i class="bi bi-check"></i></button>
+                                    <button title="{{ 'Button.cancel' | translate }}" class="btn btn-sm btn-danger-light" (click)="cancelEditFileName(i)"><i class="bi bi-x"></i></button>
 
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </td>
-                <td class="d-flex justify-content-end">
-                    <button title="{{ 'Button.download' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="downloadFile(file.id)"><i class="bi bi-pencil-fill"></i></button>
-                    <button title="{{ 'Button.changeName' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="editFileName(i)"><i class="bi bi-pencil-fill"></i></button>
-                    <button title="{{ 'Button.deleteDirectory' | translate }}" class="btn btn-sm btn-danger-light" (click)="deleteFile(file.id)"><i class="bi bi-trash3"></i></button>
-                </td>                   
-            </tr>       
-            
-        </tbody>
-        <tbody *ngIf="(selectedDirectory.directories.length < 1) && (selectedDirectory.files.length < 1)">
-            <tr>
-                <td class="text-center" colspan="3">{{ 'Documents.noFiles' | translate }}</td>
-            </tr>
-        </tbody>
-    </table>
+                        </form>
+                    </td>
+                    <td class="d-flex justify-content-end">
+                        <button title="{{ 'Button.download' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="downloadFile(file.id)"><i class="bi bi-pencil-fill"></i></button>
+                        <button title="{{ 'Button.changeName' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="editFileName(i)"><i class="bi bi-pencil-fill"></i></button>
+                        <button title="{{ 'Button.deleteDirectory' | translate }}" class="btn btn-sm btn-danger-light" (click)="deleteFile(file.id)"><i class="bi bi-trash3"></i></button>
+                    </td>                   
+                </tr>       
+                
+            </tbody>
+            <tbody *ngIf="(selectedDirectory.directories.length < 1) && (selectedDirectory.files.length < 1)">
+                <tr>
+                    <td class="text-center" colspan="3">{{ 'Documents.noFiles' | translate }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </span>
 </div>

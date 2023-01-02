@@ -8,25 +8,23 @@
         </div>
     </ng-template>
 
-    <div class="col-8 offset-2 form">
+    <div class="col-12 col-lg-8 offset-lg-2 form form-sm">
         <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                     <label for="noteStatus" class="form-label">{{ 'Note.status' | translate }}</label><br>
                     <select id="noteStatus" formControlName="noteStatus" class="form-select"
                         [selectedIndex]="this.noteDetails.noteStatus">
-                        <option value="Own">
-                            własne
+                        <option *ngFor="let status of noteStatuses" [value]="status">
+                            {{ 'NoteStatus.' + status | translate }}
                         </option>
-                        <option value="Company">
-                            firma
-                        </option>
+                      
                         <option *ngFor="let department of departments" [value]="department.id">
                             {{ department.name }}
                         </option>
                     </select>
                 </div>
-                <div class="col">
+                <div class="col-12 col-lg-6">
                     <label for="date" class="form-label">{{ 'Note.date' | translate }}</label>
                     <input type="date" class="form-control" id="date" formControlName="date">
                 </div>

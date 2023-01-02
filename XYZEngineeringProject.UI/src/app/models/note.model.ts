@@ -13,5 +13,6 @@ export interface Note {
 
 export interface NoteResponse {
     note: Note,
-    department: Department | null
+    statusName: string | null,
+    author: string | null
 }

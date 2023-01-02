@@ -19,8 +19,6 @@ export class ForumService {
   ) {}
 
   getUserForums(userId: string): Observable<Forum[]> {
-    console.log('service ' + userId);
-
     return this.http.get<Forum[]>(this.baseApiUrl + 'Forum/GetUserForums/' + userId);
   }
 

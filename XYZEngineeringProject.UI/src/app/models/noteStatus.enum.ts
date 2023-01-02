@@ -1,5 +1,4 @@
 export enum NoteStatus {
-    Own,
-    Department,
-    Company
+    Own = "Own",
+    Company = "Company"
 }

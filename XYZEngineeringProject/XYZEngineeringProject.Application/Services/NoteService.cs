@@ -39,7 +39,7 @@ namespace XYZEngineeringProject.Application.Services
         public bool EditNote(NoteVM noteVM)
         {
             var note = _noteRepository.GetNoteById(noteVM.Id);
-            if (note !=null)
+            if (note != null)
             {
                 note.Date = noteVM.Date;
                 note.Title = noteVM.Title;

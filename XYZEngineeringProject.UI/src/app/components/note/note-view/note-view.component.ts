@@ -17,7 +17,8 @@ export class NoteViewComponent implements OnInit {
     id: '',
     title: '',
     date: new Date(),
-    noteStatus: NoteStatus.Own,
+    isCompany: false,
+    noteStatus: null,
     createdBy: this.emptyGuid
   }
 

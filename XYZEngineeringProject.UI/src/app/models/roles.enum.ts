@@ -5,3 +5,11 @@ export enum Roles {
     "MANAGEMENT" = 'Management',
     "EMPLOYEE" = 'Employee'
 }
+
+export enum RolesDB {
+    Admin = "ADM",
+    Moderator = "MODERATOR",
+    Manager = "MANAGER",
+    Management = "MANAGEMENT",
+    Employee = "EMPLOYEE"
+}

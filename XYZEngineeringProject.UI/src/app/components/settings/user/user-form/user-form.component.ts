@@ -36,7 +36,7 @@ export class UserFormComponent implements OnInit {
   userForm = this.fb.group({
     id: [''],
     userUserName: ['', Validators.required],
-    userPassword: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('.*[A-Za-z].*')])],
+    userPassword: ['', Validators.compose([Validators.minLength(5), Validators.pattern('.*[A-Za-z].*')])],
     name: [''],
     surname: ['', Validators.required],
     pesel: [''],
@@ -172,7 +172,7 @@ export class UserFormComponent implements OnInit {
 
   updateUserDetails() {
     this.userDetails.userName = this.userForm.controls.userUserName.value || '';
-    this.userDetails.passwordHash = this.userForm.controls.userPassword.value || '';
+    this.userDetails.passwordHash = this.userForm.controls.userPassword.value || this.userDetails.passwordHash || '';
     this.userDetails.name = this.userForm.controls.name.value || '';
     this.userDetails.surname = this.userForm.controls.surname.value || '';
     this.userDetails.pesel = this.userForm.controls.pesel.value || '';

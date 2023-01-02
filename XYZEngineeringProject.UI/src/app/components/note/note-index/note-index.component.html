@@ -8,7 +8,7 @@
         </div>
     </div>
     <span class="table-responsive">
-        <table class="table" *ngIf="notes && notes.length >0">
+        <table class="table table-hover" *ngIf="notes && notes.length >0">
             <thead>
                 <tr>
                     <th>{{ 'Note.date' | translate }}</th>
@@ -18,9 +18,11 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- <tr *ngFor="let note of notesResponse"> -->
                 <tr *ngFor="let note of notes">
                     <td>{{note.date | dateCustom:'fullShort'}}</td>
-                    <td>{{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}</td>
+                    <!--  TODO -->
+                    <!-- <td>{{ ("NoteStatus." + noteStatuses[note.noteStatus] | translate) || '-'}}</td> -->
                     <td>{{note.title | slice: 0:300}}<span *ngIf="note.title!.length >= 300">...</span></td>
                     <td class="text-end">
                         <button title="{{ 'Button.editNote' | translate }}" class="btn btn-sm btn-secondary me-2"

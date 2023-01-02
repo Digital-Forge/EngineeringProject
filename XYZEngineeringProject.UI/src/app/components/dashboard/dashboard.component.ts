@@ -110,50 +110,52 @@ export class DashboardComponent implements OnInit {
                                 }
                             });
                         });
+                     
+                        let today = new Date().getFullYear().toString() + (new Date().getMonth()+1).toString().padStart(2, '0') + new Date().getDate().toString().padStart(2, '0');
 
                         res.tasks.forEach((task: Task) => {
                             if (!task.isComplete) {
                                 if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.High]) {
-                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    if (this.greaterThan(today, this.getDate(task.deadline))) {
                                         this.highPastTasks.push(task);
                                     }
-                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                    else if (this.equals(this.getDate(task.deadline), today)) {
                                         this.highTodayTasks.push(task);
                                     }
-                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    else if (this.lessThan(today, this.getDate(task.deadline))) {
                                         this.highFutureTasks.push(task);
                                     }
                                 }
                                 else if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.Medium]) {
-                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    if (this.greaterThan(today, this.getDate(task.deadline))) {
                                         this.mediumPastTasks.push(task);
                                     }
-                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                    else if (this.equals(this.getDate(task.deadline), today)) {
                                         this.mediumTodayTasks.push(task);
                                     }
-                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    else if (this.lessThan(today, this.getDate(task.deadline))) {
                                         this.mediumFutureTasks.push(task);
                                     }
                                 }
                                 else if (this.taskPriorities[task.priority] == this.taskPriorities[Priority.Low]) {
-                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    if (this.greaterThan(today, this.getDate(task.deadline))) {
                                         this.lowPastTasks.push(task);
                                     }
-                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                    else if (this.equals(this.getDate(task.deadline), today)) {
                                         this.lowTodayTasks.push(task);
                                     }
-                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    else if (this.lessThan(today, this.getDate(task.deadline))) {
                                         this.lowFutureTasks.push(task);
                                     }
                                 }
                                 else if ((this.taskPriorities[task.priority] == this.taskPriorities[Priority.No]) || (task.priority == undefined)) {
-                                    if (this.greaterThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    if (this.greaterThan(today, this.getDate(task.deadline))) {
                                         this.noPastTasks.push(task);
                                     }
-                                    else if (this.equals(this.getDate(task.deadline), this.getDate(new Date()))) {
+                                    else if (this.equals(this.getDate(task.deadline), today)) {
                                         this.noTodayTasks.push(task);
                                     }
-                                    else if (this.lessThan(this.getDate(new Date()), this.getDate(task.deadline))) {
+                                    else if (this.lessThan(today, this.getDate(task.deadline))) {
                                         this.noFutureTasks.push(task);
                                     }
                                 }
@@ -189,6 +191,7 @@ export class DashboardComponent implements OnInit {
     }
 
     public getDate(date: Date) {
-        return new Date(date).getTime().toString().substring(0, 4);
+        return new Date(date).getFullYear().toString() + (new Date(date).getMonth()+1).toString().padStart(2, '0') + new Date(date).getDate().toString().padStart(2, '0');
+
     }
 }

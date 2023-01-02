@@ -28,12 +28,14 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/dashboard']);
             },
             error: (res) => {
+                console.log(res)
             }
         }); 
      }
 
     onSubmit() {
         document.getElementById('login-spinner')?.classList.remove('d-none');
+        console.log(this.login)
         this.authorizationService.login(this.login);        
     }
     

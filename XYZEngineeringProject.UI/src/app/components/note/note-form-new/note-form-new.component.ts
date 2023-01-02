@@ -1,3 +1,9 @@
+import { subscribeOn } from 'rxjs';
+import { AuthorizationService } from './../../../services/authorization/authorization.service';
+import { User } from './../../../models/user.model';
+import { UserService } from './../../../services/user/user.service';
+import { DepartmentService } from 'src/app/services/department/department.service';
+import { Department } from './../../../models/department.model';
 import { environment } from 'src/environments/environment';
 import { Note } from './../../../models/note.model';
 import { Component, OnInit } from '@angular/core';
@@ -17,11 +23,14 @@ export class NoteFormNewComponent implements OnInit {
   emptyGuid = environment.emptyGuid
   noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
   pipe = new DatePipe('en-GB');
+  departments: Department[] = [];
+
   noteDetails: Note = {
     id: '',
     title: '',
     date: new Date(),
-    noteStatus: NoteStatus.Own,
+    isCompany: false,
+    noteStatus: null,
     createdBy: this.emptyGuid
   }
 
@@ -35,30 +44,68 @@ export class NoteFormNewComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private noteService: NoteService,
+    private departmentService: DepartmentService,
+    private authorizationService: AuthorizationService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (params) => {
-        const id = params.get('id');
-        if (id) {
-          this.noteService.getNote(id).subscribe({
-            next: (response) => {
-              this.editMode = true;
-              this.noteDetails = response;
-              this.updateNoteForm();
+        const noteId = params.get('id');
+
+        this.authorizationService.currentUser().subscribe({
+          next: (currentUserRes) => {
+
+            if (currentUserRes.roles.includes('ADM') || currentUserRes.roles.includes('MODERATOR') || currentUserRes.roles.includes('MANAGEMENT')) {
+              this.departmentService.getAllDepartments().subscribe({
+                next: (depratmentsRes) => {
+                  this.departments = depratmentsRes;
+                  this.getNoteData(noteId);
+                }, 
+                error: (res) => {
+                  console.log(res);
+                }
+              });
             }
-          })
-        }
-        else {
-          this.editMode = false;
-          // this.updateNoteForm();
-        }
+            // else {
+            //   this.departmentService.getDepartmentsByUser(currentUserRes.id).subscribe({
+            //     next: (depratmentsRes) => {
+            //       this.departments = depratmentsRes;
+            //       this.getNoteData(noteId);
+            //     }, 
+            //     error: (res) => {
+            //       console.log(res);
+            //     }
+            //   });
+            // }
+
+          },
+          error: (res) => {
+            console.log(res);
+          }
+        });
+
+        
       }
     })
   }
 
+  getNoteData(noteId: string | null) {
+    if (noteId) {
+      this.noteService.getNote(noteId).subscribe({
+        next: (response) => {
+          this.editMode = true;
+          this.noteDetails = response;
+          this.updateNoteForm();
+        }
+      });
+    }
+    else {
+      this.editMode = false;
+      // this.updateNoteForm();
+    }
+  }
   onSubmit() {    
     this.updateNoteDetails()
     if (this.editMode) {
@@ -104,8 +151,12 @@ export class NoteFormNewComponent implements OnInit {
 
   updateNoteDetails() {
     this.noteDetails.title = this.noteForm.controls.title.value || '';
-    this.noteDetails.noteStatus = Object.values(NoteStatus).indexOf(this.noteForm.controls.noteStatus?.value || NoteStatus.Own);
+    this.noteDetails.isCompany = this.noteForm.controls.noteStatus.value == NoteStatus.Company;
+    this.noteDetails.noteStatus = (this.noteForm.controls.noteStatus.value != NoteStatus.Own && this.noteForm.controls.noteStatus.value != NoteStatus.Company) ? this.noteForm.controls.noteStatus.value : null;
+    // this.noteDetails.noteStatus = Object.values(NoteStatus).indexOf(this.noteForm.controls.noteStatus?.value || NoteStatus.Own);
     this.noteDetails.date = new Date(this.noteForm.controls.date?.value || new Date());
+
+    console.log(this.noteDetails);
   }
 
 }

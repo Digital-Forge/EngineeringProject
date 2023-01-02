@@ -15,8 +15,14 @@
                     <label for="noteStatus" class="form-label">{{ 'Note.status' | translate }}</label><br>
                     <select id="noteStatus" formControlName="noteStatus" class="form-select"
                         [selectedIndex]="this.noteDetails.noteStatus">
-                        <option *ngFor="let status of noteStatuses" [selected]="status == 'Own'">
-                            {{ ('NoteStatus.' + status) | translate }}
+                        <option value="Own">
+                            własne
+                        </option>
+                        <option value="Company">
+                            firma
+                        </option>
+                        <option *ngFor="let department of departments" [value]="department.id">
+                            {{ department.name }}
                         </option>
                     </select>
                 </div>

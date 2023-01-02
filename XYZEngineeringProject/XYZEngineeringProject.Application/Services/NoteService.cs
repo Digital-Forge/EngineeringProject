@@ -27,13 +27,12 @@ namespace XYZEngineeringProject.Application.Services
             {
                 Title = noteVM.Title,
                 NoteStatus = noteVM.NoteStatus,
-                Date = noteVM.Date
+                Date = noteVM.Date,
+                isCompany = noteVM.isCompany
             };
 
             _noteRepository.Add(note);
-
             return true;
-
         }
 
         public bool EditNote(NoteVM noteVM)
@@ -44,6 +43,7 @@ namespace XYZEngineeringProject.Application.Services
                 note.Date = noteVM.Date;
                 note.Title = noteVM.Title;
                 note.NoteStatus = noteVM.NoteStatus;
+                note.isCompany = noteVM.isCompany;
                 return _noteRepository.Update(note);
             }
             return false;
@@ -57,6 +57,7 @@ namespace XYZEngineeringProject.Application.Services
                 Title = x.Title,
                 Id = x.Id,
                 NoteStatus = x.NoteStatus,
+                isCompany = x.isCompany,
                 CreatedBy = x.CreateBy.ToString()
             }).ToList();
         }

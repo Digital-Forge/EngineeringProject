@@ -11,7 +11,8 @@ namespace XYZEngineeringProject.Domain.Models
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public NoteStatus NoteStatus { get; set; }
+        public string? NoteStatus { get; set; }
+        public bool isCompany { get; set; }
         public DateTime Date { get; set; }
 
         //relations

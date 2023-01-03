@@ -42,6 +42,10 @@ export class UserService {
   {
     return this.http.get(this.baseApiUrl+'AppUser/DeleteUserRole/'+user.id+'/'+roleName)
   }
+
+  editAppUser(user:User): Observable<User> {
+    return this.http.put<User>(this.baseApiUrl+'AppUser/Edit',user);
+  }
  
 }
 

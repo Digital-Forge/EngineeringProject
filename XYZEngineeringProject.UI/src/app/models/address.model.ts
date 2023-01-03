@@ -1,6 +1,6 @@
 export interface Address {
     id: string,
-    phone: number,
+    phone: string,
     addressPost: string,
     addressHome: string
 }

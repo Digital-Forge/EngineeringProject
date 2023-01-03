@@ -32,7 +32,14 @@ namespace XYZEngineeringProject.Application.Services
                 Firstname = "admin",
                 Surname = "admin",
                 UserName = "admin",
-                PasswordHash = "admin"
+                PasswordHash = "admin",
+                PESEL = "admin",
+                Address = new Address
+                {
+                    Phone= "admin",
+                    AddressHome= "admin",
+                    AddressPost= "admin",
+                }
             };
 
             _utilsRepository.InitHelloWorld();

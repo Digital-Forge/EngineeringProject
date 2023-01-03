@@ -13,6 +13,7 @@ namespace XYZEngineeringProject.Application.ViewModels
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string PESEL { get; set; }
         public List<string> Roles { get; set; }
     }
 }

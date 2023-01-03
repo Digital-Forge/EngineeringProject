@@ -1,3 +1,4 @@
+import { RegisterComponent } from './components/register/register.component';
 import { DepartmentIndexComponent } from './components/settings/department/department-index/department-index.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { UserViewComponent } from './components/settings/user/user-view/user-view.component';
@@ -118,6 +119,10 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: '',

@@ -10,7 +10,7 @@ namespace XYZEngineeringProject.Domain.Models
     public class Address : ISoftDataEntity
     {
         public Guid Id { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public string AddressPost { get; set; }
         public string AddressHome { get; set; }
 

@@ -2,7 +2,7 @@
     <div class="row mb-5">
         <h1 class="col-12 col-lg-9 text-center text-lg-start">{{'User.users' | translate }}</h1>
         <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
-            <button class="btn btn-md btn-primary" [routerLink]="['/settings/users/add']">
+            <button *ngIf="canModify()" class="btn btn-md btn-primary" [routerLink]="['/settings/users/add']">
                 <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addUser' | translate }}
             </button>
         </div>
@@ -16,7 +16,7 @@
                     <th>{{ 'User.userName' | translate }}</th>
                     <th>{{ 'User.department' | translate }}</th>
                     <th>{{ 'User.roles' | translate }}</th>
-                    <th></th>
+                    <th *ngIf="canModify()"></th>
                 </tr>
             </thead>
             <tbody *ngFor="let user of users">
@@ -31,7 +31,7 @@
                         <div *ngFor="let userRole of user.roles">{{ ('Role.' + userRole | translate) }}</div>
                         <div *ngIf="user.roles.length == 0">-</div>
                     </td> -->
-                    <td class="text-end ">
+                    <td *ngIf="canModify()" class="text-end">
                         <button title="{{ 'Button.editUser' | translate}}" class="btn btn-sm btn-secondary me-2"
                             [routerLink]="['/settings/users', 'edit', user.id]"><i
                                 class="bi bi-pencil-fill"></i></button>

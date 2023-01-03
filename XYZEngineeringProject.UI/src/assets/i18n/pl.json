@@ -23,7 +23,8 @@
         "deleteNote": "Czy na pewno chcesz usunąć notatkę ",
         "deleteTaskList": "Czy na pewno chcesz usunąć listę zadań?",
         "deleteTask": "Czy na pewno chcesz usunąć zadanie?",
-        "deleteRole": "Czy na pewno chcesz usunąć rolę?"
+        "deleteRole": "Czy na pewno chcesz usunąć rolę?",
+        "deleteDepartment": "Czy na pewno chcesz usunąć dział "
 
     },
     "Button": {
@@ -161,6 +162,8 @@
         "addNote":"Utwórz notatkę",
         "editNote": "Edytuj notatkę",
         "notes": "Notatki",
+        "publicNotes": "Notatki firmowe",
+        "privateNotes": "Prywatne notatki",
         "title": "Treść",
         "status": "Przypisane",
         "date": "Data",

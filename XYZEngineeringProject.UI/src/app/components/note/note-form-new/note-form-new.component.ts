@@ -62,23 +62,23 @@ export class NoteFormNewComponent implements OnInit {
                 next: (depratmentsRes) => {
                   this.departments = depratmentsRes;
                   this.getNoteData(noteId);
-                }, 
+                },
                 error: (res) => {
                   console.log(res);
                 }
               });
             }
-            // else {
-            //   this.departmentService.getDepartmentsByUser(currentUserRes.id).subscribe({
-            //     next: (depratmentsRes) => {
-            //       this.departments = depratmentsRes;
-            //       this.getNoteData(noteId);
-            //     }, 
-            //     error: (res) => {
-            //       console.log(res);
-            //     }
-            //   });
-            // }
+            else {
+              // this.departmentService.getDepartmentsByUser(currentUserRes.id).subscribe({
+              //   next: (depratmentsRes) => {
+              //     this.departments = depratmentsRes;
+                  this.getNoteData(noteId);
+              //   },
+              //   error: (res) => {
+              //     console.log(res);
+              //   }
+              // });
+            }
 
           },
           error: (res) => {
@@ -86,7 +86,7 @@ export class NoteFormNewComponent implements OnInit {
           }
         });
 
-        
+
       }
     })
   }
@@ -106,7 +106,7 @@ export class NoteFormNewComponent implements OnInit {
       // this.updateNoteForm();
     }
   }
-  onSubmit() {    
+  onSubmit() {
     this.updateNoteDetails()
     if (this.editMode) {
       this.saveChanges();
@@ -124,7 +124,7 @@ export class NoteFormNewComponent implements OnInit {
       error: (res) => {
         window.location.reload();
       }
-    });  
+    });
   }
 
   saveChanges() {
@@ -144,6 +144,7 @@ export class NoteFormNewComponent implements OnInit {
 
   updateNoteForm() {
     this.noteForm.patchValue({
+      noteStatus: this.noteDetails.isCompany ? NoteStatus.Company : (this.noteDetails.noteStatus != null ? this.noteDetails.noteStatus : NoteStatus.Own),
       title: this.noteDetails.title,
       date: this.pipe.transform(this.noteDetails.date, 'yyyy-MM-dd'),
     })
@@ -152,7 +153,7 @@ export class NoteFormNewComponent implements OnInit {
   updateNoteDetails() {
     this.noteDetails.title = this.noteForm.controls.title.value || '';
     this.noteDetails.isCompany = this.noteForm.controls.noteStatus.value == NoteStatus.Company;
-    this.noteDetails.noteStatus = (this.noteForm.controls.noteStatus.value != NoteStatus.Own && this.noteForm.controls.noteStatus.value != NoteStatus.Company) ? this.noteForm.controls.noteStatus.value : null;
+    this.noteDetails.noteStatus = (this.noteForm.controls.noteStatus.value != NoteStatus.Own && this.noteForm.controls.noteStatus.value != NoteStatus.Company && this.noteForm.controls.noteStatus.value != '') ? this.noteForm.controls.noteStatus.value : null;
     // this.noteDetails.noteStatus = Object.values(NoteStatus).indexOf(this.noteForm.controls.noteStatus?.value || NoteStatus.Own);
     this.noteDetails.date = new Date(this.noteForm.controls.date?.value || new Date());
 

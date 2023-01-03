@@ -69,8 +69,10 @@ export class ForumComponent implements OnInit, AfterViewChecked {
             next: (currentUser) => {
                 this.currentUser = currentUser;
                 this.currentUserRoles = currentUser.roles;
+               
 
                 if (this.currentUserRoles.includes(RolesDB.Admin) || this.currentUserRoles.includes(RolesDB.Moderator) || this.currentUserRoles.includes(RolesDB.Management)) {
+                    console.log(this.currentUser.id);
                     this.forumService.getAllForumsByUserId(this.currentUser.id).subscribe({
                         next: (res) => {
                             this.forums = res;

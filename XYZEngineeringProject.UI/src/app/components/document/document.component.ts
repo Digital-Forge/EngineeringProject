@@ -40,7 +40,7 @@ export class DocumentComponent implements OnInit {
     private documentService: DocumentService,
     private fb: FormBuilder,
     private translateService: TranslateService
-  ) {}
+  ) { }
 
   fileStructure: FileStructure = {
     id: '',
@@ -127,6 +127,7 @@ export class DocumentComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.documentForm.get('fileSource')?.value || '');
     this.fileData.id = environment.emptyGuid
+    this.fileData.name = this.documentForm.controls.name?.value || this.fileData.name
     this.documentService.uploadFile(this.fileData).subscribe({
       next: (res) => {
         window.location.reload();
@@ -225,11 +226,21 @@ export class DocumentComponent implements OnInit {
     }
   }
 
-  downloadFile(id:string) {
+  downloadFile(id: string) {
     this.documentService.downloadFile(id).subscribe({
-      next: (res)=>{
+      next: (res) => {
         console.log(res);
-        
+        const byteChar = atob(res.objectBase64 as string);
+        const byteNumbers = new Array(byteChar.length);
+        for (let i = 0; i < byteChar.length; i++) {
+          byteNumbers[i] = byteChar.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray]);
+        let a = document.createElement('a');
+        a.download = res.name + '.' + res.format;
+        a.href = window.URL.createObjectURL(blob);
+        a.click()
       }
     })
   }

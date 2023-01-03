@@ -62,7 +62,18 @@
         "previousDirectory": "Previous directory",
         "refresh": "Refresh",
         "sendMessage": "Send message",
-        "assignRole": "Assign role"
+        "assignRole": "Assign role",
+        "addDepartment":"Add department",
+        "editDepartment": "Edit department",
+        "setAsManager": "Set as manager",
+        "addFile": "Add file",
+        "addDirectory": "Add directory",
+        "download": "Download",
+        "goToDirectory": "Open directory",
+        "changeName": "Change name",
+        "deleteDirectory": "Delete directory",
+        "deleteFile": "Delete file",
+        "cancel": "Cancel"
     },
     "Menu": {
         "dashboard": "Dashboard",
@@ -172,11 +183,7 @@
         "noFiles": "No files have been added yet.",
         "selectFile": "Select file",
         "saveAs": "Save as",
-        "directoryName": "New directory name",
-        "goToDirectory": "Open directory",
-        "changeName": "Change name",
-        "deleteDirectory": "Delete directory",
-        "deleteFile": "Delete file"
+        "directoryName": "New directory name"
     },
     "Forum": {
         "messages": "Messages",

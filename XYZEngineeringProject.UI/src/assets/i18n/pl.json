@@ -65,7 +65,15 @@
         "assignRole": "Przypisz rolę",
         "addDepartment":"Dodaj dział",
         "editDepartment": "Edytuj dział",
-        "setAsManager": "Ustaw jako managera"
+        "setAsManager": "Ustaw jako managera",
+        "addFile": "Dodaj plik",
+        "addDirectory": "Dodaj folder",
+        "download": "Pobierz",
+        "goToDirectory": "Otwórz katalog",
+        "changeName": "Zmień nazwę",
+        "deleteDirectory": "Usuń katalog",
+        "deleteFile": "Usuń plik",
+        "cancel": "Anuluj"
     },
     "Menu": {
         "dashboard": "Pulpit",
@@ -175,11 +183,7 @@
         "noFiles": "Brak elementów do wyświetlenia",
         "selectFile": "Wybierz plik",
         "saveAs": "Zapisz jako",
-        "directoryName": "Nazwa nowego katalogu",
-        "goToDirectory": "Otwórz katalog",
-        "changeName": "Zmień nazwę",
-        "deleteDirectory": "Usuń katalog",
-        "deleteFile": "Usuń plik"
+        "directoryName": "Nazwa nowego katalogu"
     },
     "Forum": {
         "messages": "Wiadomości",

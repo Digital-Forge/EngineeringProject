@@ -51,7 +51,7 @@ export class DocumentService {
     return this.httpClient.get(this.baseUrl+'File/DeleteDirectory/' + id);
   }
 
-  downloadFile(id: string) {
-    return this.httpClient.get(this.baseUrl+'File/DownloadFile/'+id);
+  downloadFile(id: string): Observable<FileModel> {
+    return this.httpClient.get<FileModel>(this.baseUrl+'File/Download/'+id);
   }
 }

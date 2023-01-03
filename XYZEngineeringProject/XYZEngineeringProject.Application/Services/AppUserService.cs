@@ -120,6 +120,7 @@ namespace XYZEngineeringProject.Application.Services
         public bool UpdateUser(AppUserVM appUser)
         {
             var user = _userRepository.GetUserById(Guid.Parse(appUser.Id));
+            user.Address = _userRepository.GetUserAddress(user);
             if (user == null)
             {
                 return false;

@@ -1,8 +1,11 @@
+import { RolesDB } from './../../../models/roles.enum';
+import { AuthorizationService } from './../../../services/authorization/authorization.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Client } from './../../../models/client.model';
 import { Component, OnInit } from '@angular/core';
 import { empty } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-client-index',
@@ -12,19 +15,28 @@ import { empty } from 'rxjs';
 export class ClientComponent implements OnInit {
 
   clients: Client[] = [];
+  currentUser: User;
+  
   constructor(
     private clientService: ClientService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private authorizationService: AuthorizationService
     ) { }
 
   ngOnInit(): void {
+    this.authorizationService.currentUser().subscribe({
+      next: (res) => {
+        this.currentUser = res;
+      }
+    });
+
     this.clientService.getAllClients().subscribe({
       next: (res) => {
         this.clients = res;
       },
       error: (res) => {
       }
-    })
+    });
   }
 
   toggleContacts(client: Client) {
@@ -43,6 +55,13 @@ export class ClientComponent implements OnInit {
         }
       })
     }
+  }
+
+  canRemove() {
+    if (this.currentUser.roles.includes(RolesDB.Manager) || this.currentUser.roles.includes(RolesDB.Management) || this.currentUser.roles.includes(RolesDB.Moderator) || this.currentUser.roles.includes(RolesDB.Admin)) {
+      return true;
+    }
+    return false; 
   }
 
 }

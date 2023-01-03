@@ -28,7 +28,7 @@ body {
     font-weight: 400 !important;
     letter-spacing: 0rem;
     font-size: 14px;
-    overflow-x:unset;
+    overflow-x: hidden;
 }
 
 a {
@@ -84,6 +84,12 @@ thead {
     /* text-transform: lowercase; */
     /* background-color: var(--secondary); */
     font-weight: 400;
+}
+
+.double-table-view {
+    display: block;
+    max-height: calc(50vh - 9em);
+    overflow-y: scroll;
 }
 
 .navbar {
@@ -509,7 +515,7 @@ thead {
 .border-panel-left {
     border-style: solid;
     border-color: var(--light-gray);
-    max-height: calc(100vh - 14em);
+    max-height: calc(100vh - 16em);
 }
 
 .border-panel-left {
@@ -526,7 +532,7 @@ thead {
 
 .message-form {
     position: relative;
-    bottom: 0.5rem;
+    bottom: 2em;
     /* width: calc(100% - 5rem); */
 }
 
@@ -610,11 +616,11 @@ td {
 }
 
 .min-width-100 {
-    min-width: 100px;
+    min-width: 100px !important;
 }
 
 .min-width-200 {
-    min-width: 200px;
+    min-width: 200px !important;
 }
 
 .mobile-only {

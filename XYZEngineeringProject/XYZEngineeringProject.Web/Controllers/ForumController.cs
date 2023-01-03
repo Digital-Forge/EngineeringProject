@@ -62,7 +62,7 @@ namespace XYZEngineeringProject.Web.Controllers
             return Ok(_forumService.GetUserForums(userId));
         }
 
-        [HttpGet]
+        [HttpGet("Forum/GetAllCompanyForumsByUser/{userId}")]
         public IActionResult GetAllCompanyForumsByUser(Guid userId)
         {
             var user = _userRepository.GetUserById(userId);

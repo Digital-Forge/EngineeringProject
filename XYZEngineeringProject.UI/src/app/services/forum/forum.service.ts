@@ -31,9 +31,7 @@ export class ForumService {
   }
 
   getForumMessagesByForumId(forumId: string, take: number = 20, skip: number = 0): Observable<Message[]> {
-  
-    let queryParams = new HttpParams({ fromObject: {"id": forumId, "take": take, "skip": skip}});
-
+    let queryParams = new HttpParams({ fromObject: {"id": forumId, "take": take, "skip": skip} });
     return this.http.get<Message[]>(this.baseApiUrl + 'Forum/GetForumContent', { params: queryParams });
   }
   

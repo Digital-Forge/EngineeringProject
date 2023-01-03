@@ -1,1 +1,37 @@
-<p>user-view works!</p>
+<div class="mx-5 my-0 px-5 py-5 h-100 shadow-primary">
+    <h1 class="float-start">
+        <a [routerLink]="['/users']">{{ 'User.users' | translate }}</a>
+        <i class="bi bi-arrow-right-short mx-1"></i>
+    </h1>
+
+    <h1 class="mb-3">{{ user.name }} {{ user.surname }}</h1>
+    <p>{{ user.userName }}</p>
+
+    <hr>
+    <h3>{{ 'User.address' | translate }}</h3>
+    <div class="mb-3 text-justify">
+        <p> {{ 'User.phone' | translate }}: {{ user.address.phone || '-'}} </p>
+        <p> {{ 'User.homeAddress' | translate }}: {{ user.address.addressHome || '-'}} </p>
+        <p> {{ 'User.postAddress' | translate }}: {{ user.address.addressPost || '-'}} </p>
+    </div>
+  
+    <hr>
+    <h2 class="my-3">{{ 'User.roles' | translate }}</h2>
+    <span class="table-responsive">
+        <table class="table text-nowrap table-borderless no-shadow">
+            <thead>
+                <tr>
+                    <th class="p-2">{{ 'User.role' | translate }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of user.roles; let i = index">
+                    <ng-container [formGroupName]="i">
+                        <td class="pt-3">{{ ('Role.' + role) | translate }}</td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+    </span>
+</div>

@@ -23,7 +23,8 @@
         "deleteNote": "Are you sure you want to delete note ",
         "deleteTaskList": "Are you sure you want to delete task list?",
         "deleteTask": "Are you sure you want to delete task?",
-        "deleteRole": "Are you sure you want to delete role?"
+        "deleteRole": "Are you sure you want to delete role?",
+        "deleteDepartment": "Are you sure you want to delete department "
 
     },
     "Button": {
@@ -161,6 +162,8 @@
         "addNote": "Add note",
         "editNote": "Edit note",
         "notes": "Notes",
+        "publicNotes": "Company notes",
+        "privateNotes": "Private notes",
         "title": "Note",
         "status": "Assigned",
         "date": "Data",

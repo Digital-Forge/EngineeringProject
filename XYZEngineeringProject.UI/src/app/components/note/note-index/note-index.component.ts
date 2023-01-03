@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user/user.service';
 import { RolesDB } from './../../../models/roles.enum';
 import { Department } from './../../../models/department.model';
 import { DepartmentService } from 'src/app/services/department/department.service';
@@ -8,6 +9,7 @@ import { NoteService } from './../../../services/notes/note.service';
 import { Note, NoteResponse } from './../../../models/note.model';
 import { Component, OnInit } from '@angular/core';
 import { NoteStatus } from 'src/app/models/noteStatus.enum';
+import { User } from 'src/app/models/user.model';
 
 @Component({
     selector: 'app-note-index',
@@ -18,65 +20,81 @@ export class NoteIndexComponent implements OnInit {
 
     public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
     notes: Note[] = [];
-    notesResponse: NoteResponse[] = [];
+    privateNotesResponse: NoteResponse[] = [];
+    publicNotesResponse: NoteResponse[] = [];
 
+    currentUser: User;
     currentUserRoles: string[];
     currentUserId: string;
+
+    canDeleteRoles: RolesDB[] = [
+        RolesDB.Admin,
+        RolesDB.Moderator,
+        RolesDB.Management
+      ]
 
     constructor(
         private noteService: NoteService,
         private router: Router,
         private authorizationService: AuthorizationService,
+        private userService: UserService,
         private departmentService: DepartmentService,
         private translateService: TranslateService
     ) { }
 
     ngOnInit(): void {
-        this.noteService.getAllNotes().subscribe({
-            next: (notes) => {
-                this.notes = notes;
-                
-                console.log(this.translateService.instant('NoteStatus.'+ NoteStatus.Own.toString()));
-                console.log(this.translateService.instant('NoteStatus.'+ NoteStatus.Company.toString()));
-
-                this.notes.forEach(note => {
-                    let noteResponse = {} as NoteResponse;
-                    noteResponse.note = note;
-
-
-                    if (note.isCompany == true) {
-                        noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Company.toString());
-                    }
-                    else if (note.isCompany == false && note.noteStatus == null) {
-                        noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Own.toString());
-                    }
-                    else if (note.isCompany == false && note.noteStatus != null) {
-                        this.departmentService.getDepartmentById(note.noteStatus).subscribe({
-                            next: (department) => {
-                                noteResponse.statusName = department.name;
-                            }
-                        })
-                    }
-
-                    // console.log(noteResponse.statusName);
-
-                    this.notesResponse.push(noteResponse);
-                });
-            
-            },
-            error: (res) => {
-                console.log(res);
-            }
-        });
-
         this.authorizationService.currentUser().subscribe({
             next: (res) => {
-                this.currentUserRoles = res.roles; 
+                this.currentUser = res;
+                this.currentUserRoles = res.roles;
                 this.currentUserId = res.id.toUpperCase();
                 //TODO przypisać role
-               
+
+                this.noteService.getAllNotes().subscribe({
+                    next: (notes) => {
+                        this.notes = notes;
+
+                        this.notes.forEach(note => {
+                            let noteResponse = {} as NoteResponse;
+                            noteResponse.note = note;
+
+                            if (note.isCompany == true) {
+                                noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Company.toString());
+                                this.publicNotesResponse.push(noteResponse);
+                            }
+                            else if (note.isCompany == false && note.noteStatus == null && note.createdBy.toLowerCase() == this.currentUser.id.toLowerCase()) {
+                                noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Own.toString());
+                                this.privateNotesResponse.push(noteResponse);
+                            }
+                            else if (note.isCompany == false && note.noteStatus != null) {
+                                this.departmentService.getDepartmentById(note.noteStatus).subscribe({
+                                    next: (department) => {
+
+                                        console.log(department);
+                                        noteResponse.statusName = department.name;
+                                        if (this.currentUserRoles.includes(RolesDB.Admin) || this.currentUserRoles.includes(RolesDB.Moderator) || this.currentUserRoles.includes(RolesDB.Management)) {
+                                            this.publicNotesResponse.push(noteResponse);
+                                        }
+                                        else {
+                                            department.users.forEach(user => {
+                                            if (user.id == this.currentUser.id) {
+                                                this.publicNotesResponse.push(noteResponse);
+                                            }
+                                            });
+                                        }
+                                    }
+                                })
+                            }                           
+                        });                      
+                    },
+                    error: (res) => {
+                        console.log(res);
+                    }
+                });
             }
         })
+
+
     }
 
     deleteNote(note: Note) {
@@ -93,12 +111,28 @@ export class NoteIndexComponent implements OnInit {
         }
     }
 
-    canDelete(note: Note) {
-        //TODO dodać role do if'a
-        if (this.currentUserRoles.includes(RolesDB.Admin) || this.currentUserRoles.includes(RolesDB.Management) || this.currentUserRoles.includes(RolesDB.Moderator) || (note.createdBy == this.currentUserId)) {
-            return true;
-        }
-        else return false;
+    canRead(noteResponse: NoteResponse) {        
     }
+
+    canModify(note: Note) {
+        return note.createdBy.toLowerCase() == this.currentUserId.toLowerCase();
+    }
+
+    canDelete(note: Note) {
+        let canModify: boolean = false;
+        
+        if (note.createdBy == this.currentUserId) {
+            canModify = true;
+        }
+        else {
+            this.canDeleteRoles.forEach(role => {
+            if (this.currentUser.roles.includes(role)) {
+                canModify = true;
+            }
+            });
+        }
+        return canModify;
+      }
+    
 
 }

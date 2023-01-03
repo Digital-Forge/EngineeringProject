@@ -13,14 +13,13 @@
             <div class="row mb-3">
                 <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                     <label for="noteStatus" class="form-label">{{ 'Note.status' | translate }}</label><br>
-                    <select id="noteStatus" formControlName="noteStatus" class="form-select"
-                        [selectedIndex]="this.noteDetails.noteStatus">
+                    <select id="noteStatus" formControlName="noteStatus" class="form-select">
                         <option *ngFor="let status of noteStatuses" [value]="status">
                             {{ 'NoteStatus.' + status | translate }}
                         </option>
                       
                         <option *ngFor="let department of departments" [value]="department.id">
-                            {{ department.name }}
+                           {{ department.name }}
                         </option>
                     </select>
                 </div>
@@ -31,7 +30,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <label for="title" class="label-form">{{ 'Note.title' | translate }}</label>
+                    <label for="title" class="label-form">{{ 'Note.title' | translate }} *</label>
                     <textarea class="form-control" id="title" formControlName="title"
                         [(ngModel)]="noteDetails.title"></textarea>
                 </div>

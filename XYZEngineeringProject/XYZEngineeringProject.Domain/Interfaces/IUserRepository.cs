@@ -30,5 +30,7 @@ namespace XYZEngineeringProject.Domain.Interfaces
         void RemoveRole(Guid userId, Guid roleId);
 
         List<string> GetUserRoles(Guid? userId);
+        void RemoveUserAddress(AppUser user);
+        void AddUserAddress(Address address);
     }
 }

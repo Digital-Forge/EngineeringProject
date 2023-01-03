@@ -45,7 +45,8 @@ namespace XYZEngineeringProject.Application.Services
                 Name = x.Firstname,
                 Surname = x.Surname,
                 Email = x.Email,
-                Phone = x.PhoneNumber
+                Phone = x.Address.Phone,
+                PESEL = x.PESEL
             }).FirstOrDefault();
 
             me.Roles = _userRepository.GetUserRoles(me?.Id);

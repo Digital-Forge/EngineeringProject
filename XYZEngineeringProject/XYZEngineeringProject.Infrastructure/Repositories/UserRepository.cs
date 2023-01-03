@@ -270,5 +270,18 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             var roles = _context.UserRoles.Where(x => x.UserId == userId).ToList();
             return _context.Roles.ToList().Where(x => roles.Any(a => a.RoleId == x.Id)).Select(x => x.Name).ToList();
         }
+
+        public void RemoveUserAddress(AppUser user)
+        {
+            var buff = _context.UserAddresses.Where(x => x.UseStatus != Domain.Models.EntityUtils.UseStatusEntity.Delete).FirstOrDefault();
+            _context.UserAddresses.Remove(buff);
+            _context.SaveChanges();
+        }
+
+        public void AddUserAddress(Address address)
+        {
+            _context.UserAddresses.Add(address);
+            _context.SaveChanges();
+        }
     }
 }

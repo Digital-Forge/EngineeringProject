@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-  
+
   userDetails: User = {
     id: '',
     userName: '',
@@ -28,7 +28,7 @@ export class UserFormComponent implements OnInit {
       id: '',
       addressHome: '',
       addressPost: '',
-      phone: 0
+      phone: ''
     },
     roles: []
   }
@@ -86,22 +86,22 @@ export class UserFormComponent implements OnInit {
 
         if (this.userId && this.isInUrl('/edit')) {
           this.authorizationService.getAllRoles().subscribe({
-           next: (res) => {
-             this.allRoles = res as Roles[]                              
-           }
+            next: (res) => {
+              this.allRoles = res as Roles[]
+            }
           });
 
           this.departmentService.getAllDepartments().subscribe({
-           next: (res) => {
-             this.allDepartments = res          
-           }
+            next: (res) => {
+              this.allDepartments = res
+            }
           });
 
           this.authorizationService.currentUser().subscribe({
             next: (res) => {
-                this.currentUser = res;
-                this.isCurrentUserAdmin = this.currentUser.roles.includes('ADM');          
-              }
+              this.currentUser = res;
+              this.isCurrentUserAdmin = this.currentUser.roles.includes('ADM');
+            }
           });
 
           this.userService.getAppUser(this.userId).subscribe({
@@ -113,20 +113,20 @@ export class UserFormComponent implements OnInit {
               this.userService.getAppUserRoles(this.userDetails).subscribe({
                 next: (res) => {
                   this.userRoles = res
-                  
+
                   this.userRoles.forEach(role => {
-                    this.allRoles = this.allRoles.filter(s => s!=role)
+                    this.allRoles = this.allRoles.filter(s => s != role)
                   });
 
 
-                    if (!this.isCurrentUserAdmin) {
-                        this.allRoles.forEach(role => {
-                            this.allRolesNoAdmin = this.allRoles.filter(s => s.toString() != 'ADM')
-                        });
-                        console.log()
-                        this.allRoles = this.allRolesNoAdmin;
-                    }
-  
+                  if (!this.isCurrentUserAdmin) {
+                    this.allRoles.forEach(role => {
+                      this.allRolesNoAdmin = this.allRoles.filter(s => s.toString() != 'ADM')
+                    });
+                    console.log()
+                    this.allRoles = this.allRolesNoAdmin;
+                  }
+
                   this.updateUserForm();
                 }
               })
@@ -137,31 +137,33 @@ export class UserFormComponent implements OnInit {
       },
       error: (res) => {
       }
-    });   
+    });
   }
 
   onSubmit() {
-
     this.updateUserDetails();
+
 
     if (this.formMode == FormMode.Add) {
       this.addUser();
     }
     else if (this.formMode == FormMode.Edit) {
-        this.saveChanges();
+      this.saveChanges();
     }
-}
+  }
 
   saveChanges() {
-    throw new Error('Method not implemented.');
+    this.userService.editAppUser(this.userDetails).subscribe({
+      next: (res) => {
+        window.location.reload();
+      }
+    })
   }
 
   addUser() {
 
     this.userService.addAppUser(this.userDetails).subscribe({
       next: (res) => {
-        console.log(this.userDetails);
-
         this.router.navigate(['/settings/users']);
       },
       error: (res) => {
@@ -176,9 +178,21 @@ export class UserFormComponent implements OnInit {
     this.userDetails.name = this.userForm.controls.name.value || '';
     this.userDetails.surname = this.userForm.controls.surname.value || '';
     this.userDetails.pesel = this.userForm.controls.pesel.value || '';
-    this.userDetails.address.addressHome = this.userForm.controls.addressHome.value || '',
-    this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
-    this.userDetails.address.phone = Number(this.userForm.controls.phone.value) || 0
+    if (this.userDetails.address != null)
+    {
+      this.userDetails.address.addressHome = this.userForm.controls.addressHome.value || '',
+        this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
+        this.userDetails.address.phone = this.userForm.controls.phone.value?.toString() || ''
+    }
+    else
+    {
+      this.userDetails.address = {
+        addressHome: this.userForm.controls.addressHome.value || '',
+        addressPost : this.userForm.controls.addressPost.value || '',
+        phone : this.userForm.controls.phone.value || '',
+        id: ''
+      }
+    }
   }
 
   updateUserForm() {
@@ -202,7 +216,7 @@ export class UserFormComponent implements OnInit {
     })
     controls?.forEach(control => {
       this.userFormRoles.push(control)
-      
+
     })
   }
 
@@ -214,10 +228,9 @@ export class UserFormComponent implements OnInit {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  deleteRole(index: number)
-  {
-    if(confirm(this.translateService.instant('Alert.deleteRole'))) {
-      this.userService.deleteAppUserRole(this.userDetails,this.userRoles[index]).subscribe({
+  deleteRole(index: number) {
+    if (confirm(this.translateService.instant('Alert.deleteRole'))) {
+      this.userService.deleteAppUserRole(this.userDetails, this.userRoles[index]).subscribe({
         next: (res) => {
           window.location.reload();
         }
@@ -225,14 +238,13 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  addRole()
-  {
+  addRole() {
     if (this.userForm.controls.newRole.value) {
-        this.userService.addAppUserRole(this.userDetails, this.userForm.controls.newRole.value).subscribe({
-            next: (res) => {
-                window.location.reload();
-            }
-        })
+      this.userService.addAppUserRole(this.userDetails, this.userForm.controls.newRole.value).subscribe({
+        next: (res) => {
+          window.location.reload();
+        }
+      })
     }
   }
 }

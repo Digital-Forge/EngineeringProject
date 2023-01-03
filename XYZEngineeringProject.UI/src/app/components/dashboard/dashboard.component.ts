@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
             addressHome: '',
             addressPost: '',
             id: '',
-            phone: 0
+            phone: ''
         },
         roles: []
     };

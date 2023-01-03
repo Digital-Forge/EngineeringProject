@@ -18,6 +18,8 @@ namespace XYZEngineeringProject.Domain.Models
         public string Firstname { get; set; }
         public string Surname { get; set; }
 
+        public string PESEL { get; set; }
+
         //relations
 
         public Guid? PositionId { get; set; }

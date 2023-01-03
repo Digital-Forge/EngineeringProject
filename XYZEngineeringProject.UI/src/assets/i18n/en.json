@@ -223,7 +223,8 @@
         "postAddress": "Post adress",
         "department": "Department",
         "role": "Role",
-        "roles": "Roles"
+        "roles": "Roles",
+        "companyName": "Company name"
     },
     "Role": {
         "EMPLOYEE": "Employee",

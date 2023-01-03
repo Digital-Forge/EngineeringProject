@@ -27,7 +27,7 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [HttpPut]
-        public IActionResult Create(CompanyVM model)
+        public IActionResult Create([FromBody] CompanyVM model)
         {
             var result = _companyService.CreateCompany(model);
             return result != null ? Ok(result) : BadRequest();

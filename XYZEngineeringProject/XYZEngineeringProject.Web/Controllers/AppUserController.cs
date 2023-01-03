@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Domain.Interfaces;
+using XYZEngineeringProject.Domain.Models;
 
 namespace XYZEngineeringProject.Web.Controllers
 {
@@ -70,6 +71,13 @@ namespace XYZEngineeringProject.Web.Controllers
         public IActionResult Edit([FromBody] AppUserVM appUserVM)
         {
             return Ok(_appUserService.UpdateUser(appUserVM));
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("AppUser/CreateNewCompanyUser/{companyId}")]
+        public IActionResult CreateNewCompanyUser([FromBody] AppUserVM appUserVM,string companyId)
+        {
+            return Ok(_appUserService.AddUserForNewCompany(appUserVM, Guid.Parse(companyId)));
         }
     }
 }

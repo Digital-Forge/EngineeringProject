@@ -46,7 +46,7 @@ namespace XYZEngineeringProject.Application.Services
 
             return new CompanyVM
             {
-                Id = obj.Id,
+                Id = obj.Id.ToString(),
                 Name = obj.Name,
                 Delete = obj.UseStatus == UseStatusEntity.Delete
             };
@@ -56,7 +56,7 @@ namespace XYZEngineeringProject.Application.Services
         {
             return _companyRepository.GetCompanyList().Select(m => new CompanyVM
             {
-                Id = m.Id,
+                Id = m.Id.ToString(),
                 Name = m.Name,
                 Delete = m.UseStatus == UseStatusEntity.Delete
             }).ToList();
@@ -68,7 +68,7 @@ namespace XYZEngineeringProject.Application.Services
 
             var obj = new LogicCompany
             {
-                Id = company.Id,
+                Id = Guid.Parse(company.Id),
                 Name = company.Name,
             };
 

@@ -283,5 +283,27 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             _context.UserAddresses.Add(address);
             _context.SaveChanges();
         }
+
+        public Guid? AddUserForNewCompany(AppUser user)
+        {
+            user.CreateDate = DateTime.Now;
+            user.UpdateDate = DateTime.Now;
+
+            var buff = user.PasswordHash;
+            var result = _userManager.CreateAsync(user, buff).Result;
+
+            if (result.Succeeded)
+            {
+                _logger.Log(Logger.Source.Repository, Logger.InfoType.Info, $"Add user - {user.Id}");
+                return user.Id;
+            }
+            _logger.Log(Logger.Source.Repository, Logger.InfoType.Error, $"Failed add user - {result.Errors.First().Description}");
+            return null;
+        }
+
+        public Address? GetUserAddress(AppUser user)
+        {
+            return _context.UserAddresses.Where(x => x.AppUserId== user.Id).FirstOrDefault();
+        }
     }
 }

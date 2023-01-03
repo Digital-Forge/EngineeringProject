@@ -1,1 +1,66 @@
 <p>{{ 'Other.commingSoon' | translate }}</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <label class="form-label" for="companyName">{{ 'User.companyName' | translate }} *</label>
+        <input class="form-control" type="text" id="companyName" formControlName="companyName">
+    </div>
+    <div class="row">
+        <div class="mb-3 col-12 col-lg-6">
+            <label class="form-label" for="userUserName">{{ 'User.userName' | translate }} *</label>
+            <input class="form-control" type="text" id="userUserName" formControlName="userUserName">
+        </div>
+        <div class="mb-3 col-12 col-lg-6">
+            <label *ngIf="!userDetails.passwordHash" class="form-label" for="userPassword">{{ 'User.setPassword' | translate }} *</label>
+            <label *ngIf="userDetails.passwordHash" class="form-label" for="userPassword">{{ 'User.changePassword' | translate }}</label>
+            <div class="input-group">
+                <input class="form-control" [type]="isPasswordVisible ? 'text' : 'password'" id="userPassword"
+                    formControlName="userPassword">
+                <div class="input-group-append cursor-pointer" (click)="togglePasswordVisibility()">
+                    <span class="input-group-text" id="password-visibility">
+                        <i class="bi" [ngClass]="{ 'bi-eye-slash': isPasswordVisible, 'bi-eye': !isPasswordVisible}"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-12 col-lg-6">
+            <label class="form-label" for="name">{{ 'User.name' | translate }}</label>
+            <input class="form-control" type="text" id="name" formControlName="name">
+        </div>
+        <div class="mb-3 col-12 col-lg-6">
+            <label class="form-label" for="surname">{{ 'User.surname' | translate }} *</label>
+            <input class="form-control" type="text" id="surname" formControlName="surname">
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-12 col-lg-6">
+            <label class="form-label" for="phone">{{ 'User.phone' | translate }}</label>
+            <input class="form-control" type="text" id="phone" formControlName="phone">
+        </div>
+        <div class="mb-3 col-12 col-lg-6">
+            <label class="form-label" for="pesel">{{ 'User.pesel' | translate }}</label>
+            <input class="form-control" type="text" id="pesel" formControlName="pesel">
+        </div>
+    </div>
+
+    <h3 class="form-label">{{ 'User.address' | translate }}</h3>
+    <div class="row">
+        <div class="mb-3 col-12">
+            <label class="form-label" for="addressHome">{{ 'User.homeAddress' | translate }}</label>
+            <input class="form-control" type="text" id="addressHome" formControlName="addressHome">
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-12">
+            <label class="form-label" for="addressPost">{{ 'User.postAddress' | translate }}</label>
+            <input class="form-control" type="text" id="addressPost" formControlName="addressPost">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center text-sm-end mt-3">
+            <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+                {{ 'Button.addUser' | translate }}</button>
+        </div>
+    </div>
+    </form>

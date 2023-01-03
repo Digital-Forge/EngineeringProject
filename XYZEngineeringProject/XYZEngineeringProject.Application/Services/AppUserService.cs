@@ -7,16 +7,19 @@ using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
+using XYZEngineeringProject.Domain.Models.EntityUtils;
 
 namespace XYZEngineeringProject.Application.Services
 {
     public class AppUserService : IAppUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ICompanyRepository _companyRepository;
 
-        public AppUserService(IUserRepository userRepository)
+        public AppUserService(IUserRepository userRepository, ICompanyRepository companyRepository)
         {
             _userRepository = userRepository;
+            _companyRepository = companyRepository;
         }
         public List<AppUserVM> GetAllUsers()
         {
@@ -161,6 +164,48 @@ namespace XYZEngineeringProject.Application.Services
         public bool RemoveUserRole(Guid id, string roleName)
         {
             _userRepository.RemoveRole(_userRepository.GetUserById(id),roleName);
+            return true;
+        }
+
+        public bool AddUserForNewCompany(AppUserVM appUserVM, Guid id)
+        {
+            LogicCompany company = _companyRepository.GetCompanyList().Where(x => x.Id == id).FirstOrDefault();
+            AppUser user = new AppUser
+            {
+                CompanyId = id,
+                Company = company,
+                Firstname = appUserVM.Name,
+                Surname = appUserVM.Surname,
+                PESEL = appUserVM.PESEL,
+                PasswordHash = appUserVM.PasswordHash,
+                UserName = appUserVM.UserName,
+            };
+            var userId = _userRepository.AddUserForNewCompany(user);
+            if (userId != null)
+            {
+                user = _userRepository.GetUserById((Guid)userId);
+                var address = new Address
+                {
+                    AppUserId= user.Id,
+                    CompanyId = id,
+                    Phone = appUserVM.Address.Phone,
+                    AddressHome= appUserVM.Address.AddressHome,
+                    AddressPost = appUserVM.Address.AddressPost,
+                    CreateBy = user.Id,
+                    CreateDate= DateTime.Now,
+                    UpdateBy= user.Id,
+                    UpdateDate= DateTime.Now,
+                    User = user
+                };
+
+                _userRepository.AddUserAddress(address);
+                address = _userRepository.GetUserAddress(user);
+
+                user.Address = address;
+                user.AddressId = address.Id;
+                _userRepository.Update(user);
+                AddUserRole(user.Id, "MODERATOR");
+            }
             return true;
         }
     }

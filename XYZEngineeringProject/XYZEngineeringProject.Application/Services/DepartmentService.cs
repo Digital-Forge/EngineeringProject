@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -103,5 +104,19 @@ public class DepartmentService : IDepartmentService
             ManagerId = s.Manager.ToString(),
             Name = s.Name
         }).ToList();
+    }
+
+    public List<DepartmentVM> GetAllDepartmentsByUser(Guid userId)
+    {
+        return _context.UsersToDepartments
+            .Include(i => i.Departments)
+            .Where(x => x.UserId == userId)
+            .Select(s => s.Departments)
+            .Select(m => new DepartmentVM
+            {
+                Id = m.Id.ToString(),
+                ManagerId = m.Manager != null ? m.Manager.ToString() : string.Empty,
+                Name = m.Name
+            }).ToList();
     }
 }

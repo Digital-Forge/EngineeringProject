@@ -25,6 +25,13 @@ public class DepartmentController : Controller
     {
         return Ok(_departmentService.GetAllDepartments().ToList());
     }
+    
+    [HttpGet]
+    public IActionResult GetAllDepartmentsByUser(Guid userId)
+    {
+        return Ok(_departmentService.GetAllDepartmentsByUser(userId).ToList());
+    }
+   
 
     [HttpGet]
     public IActionResult GetDepartmentById(string id)

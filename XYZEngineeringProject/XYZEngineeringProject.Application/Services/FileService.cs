@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using XYZEngineeringProject.Application.Interfaces;
+﻿using XYZEngineeringProject.Application.Interfaces;
 using XYZEngineeringProject.Application.ViewModels.File;
 using XYZEngineeringProject.Domain.Interfaces;
 using XYZEngineeringProject.Domain.Models;
-using XYZEngineeringProject.Infrastructure.Repositories;
 using XYZEngineeringProject.Infrastructure.Utils;
 
 namespace XYZEngineeringProject.Application.Services
@@ -68,7 +65,7 @@ namespace XYZEngineeringProject.Application.Services
 
             var structureVM = new FileStructureVM()
             {
-                Name = company.Name                
+                Name = company.Name
             };
 
             if (structureVM.Directories == null)
@@ -131,7 +128,7 @@ namespace XYZEngineeringProject.Application.Services
 
             try
             {
-                (new FileInfo(fileDB.Path.Replace($"\\{file.Id}",""))).Directory.Create(); 
+                (new FileInfo(fileDB.Path.Replace($"\\{file.Id}", ""))).Directory.Create();
 
                 using (MemoryStream fileStream = new MemoryStream(Convert.FromBase64String(file.ObjectBase64)))
                 {
@@ -139,7 +136,15 @@ namespace XYZEngineeringProject.Application.Services
 
                     fileStream.WriteTo(save);
                     fileStream.Close();
-                    return true;
+                    try
+                    {
+                        save.Close();
+                        save.Dispose();
+
+                    }
+                    catch
+                    {
+                    }
                 }
             }
             catch (Exception e)
@@ -147,6 +152,7 @@ namespace XYZEngineeringProject.Application.Services
                 _fileRepository.DeleteFile(fileId.Value);
                 throw e;
             }
+            return true;
         }
 
         public bool SaveFile(MemoryStream file, Guid directoryId, string name, string format)
@@ -227,7 +233,7 @@ namespace XYZEngineeringProject.Application.Services
             {
                 _logger.Log(Logger.Source.Service, Logger.InfoType.Error, $"Nie można zamknąć lub zwolinć zasobu - {e.Message}");
             }
-            
+
             return vm;
         }
 

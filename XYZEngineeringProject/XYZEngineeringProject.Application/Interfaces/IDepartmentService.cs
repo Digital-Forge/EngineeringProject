@@ -8,6 +8,7 @@ namespace XYZEngineeringProject.Application.Interfaces
         bool DeleteDepartment(DepartmentVM department);
         bool EditDepartment(DepartmentVM departmentVM);
         public List<DepartmentVM> GetAllDepartments();
+        public List<DepartmentVM> GetAllDepartmentsByUser(Guid userId);
         List<AppUserVM> GetDepartmentUsers(Guid departmentId);
         List<DepartmentVM> GetAllCompanyDepartmentsByCompany(Guid id);
     }

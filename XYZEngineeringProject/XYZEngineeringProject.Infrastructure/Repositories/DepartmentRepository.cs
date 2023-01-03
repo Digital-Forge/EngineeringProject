@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -274,7 +275,11 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
 
         public ICollection<AppUser> GetDepartmentUsers(Guid departmentId)
         {
-            return _context.UsersToDepartments.Where(x => x.DepartmentId == (Guid)departmentId).Select(x => x.User).ToList();
+            return _context.UsersToDepartments
+                .Include(i => i.User)
+                .Where(x => x.DepartmentId == (Guid)departmentId)
+                .Select(x => x.User)
+                .ToList();
         }
     }
 }

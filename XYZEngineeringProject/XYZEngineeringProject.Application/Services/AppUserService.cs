@@ -126,6 +126,7 @@ namespace XYZEngineeringProject.Application.Services
                 return false;
             }
             user.UserName = appUser.UserName;
+            user.NormalizedUserName = appUser.UserName.ToUpper();
             user.Firstname = appUser.Name;
             user.Surname= appUser.Surname;
             user.PESEL= appUser.PESEL;

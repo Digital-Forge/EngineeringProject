@@ -41,5 +41,12 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_authorizationService.GetAllRoles());
         }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult ChangePassword(Guid userId, string newPassword)
+        {
+            return Ok(_authorizationService.ChangePassword(userId, newPassword));
+        }
     }
 }

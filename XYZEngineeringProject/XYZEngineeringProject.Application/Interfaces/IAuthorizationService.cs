@@ -15,5 +15,6 @@ namespace XYZEngineeringProject.Application.Interfaces
         void Logout();
 
         List<string> GetAllRoles();
+        bool ChangePassword(Guid userId, string newPassword);
     }
 }

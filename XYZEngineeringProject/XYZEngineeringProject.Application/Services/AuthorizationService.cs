@@ -19,16 +19,18 @@ namespace XYZEngineeringProject.Application.Services
     public class AuthorizationService : IAuthorizationService
     {
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IConfiguration _config;
         private readonly IUtilsService _utilsService;
         private readonly Context _context;
 
-        public AuthorizationService(SignInManager<AppUser> signInManager, IConfiguration config, IUtilsService utilsService, Context context)
+        public AuthorizationService(SignInManager<AppUser> signInManager, IConfiguration config, IUtilsService utilsService, Context context, UserManager<AppUser> userManager)
         {
             _signInManager = signInManager;
             _config = config;
             _utilsService = utilsService;
             _context = context;
+            _userManager = userManager;
         }
 
         public bool AuthenticateUser(LoginVM input)
@@ -76,6 +78,15 @@ namespace XYZEngineeringProject.Application.Services
         public List<string> GetAllRoles()
         {
             return _context.Roles.Select(x => x.Name).ToList();
+        }
+
+        public bool ChangePassword(Guid userId, string newPassword)
+        {
+            var user = _context.AppUsers.FirstOrDefault(x => x.Id == userId);
+            if (user == null) return false;
+
+            var result =_userManager.CheckPasswordAsync(user, newPassword).Result;
+            return result;
         }
     }
 }

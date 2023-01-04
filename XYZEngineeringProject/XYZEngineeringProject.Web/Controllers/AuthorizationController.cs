@@ -48,5 +48,12 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_authorizationService.ChangePassword(userId, newPassword));
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult CheckNick(string name)
+        {
+            return Ok()
+        }
     }
 }

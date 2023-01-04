@@ -88,5 +88,10 @@ namespace XYZEngineeringProject.Application.Services
             var result =_userManager.CheckPasswordAsync(user, newPassword).Result;
             return result;
         }
+
+        public bool CheckNick(string name)
+        {
+            return _context.AppUsers.Any(x => x.NormalizedUserName == name.ToUpper());
+        }
     }
 }

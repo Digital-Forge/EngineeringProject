@@ -138,7 +138,7 @@ export class TaskListFormNewComponent implements OnInit {
     addListTask() {
         const group = this.fb.group({
             deadline: [this.pipe.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
-            priority: [Priority.No],
+            priority: [this.taskPriorities[0].toString()],
             title: ['', Validators.required],
             description: ['', Validators.required],
             listOfTasksId: [this.taskListDetails.id || null]

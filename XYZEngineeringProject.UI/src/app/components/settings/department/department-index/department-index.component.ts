@@ -81,11 +81,13 @@ export class DepartmentIndexComponent implements OnInit {
   canModify() {
     let canModify: boolean = false;
     
-    this.canModifyRoles.forEach(role => {
-      if (this.currentUser.roles.includes(role)) {
-        canModify = true;
-      }
-    });
+    if (this.currentUser) {
+      this.canModifyRoles.forEach(role => {
+        if (this.currentUser.roles.includes(role)) {
+          canModify = true;
+        }
+      });
+    }
    
     return canModify;
   }

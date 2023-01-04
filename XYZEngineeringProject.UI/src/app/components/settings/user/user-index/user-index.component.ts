@@ -41,6 +41,8 @@ export class UserIndexComponent implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (usersResponse) => {
         this.users = usersResponse;
+        console.log(this.users);
+        
 
         this.users.forEach(user => {
           this.userService.getAppUserRoles(user).subscribe({
@@ -75,23 +77,26 @@ export class UserIndexComponent implements OnInit {
   canModify() {
     let canModify: boolean = false;
 
-    this.canModifyRoles.forEach(role => {
-      if (this.currentUser.roles.includes(role)) {
-        canModify = true;
-      }
-    });
+    if (this.currentUser) {
+      this.canModifyRoles.forEach(role => {
+        if (this.currentUser.roles.includes(role)) {
+          canModify = true;
+        }
+      });
+    }
 
     return canModify;
   }
 
   canBeDeleted(user: User) {
     let canBeDeleted: boolean = true;
-
-    this.canModifyRoles.forEach(role => {
-      if (user.roles.includes(role)) {
-        canBeDeleted = false;
-      }
-    });
+    if(this.currentUser){
+      this.canModifyRoles.forEach(role => {
+        if (user.roles.includes(role)) {
+          canBeDeleted = false;
+        }
+      });
+    }
 
     return canBeDeleted;
   }

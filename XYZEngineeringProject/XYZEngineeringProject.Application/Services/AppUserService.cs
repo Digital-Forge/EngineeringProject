@@ -15,11 +15,13 @@ namespace XYZEngineeringProject.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly ICompanyRepository _companyRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public AppUserService(IUserRepository userRepository, ICompanyRepository companyRepository)
+        public AppUserService(IUserRepository userRepository, ICompanyRepository companyRepository, IAuthorizationService authorizationService)
         {
             _userRepository = userRepository;
             _companyRepository = companyRepository;
+            _authorizationService = authorizationService;
         }
         public List<AppUserVM> GetAllUsers()
         {
@@ -126,6 +128,7 @@ namespace XYZEngineeringProject.Application.Services
                 return false;
             }
             user.UserName = appUser.UserName;
+            user.NormalizedUserName = appUser.UserName.ToUpper();
             user.Firstname = appUser.Name;
             user.Surname= appUser.Surname;
             user.PESEL= appUser.PESEL;
@@ -152,6 +155,11 @@ namespace XYZEngineeringProject.Application.Services
                 //in current state there is no option for this to happen
                 //_userRepository.RemoveUserAddress(user);
                 //user.Address = null;
+            }
+
+            if (user.PasswordHash.Length>=5)
+            {
+                _authorizationService.ChangePassword(user.Id, user.PasswordHash);
             }
             return _userRepository.Update(user);
         }
@@ -208,6 +216,11 @@ namespace XYZEngineeringProject.Application.Services
                 AddUserRole(user.Id, "MODERATOR");
             }
             return true;
+        }
+
+        public void DeleteUser(Guid id)
+        {
+            _userRepository.Remove(id);
         }
     }
 }

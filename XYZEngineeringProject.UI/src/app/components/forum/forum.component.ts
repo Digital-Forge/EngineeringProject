@@ -76,6 +76,8 @@ export class ForumComponent implements OnInit, AfterViewChecked {
                     this.forumService.getAllForumsByUserId(this.currentUser.id).subscribe({
                         next: (res) => {
                             this.forums = res;
+                            this.activeForumId = this.forums[0].id;
+                            this.showForum(this.activeForumId);
                         },
                         error: (res) => {
                             console.log(res);
@@ -85,16 +87,15 @@ export class ForumComponent implements OnInit, AfterViewChecked {
                 else {
                     this.forumService.getUserForums(this.currentUser.id).subscribe({
                         next: (res) => {
-                            this.forums = res;                           
+                            this.forums = res;
+                            this.activeForumId = this.forums[0].id;
+                            this.showForum(this.activeForumId);                           
                         },
                         error: (res) => {
                             console.log(res);
                         }
                     });
                 }
-
-                this.activeForumId = this.forums[0].id;
-                this.showForum(this.activeForumId);
             },
             error: (res) => {
                 console.log(res);

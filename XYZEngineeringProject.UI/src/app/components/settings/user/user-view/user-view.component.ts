@@ -24,9 +24,13 @@ export class UserViewComponent implements OnInit {
 
                 if (id) {
                     this.userService.getAppUser(id).subscribe({
-                        next: (res) => {
-                            this.user = res;
-                            console.log(res);
+                        next: (userResponse) => {
+                            this.user = userResponse;
+                            this.userService.getAppUserRoles(this.user).subscribe({
+                                next: (rolesResponse) => {
+                                    this.user.roles = rolesResponse;
+                                }
+                            })
                         }
                     });
                 }

@@ -22,7 +22,7 @@
                     <td class="min-width-200">
                         <span *ngIf="departmentMan.manager">{{ departmentMan.manager.name }} </span>
                         {{ departmentMan.manager.surname}}
-                        <span *ngIf="(departmentMan.manager | keyvalue)?.length == 0">-</span>
+                        <span *ngIf="(departmentMan.manager | json) == '{}'">-</span>
                     </td>
                     <td class="text-end text-nowrap">
                         <button *ngIf="canModify()" title="{{ 'Button.editDepartment' | translate }}" class="btn btn-sm btn-secondary me-2"

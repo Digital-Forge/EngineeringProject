@@ -49,10 +49,10 @@ export class DepartmentIndexComponent implements OnInit {
             dep.department = department;
             dep.manager = userResponse || {};
 
-            console.log(dep);
+            console.log(dep.manager);
             
             this.departmentsMan.push(dep);
-
+            this.departmentsMan.sort((a, b) => a.department.name.localeCompare(b.department.name));
             // this.managers.push(res);
           },
           error: (res) => {
@@ -60,6 +60,7 @@ export class DepartmentIndexComponent implements OnInit {
             // this.managers.push({id:'',name:'',pesel:'',roles:[],surname:'',userName:'',passwordHash:'',address:{addressHome:'',addressPost:'',id:'',phone:0}});
           }
         }));
+       
       },
       error: (res) => {
         console.log(res);

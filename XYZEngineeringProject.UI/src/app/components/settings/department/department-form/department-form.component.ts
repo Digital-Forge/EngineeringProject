@@ -99,7 +99,7 @@ export class DepartmentFormComponent implements OnInit {
   saveChanges(){
     this.departmentService.editDepartment(this.departmentDetails).subscribe({
       next: (res)=> {
-        window.location.reload()
+        this.router.navigate(['settings/departments']);
       }
     })
 

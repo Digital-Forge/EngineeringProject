@@ -21,8 +21,8 @@ export class DepartmentService {
     return this.http.get<Department[]>(this.baseApiUrl + 'Department/GetAllDepartments')
   }
 
-  getAllCompanyDepartmentsByUserId(userId: string): Observable<Department[]> {
-    return this.http.get<Department[]>(this.baseApiUrl + 'Department/GetAllCompanyDepartmentsByUser/' + userId)
+  getAllDepartmentsByUserId(userId: string): Observable<Department[]> {
+    return this.http.get<Department[]>(this.baseApiUrl + 'Department/GetAllDepartmentsByUser/' + userId)
   }
 
   getDepartmentById(id:string): Observable<Department> {

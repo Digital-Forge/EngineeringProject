@@ -1,3 +1,4 @@
+import { DepartmentService } from 'src/app/services/department/department.service';
 import { RolesDB } from './../../../../models/roles.enum';
 import { AuthorizationService } from './../../../../services/authorization/authorization.service';
 import { Address } from './../../../../models/address.model';
@@ -23,7 +24,8 @@ export class UserIndexComponent implements OnInit {
   
   constructor(
     private userService: UserService,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private departmentService: DepartmentService
   ) {    
   }
 
@@ -35,13 +37,19 @@ export class UserIndexComponent implements OnInit {
     });
 
     this.userService.getAllUsers().subscribe({
-      next: (res) => {
-        this.users = res;
+      next: (usersResponse) => {
+        this.users = usersResponse;
 
         this.users.forEach(user => {
           this.userService.getAppUserRoles(user).subscribe({
-            next: (res) => {
-              user.roles = res;
+            next: (rolesResponse) => {
+              user.roles = rolesResponse;
+
+              this.departmentService.getAllDepartmentsByUserId(user.id).subscribe({
+                next: (departmentsResponse) => {
+                  user.departments = departmentsResponse;
+                }
+              })
             }
           })
         });

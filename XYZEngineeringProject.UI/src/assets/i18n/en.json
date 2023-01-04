@@ -12,8 +12,13 @@
         "email": "Email",
         "password": "Password",
         "wrongLoginOrPassword": "Incorrect login or password",
+        "usernameTaken": "This username is already taken",
         "noAccount": "You company doesn't have an account?",
-        "registerNow": "Sign up now!"
+        "registerNow": "Sign up now!",
+        "register": "Sign up",
+        "companyData": "Your company",
+        "firstAccount": "Your user account",
+        "firstAccountInfo": "Set up your first user account via which you will be able to add other members of your team"    
     },
     "Alert": {
         "deleteContactPerson": "Are you sure you want to delete person ",
@@ -121,7 +126,9 @@
         "address": "Adresss",
         "nip": "NIP",
         "addContact": "Add person",
-        "noContactsYet": "No poeple have been added yet."
+        "noContactsYet": "No poeple have been added yet",
+        "noClientsFound": "You don't have any clients yet"
+
     },
     "ClientFilters": {
         "firstName": "First name"
@@ -166,7 +173,7 @@
         "privateNotes": "Private notes",
         "title": "Note",
         "status": "Assigned",
-        "date": "Data",
+        "date": "Date",
         "noNotesFound": "No notes have been added yet."
     },
     "NoteStatus": {
@@ -191,7 +198,7 @@
     "Forum": {
         "messages": "Messages",
         "forums": "Groups",
-        "noForums": "You are not in any group yet",
+        "noForums": "You are not in any group yet. You will join a group once your management or moderato adds you to a department.",
         "noMessages": "This group has no messages yet or no older messages could be found",
         "typeYourMessage": "Type your message here...",
         "loadMore": "See older messages",
@@ -227,7 +234,18 @@
         "department": "Department",
         "role": "Role",
         "roles": "Roles",
+        "noRoles": "This user doesn't have any roles yet",
         "companyName": "Company name"
+    },
+    "Department": {
+        "editDepartment": "Edit department",
+        "addDepartment": "Add department",
+        "name": "Department name",
+        "manager": "Department manager",
+        "users": "Department users",
+        "addUserToDepartment": "Add user to department",
+        "departments": "Departments",
+        "managerName": "Manager"
     },
     "Role": {
         "EMPLOYEE": "Employee",

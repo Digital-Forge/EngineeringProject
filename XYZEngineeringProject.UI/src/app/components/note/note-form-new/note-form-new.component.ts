@@ -69,15 +69,15 @@ export class NoteFormNewComponent implements OnInit {
               });
             }
             else {
-              // this.departmentService.getDepartmentsByUser(currentUserRes.id).subscribe({
-              //   next: (depratmentsRes) => {
-              //     this.departments = depratmentsRes;
+              this.departmentService.getAllDepartmentsByUserId(currentUserRes.id).subscribe({
+                next: (depratmentsRes) => {
+                  this.departments = depratmentsRes;
                   this.getNoteData(noteId);
-              //   },
-              //   error: (res) => {
-              //     console.log(res);
-              //   }
-              // });
+                },
+                error: (res) => {
+                  console.log(res);
+                }
+              });
             }
 
           },

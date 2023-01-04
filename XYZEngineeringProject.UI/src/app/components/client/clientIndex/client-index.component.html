@@ -55,6 +55,6 @@
             </tbody>
         </table>
     </span>
-    <p *ngIf="!clients || clients.length <= 0">No notes found</p>
+    <p *ngIf="!clients || clients.length <= 0">{{ 'Client.noClientsFound' | translate }}</p>
 </div>
 <router-outlet></router-outlet>

@@ -155,7 +155,10 @@ export class UserFormComponent implements OnInit {
   saveChanges() {
     this.userService.editAppUser(this.userDetails).subscribe({
       next: (res) => {
-        window.location.reload();
+        this.router.navigate(['/settings/users']);
+      },
+      error: (res) => {
+        console.log(res);
       }
     })
   }

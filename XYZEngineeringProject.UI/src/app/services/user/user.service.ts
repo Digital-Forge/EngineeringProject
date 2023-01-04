@@ -30,21 +30,21 @@ export class UserService {
 
   addAppUserRole(user: User, roleName:string)
   {
-    return this.http.get(this.baseApiUrl+'AppUser/AddUserRole/'+user.id+'/'+roleName)
+    return this.http.get(this.baseApiUrl+'AppUser/AddUserRole/' + user.id + '/' + roleName)
   }
 
-  getAppUserRoles(user:User): Observable<Roles[]>
+  getAppUserRoles(user: User): Observable<Roles[]>
   {
-    return this.http.post<Roles[]>(this.baseApiUrl+'AppUser/GetUserRoles',user);
+    return this.http.post<Roles[]>(this.baseApiUrl + 'AppUser/GetUserRoles', user);
   }
 
-  deleteAppUserRole(user: User, roleName:string)
+  deleteAppUserRole(user: User, roleName: string)
   {
-    return this.http.get(this.baseApiUrl+'AppUser/DeleteUserRole/'+user.id+'/'+roleName)
+    return this.http.get(this.baseApiUrl + 'AppUser/DeleteUserRole/' + user.id + '/' + roleName)
   }
 
-  editAppUser(user:User): Observable<User> {
-    return this.http.put<User>(this.baseApiUrl+'AppUser/Edit',user);
+  editAppUser(user: User): Observable<User> {
+    return this.http.put<User>(this.baseApiUrl + 'AppUser/Edit', user);
   }
  
 }

@@ -15,23 +15,8 @@
         <p> {{ 'User.postAddress' | translate }}: {{ user.address.addressPost || '-'}} </p>
     </div>
   
-    <hr>
-    <h2 class="my-3">{{ 'User.roles' | translate }}</h2>
-    <span class="table-responsive">
-        <table class="table text-nowrap table-borderless no-shadow">
-            <thead>
-                <tr>
-                    <th class="p-2">{{ 'User.role' | translate }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let role of user.roles; let i = index">
-                    <ng-container [formGroupName]="i">
-                        <td class="pt-3">{{ ('Role.' + role) | translate }}</td>
-                    </ng-container>
-                </tr>
-            </tbody>
-        </table>
-    </span>
+   <h3>{{ 'User.roles' | translate }}</h3>
+    <p *ngFor="let role of user.roles">{{ ('Role.' + role) | translate }}</p>
+    <p *ngIf="user.roles.length == 0">{{ 'Role.noRoles' | translate }}</p>
+           
 </div>

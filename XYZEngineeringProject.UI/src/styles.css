@@ -65,6 +65,10 @@ h1::first-letter {
     text-transform: capitalize !important;
 }
 
+p {
+    line-height: 1rem;
+}
+
 i.bi {
     font-size: 1rem;
     margin: 0 2.55px;
@@ -91,6 +95,12 @@ thead {
     max-height: calc(50vh - 9em);
     overflow-y: scroll;
 }
+
+.double-table-view th,
+.double-table-view tr {
+    width: 100%;
+}
+
 
 .navbar {
     background-color: var(--background-color);
@@ -613,6 +623,10 @@ td {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.width-1 {
+    width: 1%;
 }
 
 .min-width-100 {

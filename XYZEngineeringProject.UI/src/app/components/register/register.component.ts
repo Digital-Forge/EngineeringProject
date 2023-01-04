@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Company } from './../../models/company.model';
 import { CompanyService } from './../../services/company/company.service';
 import { Component, OnInit } from '@angular/core';
@@ -41,12 +42,13 @@ export class RegisterComponent implements OnInit {
     addressHome: [''],
     addressPost: [''],
     phone: [''],
-    companyName: ['',Validators.compose([Validators.minLength(1), Validators.pattern('.*[A-Za-z].*')])]
+    companyName: ['', Validators.compose([Validators.minLength(1), Validators.pattern('.*[A-Za-z].*')])]
   });
   isPasswordVisible: boolean = false;
   constructor(
-    private companyService:CompanyService,
+    private companyService: CompanyService,
     private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -60,14 +62,22 @@ export class RegisterComponent implements OnInit {
     this.userDetails.surname = this.userForm.controls.surname.value || '';
     this.userDetails.pesel = this.userForm.controls.pesel.value || '';
     this.userDetails.address.addressHome = this.userForm.controls.addressHome.value || '',
-    this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
-    this.userDetails.address.phone = this.userForm.controls.phone.value?.toString() || ''
+      this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
+      this.userDetails.address.phone = this.userForm.controls.phone.value?.toString() || ''
 
-    this.companyService.createNewCompany(this.companyDetails,this.userDetails);
-  }
+    this.companyService.createNewCompanyOld(this.companyDetails,this.userDetails);
+    // this.companyService.createNewCompany(this.companyDetails, this.userDetails).subscribe({
+    //   next: (comapanyResponse) => {
+    //       this.router.navigate(['']);
+    //     },
+    //     error: (errorResponse) => {
+    //       console.log(errorResponse);
+    //     }
+    // })
+}
 
-  togglePasswordVisibility() {
-    this.isPasswordVisible = !this.isPasswordVisible;
-  }
+togglePasswordVisibility() {
+  this.isPasswordVisible = !this.isPasswordVisible;
+}
 
 }

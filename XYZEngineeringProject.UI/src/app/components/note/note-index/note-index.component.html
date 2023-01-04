@@ -9,61 +9,24 @@
     </div>
 
     <h3 class="col-12 col-lg-9 text-center text-lg-start"><i class="bi bi-megaphone me-2"></i>{{ 'Note.publicNotes' | translate }}</h3>
-    <span class="table-responsive">
-        <table class="table table-hover double-table-view" *ngIf="notes && notes.length >0">
-            <thead>
+    <span class="table-responsive" *ngIf="publicNotesResponse && publicNotesResponse.length > 0">
+        <table class="table table-hover double-table-view" >
+            <thead class="border-top-0">
                 <tr>
+                    <th>{{ 'Note.title' | translate }}</th>
                     <th>{{ 'Note.date' | translate }}</th>
                     <th>{{ 'Note.status' | translate }}</th>
-                    <th>{{ 'Note.title' | translate }}</th>
-                    <th> </th>
-                </tr>
-            </thead>
-            <tbody style="max-height: 25vh; overflow: scroll">
-                <tr *ngFor="let noteResponse of publicNotesResponse">
-                    <td class="text-nowrap">{{noteResponse.note.date | dateCustom:'fullShort'}}</td>
-                    <td>{{ noteResponse.statusName }}</td>
-                    <td class="min-width-200">{{noteResponse.note.title | slice: 0:300}}<span
-                            *ngIf="noteResponse.note.title!.length >= 300">...</span></td>
-                    <td class="text-end text-nowrap">
-                        <button *ngIf="canModify(noteResponse.note)" title="{{ 'Button.editNote' | translate }}"
-                            class="btn btn-sm btn-secondary me-2"
-                            [routerLink]="['/note', 'edit', noteResponse.note.id]">
-                            <i class="bi bi-pencil-fill"></i>
-                        </button>
-                        <button title="{{ 'Button.showNote' | translate }}" class="btn btn-sm btn-secondary me-2"
-                            [routerLink]="['/note', noteResponse.note.id]">
-                            <i class="bi bi-eye-fill"></i>
-                        </button>
-                        <button *ngIf="canDelete(noteResponse.note)" title="{{ 'Button.deleteNote' | translate}}"
-                            class="btn btn-sm btn-danger-light me-2" (click)="deleteNote(noteResponse.note)"><i
-                                class="bi bi-trash3"></i></button>
-                    </td>
-                </tr>
-                <tr *ngIf="!publicNotesResponse || publicNotesResponse.length <= 0">
-                    <td colspan="4">{{ 'Note.noNotesFound' | translate }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </span>
-
-    <h3 class="col-12 col-lg-9 text-center text-lg-start mt-3"><i class="bi bi-sticky me-2"></i>{{ 'Note.privateNotes' | translate }}</h3>
-    <span class="table-responsive">
-        <table class="table table-hover double-table-view" *ngIf="notes && notes.length >0">
-            <thead>
-                <tr>
-                    <th>{{ 'Note.date' | translate }}</th>
-                    <th>{{ 'Note.status' | translate }}</th>
-                    <th>{{ 'Note.title' | translate }}</th>
+                    
                     <th> </th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let noteResponse of privateNotesResponse">
-                    <td class="text-nowrap">{{noteResponse.note.date | dateCustom:'fullShort'}}</td>
-                    <td>{{ noteResponse.statusName }}</td>
+                <tr *ngFor="let noteResponse of publicNotesResponse">
                     <td class="min-width-200">{{noteResponse.note.title | slice: 0:300}}<span
-                            *ngIf="noteResponse.note.title!.length >= 300">...</span></td>
+                        *ngIf="noteResponse.note.title!.length >= 300">...</span></td>
+                    <td class="text-nowrap">{{noteResponse.note.date | dateCustom:'fullShort'}}</td>
+                    <td class="text-nowrap">{{ noteResponse.statusName }}</td>
+                    
                     <td class="text-end text-nowrap">
                         <button *ngIf="canModify(noteResponse.note)" title="{{ 'Button.editNote' | translate }}"
                             class="btn btn-sm btn-secondary me-2"
@@ -79,11 +42,51 @@
                                 class="bi bi-trash3"></i></button>
                     </td>
                 </tr>
-                <tr *ngIf="!privateNotesResponse || publicNotesResponse.length <= 0">
-                    <td colspan="4">{{ 'Note.noNotesFound' | translate }}</td>
-                </tr>
             </tbody>
         </table>
     </span>
+    <p *ngIf="!publicNotesResponse || publicNotesResponse.length <= 0">
+        {{ 'Note.noNotesFound' | translate }}
+    </p>
+
+    <h3 class="col-12 col-lg-9 text-center text-lg-start mt-3"><i class="bi bi-sticky me-2"></i>{{ 'Note.privateNotes' | translate }}</h3>
+    <span class="table-responsive" *ngIf="privateNotesResponse && privateNotesResponse.length >0">
+        <table class="table table-hover double-table-view">
+            <thead>
+                <tr>
+                    <th>{{ 'Note.title' | translate }}</th>
+                    <th>{{ 'Note.date' | translate }}</th>
+                    <th>{{ 'Note.status' | translate }}</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody class="border-bottom-0">
+                <tr *ngFor="let noteResponse of privateNotesResponse">
+                    <td class="min-width-200">{{noteResponse.note.title | slice: 0:300}}<span
+                            *ngIf="noteResponse.note.title!.length >= 300">...</span></td>
+                    <td class="text-nowrap">{{noteResponse.note.date | dateCustom:'fullShort'}}</td>
+                    <td>{{ noteResponse.statusName }}</td>
+                   
+                    <td class="text-end text-nowrap">
+                        <button *ngIf="canModify(noteResponse.note)" title="{{ 'Button.editNote' | translate }}"
+                            class="btn btn-sm btn-secondary me-2"
+                            [routerLink]="['/note', 'edit', noteResponse.note.id]">
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+                        <button title="{{ 'Button.showNote' | translate }}" class="btn btn-sm btn-secondary me-2"
+                            [routerLink]="['/note', noteResponse.note.id]">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                        <button *ngIf="canDelete(noteResponse.note)" title="{{ 'Button.deleteNote' | translate}}"
+                            class="btn btn-sm btn-danger-light me-2" (click)="deleteNote(noteResponse.note)"><i
+                                class="bi bi-trash3"></i></button>
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+    </span>
+    <p *ngIf="!privateNotesResponse || privateNotesResponse.length <= 0">
+        {{ 'Note.noNotesFound' | translate }}
+    </p>
 </div>
 <router-outlet></router-outlet>

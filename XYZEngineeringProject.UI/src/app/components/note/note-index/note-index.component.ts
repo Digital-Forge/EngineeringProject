@@ -27,7 +27,7 @@ export class NoteIndexComponent implements OnInit {
     currentUserRoles: string[];
     currentUserId: string;
 
-    canDeleteRoles: RolesDB[] = [
+    highAccessRoles: RolesDB[] = [
         RolesDB.Admin,
         RolesDB.Moderator,
         RolesDB.Management
@@ -51,50 +51,91 @@ export class NoteIndexComponent implements OnInit {
                 //TODO przypisać role
 
                 this.noteService.getAllNotes().subscribe({
-                    next: (notes) => {
-                        this.notes = notes;
-
-                        this.notes.forEach(note => {
-                            let noteResponse = {} as NoteResponse;
-                            noteResponse.note = note;
-
-                            if (note.isCompany == true) {
-                                noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Company.toString());
-                                this.publicNotesResponse.push(noteResponse);
-                            }
-                            else if (note.isCompany == false && note.noteStatus == null && note.createdBy.toLowerCase() == this.currentUser.id.toLowerCase()) {
-                                noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Own.toString());
-                                this.privateNotesResponse.push(noteResponse);
-                            }
-                            else if (note.isCompany == false && note.noteStatus != null) {
-                                this.departmentService.getDepartmentById(note.noteStatus).subscribe({
-                                    next: (department) => {
-
-                                        console.log(department);
-                                        noteResponse.statusName = department.name;
-                                        if (this.currentUserRoles.includes(RolesDB.Admin) || this.currentUserRoles.includes(RolesDB.Moderator) || this.currentUserRoles.includes(RolesDB.Management)) {
-                                            this.publicNotesResponse.push(noteResponse);
-                                        }
-                                        else {
-                                            department.users.forEach(user => {
-                                            if (user.id == this.currentUser.id) {
-                                                this.publicNotesResponse.push(noteResponse);
-                                            }
-                                            });
-                                        }
-                                    }
-                                })
-                            }                           
-                        });                      
-                    },
-                    error: (res) => {
-                        console.log(res);
-                    }
-                });
-            }
+                        next: (notes) => {
+                            this.notes = notes;     
+                            this.filterNotes(this.notes)                  
+                        },
+                        error: (res) => {
+                            console.log(res);
+                        }
+                    });       
+                     
+                }
         })
+    }
 
+    isCurrentUserHighAccessRole() {
+        let isHighAccessRole: boolean = false;
 
+        this.highAccessRoles.forEach(role => {
+            if (this.currentUserRoles.includes(role)) {
+                isHighAccessRole = true;
+            }
+        });
+
+        return isHighAccessRole;
+
+    }
+
+    filterNotes(notes: Note[]) {
+        notes.forEach(note => {
+            let noteResponse = {} as NoteResponse;
+            noteResponse.note = note;
+
+            if (note.isCompany == true) {
+                noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Company.toString());
+                this.publicNotesResponse.push(noteResponse);
+            }
+            else if (note.isCompany == false && note.noteStatus == null && note.createdBy.toLowerCase() == this.currentUser.id.toLowerCase()) {
+                noteResponse.statusName = this.translateService.instant('NoteStatus.' + NoteStatus.Own.toString());
+                this.privateNotesResponse.push(noteResponse);
+            }
+            else if (note.isCompany == false && note.noteStatus != null) {
+
+                if (this.isCurrentUserHighAccessRole()) {
+                    this.departmentService.getDepartmentById(note.noteStatus).subscribe({
+                        next: (department) => {    
+                            noteResponse.statusName = department.name;
+                            this.publicNotesResponse.push(noteResponse);              
+                        }
+                    });
+                  }
+                else {
+                    console.log(this.currentUserId);
+
+                    this.departmentService.getAllDepartmentsByUserId(this.currentUserId).subscribe({
+                        next: (currentUserDepartments) => {
+                            console.log(currentUserDepartments);
+                            
+                            currentUserDepartments.forEach(department =>{                      
+                                if (department.id.toLowerCase() == note.noteStatus?.toLowerCase()) {
+                                    noteResponse.statusName = department.name;
+                                    this.publicNotesResponse.push(noteResponse);
+                                }
+                        })
+                        }
+                    });
+                }
+
+                // this.departmentService.getDepartmentById(note.noteStatus).subscribe({
+                //     next: (department) => {
+
+                //         console.log(department);
+                //         noteResponse.statusName = department.name;
+                //         if (this.currentUserRoles.includes(RolesDB.Admin) || this.currentUserRoles.includes(RolesDB.Moderator) || this.currentUserRoles.includes(RolesDB.Management)) {
+                //             this.publicNotesResponse.push(noteResponse);
+                //         }
+                //         else {
+                //             department.users.forEach(user => {
+                //             if (user.id == this.currentUser.id) {
+                //                 this.publicNotesResponse.push(noteResponse);
+                //             }
+                //             });
+                //         }
+                //     }
+                // })
+            }                           
+        });                      
     }
 
     deleteNote(note: Note) {
@@ -125,7 +166,7 @@ export class NoteIndexComponent implements OnInit {
             canModify = true;
         }
         else {
-            this.canDeleteRoles.forEach(role => {
+            this.highAccessRoles.forEach(role => {
             if (this.currentUser.roles.includes(role)) {
                 canModify = true;
             }

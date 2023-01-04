@@ -1,3 +1,4 @@
+import { Department } from 'src/app/models/department.model';
 import { Address } from "./address.model";
 
 export interface User {
@@ -8,5 +9,6 @@ export interface User {
     surname: string,
     pesel: string,
     address: Address,
-    roles: string[]
+    roles: string[],
+    departments?: Department[]
 }

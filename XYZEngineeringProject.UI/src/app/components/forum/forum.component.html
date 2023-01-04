@@ -24,8 +24,8 @@
                     <span *ngIf="forum.name.length > 50">...</span>
                 </p>
             </div>
-            <div *ngIf="forums.length == 0" class="text-center">
-                <p>{{ 'Forum.noForums' | translate }}</p>
+            <div *ngIf="forums.length == 0" class="text-center p-2">
+                <p style="line-height: 1.3rem">{{ 'Forum.noForums' | translate }}</p>
             </div>
         </div>
         <div class="col-12 col-md-10 border-panel-right p-3 pb-1 overflow-auto" id="messages">

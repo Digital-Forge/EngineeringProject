@@ -23,10 +23,10 @@ public class DepartmentController : Controller
     [HttpGet]
     public IActionResult GetAllDepartments()
     {
-        return Ok(_departmentService.GetAllDepartments().ToList());
+        return Ok(_departmentService.GetAllDepartments().OrderBy(x => x.Name).ToList());
     }
     
-    [HttpGet]
+    [HttpGet("Department/GetAllDepartmentsByUser/{userId}")]
     public IActionResult GetAllDepartmentsByUser(Guid userId)
     {
         return Ok(_departmentService.GetAllDepartmentsByUser(userId).ToList());

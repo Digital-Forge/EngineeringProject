@@ -12,8 +12,13 @@
         "email": "Email",
         "password": "Hasło",
         "wrongLoginOrPassword": "Nieprawidłowy login lub hasło",
+        "usernameTaken": "Ta nazwa użytkownika jest już zajęta",
         "noAccount": "Twoja firma nie ma jeszcze konta?",
-        "registerNow": "Załóż konto teraz!"
+        "registerNow": "Załóż konto teraz!",
+        "register": "Rejestracja",
+        "companyData": "Twoja firma",
+        "firstAccount": "Twoje konto użytkownika",
+        "firstAccountInfo": "Utwórz pierwsze konto użytkownika, przez które będziesz mógł dodać pozostałych członków swojego zespołu"
     },
     "Alert": {
         "deleteContactPerson": "Czy na pewno chcesz usunąć osobę ",
@@ -121,7 +126,8 @@
         "address": "Adres",
         "nip": "NIP",
         "addContact": "Dodaj osobę",
-        "noContactsYet":  "Nie dodano jeszcze osób"
+        "noContactsYet":  "Nie dodano jeszcze osób",
+        "noClientsFound": "Nie masz jeszcze żadnych klientów"
     },
     "ClientFilters": {
         "firstName": "Imię"
@@ -191,7 +197,7 @@
     "Forum": {
         "messages": "Wiadomości",
         "forums": "Grupy",
-        "noForums": "Nie należysz jeszcze do żadnej grupy",
+        "noForums": "Nie należysz jeszcze do żadnej grupy. Zostaniesz dodany do grupy kiedy Twój zarząd lub moderator dodadzą Cię do działu. ",
         "noMessages": "Ta grupa nie ma jeszcze żadnych wiadomości lub nie znaleziono starszych wiadmości",
         "typeYourMessage": "Napisz wiadomość...",
         "loadMore": "Zobacz starsze wiadmości",
@@ -226,7 +232,18 @@
         "department": "Dział",
         "role": "Rola",
         "roles": "Role",
+        "noRoles": "Ten użytkownik nie ma jeszcze żadnej roli",
         "companyName": "Nazwa firmy"
+    },
+    "Department": {
+        "editDepartment": "Edytuj dział",
+        "addDepartment": "Dodaj dział",
+        "name": "Nazwa działu",
+        "manager": "Manager działu",
+        "users": "Użytkownicy działu",
+        "addUserToDepartment": "Dodaj użytkownika do działu",
+        "departments": "Działy",
+        "managerName": "Manager"
     },
     "Role": {
         "EMPLOYEE": "Pracownik",
@@ -257,15 +274,5 @@
         "5": "Piątek",
         "6": "Sobota",
         "0": "Niedziela"
-    },
-    "Department": {
-        "editDepartment": "Edytuj dział",
-        "addDepartment": "Dodaj dział",
-        "name": "Nazwa działu",
-        "manager": "Manager działu",
-        "users": "Użytkownicy działu",
-        "addUserToDepartment": "Dodaj użytkownika do działu",
-        "departments": "Działy",
-        "managerName": "Manager"
     }
 }

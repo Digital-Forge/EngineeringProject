@@ -76,7 +76,8 @@ export class ForumComponent implements OnInit, AfterViewChecked {
                     this.forumService.getAllForumsByUserId(this.currentUser.id).subscribe({
                         next: (res) => {
                             this.forums = res;
-                            this.activeForumId = this.forums[0].id;
+                                                
+                            this.activeForumId = localStorage.getItem('activeForum') || this.forums[0].id;
                             this.showForum(this.activeForumId);
                         },
                         error: (res) => {
@@ -122,6 +123,7 @@ export class ForumComponent implements OnInit, AfterViewChecked {
             next: (res) => {
                 this.forumMessages = res;
                 this.activeForumId = forumId;
+                localStorage.setItem('activeForum', this.activeForumId);
             },
             error: (res) => {
                 console.log(res);

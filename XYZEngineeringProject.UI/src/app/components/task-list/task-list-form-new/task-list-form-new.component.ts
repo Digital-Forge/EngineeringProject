@@ -98,6 +98,9 @@ export class TaskListFormNewComponent implements OnInit {
     }
     
     updateTaskListDetails() {
+
+
+
         this.taskListDetails.name = this.taskListForm.controls.name.value || '';
         this.taskListDetails.project = this.taskListForm.controls.project.value || '';
         this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New); //TODO
@@ -122,6 +125,12 @@ export class TaskListFormNewComponent implements OnInit {
         });
 
         this.taskListDetails.tasks = tasksTemp;
+
+        if (this.taskListForm.controls.status?.value == this.taskListStatuses[TaskListStatus.Done]) {
+            this.taskListDetails.tasks.forEach(task => {
+                task.isComplete = true;
+            })
+        }
     }
 
     //   addListTask() {
@@ -149,11 +158,12 @@ export class TaskListFormNewComponent implements OnInit {
 
     removeListTask(index: number) {
      if(confirm(this.translateService.instant('Alert.deleteTask'))) {
-        if (this.editMode == true && this.taskListDetails.tasks)
+        if (this.editMode == true && this.taskListDetails.tasks) {
             this.taskService.deleteTaskById(this.taskListDetails.tasks[index]).subscribe({
                 next: (res) => {
                 }
             })
+        }
         this.tasks.removeAt(index);
      }
     }

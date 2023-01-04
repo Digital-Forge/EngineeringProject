@@ -25,6 +25,7 @@
                         | translate }} *</label>
                     <label *ngIf="userDetails.passwordHash" class="form-label" for="userPassword">{{
                         'User.changePassword' | translate }}</label>
+                    <label class="text-warning ms-2">({{ 'Login.passwordPlaceholder' | translate }})</label>
                     <div class="input-group">
                         <input class="form-control" [type]="isPasswordVisible ? 'text' : 'password'" id="userPassword"
                             formControlName="userPassword">
@@ -35,6 +36,7 @@
                             </span>
                         </div>
                     </div>
+                    <p class="text-warning mt-2 mb-0">({{ 'Login.passwordPlaceholder' | translate }})</p>
                 </div>
             </div>
             <div class="row">

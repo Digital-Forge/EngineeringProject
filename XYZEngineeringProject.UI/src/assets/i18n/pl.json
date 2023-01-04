@@ -18,7 +18,8 @@
         "register": "Rejestracja",
         "companyData": "Twoja firma",
         "firstAccount": "Twoje konto użytkownika",
-        "firstAccountInfo": "Utwórz pierwsze konto użytkownika, przez które będziesz mógł dodać pozostałych członków swojego zespołu"
+        "firstAccountInfo": "Utwórz pierwsze konto użytkownika, przez które będziesz mógł dodać pozostałych członków swojego zespołu",
+        "passwordPlaceholder": "Co najmniej 5 znaków, w tym minimum 1 litera"
     },
     "Alert": {
         "deleteContactPerson": "Czy na pewno chcesz usunąć osobę ",
@@ -44,6 +45,8 @@
         "showTaskList": "Pokaż listę zadań",
         "completeTaskList": "Ukończ wszystkie zadania na liście",
         "uncompleteTaskList": "Oznacz wszystkie zadania na liście jako nieukończone",
+        "completeTask": "Ukończ zadanie",
+        "uncompleteTask": "Oznacz zadanie jako nieukończone",
         "editTaskList": "Edytuj listę zadań",
         "deleteTaskList": "Usuń listę zadań",
         "addTask": "Dodaj zadanie",
@@ -80,7 +83,10 @@
         "changeName": "Zmień nazwę",
         "deleteDirectory": "Usuń katalog",
         "deleteFile": "Usuń plik",
-        "cancel": "Anuluj"
+        "cancel": "Anuluj",
+        "deleteDepartment": "Usuń dział",
+        "deleteUserFromDepartment": "Usuń użytkownika z działu",
+        "deleteRole": "Usuń rolę użytkownika"
     },
     "Menu": {
         "dashboard": "Pulpit",
@@ -214,8 +220,10 @@
         "english": "Angielski"
     },
     "User": {
+        "user": "Użytkownik",
         "users": "Użytkownicy",
         "myData": "Moje dane",
+        "personalData": "Dane osobowe",
         "editUser": "Edytuj użytkownika",
         "addUser": "Dodaj użytkownika",
         "noUsers": "Nie znaleziono użytkowników",
@@ -242,11 +250,11 @@
         "addDepartment": "Dodaj dział",
         "name": "Nazwa działu",
         "manager": "Manager działu",
-        "users": "Użytkownicy działu",
+        "users": "Użytkownicy w dziale",
         "addUserToDepartment": "Dodaj użytkownika do działu",
         "departments": "Działy",
         "managerName": "Manager",
-        "noDepartmentsFound": "Brak działów"
+        "noDepartmentsFound": "Twoja firma nie ma jeszcze żadnych działów."
     },
     "Role": {
         "EMPLOYEE": "Pracownik",

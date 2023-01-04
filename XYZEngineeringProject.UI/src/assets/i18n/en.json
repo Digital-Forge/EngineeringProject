@@ -18,7 +18,8 @@
         "register": "Sign up",
         "companyData": "Your company",
         "firstAccount": "Your user account",
-        "firstAccountInfo": "Set up your first user account via which you will be able to add other members of your team"    
+        "firstAccountInfo": "Set up your first user account via which you will be able to add other members of your team",
+        "passwordPlaceholder": "Minimum 5 characters including at least 1 letter."    
     },
     "Alert": {
         "deleteContactPerson": "Are you sure you want to delete person ",
@@ -44,6 +45,8 @@
         "showTaskList": "Show task list",
         "completeTaskList": "Complete all tasks on list",
         "uncompleteTaskList": "Uncomplete all tasks on list",
+        "completeTask": "Complete task",
+        "uncompleteTask": "Uncomplete task",
         "editTaskList": "Edit task list",
         "deleteTaskList": "Delete task list",
         "addTask": "Add task",
@@ -80,7 +83,11 @@
         "changeName": "Change name",
         "deleteDirectory": "Delete directory",
         "deleteFile": "Delete file",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "showDepartment": "Show department",
+        "deleteDepartment": "Delete department",
+        "deleteUserFromDepartment": "Delete user from department",
+        "deleteRole": "Delete user's role"
     },
     "Menu": {
         "dashboard": "Dashboard",
@@ -216,8 +223,10 @@
         "roles": "Roles"
     },
     "User": {
+        "user": "User",
         "users": "Users",
         "myData": "My data",
+        "personalData": "Personal data",
         "editUser": "Edit user",
         "addUser": "Add user",
         "noUsers": "No users have been added yet.",
@@ -245,10 +254,11 @@
         "addDepartment": "Add department",
         "name": "Department name",
         "manager": "Department manager",
-        "users": "Department users",
+        "users": "Users in department",
         "addUserToDepartment": "Add user to department",
         "departments": "Departments",
-        "managerName": "Manager"
+        "managerName": "Manager",
+        "noDepartmentsFound": "Your company doesn't have any departments yet."
     },
     "Role": {
         "EMPLOYEE": "Employee",

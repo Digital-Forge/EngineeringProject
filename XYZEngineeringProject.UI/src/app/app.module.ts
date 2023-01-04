@@ -1,3 +1,4 @@
+import { DepartmentViewComponent } from './components/settings/department/department-view/department-view.component';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { InterceptorService } from './services/interceptor/interceptor.service';
@@ -76,7 +77,8 @@ import { DepartmentFormComponent } from './components/settings/department/depart
     ForumComponent,
     UserIndexComponent,
     DepartmentIndexComponent,
-    DepartmentFormComponent
+    DepartmentFormComponent,
+    DepartmentViewComponent
   ],
   imports: [
     BrowserModule,

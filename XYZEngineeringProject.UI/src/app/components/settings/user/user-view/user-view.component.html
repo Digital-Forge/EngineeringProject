@@ -4,18 +4,21 @@
         <i class="bi bi-arrow-right-short mx-1"></i>
     </h1>
 
-    <h1 class="mb-3">{{ user.name }} {{ user.surname }}</h1>
-    <p>{{ user.userName }}</p>
+    <h1 class="mb-3">{{ user.name }} {{ user.surname }} ({{ user.userName }})</h1>
 
     <hr>
-    <h3>{{ 'User.address' | translate }}</h3>
+
+    <h2 class="mb-4">{{ 'User.personalData' | translate }}</h2>
     <div class="mb-3 text-justify">
-        <p> {{ 'User.phone' | translate }}: {{ user.address.phone || '-'}} </p>
-        <p> {{ 'User.homeAddress' | translate }}: {{ user.address.addressHome || '-'}} </p>
-        <p> {{ 'User.postAddress' | translate }}: {{ user.address.addressPost || '-'}} </p>
+        <p><b>{{ 'User.phone' | translate }}:</b> {{ user.address.phone || '-'}} </p>
+        <p><b>{{ 'User.homeAddress' | translate }}:</b> {{ user.address.addressHome || '-'}} </p>
+        <p><b>{{ 'User.postAddress' | translate }}:</b> {{ user.address.addressPost || '-'}} </p>
+        <p><b>{{ 'User.pesel' | translate }}:</b> {{ user.pesel || '-'}} </p>
+
     </div>
+    <hr>
   
-   <h3>{{ 'User.roles' | translate }}</h3>
+   <h2 class="mb-4">{{ 'User.roles' | translate }}</h2>
     <p *ngFor="let role of user.roles">{{ ('Role.' + role) | translate }}</p>
     <p *ngIf="user.roles.length == 0">{{ 'Role.noRoles' | translate }}</p>
            

@@ -27,7 +27,7 @@
                                         'text-gray': taskListStatuses[taskList.status] == 'Done'}">
                                         {{ ('TaskListStatus.' + taskListStatuses[taskList.status]) | translate }}
                                     </p>
-                                    <h3 class="card-title mb-2 cursor-pointer" [routerLink]="['/task-list', taskList.id]">{{taskList.name}}</h3>
+                                    <h3 class="card-title mb-2 cursor-pointer" [ngClass]="{ 'text-secondary': taskListStatuses[taskList.status] == 'Done'}" [routerLink]="['/task-list', taskList.id]">{{taskList.name}}</h3>
                                     <p class="card-subtitle text-gray mb-2">
                                         {{ 'Task.created' | translate }} {{ taskList.createDate | dateCustom:
                                         'fullShort' }}
@@ -41,7 +41,7 @@
                                 <div class="col">
                                     <!-- TODO wyciągnąć isComplete z backendu -->
                                     <div *ngIf="taskList.tasks?.length; else noTasks">
-                                        <div *ngFor="let task of taskList.tasks">
+                                        <div  [ngClass]="{ 'text-secondary': taskListStatuses[taskList.status] == 'Done'}" *ngFor="let task of taskList.tasks">
                                             <i class="cursor-pointer bi" [ngClass]="{ 'bi-check-square': task.isComplete, 'bi-square': !task.isComplete}" (click)="toggleCompleteTask(task.id)"></i>
                                             <span class="ms-2" [ngClass]="{ 'text-decoration-line-through': task.isComplete}">
                                                 {{ task.title }}  <span class="text-nowrap">({{ task.deadline | dateCustom: 'dayMonth' }})</span>

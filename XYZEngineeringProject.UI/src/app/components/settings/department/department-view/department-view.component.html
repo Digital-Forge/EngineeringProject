@@ -1,1 +1,20 @@
-<p>department-view works!</p>
+<div class="mx-5 my-0 px-5 py-5 h-100 shadow-primary">
+     <h1 class="float-start">
+        <a [routerLink]="['/settings/departments']">{{ 'Department.departments' | translate }}</a>
+        <i class="bi bi-arrow-right-short mx-1"></i>
+    </h1>
+    <h1 class="mb-3">{{ department.name | slice: 0:30}}<span
+            *ngIf="department.name!.length >= 30">...</span></h1>
+    <hr>
+
+        <h2>{{ 'Department.manager' | translate }}:</h2> 
+        <p>{{ manager.name }} {{ manager.surname }}</p>
+
+   <h2 class="mt-5">{{ 'User.users' | translate }} ({{ users.length }}):</h2>
+    <ol>
+        <li *ngFor="let user of users" class="mb-2">
+            {{ user.name }} {{ user.surname }}</li>
+        </ol>
+    <p *ngIf="users.length == 0">{{ 'User.noUsers' | translate }}</p>
+
+</div>

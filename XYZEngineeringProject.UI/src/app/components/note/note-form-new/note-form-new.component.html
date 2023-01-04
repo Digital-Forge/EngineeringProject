@@ -37,10 +37,8 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
-                    <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid" *ngIf="editMode">{{
-                        'Button.save' | translate}}</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid" *ngIf="!editMode">{{
-                        'Button.addNote' | translate}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid" *ngIf="editMode">{{ 'Button.save' | translate}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid" *ngIf="!editMode">{{ 'Button.addNote' | translate}}</button>
                 </div>
             </div>
         </form>

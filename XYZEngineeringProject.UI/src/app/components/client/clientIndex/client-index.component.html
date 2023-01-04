@@ -26,10 +26,10 @@
                     <td class="text-wrap min-width-100">{{ client.description }}</td>
                     <td class="text-wrap min-width-100">{{ client.comments | slice: 0:150 }}<span *ngIf="client.comments!.length >= 150">...</span></td>
                     <td class="text-end text-nowrap">
+                        <button *ngIf="client.contacts != undefined && client.contacts.length > 0" title="{{ 'Button.showClientContacts' | translate}}" class="btn btn-sm btn-light me-2" [routerLink]="[]" (click)="toggleContacts(client)"><i class="bi bi-person-lines-fill"></i></button>
                         <button title="{{ 'Button.editClient' | translate}}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/clients', 'edit', client.id]"><i class="bi bi-pencil-fill"></i></button>
                         <button title="{{ 'Button.showClient' | translate}}" class="btn btn-sm btn-secondary me-2" [routerLink]="['/clients', client.id]"><i class="bi bi-eye-fill"></i></button>
-                        <button title="{{ 'Button.showClientContacts' | translate}}" class="btn btn-sm btn-light me-2" [routerLink]="[]" (click)="toggleContacts(client)"><i class="bi bi-person-lines-fill"></i></button>
-                        <button *ngIf="canRemove()" title="{{ 'Button.deleteClient' | translate}}" class="btn btn-sm btn-danger-light me-2" (click)="removeClient(client)"><i class="bi bi-trash3"></i></button>
+                        <button title="{{ 'Button.deleteClient' | translate}}" *ngIf="canRemove()" class="btn btn-sm btn-danger-light me-2" (click)="removeClient(client)"><i class="bi bi-trash3"></i></button>
                     </td>
                 </tr>
                 <tr *ngIf="(client.contacts!.length > 0) && client.isContactsVisible">

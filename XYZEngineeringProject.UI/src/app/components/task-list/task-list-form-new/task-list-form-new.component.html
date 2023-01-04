@@ -52,13 +52,7 @@
                                         formControlName="description"></textarea>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12 col-lg-6 mb-3">
-                                    <label class="form-label" for="task-{{i}}-deadline">{{ 'Task.deadline' | translate
-                                        }} *</label>
-                                    <input class="form-control" id="task-{{i}}-deadline" type="date"
-                                        formControlName="deadline">
-                                </div>
+                            <div class="row">                               
                                 <div class="col-12 col-lg-6 mb-3">
                                     <label class="form-label" for="task-{{i}}-priority">{{ 'Task.priority' | translate
                                         }}</label>
@@ -67,6 +61,12 @@
                                             {{ 'Priority.' + priority | translate }}
                                         </option>
                                     </select>
+                                </div>
+                                <div class="col-12 col-lg-6 mb-3">
+                                    <label class="form-label" for="task-{{i}}-deadline">{{ 'Task.deadline' | translate
+                                        }} *</label>
+                                    <input class="form-control" id="task-{{i}}-deadline" type="date"
+                                        formControlName="deadline">
                                 </div>
                             </div>
                             <div class="row">

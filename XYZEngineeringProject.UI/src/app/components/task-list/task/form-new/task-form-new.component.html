@@ -45,14 +45,13 @@
                 </div>
                 <div class="col-lg-6 col-12 mb-3">
                         <label for="selectorDate" class="form-label">{{ 'Task.deadline' | translate }} *</label>
-                        <input type="date" class="form-control" id="selectorDate" name="selectorDate"
-                            formControlName="deadline">
+                        <input type="date" class="form-control" id="selectorDate" name="selectorDate" formControlName="deadline">
                 </div>                       
             </div>
             
             <div class="row">
                 <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
-                    <button *ngIf="formMode == FormMode.Edit" class="btn btn-sm btn-success-light me-2" (click)="completeTask()"><i class="bi bi-check2-square"></i></button>  
+                    <button title="{{ 'Button.completeTask' | translate }}" *ngIf="formMode == FormMode.Edit" class="btn btn-sm btn-success-light me-2" (click)="completeTask()"><i class="bi bi-check2-square"></i></button>  
                     <button class="btn btn-md btn-primary" type="submit" [routerLink]="['/task-list']" *ngIf="formMode == FormMode.Edit">{{ 'Button.update' | translate }}</button>
                     <button class="btn btn-md btn-primary" [routerLink]="['/task-list']" type="submit" *ngIf="formMode == FormMode.Add || formMode == FormMode.AddFromList">{{ 'Button.add' | translate }}</button>
                 </div>

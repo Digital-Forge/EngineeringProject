@@ -45,10 +45,10 @@ export class UserFormComponent implements OnInit {
     userPassword: ['', Validators.compose([Validators.minLength(5), Validators.pattern('.*[A-Za-z].*')])],
     name: [''],
     surname: ['', Validators.required],
-    pesel: [''],
+    pesel: ['', Validators.maxLength(30)],
     addressHome: [''],
     addressPost: [''],
-    phone: [''],
+    phone: ['', Validators.maxLength(50)],
     departments: this.fb.array([]),
     roles: this.fb.array([]),
     newRole: ['']
@@ -257,14 +257,16 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  canModify() {
+  canModify() {      
     let canModify: boolean = false;
-
-    this.canModifyRoles.forEach(role => {
-      if (this.currentUser.roles.includes(role)) {
-        canModify = true;
-      }
-    });
+    
+    if (this.currentUser) {
+      this.canModifyRoles.forEach(role => {
+        if (this.currentUser.roles.includes(role)) {
+          canModify = true;
+        }
+      });
+    }
 
     return canModify;
   }

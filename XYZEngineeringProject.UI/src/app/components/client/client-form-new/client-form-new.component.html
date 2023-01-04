@@ -40,7 +40,7 @@
             </div>  
             <ng-container formArrayName="clientContacts">
                 <h3 class="mb-3">{{ 'Client.contactPersons' | translate }}</h3>
-                <div class="border border-sm-none b-1 br-5 p-3 p-lg-0 mb-3">
+                <div class="border border-sm-none b-1 br-5 p-3 mb-3">
                     <div *ngIf="clientContacts.length > 0; else noContacts">
                         <div class="border b-1 br-5 p-3 mb-3" *ngFor="let contact of clientContacts.controls; let i=index">
                             <ng-container [formGroupName]="i">                          

@@ -28,7 +28,8 @@ body {
     font-weight: 400 !important;
     letter-spacing: 0rem;
     font-size: 14px;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
+    word-break: break-word;
 }
 
 a {

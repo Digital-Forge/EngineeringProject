@@ -17,11 +17,8 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     this.authorizationService.getMyId().subscribe({
       next: (res) => {
-        
-    console.log(res);
       },
       error: (res) => {
-        console.log(res);
         this.router.navigateByUrl('/login');
       }
       })

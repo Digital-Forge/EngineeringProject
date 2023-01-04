@@ -26,16 +26,6 @@
             <div *ngFor="let task of taskListDetails.tasks">
                 <div class="card card-corner p-1 mb-3" *ngIf="(task.isComplete == false); else done">
                     <div class="card-body">
-                        <!-- <div class="card-subtitle d-flex justify-content-around text-center mb-2">
-                            <div>
-                                {{ 'Task.createDate' | translate}} <br>
-                                {{task.createDate | dateCustom:'fullShort'}}
-                            </div>
-                            <div>
-                                {{ 'Task.deadline' | translate }} <br>
-                                {{task.deadline | dateCustom:'fullShort'}}
-                            </div>                      
-                        </div> -->
                         <div class="card-subtitle text-center mb-2">
                             <div class="text-secondary">
                                 {{task.createDate | dateCustom:'short'}} - {{task.deadline | dateCustom:'short'}}
@@ -52,10 +42,10 @@
                         <div class="card-text text-justify mb-2">{{task.description}}</div>
 
                         <div class="d-flex justify-content-end mt-3">
-                            <button class="btn btn-sm btn-light me-2" [routerLink]="['/task', 'edit', task.id]">
+                            <button title="{{ 'Button.editTask' | translate }}" class="btn btn-sm btn-light me-2" [routerLink]="['/task', 'edit', task.id]">
                                 <i class="bi bi-pencil-square"></i>                            
                             </button>
-                            <button class="btn btn-sm btn-success-light" (click)="completeTask(task.id)">
+                            <button title="{{ 'Button.completeTask' | translate }}" class="btn btn-sm btn-success-light" (click)="completeTask(task.id)">
                                 <i class="bi bi-check2-square"></i>
                             </button>
                         </div>
@@ -70,10 +60,10 @@
                                     {{task.createDate | dateCustom:'short'}} - {{task.deadline | dateCustom:'short'}}
                                 </div>                      
                             </div>
-                            <div class="card-subtitle text-center">{{task.deadline | dateCustom:'fullShort'}}</div>
                             <div class="note-corner bg-secondary"></div>
 
                             <h3 class="card-title text-center text-decoration-line-through">{{task.title}}</h3>
+                            
 
                             <div class="d-flex justify-content-end mt-3">
                                 <a class="card-link btn btn-sm btn-light" (click)="restoreTask(task.id)">

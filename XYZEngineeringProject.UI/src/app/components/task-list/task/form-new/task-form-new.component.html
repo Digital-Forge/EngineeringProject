@@ -61,7 +61,7 @@
     </div>
     <div *ngIf="taskLists.length == 0" class="col-8 offset-2 text-center form">
         <p>{{ 'TaskList.noTaskLists' | translate }}</p>
-        <button class="btn btn-md btn-primary" [routerLink]="['/task-list', 'add']">
+        <button class="btn btn-md btn-primary" [routerLink]="['/task-list', 'add']" [disabled]="!taskForm.valid">
             <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTaskList' | translate }}
         </button>
     </div>

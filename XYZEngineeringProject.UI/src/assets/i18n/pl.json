@@ -243,7 +243,8 @@
         "users": "Użytkownicy działu",
         "addUserToDepartment": "Dodaj użytkownika do działu",
         "departments": "Działy",
-        "managerName": "Manager"
+        "managerName": "Manager",
+        "noDepartmentsFound": "Brak działów"
     },
     "Role": {
         "EMPLOYEE": "Pracownik",

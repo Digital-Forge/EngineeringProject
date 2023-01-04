@@ -65,19 +65,10 @@ export class RegisterComponent implements OnInit {
       this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
       this.userDetails.address.phone = this.userForm.controls.phone.value?.toString() || ''
 
-    this.companyService.createNewCompanyOld(this.companyDetails,this.userDetails);
-    // this.companyService.createNewCompany(this.companyDetails, this.userDetails).subscribe({
-    //   next: (comapanyResponse) => {
-    //       this.router.navigate(['']);
-    //     },
-    //     error: (errorResponse) => {
-    //       console.log(errorResponse);
-    //     }
-    // })
-}
+    this.companyService.createNewCompanyOld(this.companyDetails, this.userDetails);
+  }
 
-togglePasswordVisibility() {
-  this.isPasswordVisible = !this.isPasswordVisible;
-}
-
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
 }

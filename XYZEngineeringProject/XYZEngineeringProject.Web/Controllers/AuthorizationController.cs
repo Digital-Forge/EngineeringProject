@@ -53,7 +53,7 @@ namespace XYZEngineeringProject.Web.Controllers
         [HttpGet]
         public IActionResult CheckNick(string name)
         {
-            return Ok()
+            return Ok();
         }
     }
 }

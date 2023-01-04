@@ -61,23 +61,33 @@ namespace XYZEngineeringProject.Web.Controllers
         {
             return Ok(_appUserService.AddUserRole(Guid.Parse(id), roleName));
         }
+
         [HttpGet]
         [Route("AppUser/DeleteUserRole/{id}/{roleName}")]
         public IActionResult DeleteUserRole(string id, string roleName)
         {
             return Ok(_appUserService.RemoveUserRole(Guid.Parse(id), roleName));
         }
+
         [HttpPut]
         public IActionResult Edit([FromBody] AppUserVM appUserVM)
         {
             return Ok(_appUserService.UpdateUser(appUserVM));
         }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("AppUser/CreateNewCompanyUser/{companyId}")]
         public IActionResult CreateNewCompanyUser([FromBody] AppUserVM appUserVM,string companyId)
         {
             return Ok(_appUserService.AddUserForNewCompany(appUserVM, Guid.Parse(companyId)));
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteUser(Guid id)
+        {
+            _appUserService.DeleteUser(id);
+            return Ok();
         }
     }
 }

@@ -15,5 +15,6 @@ namespace XYZEngineeringProject.Application.Interfaces
         public List<AppUserVM> GetAllUsers();
         bool RemoveUserRole(Guid id, string roleName);
         bool UpdateUser(AppUserVM appUser);
+        void DeleteUser(Guid id);
     }
 }

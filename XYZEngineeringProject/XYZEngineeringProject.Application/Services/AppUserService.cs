@@ -209,5 +209,10 @@ namespace XYZEngineeringProject.Application.Services
             }
             return true;
         }
+
+        public void DeleteUser(Guid id)
+        {
+            _userRepository.Remove(id);
+        }
     }
 }

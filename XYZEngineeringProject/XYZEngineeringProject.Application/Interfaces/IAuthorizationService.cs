@@ -16,5 +16,7 @@ namespace XYZEngineeringProject.Application.Interfaces
 
         List<string> GetAllRoles();
         bool ChangePassword(Guid userId, string newPassword);
+
+        bool CheckNick(string name);
     }
 }

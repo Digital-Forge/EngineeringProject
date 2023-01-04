@@ -183,7 +183,7 @@ export class UserFormComponent implements OnInit {
 
   updateUserDetails() {
     this.userDetails.userName = this.userForm.controls.userUserName.value || '';
-    this.userDetails.passwordHash = this.userForm.controls.userPassword.value || this.userDetails.passwordHash || '';
+    this.userDetails.passwordHash = this.userForm.controls.userPassword.value || '';
     this.userDetails.name = this.userForm.controls.name.value || '';
     this.userDetails.surname = this.userForm.controls.surname.value || '';
     this.userDetails.pesel = this.userForm.controls.pesel.value || '';
@@ -259,12 +259,13 @@ export class UserFormComponent implements OnInit {
 
   canModify() {
     let canModify: boolean = false;
-
-    this.canModifyRoles.forEach(role => {
-      if (this.currentUser.roles.includes(role)) {
-        canModify = true;
-      }
-    });
+    if(this.currentUser){
+      this.canModifyRoles.forEach(role => {
+        if (this.currentUser.roles.includes(role)) {
+          canModify = true;
+        }
+      });
+    }
 
     return canModify;
   }

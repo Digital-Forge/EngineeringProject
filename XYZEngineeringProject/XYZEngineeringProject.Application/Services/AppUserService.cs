@@ -15,11 +15,13 @@ namespace XYZEngineeringProject.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly ICompanyRepository _companyRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public AppUserService(IUserRepository userRepository, ICompanyRepository companyRepository)
+        public AppUserService(IUserRepository userRepository, ICompanyRepository companyRepository, IAuthorizationService authorizationService)
         {
             _userRepository = userRepository;
             _companyRepository = companyRepository;
+            _authorizationService = authorizationService;
         }
         public List<AppUserVM> GetAllUsers()
         {
@@ -153,6 +155,11 @@ namespace XYZEngineeringProject.Application.Services
                 //in current state there is no option for this to happen
                 //_userRepository.RemoveUserAddress(user);
                 //user.Address = null;
+            }
+
+            if (user.PasswordHash.Length>=5)
+            {
+                _authorizationService.ChangePassword(user.Id, user.PasswordHash);
             }
             return _userRepository.Update(user);
         }

@@ -55,6 +55,8 @@ export class TaskFormNewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.taskPriorities);
+
     this.taskService.getAllTaskLists().subscribe({
       next: (res)=>{
         this.taskLists=res;
@@ -117,7 +119,7 @@ export class TaskFormNewComponent implements OnInit {
     this.taskDetails.title = this.taskForm.controls.title.value || '',
     this.taskDetails.description = this.taskForm.controls.description.value || '',
     this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || new Date()),
-    this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority.value || 0),
+    this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority.value || 1),
     this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
 
     console.log(this.taskDetails);

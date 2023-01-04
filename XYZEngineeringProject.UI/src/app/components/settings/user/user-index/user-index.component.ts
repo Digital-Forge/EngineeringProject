@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { DepartmentService } from 'src/app/services/department/department.service';
 import { RolesDB } from './../../../../models/roles.enum';
 import { AuthorizationService } from './../../../../services/authorization/authorization.service';
@@ -21,12 +22,13 @@ export class UserIndexComponent implements OnInit {
     RolesDB.Management
   ];
 
-  
+
   constructor(
     private userService: UserService,
     private authorizationService: AuthorizationService,
-    private departmentService: DepartmentService
-  ) {    
+    private departmentService: DepartmentService,
+    private translateService: TranslateService
+  ) {
   }
 
   ngOnInit(): void {
@@ -53,26 +55,45 @@ export class UserIndexComponent implements OnInit {
             }
           })
         });
-        
+
       },
       error: (res) => {
       }
     })
   }
 
-  deleteUser(id: string) {
+  deleteUser(user: User) {
+    if (confirm(this.translateService.instant('Alert.deleteUser') + `${user.name} ${user.surname} (${user.userName})?`)) {
+      this.userService.deleteAppUser(user.id).subscribe({
+        next: (res) => {
+          window.location.reload();
+        }
+      })
+    }
   }
 
   canModify() {
     let canModify: boolean = false;
-    
+
     this.canModifyRoles.forEach(role => {
       if (this.currentUser.roles.includes(role)) {
         canModify = true;
       }
     });
-   
+
     return canModify;
+  }
+
+  canBeDeleted(user: User) {
+    let canBeDeleted: boolean = true;
+
+    this.canModifyRoles.forEach(role => {
+      if (user.roles.includes(role)) {
+        canBeDeleted = false;
+      }
+    });
+
+    return canBeDeleted;
   }
 
 }

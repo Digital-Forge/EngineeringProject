@@ -29,7 +29,8 @@
         "deleteTaskList": "Are you sure you want to delete task list?",
         "deleteTask": "Are you sure you want to delete task?",
         "deleteRole": "Are you sure you want to delete role?",
-        "deleteDepartment": "Are you sure you want to delete department "
+        "deleteDepartment": "Are you sure you want to delete department ",
+        "deleteUser": "Are you sure you want to delete user "
 
     },
     "Button": {
@@ -97,7 +98,7 @@
         "tasks": "Tasks",
         "chat": "Messages",
         "todayIs": "Todaz:",
-        "welcome": "Wolcome",
+        "welcome": "Welcome",
         "seeAll": "View all",
         "pastTasks": "Overdue",
         "todayTasks": "Today",
@@ -224,8 +225,8 @@
         "surname": "Last name",
         "userName": "Username",
         "password": "Password",
-        "setPassword": "Set hasło",
-        "changePassword": "Change hasło",
+        "setPassword": "Set password",
+        "changePassword": "Change password",
         "address": "Adress",
         "pesel": "PESEL",
         "phone": "Phone",
@@ -235,7 +236,9 @@
         "role": "Role",
         "roles": "Roles",
         "noRoles": "This user doesn't have any roles yet",
-        "companyName": "Company name"
+        "companyName": "Company name",
+        "rolesInfo": "Warning! If you delete all Moderator and Management users you will not be able to add or edit users."
+
     },
     "Department": {
         "editDepartment": "Edit department",

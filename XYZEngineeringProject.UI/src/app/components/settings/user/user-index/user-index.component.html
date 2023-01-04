@@ -7,6 +7,7 @@
             </button>
         </div>
     </div>
+    <p *ngIf="canModify()" class="text-secondary">{{ 'User.rolesInfo' | translate }}</p>
     <span class="table-responsive">
         <table class="table text-nowrap text-left" *ngIf="users && users.length > 0">
             <thead>
@@ -38,8 +39,8 @@
                                 class="bi bi-pencil-fill"></i></button>
                         <button title="{{ 'Button.showUser' | translate}}" class="btn btn-sm btn-secondary me-2"
                             [routerLink]="['/settings/users', user.id]"><i class="bi bi-eye-fill"></i></button>
-                        <button title="{{ 'Button.deleteUser' | translate}}" class="btn btn-sm btn-danger-light me-2"
-                            [routerLink]="[]" (click)="deleteUser(user.id)"><i class="bi bi-trash3"></i></button>
+                        <button *ngIf="canBeDeleted(user)" title="{{ 'Button.deleteUser' | translate}}" class="btn btn-sm btn-danger-light me-2"
+                            [routerLink]="[]" (click)="deleteUser(user)"><i class="bi bi-trash3"></i></button>
                     </td>
                 </tr>
             </tbody>

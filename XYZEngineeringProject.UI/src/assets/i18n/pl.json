@@ -29,7 +29,8 @@
         "deleteTaskList": "Czy na pewno chcesz usunąć listę zadań?",
         "deleteTask": "Czy na pewno chcesz usunąć zadanie?",
         "deleteRole": "Czy na pewno chcesz usunąć rolę?",
-        "deleteDepartment": "Czy na pewno chcesz usunąć dział "
+        "deleteDepartment": "Czy na pewno chcesz usunąć dział ",
+        "deleteUser": "Czy na pewno chcesz usunąć użytownika "
 
     },
     "Button": {
@@ -233,7 +234,8 @@
         "role": "Rola",
         "roles": "Role",
         "noRoles": "Ten użytkownik nie ma jeszcze żadnej roli",
-        "companyName": "Nazwa firmy"
+        "companyName": "Nazwa firmy",
+        "rolesInfo": "Uwaga! Jeśli usuniesz wysztkich Moderatorów i Zarząd nie będziesz w stanie dodawać ani edytować użytkowników."
     },
     "Department": {
         "editDepartment": "Edytuj dział",

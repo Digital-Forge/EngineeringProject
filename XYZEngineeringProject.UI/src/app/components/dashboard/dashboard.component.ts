@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
     ) {
         this.today = new Date();
 
-        this.router.events.subscribe(val => {
+        // this.router.events.subscribe(val => {
             this.authorizationService.getMyId().subscribe({
                 next: (res) => {
                     this.isAuthorized = true;
@@ -81,7 +81,8 @@ export class DashboardComponent implements OnInit {
                     this.isAuthorized = false;
                 }
             });
-        });
+            
+        // });
     }
 
     ngOnInit(): void {

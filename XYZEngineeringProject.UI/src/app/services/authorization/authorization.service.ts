@@ -18,9 +18,7 @@ export class AuthorizationService {
   
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private location: Location,
-    private translateService: TranslateService
+    private router: Router
   ) { }
 
   login(login: Login) {
@@ -46,7 +44,7 @@ export class AuthorizationService {
     });
   }
 
-  getMyId() {
+  getMyId(): Observable<any> {
     return this.http.get(this.baseApiUrl + 'Me/GetMyId');
   }
 

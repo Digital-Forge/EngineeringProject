@@ -64,6 +64,7 @@
                 </div>
             </div>
 
+            <div *ngIf="canModify()">
             <h3 class="form-label" *ngIf="formMode==FormMode.Edit">{{'User.roles' | translate}}</h3>
             <ng-container formArrayName="roles" *ngIf="formMode==FormMode.Edit">
                 <table class="table table-hover">
@@ -101,7 +102,7 @@
                     <button class="btn btn-sm btn-success-light" (click)="addRole()">{{ 'Button.assignRole' | translate }}</button>
                 </div>
             </div>       
-            
+            </div>
             <div class="row">
                 <div class="col text-center text-sm-end mt-3">
                     <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid"

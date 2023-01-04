@@ -28,6 +28,14 @@ export class UserService {
     return this.http.get<User>(this.baseApiUrl + 'AppUser/GetUser/' + id);
   }
 
+  editAppUser(user: User): Observable<User> {
+    return this.http.put<User>(this.baseApiUrl + 'AppUser/Edit', user);
+  }
+
+  deleteAppUser(userId: string) {
+    return this.http.get(this.baseApiUrl + 'AppUser/DeleteUser/' + userId);
+  }
+
   addAppUserRole(user: User, roleName:string)
   {
     return this.http.get(this.baseApiUrl+'AppUser/AddUserRole/' + user.id + '/' + roleName)
@@ -41,11 +49,6 @@ export class UserService {
   deleteAppUserRole(user: User, roleName: string)
   {
     return this.http.get(this.baseApiUrl + 'AppUser/DeleteUserRole/' + user.id + '/' + roleName)
-  }
-
-  editAppUser(user: User): Observable<User> {
-    return this.http.put<User>(this.baseApiUrl + 'AppUser/Edit', user);
-  }
- 
+  } 
 }
 

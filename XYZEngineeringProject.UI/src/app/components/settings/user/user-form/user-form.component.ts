@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Roles } from './../../../../models/roles.enum';
+import { Roles, RolesDB } from './../../../../models/roles.enum';
 import { DepartmentService } from './../../../../services/department/department.service';
 import { Department } from './../../../../models/department.model';
 import { User } from './../../../../models/user.model';
@@ -16,6 +16,12 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
+
+  canModifyRoles: RolesDB[] = [
+    RolesDB.Admin,
+    RolesDB.Moderator,
+    RolesDB.Management
+  ];
 
   userDetails: User = {
     id: '',
@@ -250,4 +256,17 @@ export class UserFormComponent implements OnInit {
       })
     }
   }
+
+  canModify() {
+    let canModify: boolean = false;
+
+    this.canModifyRoles.forEach(role => {
+      if (this.currentUser.roles.includes(role)) {
+        canModify = true;
+      }
+    });
+
+    return canModify;
+  }
+
 }

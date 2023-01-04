@@ -28,6 +28,19 @@ import { DepartmentFormComponent } from './components/settings/department/depart
 const routes: Routes = [
 
   {
+    path: '',
+    component: LoginComponent
+  }, 
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
     children: [
       { path: '', component: TaskListComponent },
@@ -66,13 +79,6 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'calendar',
-  //   children: [
-  //     { path: '', component: CalendarComponent },
-  //   ],
-  //   canActivate: [AuthGuard]
-  // },
   {
     path: 'forum',
     component: ForumComponent,
@@ -116,18 +122,12 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
+    path: '**',
+    redirectTo: 'login'
   },
-  {
-    path: 'register',
-    component: RegisterComponent
-  },
-  {
-    path: '',
-    component: LoginComponent
-  }
+ 
+ 
+ 
 ];
 
 @NgModule({

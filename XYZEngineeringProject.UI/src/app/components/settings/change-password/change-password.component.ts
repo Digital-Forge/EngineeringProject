@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ChangePasswordComponent implements OnInit {
   currentUserId:string;
+
+  isPasswordVisible: boolean[] = [false, false, false];
   passwordDetails: ChangePassword = {
     newPassword:'',
     oldPassword:''
@@ -50,6 +52,21 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 
-
+  togglePasswordVisibility(input: string) {
+    switch (input) {
+      case 'old': {
+        this.isPasswordVisible[0] = !this.isPasswordVisible[0];
+        break;
+      } 
+      case 'new': {
+        this.isPasswordVisible[1] = !this.isPasswordVisible[1];
+        break;
+      }
+      case 'newRepeat': {
+        this.isPasswordVisible[2] = !this.isPasswordVisible[2];
+        break;
+      }
+    }
+}
 
 }

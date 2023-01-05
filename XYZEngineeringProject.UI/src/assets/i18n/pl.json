@@ -32,8 +32,8 @@
         "deleteRole": "Czy na pewno chcesz usunąć rolę?",
         "deleteDepartment": "Czy na pewno chcesz usunąć dział ",
         "deleteUser": "Czy na pewno chcesz usunąć użytownika ",
-        "cannotRemoveClient": "Klient nie może być teraz usunięty"
-
+        "deleteCompany": "Czy na pewno chcesz usunąć całą firmę i wszystkie jej zasoby? Tej operacji nie można odwrócić!",
+        "deleteCompanyConfirm": "POTWIERDŹ USUWANIE FIRMY Z APLIKACJI FRANLY"
     },
     "Button": {
         "view": "Zobacz",
@@ -221,7 +221,8 @@
         "polish": "Polski",
         "english": "Angielski",
         "deleteCompany": "Usuń firmę",
-        "changePassword":"Zmień hasło"
+        "changePassword":"Zmień hasło",
+        "deleteCompanyConfirm": "Usunięcie firmy spowoduje, że nie będziesz mieć dostępu do jej zasobów, a wszyscy jej użytkownicy stracą dostępy do swoich kont."
     },
     "User": {
         "user": "Użytkownik",

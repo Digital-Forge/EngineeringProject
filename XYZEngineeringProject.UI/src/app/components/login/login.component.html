@@ -20,8 +20,14 @@
                         name="email" [(ngModel)]="login.email">
                 </div>
                 <div class="mb-4">
-                    <input type="password" class="form-control" placeholder="{{ 'Login.password' | translate }}"
-                        id="password" name="password" [(ngModel)]="login.password">
+                    <div class="input-group">
+                        <input [type]="isPasswordVisible ? 'text' : 'password'" id="userPassword" class="form-control" placeholder="{{ 'Login.password' | translate }}" id="password" name="password" [(ngModel)]="login.password">
+                        <div class="input-group-append cursor-pointer" (click)="togglePasswordVisibility()">
+                            <span class="input-group-text" id="password-visibility">
+                                <i class="bi" [ngClass]="{ 'bi-eye-slash': isPasswordVisible, 'bi-eye': !isPasswordVisible}"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-md btn-primary" type="submit">

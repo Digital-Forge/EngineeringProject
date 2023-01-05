@@ -11,6 +11,8 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
+    isPasswordVisible: boolean = false;
+
     login: Login = {
         email: '',
         password: '',
@@ -42,4 +44,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('language', language);
         window.location.reload();
     }
+
+     togglePasswordVisibility() {
+        this.isPasswordVisible = !this.isPasswordVisible;
+    }
 }
+

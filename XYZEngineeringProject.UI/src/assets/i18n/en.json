@@ -32,7 +32,9 @@
         "deleteRole": "Are you sure you want to delete role?",
         "deleteDepartment": "Are you sure you want to delete department ",
         "deleteUser": "Are you sure you want to delete user ",
-        "cannotRemoveClient": "Client cannot be removed now."
+        "cannotRemoveClient": "Client cannot be removed now.",
+        "deleteCompany": "Are you sure you want to delete the company? This operation can't be reversed!",
+        "deleteCompanyConfirm": "CONFIRM REMOVING YOUR COMPANY FROM THE FRANKLY APP"
     },
     "Button": {
         "view": "View",
@@ -223,7 +225,8 @@
         "english": "English",
         "roles": "Roles",
         "deleteCompany": "Delete company",
-        "changePassword":"Change password"
+        "changePassword":"Change password",
+        "deleteCompanyConfirm": "Once you delete your company you will not have access to the company data and all its users will lose access to their accounts."
     },
     "User": {
         "user": "User",

@@ -1,31 +1,29 @@
 <div class="container-fluid my-5">
-    <div class="mb-5 text-center">
+    <div class="tile-title mb-5 text-center">
         <h1>{{'Settings.settings' | translate }}</h1>
     </div>
-    <div class="container text-center justify-content-center d-sm-flex flex-wrap mb-3">
-        <!--  *ngIf="(currentUserRole == UserRole.Management) || (currentUserRole == UserRole.Moderator)"  -->
-        <div class="tile mb-4 mx-3" [routerLink]="['/settings/users']">
-            <i class="bi bi-people-fill"></i>
-            <h4>{{ 'User.users' | translate }}</h4>
-        </div>
-        <div class="tile mb-4 mx-3" [routerLink]="['/settings/users', 'edit', currentUserId]">
+    <div class="tile-title container text-center justify-content-center d-sm-flex flex-wrap mb-3">       
+        <div class="tile mb-4 mx-3" [routerLink]="['/settings/users', 'edit', currentUser.id]">
             <i class="bi bi-person-circle"></i>
             <h4>{{ 'User.myData' | translate }}</h4>
-        </div>
-        <div class="tile mb-4 mx-3" [routerLink]="['/settings/departments']">
-            <i class="bi bi-briefcase-fill"></i>
-            <h4>{{ 'Settings.departments' | translate }}</h4>
         </div>
         <div class="tile mb-4 mx-3" [routerLink]="['/settings/changePassword']">
             <i class="bi bi-shield-lock-fill"></i>
             <h4>{{ 'Settings.changePassword' | translate }}</h4>
         </div>
+        <div class="tile mb-4 mx-3" [routerLink]="['/settings/users']">
+            <i class="bi bi-people-fill"></i>
+            <h4>{{ 'User.users' | translate }}</h4>
+        </div>       
+        <div class="tile mb-4 mx-3" [routerLink]="['/settings/departments']">
+            <i class="bi bi-briefcase-fill"></i>
+            <h4>{{ 'Settings.departments' | translate }}</h4>
+        </div>
     </div>
-    <div class="mb-5 text-center">
+    <div class="tile-title mb-5 text-center">
         <h1>{{'Settings.selectLanguage' | translate }}</h1>
     </div>
     <div class="container text-center justify-content-center d-sm-flex flex-wrap mb-3">
-        <!--  *ngIf="(currentUserRole == UserRole.Management) || (currentUserRole == UserRole.Moderator)"  -->
         <div class="tile mb-4 mx-3" (click)="changeLanguage('en')">
             <h2 class="border-language">EN</h2>
             <h4>{{ 'Settings.english' | translate }}</h4>
@@ -35,13 +33,27 @@
             <h4>{{ 'Settings.polish' | translate }}</h4>
         </div>    
     </div>
-    <div class="mb-5 text-center">
-        <h1>{{"Settings.deleteCompany"|translate}}</h1>
-    </div>
-    <div class="container text-center justify-content-center d-sm-flex flex-wrap mb-3">
-        <div class="tile mb-4 mx-3" (click)="deleteCompany()">
-            <i class="bi bi-trash3"></i>
-            <h4>{{"Settings.deleteCompany"|translate}}</h4>
+    <div *ngIf="canModify() == true">
+        <div class="mb-5 text-center">
+            <h1>{{"Settings.deleteCompany"|translate}}</h1>
+        </div>
+        <div class="container text-center justify-content-center d-sm-flex flex-wrap mb-3">
+            <div class="tile mb-4 mx-3" (click)="deleteCompany()">
+                <i class="bi bi-trash3 text-danger"></i>
+                <h4>{{"Settings.deleteCompany"|translate}}</h4>
+            </div>
+        </div>
+
+        <div class="d-none" id="confirm-delete">
+            <div class="mb-5 text-center">
+                <h3>{{"Settings.deleteCompanyConfirm" | translate}}</h3>
+            </div>
+            <div class="container text-center justify-content-center d-sm-flex flex-wrap mb-3">
+                <button type="button" class="btn btn-lg btn-danger mb-4 mx-3" (click)="confirmCompanyDelete()">
+                    <i class="bi bi-trash3 text-light"></i>
+                    <h4>{{"Settings.deleteCompany" | translate}}</h4>
+                </button>
+            </div>
         </div>
     </div>
 </div>

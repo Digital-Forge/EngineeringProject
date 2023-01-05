@@ -35,7 +35,8 @@ export class TaskFormNewComponent implements OnInit {
     assignerUserId: environment.emptyGuid, //TODO przekazać id użytkownika, który dodaje taska
     createDate: new Date(),
     listOfTasksId: environment.emptyGuid, //TODO przekazać z urla id listy. do której ma się dodać task
-    isComplete: false
+    isComplete: false,
+    createBy: ''
   }
 
   taskForm = this.fb.group({

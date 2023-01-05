@@ -20,5 +20,6 @@ namespace XYZEngineeringProject.Application.ViewModels
         //public ListOfTasks? ListOfTasks { get; set; }
         public DateTime CreateDate { get; set; }
         public bool IsComplete { get; set; }
+        public Guid CreateBy { get; set; }
     }
 }

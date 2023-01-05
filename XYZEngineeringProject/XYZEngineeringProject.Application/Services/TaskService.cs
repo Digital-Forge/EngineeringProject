@@ -57,6 +57,7 @@ namespace XYZEngineeringProject.Application.Services
                 Title = x.Title,
                 IsComplete = x.IsComplete,
                 CreateDate = x.CreateDate,
+                CreateBy= x.CreateBy,
             }).ToList();
         }
 
@@ -129,6 +130,7 @@ namespace XYZEngineeringProject.Application.Services
                 Status = x.Status,
                 Project=x.Project,
                 CreateDate = x.CreateDate,
+                CreateBy= x.CreateBy,
             }).ToList();
 
             foreach (ListOfTasksVM list in lists)
@@ -178,6 +180,7 @@ namespace XYZEngineeringProject.Application.Services
                     AssignerUserId = e.AssignFromUserId,
                     ListOfTasksId = e.ListOfTasksId,
                     IsComplete= e.IsComplete,
+                    CreateBy = e.CreateBy,
                 }).ToList();
         }
 

@@ -28,7 +28,8 @@ export class TaskListFormNewComponent implements OnInit {
         project: '',
         createDate: new Date(),
         status: TaskListStatus.New,
-        tasks: []
+        tasks: [],
+        createBy: ''
     }
 
     taskListForm = this.fb.group({
@@ -119,7 +120,8 @@ export class TaskListFormNewComponent implements OnInit {
                     assignerUserId: control.get('assignerUserId')?.value,
                     listOfTasksId: control.get('listOfTasksId')?.value,
                     createDate: control.get('createDate')?.value || new Date(),
-                    isComplete: control.get('isComplete')?.value || false
+                    isComplete: control.get('isComplete')?.value || false,
+                    createBy: ''
                 })
             }
         });

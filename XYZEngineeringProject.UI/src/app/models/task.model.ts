@@ -11,7 +11,8 @@ export interface Task {
     assignerUserId:string,
     listOfTasksId?: string,
     createDate: Date,
-    isComplete: boolean 
+    isComplete: boolean,
+    createBy: string
 }
 
 export interface TaskList {
@@ -20,7 +21,8 @@ export interface TaskList {
     createDate: Date,
     project?: string,
     status: TaskListStatus,
-    tasks?: Task[]
+    tasks?: Task[],
+    createBy: string
 }
 
 export interface TaskListResponse {

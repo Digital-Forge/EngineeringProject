@@ -48,7 +48,8 @@ export class TaskListComponent implements OnInit {
             project: '',
             createDate: new Date(),
             status: TaskListStatus.New,
-            tasks: []
+            tasks: [],
+            createBy: ''
         }
 
         this.taskService.getTaskListById(id).subscribe({

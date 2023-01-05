@@ -139,7 +139,7 @@ export class NoteIndexComponent implements OnInit {
     }
 
     deleteNote(note: Note) {
-        if (confirm(this.translateService.instant('Alert.deleteNote') + note.title.substring(0, 50) + "[...]?")) {
+        if (confirm(this.translateService.instant('Alert.deleteNote') + note.title.substring(0, 50) +  (note.title.length>50?"[...]?":"?"))) {
             this.noteService.deleteNote(note).subscribe({
                 next: (res) => {
                     window.location.reload();

@@ -49,7 +49,7 @@ export class TaskListFormNewComponent implements OnInit {
         private taskService: TaskService,
         private router: Router,
         private translateService: TranslateService,
-        private authorizationService: AuthorizationService
+        private authorizationService: AuthorizationService,
     ) { }
 
     ngOnInit(): void {
@@ -114,7 +114,7 @@ export class TaskListFormNewComponent implements OnInit {
         this.taskListDetails.name = this.taskListForm.controls.name.value || '';
         this.taskListDetails.project = this.taskListForm.controls.project.value || '';
         this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New); //TODO
-        // this.taskListDetails.status = TaskListStatus. [this.taskListForm.controls.status.value || TaskListStatus.New]
+        this.taskListDetails.createBy = this.taskListDetails.createBy || undefined;
 
         let tasksTemp: Task[] = [];
         this.taskListForm.controls.tasks.controls.forEach(control => {

@@ -1,3 +1,4 @@
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Component, OnInit } from '@angular/core';
@@ -22,7 +23,9 @@ export class TaskListComponent implements OnInit {
 
     constructor(
         private taskService: TaskService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private authorizationService: AuthorizationService
+
     ) { }
 
     ngOnInit(): void {
@@ -36,7 +39,8 @@ export class TaskListComponent implements OnInit {
                     this.taskLists[i] = res[i];
                 }
             },
-            error: (response) => {
+            error: (res) => {
+                this.authorizationService.logForAdmin(res);
             }
         });
     }
@@ -116,18 +120,18 @@ export class TaskListComponent implements OnInit {
                                                         this.getData();
                                                     },
                                                     error: (res) => {
-                                                        console.log(res);
+                                                        this.authorizationService.logForAdmin(res);
                                                     }
                                                 })
                                             },
                                             error: (res) => {
-                                                console.log(res);
+                                                this.authorizationService.logForAdmin(res);
                                             }
                                         })
                                     }
                                 },
                                 error: (res) => {
-                                    console.log(res);
+                                    this.authorizationService.logForAdmin(res);
                                 }
                             })
                         }

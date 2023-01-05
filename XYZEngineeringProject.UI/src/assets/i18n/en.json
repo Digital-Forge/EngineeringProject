@@ -31,8 +31,8 @@
         "deleteTask": "Are you sure you want to delete task?",
         "deleteRole": "Are you sure you want to delete role?",
         "deleteDepartment": "Are you sure you want to delete department ",
-        "deleteUser": "Are you sure you want to delete user "
-
+        "deleteUser": "Are you sure you want to delete user ",
+        "cannotRemoveClient": "Client cannot be removed now."
     },
     "Button": {
         "view": "View",

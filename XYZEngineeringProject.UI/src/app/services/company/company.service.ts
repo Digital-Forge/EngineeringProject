@@ -1,3 +1,4 @@
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { Company } from './../../models/company.model';
 import { Login } from './../../models/login.model';
 import { User } from 'src/app/models/user.model';
@@ -15,27 +16,11 @@ export class CompanyService {
   emptyGuid: string = environment.emptyGuid;
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authorizationService: AuthorizationService
     ) { }
 
-    createNewCompany(company: Company, user: User) {
-      company.id = this.emptyGuid
-      user.id = this.emptyGuid
-      this.http.put<string>(this.baseApiUrl+'Company/Create',company).subscribe({
-        next: (res) => {
-          return this.http.post<User>(this.baseApiUrl+'AppUser/CreateNewCompanyUser/'+company.id,user);
-        },
-        error: (res) => {
-          return res;
-        }
-      })
-    }
-
-    createCompanyFirstUser(company: Company, user: User) {
-      return this.http.post<User>(this.baseApiUrl+'AppUser/CreateNewCompanyUser/'+company.id,user)
-    }
-
-  createNewCompanyOld(company: Company, user:User)
+  createNewCompany(company: Company, user:User)
   {
     company.id = this.emptyGuid
     user.id = this.emptyGuid
@@ -47,6 +32,7 @@ export class CompanyService {
             this.router.navigate(['']);
           },
           error: (res) => {
+            this.authorizationService.logForAdmin(res);
             document.getElementById('username-taken')?.classList.remove('d-none');
           }
         })

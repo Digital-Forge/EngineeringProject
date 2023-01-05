@@ -14,18 +14,17 @@
             </div>
             <h3>{{ 'Login.firstAccount' | translate }}</h3>
             <p>{{ 'Login.firstAccountInfo' | translate }}</p>
-            <p class="d-none text-danger" id="username-taken">{{ 'Login.usernameTaken' | translate }}</p>
             <div class="row">
                 <div class="mb-3 col-12 col-lg-6">
                     <label class="form-label" for="userUserName">{{ 'User.userName' | translate }} *</label>
                     <input class="form-control" type="text" id="userUserName" formControlName="userUserName">
+                    <p class="text-danger mt-2 mb-0 d-none" id="username-taken">{{ 'Login.usernameTaken' | translate }}</p>
                 </div>
                 <div class="mb-3 col-12 col-lg-6">
                     <label *ngIf="!userDetails.passwordHash" class="form-label" for="userPassword">{{ 'User.setPassword'
                         | translate }} *</label>
                     <label *ngIf="userDetails.passwordHash" class="form-label" for="userPassword">{{
                         'User.changePassword' | translate }}</label>
-                    <label class="text-warning ms-2">({{ 'Login.passwordPlaceholder' | translate }})</label>
                     <div class="input-group">
                         <input class="form-control" [type]="isPasswordVisible ? 'text' : 'password'" id="userPassword"
                             formControlName="userPassword">

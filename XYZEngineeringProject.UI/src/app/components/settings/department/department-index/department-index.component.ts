@@ -53,17 +53,15 @@ export class DepartmentIndexComponent implements OnInit {
             
             this.departmentsMan.push(dep);
             this.departmentsMan.sort((a, b) => a.department.name.localeCompare(b.department.name));
-            // this.managers.push(res);
           },
           error: (res) => {
-            console.log(res);
-            // this.managers.push({id:'',name:'',pesel:'',roles:[],surname:'',userName:'',passwordHash:'',address:{addressHome:'',addressPost:'',id:'',phone:0}});
+            this.authorizationService.logForAdmin(res);
           }
         }));
        
       },
       error: (res) => {
-        console.log(res);
+        this.authorizationService.logForAdmin(res);
       }
     })
   }

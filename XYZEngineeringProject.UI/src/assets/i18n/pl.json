@@ -31,7 +31,8 @@
         "deleteTask": "Czy na pewno chcesz usunąć zadanie?",
         "deleteRole": "Czy na pewno chcesz usunąć rolę?",
         "deleteDepartment": "Czy na pewno chcesz usunąć dział ",
-        "deleteUser": "Czy na pewno chcesz usunąć użytownika "
+        "deleteUser": "Czy na pewno chcesz usunąć użytownika ",
+        "cannotRemoveClient": "Klient nie może być teraz usunięty"
 
     },
     "Button": {

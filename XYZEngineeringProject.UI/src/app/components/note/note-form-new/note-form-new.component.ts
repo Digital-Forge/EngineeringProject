@@ -64,7 +64,7 @@ export class NoteFormNewComponent implements OnInit {
                   this.getNoteData(noteId);
                 },
                 error: (res) => {
-                  console.log(res);
+                  this.authorizationService.logForAdmin(res);
                 }
               });
             }
@@ -75,14 +75,13 @@ export class NoteFormNewComponent implements OnInit {
                   this.getNoteData(noteId);
                 },
                 error: (res) => {
-                  console.log(res);
+                  this.authorizationService.logForAdmin(res);
                 }
               });
             }
-
           },
           error: (res) => {
-            console.log(res);
+            this.authorizationService.logForAdmin(res);
           }
         });
 
@@ -122,6 +121,7 @@ export class NoteFormNewComponent implements OnInit {
         this.router.navigate(['note']);
       },
       error: (res) => {
+        this.authorizationService.logForAdmin(res);
         window.location.reload();
       }
     });
@@ -137,6 +137,7 @@ export class NoteFormNewComponent implements OnInit {
         }
       },
       error: (res) => {
+        this.authorizationService.logForAdmin(res);
         window.location.reload();
       }
     });

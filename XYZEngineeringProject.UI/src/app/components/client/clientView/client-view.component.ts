@@ -1,3 +1,4 @@
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { Client } from './../../../models/client.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client/client.service';
@@ -23,6 +24,7 @@ export class ClientViewComponent implements OnInit {
     private clientService: ClientService,
     private route: ActivatedRoute,
     private router: Router,
+    private authorizationService: AuthorizationService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class ClientViewComponent implements OnInit {
               this.clientDetails = res;
             },
             error: (res) => {
+              this.authorizationService.logForAdmin(res);
               this.router.navigate(['clients']);
             }
           })

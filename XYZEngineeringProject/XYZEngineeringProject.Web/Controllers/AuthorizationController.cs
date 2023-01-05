@@ -50,7 +50,7 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("Authorization/CheckNick/{name}")]
         public IActionResult CheckNick(string name)
         {
             return Ok(_authorizationService.CheckNick(name));

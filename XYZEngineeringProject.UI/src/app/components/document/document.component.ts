@@ -1,3 +1,4 @@
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FileModel } from './../../models/file.model';
 import { FileStructure } from './../../models/fileStructure.model';
@@ -39,7 +40,8 @@ export class DocumentComponent implements OnInit {
   constructor(
     private documentService: DocumentService,
     private fb: FormBuilder,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private authorizationService: AuthorizationService
   ) { }
 
   fileStructure: FileStructure = {
@@ -88,7 +90,7 @@ export class DocumentComponent implements OnInit {
         this.selectedDirectory = this.fileStructure;
       },
       error: (res) => {
-        // document.
+        this.authorizationService.logForAdmin(res);
       }
     })
   }

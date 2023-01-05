@@ -33,7 +33,7 @@ export class UserService {
   }
 
   deleteAppUser(userId: string) {
-    return this.http.get(this.baseApiUrl + 'AppUser/DeleteUser/' + userId);
+    return this.http.delete(this.baseApiUrl + 'AppUser/DeleteUser/' + userId);
   }
 
   addAppUserRole(user: User, roleName:string)

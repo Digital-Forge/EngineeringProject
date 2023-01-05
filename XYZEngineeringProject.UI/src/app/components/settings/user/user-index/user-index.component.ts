@@ -41,9 +41,7 @@ export class UserIndexComponent implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (usersResponse) => {
         this.users = usersResponse;
-        console.log(this.users);
         
-
         this.users.forEach(user => {
           this.userService.getAppUserRoles(user).subscribe({
             next: (rolesResponse) => {
@@ -57,9 +55,10 @@ export class UserIndexComponent implements OnInit {
             }
           })
         });
-
       },
       error: (res) => {
+        this.authorizationService.logForAdmin(res);
+
       }
     })
   }
@@ -69,6 +68,9 @@ export class UserIndexComponent implements OnInit {
       this.userService.deleteAppUser(user.id).subscribe({
         next: (res) => {
           window.location.reload();
+        },
+        error: (res) => {
+          this.authorizationService.logForAdmin(res);
         }
       })
     }

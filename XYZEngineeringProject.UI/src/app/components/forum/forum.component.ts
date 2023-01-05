@@ -80,7 +80,7 @@ export class ForumComponent implements OnInit, AfterViewChecked {
                             this.showForum(this.activeForumId);
                         },
                         error: (res) => {
-                            console.log(res);
+                            this.authorizationService.logForAdmin(res);
                         }
                     });
                 }
@@ -92,13 +92,13 @@ export class ForumComponent implements OnInit, AfterViewChecked {
                             this.showForum(this.activeForumId);                           
                         },
                         error: (res) => {
-                            console.log(res);
+                            this.authorizationService.logForAdmin(res);
                         }
                     });
                 }
             },
             error: (res) => {
-                console.log(res);
+                this.authorizationService.logForAdmin(res);
             }
         });
 
@@ -125,7 +125,7 @@ export class ForumComponent implements OnInit, AfterViewChecked {
                 localStorage.setItem('activeForum', this.activeForumId);
             },
             error: (res) => {
-                console.log(res);
+                this.authorizationService.logForAdmin(res);
             }
         })
     }
@@ -146,7 +146,7 @@ export class ForumComponent implements OnInit, AfterViewChecked {
                 window.location.reload();
             },
             error: (res) => {
-                console.log(res);
+                this.authorizationService.logForAdmin(res);
             }
         })
     }

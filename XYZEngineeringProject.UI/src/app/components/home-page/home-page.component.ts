@@ -20,6 +20,7 @@ export class HomePageComponent implements OnInit {
           this.router.navigate(['/dashboard']);
       },
       error: (res) => {
+        this.authorizationService.logForAdmin(res);
       }
   });   
   }

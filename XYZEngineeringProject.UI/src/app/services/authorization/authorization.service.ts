@@ -1,3 +1,5 @@
+import { RolesDB } from './../../models/roles.enum';
+import { UserService } from 'src/app/services/user/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Login } from './../../models/login.model';
@@ -18,7 +20,7 @@ export class AuthorizationService {
   
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) { }
 
   login(login: Login) {
@@ -29,6 +31,7 @@ export class AuthorizationService {
       },
       error: (res) =>
       {
+        this.logForAdmin(res);
         document.getElementById('login-spinner')?.classList.add('d-none');
         document.getElementById('login-error')?.classList.remove('d-none');        
       }
@@ -40,6 +43,9 @@ export class AuthorizationService {
       next: (res: any) => {
         localStorage.removeItem('token');
         this.router.navigate(['/login']);
+      },
+      error: (res) => {
+        this.logForAdmin(res);
       }
     });
   }
@@ -54,5 +60,21 @@ export class AuthorizationService {
 
   getAllRoles() {
     return this.http.get(this.baseApiUrl+'Authorization/GetAllRoles');
+  }
+
+  isUsernameTaken(username: string) {
+    console.log(username)
+    return this.http.get(this.baseApiUrl + 'Authorization/CheckNick/' + username);
+  }
+
+  logForAdmin(res: any) {
+
+    this.currentUser().subscribe({
+      next: (currentUser) => {
+        if (currentUser && currentUser.roles.includes(RolesDB.Admin)) {
+          console.log(res);
+        }
+      }
+    })
   }
 }

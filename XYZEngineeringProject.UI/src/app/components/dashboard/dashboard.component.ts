@@ -81,17 +81,14 @@ export class DashboardComponent implements OnInit {
     ) {
         this.today = new Date();
 
-        // this.router.events.subscribe(val => {
-            this.authorizationService.getMyId().subscribe({
-                next: (res) => {
-                    this.isAuthorized = true;
-                },
-                error: () => {
-                    this.isAuthorized = false;
-                }
-            });
-            
-        // });
+        this.authorizationService.getMyId().subscribe({
+            next: (res) => {
+                this.isAuthorized = true;
+            },
+            error: () => {
+                this.isAuthorized = false;
+            }
+        });
     }
 
     ngOnInit(): void {

@@ -1,3 +1,4 @@
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormMode } from 'src/app/models/form-mode.enum';
 import { DatePipe } from '@angular/common';
@@ -52,7 +53,7 @@ export class TaskFormNewComponent implements OnInit {
     private taskService: TaskService,
     private route: ActivatedRoute,
     private router: Router,
-    private translateService: TranslateService
+    private authorizationService: AuthorizationService
   ) { }
 
   ngOnInit(): void {
@@ -87,7 +88,7 @@ export class TaskFormNewComponent implements OnInit {
         });
       },
       error: (res) => {
-        console.log(res);
+        this.authorizationService.logForAdmin(res);
       }
     })
    
@@ -120,7 +121,8 @@ export class TaskFormNewComponent implements OnInit {
     this.taskDetails.deadline = new Date(this.taskForm.controls.deadline.value || new Date()),
     this.taskDetails.priority = Object.values(Priority).indexOf(this.taskForm.controls.priority.value || 1),
     this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
-
+    this.taskDetails.createBy = this.taskDetails.createBy || undefined;
+    
     console.log(this.taskDetails);
   }
 

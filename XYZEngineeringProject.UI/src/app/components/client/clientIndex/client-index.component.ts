@@ -35,6 +35,8 @@ export class ClientComponent implements OnInit {
         this.clients = res;
       },
       error: (res) => {
+        this.authorizationService.logForAdmin(res);
+
       }
     });
   }
@@ -49,9 +51,9 @@ export class ClientComponent implements OnInit {
         next: (res) => {
           window.location.reload();
         },
-        error: (error) => {
-          let msg = 'Error'
-          window.alert(msg);
+        error: (res) => {
+          this.authorizationService.logForAdmin(res);
+          window.alert(this.translateService.instant('Alert.cannotRemoveClient'));
         }
       })
     }

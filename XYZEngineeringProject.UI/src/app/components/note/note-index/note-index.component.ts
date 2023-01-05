@@ -56,7 +56,7 @@ export class NoteIndexComponent implements OnInit {
                             this.filterNotes(this.notes)                  
                         },
                         error: (res) => {
-                            console.log(res);
+                            this.authorizationService.logForAdmin(res);
                         }
                     });       
                      
@@ -144,8 +144,9 @@ export class NoteIndexComponent implements OnInit {
                 next: (res) => {
                     window.location.reload();
                 },
-                error: (error) => {
-                    let msg = '{{deleteError | translate}}'
+                error: (res) => {
+                    this.authorizationService.logForAdmin(res);
+                    let msg = '{{ deleteError | translate}}'
                     window.alert(msg);
                 }
             })

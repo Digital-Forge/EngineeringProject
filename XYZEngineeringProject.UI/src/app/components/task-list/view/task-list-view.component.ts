@@ -1,3 +1,4 @@
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { Priority } from './../../../models/priority.enum';
 import { TaskList, Task } from './../../../models/task.model';
 import { TaskService } from './../../../services/tasks/task.service';
@@ -27,7 +28,7 @@ export class TaskListViewComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router: Router,
+    private authorizationService: AuthorizationService
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +56,8 @@ export class TaskListViewComponent implements OnInit {
               this.tasks = res.tasks;
               this.taskListDetails = res.taskList;
             },
-            error: (response) => {
+            error: (res) => {
+              this.authorizationService.logForAdmin(res);
             }
           });
         }

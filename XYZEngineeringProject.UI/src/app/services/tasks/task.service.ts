@@ -24,6 +24,7 @@ export class TaskService {
 
   addTask(addTaskRequest: Task): Observable<Task> {
     addTaskRequest.id = this.emptyGuid;
+    if (addTaskRequest.createBy == undefined) addTaskRequest.createBy = this.emptyGuid;
     return this.http.post<Task>(this.baseApiUrl + 'Task/AddTask', addTaskRequest)
   }
 
@@ -42,7 +43,7 @@ export class TaskService {
 
   addListOfTasks(addListOfTasksRequest: TaskList):Observable<TaskList> {
     addListOfTasksRequest.id=this.emptyGuid;
-    addListOfTasksRequest.createBy = this.emptyGuid;
+    if (addListOfTasksRequest.createBy == undefined) addListOfTasksRequest.createBy = this.emptyGuid;
     return this.http.post<TaskList>(this.baseApiUrl + 'Task/AddListOfTasks',addListOfTasksRequest);
   }
 

@@ -46,7 +46,7 @@ namespace XYZEngineeringProject.Web.Controllers
         [Authorize]
         [HttpPost]
         [Route("Authorization/ChangePassword/{userId}")]
-        public IActionResult ChangePassword(string userId,ChangePasswordVM passwordVM)
+        public IActionResult ChangePassword(string userId,[FromBody] ChangePasswordVM passwordVM)
         {
             return Ok(_authorizationService.ChangePassword(Guid.Parse(userId), passwordVM));
         }

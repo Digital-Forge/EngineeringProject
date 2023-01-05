@@ -37,9 +37,11 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit(){
     if (this.passwordForm.controls.repeatNewPassword.value === this.passwordForm.controls.newPassword.value 
-      && this.passwordForm.valid) {
+      && this.passwordForm.valid) {        
         this.passwordDetails.newPassword = this.passwordForm.controls.newPassword.value || ''
         this.passwordDetails.oldPassword = this.passwordForm.controls.oldPassword.value || ''
+        console.log(this.passwordDetails);
+        
         this.authorizationService.changeUserPassword(this.currentUserId, this.passwordDetails).subscribe({
           next: (res) => {
             this.router.navigate(['settings']);

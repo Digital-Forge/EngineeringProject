@@ -87,7 +87,8 @@
         "showDepartment": "Show department",
         "deleteDepartment": "Delete department",
         "deleteUserFromDepartment": "Delete user from department",
-        "deleteRole": "Delete user's role"
+        "deleteRole": "Delete user's role",
+        "changePassword" :"Change password"
     },
     "Menu": {
         "dashboard": "Dashboard",
@@ -221,7 +222,8 @@
         "polish": "Polish",
         "english": "English",
         "roles": "Roles",
-        "deleteCompany": "Delete company"
+        "deleteCompany": "Delete company",
+        "changePassword":"Change password"
     },
     "User": {
         "user": "User",
@@ -290,5 +292,10 @@
         "5": "Friday",
         "6": "Saturday",
         "0": "Sunday"
+    },
+    "ChangePassword" : {
+        "oldPassword": "Current password",
+        "newPassword": "New password",
+        "repeatNewPassword": "Repeat new password"
     }
 }

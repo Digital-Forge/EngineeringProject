@@ -11,12 +11,12 @@
     <div class="col-12 col-lg-8 offset-lg-2 form form-sm">
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div class="row">
-                <div class="mb-3 col-12 col-lg-6">
+                <div class="mb-3 col-12 col-lg-6" [ngClass]="{'mb-3 col-12 col-lg-6': formMode == FormMode.Add, 'mb-3 col-12' : formMode != FormMode.Add}">
                     <label class="form-label" for="userUserName">{{ 'User.userName' | translate }} *</label>
                     <input class="form-control" type="text" id="userUserName" formControlName="userUserName">
                     <p class="text-danger mt-2 mb-0 d-none" id="username-taken">{{ 'Login.usernameTaken' | translate }}</p>
                 </div>
-                <div class="mb-3 col-12 col-lg-6">
+                <div class="mb-3 col-12 col-lg-6" *ngIf="formMode == FormMode.Add">
                     <label *ngIf="!userDetails.passwordHash" class="form-label" for="userPassword">{{ 'User.setPassword' | translate }} *</label>
                     <label *ngIf="userDetails.passwordHash" class="form-label" for="userPassword">{{ 'User.changePassword' | translate }}</label>
                     <div class="input-group">

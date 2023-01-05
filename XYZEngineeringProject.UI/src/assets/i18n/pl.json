@@ -87,7 +87,8 @@
         "cancel": "Anuluj",
         "deleteDepartment": "Usuń dział",
         "deleteUserFromDepartment": "Usuń użytkownika z działu",
-        "deleteRole": "Usuń rolę użytkownika"
+        "deleteRole": "Usuń rolę użytkownika",
+        "changePassword" :"Zmień hasło"
     },
     "Menu": {
         "dashboard": "Pulpit",
@@ -219,7 +220,8 @@
         "selectLanguage": "Wybierz język",        
         "polish": "Polski",
         "english": "Angielski",
-        "deleteCompany": "Usuń firmę"
+        "deleteCompany": "Usuń firmę",
+        "changePassword":"Zmień hasło"
     },
     "User": {
         "user": "Użytkownik",
@@ -287,5 +289,10 @@
         "5": "Piątek",
         "6": "Sobota",
         "0": "Niedziela"
+    },
+    "ChangePassword" : {
+        "oldPassword": "Obecne hasło",
+        "newPassword": "Nowe hasło",
+        "repeatNewPassword": "Powtórz nowe hasło"
     }
 }

@@ -88,6 +88,8 @@ export class DocumentComponent implements OnInit {
       next: (res) => {
         this.fileStructure = res;
         this.selectedDirectory = this.fileStructure;
+        console.log(this.selectedDirectory.path)
+
       },
       error: (res) => {
         this.authorizationService.logForAdmin(res);
@@ -117,6 +119,7 @@ export class DocumentComponent implements OnInit {
   goToDirectory(targetDirectory: FileStructure) {
     this.parentDirectoryId = this.selectedDirectory.id;
     this.selectedDirectory = targetDirectory;
+    console.log(this.selectedDirectory)
   }
 
   toggleAddFile(directoryId: string) {
@@ -221,9 +224,19 @@ export class DocumentComponent implements OnInit {
     }
   }
 
-  deleteDirectory(id: string) {
-    if (confirm(this.translateService.instant('Alert.deleteDirectory'))) {
-      this.documentService.deleteDirectory(id).subscribe({
+  isDepartmentFolder(directory: FileStructure): boolean {
+    let regex = /([\\].[a-zA-Z0-9- ]+){1}/g;
+    let regexLength = directory.path.match(regex)?.length || 0;
+    if (regexLength > 2) {
+      return false;
+    }
+
+    return true;
+  } 
+
+  deleteDirectory(directory: FileStructure) {
+     if (confirm(this.translateService.instant('Alert.deleteDirectory'))) {
+      this.documentService.deleteDirectory(directory.id).subscribe({
         next: (res) => {
           window.location.reload();
         }

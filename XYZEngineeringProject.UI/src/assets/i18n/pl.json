@@ -199,6 +199,7 @@
         "name": "Nazwa",
         "currentFolder": "Bieżący katalog",
         "noFiles": "Brak elementów do wyświetlenia",
+        "noFilesYet": "Nie masz jeszcze dostępu do żadnego katalogu. Każdy dział ma swój katalog główny. Otrzymasz dostęp do katalogu głównego, kiedy zostaniesz dodany do działu przez Moderatora lub Zarząd twojej firmy.",
         "selectFile": "Wybierz plik",
         "saveAs": "Zapisz jako",
         "directoryName": "Nazwa nowego katalogu"

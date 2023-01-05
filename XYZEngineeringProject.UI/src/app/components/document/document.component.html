@@ -6,7 +6,7 @@
         <button title="{{ 'Button.previousDirectory' | translate }}" class="btn btn-sm btn-secondary-dark me-2" (click)="goUp()"><i class="bi bi-arrow-left"></i></button>
         <button title="{{ 'Button.addFile' | translate }}" class="btn btn-sm btn-primary me-2" (click)="toggleAddFile(selectedDirectory.id)"><i class="bi bi-file-earmark-plus"></i></button>
         <button title="{{ 'Button.addDirectory' | translate }}" class="btn btn-sm btn-primary" *ngIf="(selectedDirectory.id != emptyGuid)" (click)="toggleAddDirectory()"><i class="bi bi-folder-plus"></i></button>
-    </div>  
+    </div>
 
     <div *ngIf="addFile">
         <form [formGroup]="documentForm" (ngSubmit)="addFileToDirectory()">
@@ -39,7 +39,7 @@
             </div>
         </form>
     </div>
-   
+
     <span class="table-responsive">
         <table class="table">
             <thead>
@@ -49,7 +49,7 @@
             </thead>
             <tbody *ngIf="(selectedDirectory.directories.length > 0) || (selectedDirectory.files.length > 0)">
                 <tr *ngFor="let directory of selectedDirectory.directories; index as i">
-                    <td class="text-nowrap"><i class="bi bi-folder me-2"></i>{{directory.name}}</td>                 
+                    <td class="text-nowrap"><i class="bi bi-folder me-2"></i>{{directory.name}}</td>
                     <td class="min-width-200">
                         <form *ngIf="editDirectory==true && editingDirectory==i" [formGroup]="editDirectoryForm" (ngSubmit)="changeDirectoryName(directory.id)">
                             <div class="row justify-content-end">
@@ -66,10 +66,10 @@
                     <td class="d-flex justify-content-end">
                         <button title="{{ 'Button.goToDirectory' | translate }}" class="btn btn-sm btn-success-light me-2" (click)="goToDirectory(directory)"><i class="bi bi-folder2-open"></i></button>
                         <button title="{{ 'Button.changeName' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="editDirectoryName(i)"><i class="bi bi-pencil-fill"></i></button>
-                        <button title="{{ 'Button.deleteDirectory' | translate }}" class="btn btn-sm btn-danger-light me-2" (click)="deleteDirectory(directory.id)"><i class="bi bi-trash3"></i></button>
+                        <button title="{{ 'Button.deleteDirectory' | translate }}" *ngIf="!isDepartmentFolder(directory)" class="btn btn-sm btn-danger-light me-2" (click)="deleteDirectory(directory)"><i class="bi bi-trash3"></i></button>
                     </td>
                 </tr>
-                
+
                 <tr *ngFor="let file of selectedDirectory.files; index as i">
                     <td><i class="bi bi-file-earmark me-2"></i>{{file.name}}.{{file.format}}</td>
                     <td>
@@ -89,14 +89,23 @@
                     <td class="d-flex justify-content-end">
                         <button title="{{ 'Button.download' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="downloadFile(file.id)"><i class="bi bi-file-earmark-arrow-down"></i></button>
                         <button title="{{ 'Button.changeName' | translate }}" class="btn btn-sm btn-secondary me-2" (click)="editFileName(i)"><i class="bi bi-pencil-fill"></i></button>
-                        <button title="{{ 'Button.deleteFile' | translate }}" class="btn btn-sm btn-danger-light" (click)="deleteFile(file.id)"><i class="bi bi-trash3"></i></button>
-                    </td>                   
-                </tr>       
-                
+                        <button title="{{ 'Button.deleteFile' | translate }}" class="btn btn-sm btn-danger-light me-2" (click)="deleteFile(file.id)"><i class="bi bi-trash3"></i></button>
+                    </td>
+                </tr>
+
             </tbody>
-            <tbody *ngIf="(selectedDirectory.directories.length < 1) && (selectedDirectory.files.length < 1)">
+            <tbody *ngIf="!selectedDirectory.path && (selectedDirectory.directories.length < 1) && (selectedDirectory.files.length < 1)">
                 <tr>
-                    <td class="text-center" colspan="3">{{ 'Documents.noFiles' | translate }}</td>
+                    <td class="text-center" colspan="3">
+                        {{ 'Documents.noFilesYet' | translate }}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="selectedDirectory.path && (selectedDirectory.directories.length < 1) && (selectedDirectory.files.length < 1)">
+                <tr>
+                    <td class="text-center" colspan="3">
+                         {{ 'Documents.noFiles' | translate }}
+                    </td>
                 </tr>
             </tbody>
         </table>

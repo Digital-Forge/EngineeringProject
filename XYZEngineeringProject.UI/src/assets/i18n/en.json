@@ -202,6 +202,7 @@
         "name": "Name",
         "currentFolder": "Current directory",
         "noFiles": "No files have been added yet.",
+        "noFilesYet": "You don't have access to any directories yet. Each department has its main directory. You will have access to a main directory once you are added to a department by your company's Moderator or Management.",
         "selectFile": "Select file",
         "saveAs": "Save as",
         "directoryName": "New directory name"

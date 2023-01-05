@@ -41,6 +41,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { DepartmentIndexComponent } from './components/settings/department/department-index/department-index.component';
 import { DepartmentFormComponent } from './components/settings/department/department-form/department-form.component';
+import { ChangePasswordComponent } from './components/settings/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { DepartmentFormComponent } from './components/settings/department/depart
     UserIndexComponent,
     DepartmentIndexComponent,
     DepartmentFormComponent,
-    DepartmentViewComponent
+    DepartmentViewComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

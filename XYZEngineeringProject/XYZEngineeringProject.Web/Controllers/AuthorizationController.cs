@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Application.ViewModels.Authorization;
 
 namespace XYZEngineeringProject.Web.Controllers
@@ -44,9 +45,10 @@ namespace XYZEngineeringProject.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult ChangePassword(Guid userId, string newPassword)
+        [Route("Authorization/ChangePassword/{userId}")]
+        public IActionResult ChangePassword(string userId,ChangePasswordVM passwordVM)
         {
-            return Ok(_authorizationService.ChangePassword(userId, newPassword));
+            return Ok(_authorizationService.ChangePassword(Guid.Parse(userId), passwordVM));
         }
 
         [AllowAnonymous]

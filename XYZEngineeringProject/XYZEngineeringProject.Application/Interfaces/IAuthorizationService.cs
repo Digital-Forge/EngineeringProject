@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Application.ViewModels.Authorization;
 
 namespace XYZEngineeringProject.Application.Interfaces
@@ -15,7 +16,7 @@ namespace XYZEngineeringProject.Application.Interfaces
         void Logout();
 
         List<string> GetAllRoles();
-        bool ChangePassword(Guid userId, string newPassword);
+        bool ChangePassword(Guid userId, ChangePasswordVM passwordVM);
 
         bool CheckNick(string name);
     }

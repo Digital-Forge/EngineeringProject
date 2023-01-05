@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using XYZEngineeringProject.Application.Interfaces;
+using XYZEngineeringProject.Application.ViewModels;
 using XYZEngineeringProject.Application.ViewModels.Authorization;
 using XYZEngineeringProject.Domain.Models;
 using XYZEngineeringProject.Infrastructure.Utils;
@@ -80,13 +81,20 @@ namespace XYZEngineeringProject.Application.Services
             return _context.Roles.Select(x => x.Name).ToList();
         }
 
-        public bool ChangePassword(Guid userId, string newPassword)
+        public bool ChangePassword(Guid userId, ChangePasswordVM passwordVM)
         {
             var user = _context.AppUsers.FirstOrDefault(x => x.Id == userId);
             if (user == null) return false;
 
-            var result =_userManager.CheckPasswordAsync(user, newPassword).Result;
-            return result;
+            var result =_userManager.ChangePasswordAsync(user, passwordVM.OldPassword, passwordVM.NewPassword).Result;
+            if (result.Succeeded)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool CheckNick(string name)

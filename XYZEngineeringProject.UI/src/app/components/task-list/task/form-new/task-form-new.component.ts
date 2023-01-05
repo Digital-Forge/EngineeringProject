@@ -43,7 +43,7 @@ export class TaskFormNewComponent implements OnInit {
     description: ['', Validators.required],
     priority: [''],
     deadline: ['', Validators.required],
-    listOfTasksId: ['']
+    listOfTasksId: ['', Validators.required]
   });
 
   constructor(

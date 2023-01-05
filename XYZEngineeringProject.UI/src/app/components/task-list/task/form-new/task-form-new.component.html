@@ -14,7 +14,7 @@
         <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
             <div class="row mb-3" *ngIf="formMode == FormMode.Add">
                 <div class="col">
-                    <label for="task-list" class="form-label">{{ 'Task.taskList' | translate }}</label><br>
+                    <label for="task-list" class="form-label">{{ 'Task.taskList' | translate }} *</label><br>
                     <select id="task-list" name="task-list" class="form-control form-select" formControlName="listOfTasksId">
                         <option *ngFor="let taskList of taskLists" aria-placeholder="" [value]="taskList.id">
                             {{ taskList.name }}
@@ -52,15 +52,15 @@
             <div class="row">
                 <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
                     <button title="{{ 'Button.completeTask' | translate }}" *ngIf="formMode == FormMode.Edit" class="btn btn-sm btn-success-light me-2" (click)="completeTask()"><i class="bi bi-check2-square"></i></button>  
-                    <button class="btn btn-md btn-primary" type="submit" [routerLink]="['/task-list']" *ngIf="formMode == FormMode.Edit">{{ 'Button.update' | translate }}</button>
-                    <button class="btn btn-md btn-primary" [routerLink]="['/task-list']" type="submit" *ngIf="formMode == FormMode.Add || formMode == FormMode.AddFromList">{{ 'Button.add' | translate }}</button>
+                    <button class="btn btn-md btn-primary" type="submit" [routerLink]="['/task-list']" *ngIf="formMode == FormMode.Edit" [disabled]="!taskForm.valid">{{ 'Button.update' | translate }}</button>
+                    <button class="btn btn-md btn-primary" [routerLink]="['/task-list']" type="submit" *ngIf="formMode == FormMode.Add || formMode == FormMode.AddFromList" [disabled]="!taskForm.valid">{{ 'Button.add' | translate }}</button>
                 </div>
             </div>  
         </form>
     </div>
     <div *ngIf="taskLists.length == 0" class="col-8 offset-2 text-center form">
         <p>{{ 'TaskList.noTaskLists' | translate }}</p>
-        <button class="btn btn-md btn-primary" [routerLink]="['/task-list', 'add']" [disabled]="!taskForm.valid">
+        <button class="btn btn-md btn-primary" [routerLink]="['/task-list', 'add']" type="button">
             <i class="bi bi-plus-lg me-1"></i>{{ 'Button.addTaskList' | translate }}
         </button>
     </div>

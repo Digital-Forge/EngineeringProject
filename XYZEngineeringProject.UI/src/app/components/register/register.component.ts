@@ -57,6 +57,15 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
+        this.companyDetails.name = this.userForm.controls.companyName.value || '';
+        this.userDetails.userName = this.userForm.controls.userUserName.value || '';
+        this.userDetails.passwordHash = this.userForm.controls.userPassword.value || this.userDetails.passwordHash || '';
+        this.userDetails.name = this.userForm.controls.name.value || '';
+        this.userDetails.surname = this.userForm.controls.surname.value || '';
+        this.userDetails.pesel = this.userForm.controls.pesel.value || '';
+        this.userDetails.address.addressHome = this.userForm.controls.addressHome.value || '',
+            this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
+            this.userDetails.address.phone = this.userForm.controls.phone.value?.toString() || ''
         this.authorizationService.isUsernameTaken(this.userDetails.userName).subscribe({
             next: (usernameCheckRes) => {
                 if (this.userForm.controls.userUserName.value) {
@@ -66,16 +75,6 @@ export class RegisterComponent implements OnInit {
                                 document.getElementById('username-taken')?.classList.remove('d-none');
                             }
                             else {
-                                this.companyDetails.name = this.userForm.controls.companyName.value || '';
-                                this.userDetails.userName = this.userForm.controls.userUserName.value || '';
-                                this.userDetails.passwordHash = this.userForm.controls.userPassword.value || this.userDetails.passwordHash || '';
-                                this.userDetails.name = this.userForm.controls.name.value || '';
-                                this.userDetails.surname = this.userForm.controls.surname.value || '';
-                                this.userDetails.pesel = this.userForm.controls.pesel.value || '';
-                                this.userDetails.address.addressHome = this.userForm.controls.addressHome.value || '',
-                                    this.userDetails.address.addressPost = this.userForm.controls.addressPost.value || '',
-                                    this.userDetails.address.phone = this.userForm.controls.phone.value?.toString() || ''
-
                                 this.companyService.createNewCompany(this.companyDetails, this.userDetails);
                             }
                         },

@@ -157,9 +157,9 @@ namespace XYZEngineeringProject.Application.Services
                 //user.Address = null;
             }
 
-            if (user.PasswordHash.Length>=5)
+            if (appUser.PasswordHash.Length>=5)
             {
-                _authorizationService.ChangePassword(user.Id, user.PasswordHash);
+                _authorizationService.ChangePassword(user.Id, appUser.PasswordHash);
             }
             return _userRepository.Update(user);
         }

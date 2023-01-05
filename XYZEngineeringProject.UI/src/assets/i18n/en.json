@@ -220,7 +220,8 @@
         "selectLanguage": "Select language",
         "polish": "Polish",
         "english": "English",
-        "roles": "Roles"
+        "roles": "Roles",
+        "deleteCompany": "Delete company"
     },
     "User": {
         "user": "User",

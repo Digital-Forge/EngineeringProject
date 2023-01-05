@@ -39,4 +39,12 @@ export class CompanyService {
       }
     })
   }
+
+  getCompanyByUserId(userId: string):Observable<Company>{
+    return this.http.get<Company>(this.baseApiUrl+'Company/GetCompanyByUserId/'+userId);
+  }
+
+  deleteCompany(id: string):Observable<any> {
+    return this.http.delete<any>(this.baseApiUrl+'Company/Delete/'+id)
+  }
 }

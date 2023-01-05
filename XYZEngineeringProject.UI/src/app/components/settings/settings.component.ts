@@ -1,3 +1,4 @@
+import { CompanyService } from './../../services/company/company.service';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -18,6 +19,7 @@ export class SettingsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authorizationService: AuthorizationService,
+    private companyService: CompanyService,
     private translate: TranslateService
   ) { }
   
@@ -34,5 +36,19 @@ export class SettingsComponent implements OnInit {
   changeLanguage(language: string) {
     localStorage.setItem('language', language);
     window.location.reload();
+  }
+
+  deleteCompany(){
+    if (confirm(this.translate.instant('Alert.deleteCompany'))) {
+      this.companyService.getCompanyByUserId(this.currentUserId).subscribe({
+        next: (res) => {
+          this.companyService.deleteCompany(res.id).subscribe({
+            next: () => {
+              this.authorizationService.logout()
+            }
+          })          
+        }
+      })
+    }
   }
 }

@@ -20,9 +20,10 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCompanyByUser(Guid userId)
+        [Route("Company/GetCompanyByUserId/{userId}")]
+        public IActionResult GetCompanyByUser(string userId)
         {
-            var model = _companyService.GetCompanyByUser(userId);
+            var model = _companyService.GetCompanyByUser(Guid.Parse(userId));
             return model != null ? Ok(model) : NotFound();
         }
 
@@ -40,9 +41,10 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(Guid id)
+        [Route("Company/Delete/{id}")]
+        public IActionResult Delete(string id)
         {
-            return _companyService.DeleteCompany(id) ? Ok() : BadRequest();
+            return _companyService.DeleteCompany(Guid.Parse(id)) ? Ok() : BadRequest();
         }
     }
 }

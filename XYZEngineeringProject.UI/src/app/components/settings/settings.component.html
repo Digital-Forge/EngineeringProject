@@ -29,8 +29,16 @@
         <div class="tile mb-4 mx-3" (click)="changeLanguage('pl')">
             <h2 class="border-language">PL</h2>
             <h4>{{ 'Settings.polish' | translate }}</h4>
+        </div>    
+    </div>
+    <div class="mb-5 text-center">
+        <h1>{{"Settings.deleteCompany"|translate}}</h1>
+    </div>
+    <div class="container text-center justify-content-center d-sm-flex flex-wrap mb-3">
+        <div class="tile mb-4 mx-3" (click)="deleteCompany()">
+            <i class="bi bi-trash3"></i>
+            <h4>{{"Settings.deleteCompany"|translate}}</h4>
         </div>
-    
     </div>
 </div>
 <router-outlet></router-outlet>

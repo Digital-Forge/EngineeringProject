@@ -218,7 +218,8 @@
         "departments": "Działy",
         "selectLanguage": "Wybierz język",        
         "polish": "Polski",
-        "english": "Angielski"
+        "english": "Angielski",
+        "deleteCompany": "Usuń firmę"
     },
     "User": {
         "user": "Użytkownik",

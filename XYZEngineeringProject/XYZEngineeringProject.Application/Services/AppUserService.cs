@@ -156,11 +156,6 @@ namespace XYZEngineeringProject.Application.Services
                 //_userRepository.RemoveUserAddress(user);
                 //user.Address = null;
             }
-
-            if (appUser.PasswordHash.Length>=5)
-            {
-                _authorizationService.ChangePassword(user.Id, appUser.PasswordHash);
-            }
             return _userRepository.Update(user);
         }
 

@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './components/settings/change-password/change-password.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DepartmentIndexComponent } from './components/settings/department/department-index/department-index.component';
 import { ForumComponent } from './components/forum/forum.component';
@@ -106,6 +107,10 @@ const routes: Routes = [
           { path: ':id', component: DepartmentViewComponent },
           { path: '', component: DepartmentIndexComponent }
         ]
+      },
+      {
+        path: 'changePassword',
+        component: ChangePasswordComponent
       }
     ],
     canActivate: [AuthGuard]

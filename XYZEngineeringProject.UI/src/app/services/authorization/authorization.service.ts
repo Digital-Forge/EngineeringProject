@@ -1,3 +1,4 @@
+import { ChangePassword } from './../../models/changePassword.model';
 import { RolesDB } from './../../models/roles.enum';
 import { UserService } from 'src/app/services/user/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -76,5 +77,9 @@ export class AuthorizationService {
         }
       }
     })
+  }
+
+  changeUserPassword(userId:string, password: ChangePassword) {
+    return this.http.post(this.baseApiUrl+'Authorization/ChangePassword/'+userId,password);
   }
 }

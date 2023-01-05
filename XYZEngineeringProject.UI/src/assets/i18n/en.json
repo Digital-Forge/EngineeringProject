@@ -9,7 +9,7 @@
         "login": "Sign in",
         "rememberMe": "Remember me",
         "signIn": "Sign in",
-        "email": "Email",
+        "email": "Username",
         "password": "Password",
         "wrongLoginOrPassword": "Incorrect login or password",
         "usernameTaken": "This username is already taken",

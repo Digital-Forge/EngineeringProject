@@ -1,3 +1,4 @@
+import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Task } from 'src/app/models/task.model';
 import { Priority } from './../../../models/priority.enum';
@@ -47,7 +48,8 @@ export class TaskListFormNewComponent implements OnInit {
         private route: ActivatedRoute,
         private taskService: TaskService,
         private router: Router,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private authorizationService: AuthorizationService
     ) { }
 
     ngOnInit(): void {
@@ -55,13 +57,23 @@ export class TaskListFormNewComponent implements OnInit {
             next: (param) => {
                 const id = param.get('id');
                 if (id) {
-                    this.taskService.getTaskListById(id).subscribe({
-                        next: (response) => {
-                            this.editMode = true;
-                            this.taskListDetails = response;
-                            this.updateTaskListForm();
+                    this.authorizationService.currentUser().subscribe({
+                        next: (currentUser) => {                            
+                            this.taskService.getTaskListById(id).subscribe({
+                                next: (taskList) => {
+                                    if (taskList.createBy?.toLowerCase() == currentUser.id.toLowerCase()) {                                   
+                                        this.editMode = true;
+                                        this.taskListDetails = taskList;
+                                        this.updateTaskListForm();
+                                    }
+                                    else {
+                                        this.router.navigate(['/task-list']);                                    
+                                    }
+                                }
+                            })
                         }
                     })
+                   
                 }
                 else {
                     this.updateTaskListForm();
@@ -99,9 +111,6 @@ export class TaskListFormNewComponent implements OnInit {
     }
     
     updateTaskListDetails() {
-
-
-
         this.taskListDetails.name = this.taskListForm.controls.name.value || '';
         this.taskListDetails.project = this.taskListForm.controls.project.value || '';
         this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New); //TODO
@@ -120,8 +129,7 @@ export class TaskListFormNewComponent implements OnInit {
                     assignerUserId: control.get('assignerUserId')?.value,
                     listOfTasksId: control.get('listOfTasksId')?.value,
                     createDate: control.get('createDate')?.value || new Date(),
-                    isComplete: control.get('isComplete')?.value || false,
-                    createBy: ''
+                    isComplete: control.get('isComplete')?.value || false
                 })
             }
         });
@@ -181,6 +189,7 @@ export class TaskListFormNewComponent implements OnInit {
     }
 
     addTaskList() {
+        console.log(this.taskListDetails)
         this.taskService.addListOfTasks(this.taskListDetails).subscribe({
             next: (res) => {
                 this.router.navigate(['task-list']);

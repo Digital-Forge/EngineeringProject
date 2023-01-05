@@ -12,7 +12,7 @@ export interface Task {
     listOfTasksId?: string,
     createDate: Date,
     isComplete: boolean,
-    createBy: string
+    createBy?: string
 }
 
 export interface TaskList {
@@ -22,7 +22,7 @@ export interface TaskList {
     project?: string,
     status: TaskListStatus,
     tasks?: Task[],
-    createBy: string
+    createBy?: string
 }
 
 export interface TaskListResponse {

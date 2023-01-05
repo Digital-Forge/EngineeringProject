@@ -232,7 +232,6 @@ export class DocumentComponent implements OnInit {
   downloadFile(id: string) {
     this.documentService.downloadFile(id).subscribe({
       next: (res) => {
-        console.log(res);
         const byteChar = atob(res.objectBase64 as string);
         const byteNumbers = new Array(byteChar.length);
         for (let i = 0; i < byteChar.length; i++) {

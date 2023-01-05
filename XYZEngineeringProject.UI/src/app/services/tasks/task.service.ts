@@ -42,6 +42,7 @@ export class TaskService {
 
   addListOfTasks(addListOfTasksRequest: TaskList):Observable<TaskList> {
     addListOfTasksRequest.id=this.emptyGuid;
+    addListOfTasksRequest.createBy = this.emptyGuid;
     return this.http.post<TaskList>(this.baseApiUrl + 'Task/AddListOfTasks',addListOfTasksRequest);
   }
 

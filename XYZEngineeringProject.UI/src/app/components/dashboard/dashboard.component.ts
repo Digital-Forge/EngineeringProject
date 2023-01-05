@@ -167,12 +167,8 @@ export class DashboardComponent implements OnInit {
                     });
                   }
                 else {
-                    console.log(this.currentUser.id);
-
                     this.departmentService.getAllDepartmentsByUserId(this.currentUser.id).subscribe({
-                        next: (currentUserDepartments) => {
-                            console.log(currentUserDepartments);
-                            
+                        next: (currentUserDepartments) => {                            
                             currentUserDepartments.forEach(department =>{                      
                                 if (department.id.toLowerCase() == note.noteStatus?.toLowerCase()) {
                                     noteResponse.statusName = department.name;
@@ -182,29 +178,8 @@ export class DashboardComponent implements OnInit {
                         }
                     });
                 }
-
-                // this.departmentService.getDepartmentById(note.noteStatus).subscribe({
-                //     next: (department) => {
-
-                //         console.log(department);
-                //         noteResponse.statusName = department.name;
-                //         if (this.currentUser.roles.includes(RolesDB.Admin) || this.currentUser.roles.includes(RolesDB.Moderator) || this.currentUser.roles.includes(RolesDB.Management)) {
-                //             this.publicNotes.push(noteResponse);
-                //         }
-                //         else {
-                //             department.users.forEach(user => {
-                //             if (user.id == this.currentUser.id) {
-                //                 this.publicNotes.push(noteResponse);
-                //             }
-                //             });
-                //         }
-                //     }
-                // })
             }                           
         });     
-        
-        console.log(this.publicNotes);
-        console.log(this.privateNotes);
     }
 
     filterForums(forums: Forum[]) {

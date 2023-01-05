@@ -153,8 +153,6 @@ export class TaskFormNewComponent implements OnInit {
     this.taskService.saveChanges(this.taskDetails).subscribe({
       next: (response) => {
         this.router.navigate(['task-list']);
-
-        // window.location.reload();
       }
     });
   }

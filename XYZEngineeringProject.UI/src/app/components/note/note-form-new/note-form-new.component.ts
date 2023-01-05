@@ -37,7 +37,7 @@ export class NoteFormNewComponent implements OnInit {
   noteForm = this.fb.group({
     title: ['', Validators.required],
     date: [''],
-    noteStatus: ['']
+    noteStatus: [this.noteStatuses[0].valueOf(), Validators.required]
   })
 
   constructor(

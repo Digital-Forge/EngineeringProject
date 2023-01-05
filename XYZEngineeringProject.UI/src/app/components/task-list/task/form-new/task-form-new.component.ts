@@ -19,7 +19,7 @@ export class TaskFormNewComponent implements OnInit {
   taskPriorities = Object.values(Priority).filter(value => typeof value === "string");
   public pipe = new DatePipe('en-GB');
 
-  formMode = FormMode.Edit;
+  formMode = FormMode.Add;
   FormMode = FormMode;
   taskLists: TaskList[] = [];
   taskListId: string | null;
@@ -55,8 +55,6 @@ export class TaskFormNewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.taskPriorities);
-
     this.taskService.getAllTaskLists().subscribe({
       next: (res)=>{
         this.taskLists=res;
@@ -137,7 +135,7 @@ export class TaskFormNewComponent implements OnInit {
     if (this.taskListId) { 
       this.router.navigate(['task-list/' + this.taskListId]);
     }
-    else {
+    else {      
       this.router.navigate(['task-list']);
     }
   }

@@ -57,38 +57,42 @@ export class TaskFormNewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.taskService.getAllTaskLists().subscribe({
-      next: (res)=>{
-        this.taskLists=res;
-     
-        this.route.paramMap.subscribe({
-          next: (param) => {
-            this.taskListId = param.get('listId');
-            this.taskId = param.get('taskId');
-
-            if (this.taskId && this.isInUrl('/edit')) {
-              this.taskService.getTask(this.taskId).subscribe({
-                next: (res) => {
-                  this.formMode = FormMode.Edit;
-                  this.taskDetails = res;
-                  console.log(res);
-                  this.updateTaskForm();
+    this.authorizationService.getMyId().subscribe({
+      next: (res) => {
+        this.taskService.getAllUserTaskLists(res).subscribe({
+          next: (res)=>{
+            this.taskLists=res;
+         
+            this.route.paramMap.subscribe({
+              next: (param) => {
+                this.taskListId = param.get('listId');
+                this.taskId = param.get('taskId');
+    
+                if (this.taskId && this.isInUrl('/edit')) {
+                  this.taskService.getTask(this.taskId).subscribe({
+                    next: (res) => {
+                      this.formMode = FormMode.Edit;
+                      this.taskDetails = res;
+                      console.log(res);
+                      this.updateTaskForm();
+                    }
+                  });
                 }
-              });
-            }
-            else if (!this.taskListId && this.isInUrl('/add')) {
-              this.formMode = FormMode.Add;
-              this.emptyTaskForm();
-            }
-            else if (this.taskListId && this.isInUrl('/add')) {
-              this.formMode = FormMode.AddFromList;
-              this.emptyTaskForm();
-            }
+                else if (!this.taskListId && this.isInUrl('/add')) {
+                  this.formMode = FormMode.Add;
+                  this.emptyTaskForm();
+                }
+                else if (this.taskListId && this.isInUrl('/add')) {
+                  this.formMode = FormMode.AddFromList;
+                  this.emptyTaskForm();
+                }
+              }
+            });
+          },
+          error: (res) => {
+            this.authorizationService.logForAdmin(res);
           }
-        });
-      },
-      error: (res) => {
-        this.authorizationService.logForAdmin(res);
+        })
       }
     })
    

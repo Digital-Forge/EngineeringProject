@@ -33,16 +33,20 @@ export class TaskListComponent implements OnInit {
     }
 
     getData() {
-        this.taskService.getAllTaskLists().subscribe({
+        this.authorizationService.getMyId().subscribe({
             next: (res) => {
-                for (let i = 0; i < res.length; i++) {
-                    this.taskLists[i] = res[i];
-                }
-            },
-            error: (res) => {
-                this.authorizationService.logForAdmin(res);
+                this.taskService.getAllUserTaskLists(res).subscribe({
+                    next: (res) => {
+                        for (let i = 0; i < res.length; i++) {
+                            this.taskLists[i] = res[i];
+                        }
+                    },
+                    error: (res) => {
+                        this.authorizationService.logForAdmin(res);
+                    }
+                });
             }
-        });
+        })
     }
 
     toggleCompleteAllTasksOnList(id: string, isComplete: boolean) {

@@ -43,9 +43,10 @@ namespace XYZEngineeringProject.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllListOfTasks()
+        [Route("Task/GeUsersListsOfTasks/{userId}")]
+        public IActionResult GeUsersListsOfTasks(string userId)
         {
-            return Ok(_taskService.GetAllListOfTasks().ToList());
+            return Ok(_taskService.GetAllListOfTasks().Where(x  => x.CreateBy == Guid.Parse(userId)).ToList());
         }
 
         [HttpPost]

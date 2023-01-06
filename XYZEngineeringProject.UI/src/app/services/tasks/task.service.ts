@@ -37,8 +37,8 @@ export class TaskService {
   }
 
   //zwraca wszystkie TaskList-y
-  getAllTaskLists(): Observable<TaskList[]> {
-    return this.http.get<TaskList[]>(this.baseApiUrl + 'Task/GetAllListOfTasks');
+  getAllUserTaskLists(id:string): Observable<TaskList[]> {
+    return this.http.get<TaskList[]>(this.baseApiUrl + 'Task/GeUsersListsOfTasks/'+id);
   }
 
   addListOfTasks(addListOfTasksRequest: TaskList):Observable<TaskList> {

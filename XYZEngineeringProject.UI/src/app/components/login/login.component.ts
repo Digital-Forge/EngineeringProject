@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         document.getElementById('login-spinner')?.classList.remove('d-none');
-        console.log(this.login)
         this.authorizationService.login(this.login);
     }
 

@@ -48,8 +48,6 @@ export class DepartmentIndexComponent implements OnInit {
             let dep: DepartmentManager = {} as DepartmentManager;
             dep.department = department;
             dep.manager = userResponse || {};
-
-            console.log(dep.manager);
             
             this.departmentsMan.push(dep);
             this.departmentsMan.sort((a, b) => a.department.name.localeCompare(b.department.name));

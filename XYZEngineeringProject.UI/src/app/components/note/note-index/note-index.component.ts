@@ -1,6 +1,5 @@
 import { UserService } from './../../../services/user/user.service';
 import { RolesDB } from './../../../models/roles.enum';
-import { Department } from './../../../models/department.model';
 import { DepartmentService } from 'src/app/services/department/department.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
@@ -35,9 +34,7 @@ export class NoteIndexComponent implements OnInit {
 
     constructor(
         private noteService: NoteService,
-        private router: Router,
         private authorizationService: AuthorizationService,
-        private userService: UserService,
         private departmentService: DepartmentService,
         private translateService: TranslateService
     ) { }
@@ -48,7 +45,6 @@ export class NoteIndexComponent implements OnInit {
                 this.currentUser = res;
                 this.currentUserRoles = res.roles;
                 this.currentUserId = res.id.toUpperCase();
-                //TODO przypisać role
 
                 this.noteService.getAllNotes().subscribe({
                         next: (notes) => {
@@ -101,12 +97,8 @@ export class NoteIndexComponent implements OnInit {
                     });
                   }
                 else {
-                    console.log(this.currentUserId);
-
                     this.departmentService.getAllDepartmentsByUserId(this.currentUserId).subscribe({
-                        next: (currentUserDepartments) => {
-                            console.log(currentUserDepartments);
-                            
+                        next: (currentUserDepartments) => {                            
                             currentUserDepartments.forEach(department =>{                      
                                 if (department.id.toLowerCase() == note.noteStatus?.toLowerCase()) {
                                     noteResponse.statusName = department.name;
@@ -116,24 +108,6 @@ export class NoteIndexComponent implements OnInit {
                         }
                     });
                 }
-
-                // this.departmentService.getDepartmentById(note.noteStatus).subscribe({
-                //     next: (department) => {
-
-                //         console.log(department);
-                //         noteResponse.statusName = department.name;
-                //         if (this.currentUserRoles.includes(RolesDB.Admin) || this.currentUserRoles.includes(RolesDB.Moderator) || this.currentUserRoles.includes(RolesDB.Management)) {
-                //             this.publicNotesResponse.push(noteResponse);
-                //         }
-                //         else {
-                //             department.users.forEach(user => {
-                //             if (user.id == this.currentUser.id) {
-                //                 this.publicNotesResponse.push(noteResponse);
-                //             }
-                //             });
-                //         }
-                //     }
-                // })
             }                           
         });                      
     }
@@ -151,9 +125,6 @@ export class NoteIndexComponent implements OnInit {
                 }
             })
         }
-    }
-
-    canRead(noteResponse: NoteResponse) {        
     }
 
     canModify(note: Note) {

@@ -1,5 +1,4 @@
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
-import { UserService } from 'src/app/services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,14 +12,12 @@ export class UserComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService,
     private authService: AuthorizationService,
   ) { }
   
   ngOnInit(): void {
     this.authService.getMyId().subscribe({
     next: (res) => {
-      // this.currentUser = res;
     }
   });
   }

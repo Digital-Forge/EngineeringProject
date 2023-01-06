@@ -1,4 +1,3 @@
-import { Group } from './../../models/group.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Client } from './../../models/client.model';

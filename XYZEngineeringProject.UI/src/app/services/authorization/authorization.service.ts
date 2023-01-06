@@ -64,7 +64,6 @@ export class AuthorizationService {
   }
 
   isUsernameTaken(username: string) {
-    console.log(username)
     return this.http.get(this.baseApiUrl + 'Authorization/CheckNick/' + username);
   }
 

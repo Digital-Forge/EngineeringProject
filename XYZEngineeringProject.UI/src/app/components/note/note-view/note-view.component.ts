@@ -123,13 +123,8 @@ export class NoteViewComponent implements OnInit {
             }
             else {
                 departments.forEach(department => {
-                    console.log(department.id);
                     if (department.id == note.noteStatus) {
-                        console.log('same')
                         canRead = true;
-                    }
-                    else {
-                        console.log('diff')
                     }
                 })
             }

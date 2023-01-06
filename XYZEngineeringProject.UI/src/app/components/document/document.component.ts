@@ -88,8 +88,6 @@ export class DocumentComponent implements OnInit {
       next: (res) => {
         this.fileStructure = res;
         this.selectedDirectory = this.fileStructure;
-        console.log(this.selectedDirectory.path)
-
       },
       error: (res) => {
         this.authorizationService.logForAdmin(res);
@@ -119,7 +117,6 @@ export class DocumentComponent implements OnInit {
   goToDirectory(targetDirectory: FileStructure) {
     this.parentDirectoryId = this.selectedDirectory.id;
     this.selectedDirectory = targetDirectory;
-    console.log(this.selectedDirectory)
   }
 
   toggleAddFile(directoryId: string) {

@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
     public noteStatuses = Object.values(NoteStatus).filter(value => typeof value === "string");
     public forums: Forum[] = [];
     public messages: Message[] = [];
+    public allMessagesCount: number = 0;
     public today: Date;
     public currentUser: User = {
         id: '',
@@ -172,6 +173,7 @@ export class DashboardComponent implements OnInit {
             this.forumService.getForumMessagesByForumId(forum.id).subscribe({
                 next: (res) => {
                     forum.messages = res;
+                    this.allMessagesCount += forum.messages.length;
                 }
             });
         });

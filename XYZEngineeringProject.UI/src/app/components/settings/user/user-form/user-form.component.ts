@@ -314,4 +314,19 @@ export class UserFormComponent implements OnInit {
         return canModify;
     }
 
+    canModifyRole() {
+        let canModify: boolean = false;
+
+     
+        if (this.currentUser) {
+            this.canModifyRoles.forEach(role => {
+                if (this.currentUser.roles.includes(role)) {
+                    canModify = true;
+                }
+            });
+        }
+
+        return canModify;
+    }
+
 }

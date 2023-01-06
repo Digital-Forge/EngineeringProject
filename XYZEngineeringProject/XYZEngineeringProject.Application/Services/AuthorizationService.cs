@@ -66,7 +66,7 @@ namespace XYZEngineeringProject.Application.Services
                 claims.Add(new Claim(ClaimTypes.Role, _context.Roles.First(x => x.Id == role.RoleId).Name));
             }         
 
-            var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Issuer"], claims, null, DateTime.Now.AddMinutes(120), credentials);
+            var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Issuer"], claims, null, DateTime.Now.AddMinutes(600), credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

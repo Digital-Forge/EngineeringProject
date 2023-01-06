@@ -16,16 +16,17 @@
                     <input type="text" class="form-control" id="name" name="name" formControlName="name" required>
                 </div>
             </div>
-            <!-- <div class="row mb-3" *ngIf="!departmentDetails.managerId">
+            <div class="row mb-3" *ngIf="!departmentDetails.managerId">
                 <div class="col">
                     <label for="managerId" class="label-form"> {{'Department.manager' | translate}}</label>
-                    <select name="managerId" id="managerId" class="form-select" formControlName="managerId" (change)="selectedManager()">
+                    <select name="managerId" id="managerId" class="form-select" formControlName="managerId"
+                        (change)="selectedManager()">
                         <option *ngFor="let user of users" [value]="user.id">
                             {{ user.name }} {{ user.surname }} <span *ngIf="user.userName">({{ user.userName }}) </span>
                         </option>
                     </select>
                 </div>
-            </div> -->
+            </div>
             <div class="row" *ngIf="availableUsers.length > 0">
                 <div class="col-12">
                     <h3>{{ 'Department.addUserToDepartment' | translate }}</h3>
@@ -36,35 +37,44 @@
                     </select>
                 </div>
                 <div class="col-12 text-end">
-                    <button type="button" class="btn btn-sm btn-secondary my-3 " (click)="addUserToDepartment()">{{ 'Button.addUser' | translate}}</button>
+                    <button type="button" class="btn btn-sm btn-secondary my-3 " (click)="addUserToDepartment()">{{
+                        'Button.addUser' | translate}}</button>
                 </div>
             </div>
             <div class="row" *ngIf="departmentDetails.users.length>0">
                 <div class="col">
                     <h3>{{'Department.users' | translate}}</h3>
                     <table class="table text-nowrap text-left">
-                        <thead>           
-                            <tr>            
+                        <thead>
+                            <tr>
                                 <th colspan="2">{{ 'User.user' | translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of departmentDetails.users">
-                                <td [style.font-weight]="departmentDetails.managerId.toLowerCase()==user.id.toLowerCase()?'bold':null">
-                                    {{ user.name }} {{ user.surname }} <span *ngIf="user.userName">({{ user.userName }}) </span> 
+                                <td
+                                    [style.font-weight]="departmentDetails.managerId.toLowerCase()==user.id.toLowerCase()?'bold':null">
+                                    {{ user.name }} {{ user.surname }} <span *ngIf="user.userName">({{ user.userName }})
+                                    </span>
                                     <label *ngIf="departmentDetails.managerId.toLowerCase() == user.id.toLowerCase()">
                                         {{'Department.manager' | translate}}
                                     </label>
                                 </td>
                                 <td class="text-end">
-                                    <button *ngIf="user.id!=departmentDetails.managerId" title="{{'Button.setAsManager'|translate}}" class="btn btn-sm btn-secondary me-2" type="button" (click)="setAsManager(user.id)">
+                                    <button *ngIf="user.id!=departmentDetails.managerId"
+                                        title="{{'Button.setAsManager'|translate}}"
+                                        class="btn btn-sm btn-secondary me-2" type="button"
+                                        (click)="setAsManager(user.id)">
                                         {{'Button.setAsManager'|translate}}
                                     </button>
-                                    <button title="{{ 'Button.showUser' | translate}}" class="btn btn-sm btn-secondary me-2"
-                                    [routerLink]="['/settings/users', user.id]">
+                                    <a title="{{ 'Button.showUser' | translate}}" class="btn btn-sm btn-secondary me-2"
+                                        [routerLink]="['/settings/users', user.id]" target="_blank">
                                         <i class="bi bi-eye-fill"></i>
-                                    </button>                              
-                                    <button title="{{ 'Button.deleteUserFromDepartment' | translate }}" class="btn btn-sm btn-secondary me-2" type="button" *ngIf="departmentDetails.managerId != user.id" (click)="deleteUserFromDepartment(user)">
+                                    </a>
+                                    <button title="{{ 'Button.deleteUserFromDepartment' | translate }}"
+                                        class="btn btn-sm btn-secondary me-2" type="button"
+                                        *ngIf="departmentDetails.managerId != user.id"
+                                        (click)="deleteUserFromDepartment(user)">
                                         <i class="bi bi-trash3"></i>
                                     </button>
                                 </td>
@@ -88,8 +98,10 @@
             </div> -->
             <div class="row">
                 <div class="col-12 text-center col-lg-3 offset-lg-9 text-sm-end">
-                    <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid" *ngIf="formMode==FormMode.Edit"> {{ 'Button.save' | translate}}</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid" *ngIf="formMode==FormMode.Add">{{ 'Button.addDepartment' | translate}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid"
+                        *ngIf="formMode==FormMode.Edit"> {{ 'Button.save' | translate}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid"
+                        *ngIf="formMode==FormMode.Add">{{ 'Button.addDepartment' | translate}}</button>
                 </div>
             </div>
         </form>

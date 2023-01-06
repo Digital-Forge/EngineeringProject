@@ -160,8 +160,6 @@ export class DepartmentFormComponent implements OnInit {
   }
 
   addUserToDepartment() {
-    console.log(this.departmentForm.controls.newUserId.value);
-
     if (this.departmentForm.controls.newUserId.value) {
       this.userService.getAppUser(this.departmentForm.controls.newUserId.value).subscribe({
         next: (res) => {
@@ -174,7 +172,10 @@ export class DepartmentFormComponent implements OnInit {
 
   selectedManager() {
     this.departmentDetails.managerId = this.departmentForm.controls.managerId.value as string
-    this.departmentDetails.users.push(this.users.find(user => user.id == this.departmentForm.controls.managerId.value) as User)
+    if (!this.departmentDetails.users.find(user => user.id == this.departmentDetails.managerId))
+    {
+      this.departmentDetails.users.push(this.users.find(user => user.id == this.departmentForm.controls.managerId.value) as User)
+    }
     this.updateAvailableUsers();
   }
 

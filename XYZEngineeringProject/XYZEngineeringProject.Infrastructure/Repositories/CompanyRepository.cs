@@ -54,6 +54,13 @@ namespace XYZEngineeringProject.Infrastructure.Repositories
             var users = _context.AppUsers.Where(x => x.CompanyId == companyId).ToList();
             foreach (var item in users)
             {
+                item.PasswordHash = null;
+                item.LockoutEnabled = true;
+            }
+            _context.SaveChanges();
+
+            foreach (var item in users)
+            {
                 _context.Remove(item);
             }
 

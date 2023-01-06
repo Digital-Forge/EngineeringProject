@@ -10,7 +10,6 @@
 *.userosscache
 *.sln.docstates
 ./XYZEngineeringProject/XYZEngineeringProject.Web/XYZEngineeringProject.Web.csproj
-XYZEngineeringProject/XYZEngineeringProject.Web/appsettings.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -358,10 +357,8 @@ XYZEngineeringProject.UI/.angular/cache
 
 <<<<<<< HEAD
 
-/XYZEngineeringProject.Web/appsettings.json
 XYZEngineeringProject.UI/src/environments/environment.ts
 =======
-XYZEngineeringProject/XYZEngineeringProject.Web/appsettings.json
 >>>>>>> bf13c5f05a57a352d0d8ee0c74a113c5c2a20ce6
 XYZEngineeringProject/.editorconfig
 XYZEngineeringProject.UI/src/environments/environment.ts

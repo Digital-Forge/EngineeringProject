@@ -102,7 +102,6 @@ export class NoteFormNewComponent implements OnInit {
     }
     else {
       this.editMode = false;
-      // this.updateNoteForm();
     }
   }
   onSubmit() {
@@ -155,10 +154,7 @@ export class NoteFormNewComponent implements OnInit {
     this.noteDetails.title = this.noteForm.controls.title.value || '';
     this.noteDetails.isCompany = this.noteForm.controls.noteStatus.value == NoteStatus.Company;
     this.noteDetails.noteStatus = (this.noteForm.controls.noteStatus.value != NoteStatus.Own && this.noteForm.controls.noteStatus.value != NoteStatus.Company && this.noteForm.controls.noteStatus.value != '') ? this.noteForm.controls.noteStatus.value : null;
-    // this.noteDetails.noteStatus = Object.values(NoteStatus).indexOf(this.noteForm.controls.noteStatus?.value || NoteStatus.Own);
     this.noteDetails.date = new Date(this.noteForm.controls.date?.value || new Date());
-
-    console.log(this.noteDetails);
   }
 
 }

@@ -170,10 +170,7 @@ export class ForumComponent implements OnInit, AfterViewChecked {
         if (element) {
             element.scrollTop = Math.max(0, element.scrollHeight - element.offsetHeight);
         }
-
-        // this.messagesLoadCount = 20;
-        // this.messagesSkipCount = 0;
-        // this.showForum(this.activeForumId);
+        
         document.getElementById("see-new-messages")?.classList.add("d-none");
     }
 

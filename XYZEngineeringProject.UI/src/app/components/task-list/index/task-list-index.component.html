@@ -39,7 +39,6 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <!-- TODO wyciągnąć isComplete z backendu -->
                                     <div *ngIf="taskList.tasks?.length; else noTasks">
                                         <div  [ngClass]="{ 'text-secondary': taskListStatuses[taskList.status] == 'Done'}" *ngFor="let task of taskList.tasks">
                                             <i class="cursor-pointer bi" [ngClass]="{ 'bi-check-square': task.isComplete, 'bi-square': !task.isComplete}" (click)="toggleCompleteTask(task.id)"></i>

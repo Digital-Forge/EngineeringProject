@@ -12,13 +12,11 @@
         </span>
     </p>
     <div class="row border-panels mx-1">
-        <!-- mb-3 mb-md-0 p-2 p-md-0 pt-md-2 -->
         <div class="col-12 col-md-2 p-0 border-panel-left bg-light">
             <div class="border-bottom p-2">
                 <h4 class="d-inline d-md-block text-break">{{ 'Forum.forums' | translate }}</h4>
             </div>
             <div class="border-bottom p-2 pb-md-0 cursor-pointer" *ngFor="let forum of forums" (click)="showForum(forum.id)" [ngClass]="{'fw-bold bg-background': isForumActive(forum)}">
-                <!-- mx-md-3 -->
                 <p class="d-inline d-md-block text-break">
                     {{ forum.name | slice: 0:50}}
                     <span *ngIf="forum.name.length > 50">...</span>

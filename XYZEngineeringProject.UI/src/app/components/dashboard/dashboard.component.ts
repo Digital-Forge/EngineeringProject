@@ -116,21 +116,9 @@ export class DashboardComponent implements OnInit {
                         this.forums = res.forums;
                         this.notes = res.notes;
 
-                        this.filterNotes(this.notes);                  
-
-                        // res.notes.forEach(note => {
-                        //     if (!note.isCompany && note.noteStatus == null) {
-                        //         this.privateNotes.push(note);
-                        //     }
-                        //     else {
-                        //         this.publicNotes.push(note);
-                        //     }
-                        // })
-
-                        this.filterForums(this.forums);
-                       
-                     
-                       this.filterTasks(this.tasks);
+                        this.filterNotes(this.notes);               
+                        this.filterForums(this.forums);                     
+                        this.filterTasks(this.tasks);
 
                     }
                 });

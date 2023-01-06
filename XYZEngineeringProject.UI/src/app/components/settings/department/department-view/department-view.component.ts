@@ -46,9 +46,6 @@ export class DepartmentViewComponent implements OnInit {
                                 this.users = usersResponse;
                                 }
                             })
-                          
-
-                            console.log(departmentResponse)
                         }
                     })
                 }

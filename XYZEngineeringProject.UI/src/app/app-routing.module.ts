@@ -15,7 +15,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TaskListComponent } from './components/task-list/index/task-list-index.component';
 import { AuthGuard } from './services/auth.guard';
-import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientFormNewComponent } from './components/client/client-form-new/client-form-new.component';
 import { NoteFormNewComponent } from './components/note/note-form-new/note-form-new.component';
 import { NoteViewComponent } from './components/note/note-view/note-view.component';
@@ -42,7 +41,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'task-list', //TODO trzymajmy się liczby pojedynczej może bo będziemy mieć widok listy pod /task i widok konkretnego taska pod task/123
+    path: 'task-list',
     children: [
       { path: '', component: TaskListComponent },
       { path: 'add', component: TaskListFormNewComponent },

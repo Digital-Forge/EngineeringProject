@@ -6,7 +6,6 @@ export interface Note {
     title: string,
     isCompany: boolean,
     noteStatus: string | null,
-    // noteStatus: NoteStatus,
     date: Date
     createdBy: string
 }

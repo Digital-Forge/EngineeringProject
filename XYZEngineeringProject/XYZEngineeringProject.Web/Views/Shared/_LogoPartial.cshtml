@@ -3,10 +3,8 @@
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 
-    <a class="nav-link menu-item" asp-area="" asp-controller="Home" asp-action="Index">
-   <!-- TODO: logowanie -->
-    @*@if (SignInManager.IsSignedIn(User))
-    {*@
+@*    <a class="nav-link menu-item" asp-area="" asp-controller="Home" asp-action="Index">
+  
 
     <img onmouseover="ShowUserDetails()" onmouseleave="HideUserDetails()" class="user-image" src="~/img/default-user-picture.png"/>
         <div id="user-details" class="user-details shadow-center bg-white hidden">
@@ -19,7 +17,7 @@
             Option 3
         </div>
 
-
+*@
 
 
        @* //hidden by default:

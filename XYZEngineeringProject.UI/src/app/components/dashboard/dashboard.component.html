@@ -92,7 +92,6 @@
                             <h4>{{ 'Priority.High' | translate }}</h4>
                         </div>
                         <div class="col eisenhower border-danger">
-                            <!-- pilne zaległe -->
                             <div *ngFor="let task of highPastTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
@@ -102,7 +101,6 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-danger-light">
-                            <!-- pilne dzisiaj -->
                             <div *ngFor="let task of highTodayTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
@@ -112,10 +110,8 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-warning-light">
-                            <!-- pilne przyszłe -->
                             <div *ngFor="let task of highFutureTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
-
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
                                     {{ task.title | slice: 0:100 }}
                                     <span class="text-nowrap">({{ task.deadline | dateCustom: 'dayMonth' }})</span>
@@ -128,7 +124,6 @@
                             <h4>{{ 'Priority.Medium' | translate }}</h4>
                         </div>
                         <div class="col eisenhower border-danger-light">
-                            <!-- średnie zaległe -->
                             <div *ngFor="let task of mediumPastTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
@@ -138,10 +133,8 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-warning-light">
-                            <!-- średnie dzisiaj -->
                             <div *ngFor="let task of mediumTodayTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
-
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
                                     {{ task.title | slice: 0:100 }}
                                     <span class="text-nowrap">({{ task.deadline | dateCustom: 'dayMonth' }})</span>
@@ -149,7 +142,6 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-success-light">
-                            <!-- średnie przyszłe -->
                             <div *ngFor="let task of mediumFutureTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
 
@@ -165,7 +157,6 @@
                             <h4>{{ 'Priority.Low' | translate }}</h4>
                         </div>
                         <div class="col eisenhower border-warning-light">
-                            <!-- niski zaległe -->
                             <div *ngFor="let task of lowPastTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
 
@@ -176,7 +167,6 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-success-light">
-                            <!-- niski dzisiaj -->
                             <div *ngFor="let task of lowTodayTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
 
@@ -187,7 +177,6 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-success-dark">
-                            <!-- niski przyszłe -->
                             <div *ngFor="let task of lowFutureTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
@@ -202,7 +191,6 @@
                             <h4>{{ 'Priority.No' | translate }}</h4>
                         </div>
                         <div class="col eisenhower border-primary">
-                            <!-- brak zaległe -->
                             <div *ngFor="let task of noPastTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
@@ -212,7 +200,6 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-secondary">
-                            <!-- brak dzisiaj -->
                             <div *ngFor="let task of noTodayTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>
@@ -222,7 +209,6 @@
                             </div>
                         </div>
                         <div class="col eisenhower border-light">
-                            <!-- brak przyszłe -->
                             <div *ngFor="let task of noFutureTasks | slice:0:5">
                                 <span class="cursor-pointer" [routerLink]="['/task/edit', task.id]">
                                     <i class="bi bi-circle" style="font-size: 0.4em; vertical-align: middle;"></i>

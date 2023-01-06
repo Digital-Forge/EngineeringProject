@@ -13,11 +13,8 @@ import { ClientViewComponent } from './components/client/clientView/client-view.
 import { ClientComponent } from './components/client/clientIndex/client-index.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { AuthorizationComponent } from './components/authorization/authorization.component';
-import { ClientFiltersComponent } from './components/client/clientFilters/filters.component';
 import { NoteFilterComponent } from './components/note/note-filter/note-filter.component';
 import { NoteIndexComponent } from './components/note/note-index/note-index.component';
-import { CalendarComponent } from './components/calendar/calendar/calendar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TaskListComponent } from './components/task-list/index/task-list-index.component';
 import { TaskListFiltersComponent } from './components/task-list/filters/task-list-filters.component';
@@ -46,15 +43,12 @@ import { ChangePasswordComponent } from './components/settings/change-password/c
 @NgModule({
   declarations: [
     AppComponent,
-    AuthorizationComponent,
     LoginComponent,
     ClientViewComponent,
     ClientComponent,
-    ClientFiltersComponent,
     NavbarComponent,
     NoteFilterComponent,
     NoteIndexComponent,
-    CalendarComponent,
     DashboardComponent,
     TaskListComponent,
     TaskListFiltersComponent,

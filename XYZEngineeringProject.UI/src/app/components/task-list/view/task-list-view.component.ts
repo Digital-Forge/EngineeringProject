@@ -85,7 +85,6 @@ export class TaskListViewComponent implements OnInit {
       next: (res) => {
         task = res;
         task.isComplete = true;
-        //TODO nie działa zapisywanie i odczyt isComplete
         this.taskService.saveChanges(task).subscribe({
           next: (res) => {
             this.getData();
@@ -96,13 +95,11 @@ export class TaskListViewComponent implements OnInit {
   }
 
   restoreTask(id: string) {
-    //TODO jak będzie pole w bazie - podmienić na zmianę isComplete na false i poprawić html
     let task: Task;
     
     this.taskService.getTask(id).subscribe({
       next: (res) => {
         task = res;
-        //TODO nie zapisuje isComplete :( 
         task.isComplete = false;
         this.taskService.saveChanges(task).subscribe({
           next: (response) => {

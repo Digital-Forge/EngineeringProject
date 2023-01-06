@@ -36,7 +36,6 @@ export class TaskService {
     return this.http.put<Task>(this.baseApiUrl + 'Task/EditTask', editTaskRequest);
   }
 
-  //zwraca wszystkie TaskList-y
   getAllUserTaskLists(id:string): Observable<TaskList[]> {
     return this.http.get<TaskList[]>(this.baseApiUrl + 'Task/GeUsersListsOfTasks/'+id);
   }
@@ -47,7 +46,6 @@ export class TaskService {
     return this.http.post<TaskList>(this.baseApiUrl + 'Task/AddListOfTasks',addListOfTasksRequest);
   }
 
-  // zwraca TaskList po id
   getTaskListById(id: string): Observable<TaskList> {
     return this.http.get<TaskList>(this.baseApiUrl + 'Task/GetListOfTasksById/' + id);
   }

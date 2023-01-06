@@ -25,7 +25,7 @@ export class DateCustom implements PipeTransform {
       datePiped = date.getDate().toString() + ' ' + this.translateService.instant('Month.' + (date.getMonth() + 1).toString());
     }
     else if (type == 'shortTime') {
-      datePiped = date.getDate().toString() + ' ' + this.translateService.instant('Month.' + (date.getMonth() + 1).toString()).substring(0, 3) + ((new Date().getFullYear() != date.getFullYear()) ? ( + date.getFullYear().toString()) : '') + ' ' + date.getHours().toString() + ':' + date.getMinutes().toString();
+      datePiped = date.getDate().toString() + ' ' + this.translateService.instant('Month.' + (date.getMonth() + 1).toString()).substring(0, 3) + ' ' + ((new Date().getFullYear() != date.getFullYear()) ? ( + date.getFullYear().toString()) : '') + ' ' + date.getHours().toString().padStart(2, "0") + ':' + date.getMinutes().toString().padStart(2, "0");
     }
 
     return datePiped;

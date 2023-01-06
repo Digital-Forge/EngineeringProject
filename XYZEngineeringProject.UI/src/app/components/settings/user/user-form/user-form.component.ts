@@ -124,12 +124,10 @@ export class UserFormComponent implements OnInit {
                                                     this.allRoles = this.allRoles.filter(s => s != role)
                                                 });
 
-
                                                 if (!this.isCurrentUserAdmin) {
                                                     this.allRoles.forEach(role => {
                                                         this.allRolesNoAdmin = this.allRoles.filter(s => s.toString() != RolesDB.Admin)
                                                     });
-                                                    console.log()
                                                     this.allRoles = this.allRolesNoAdmin;
                                                 }
 
@@ -198,7 +196,6 @@ export class UserFormComponent implements OnInit {
     }
 
     addUser() {
-        // TODO sprawdzanie czy username się nie powtarza
         if (this.userForm.controls.userUserName.value) {
             this.authorizationService.isUsernameTaken(this.userForm.controls.userUserName.value).subscribe({
                 next: (usernameCheckRes) => {

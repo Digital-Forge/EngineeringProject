@@ -1,5 +1,4 @@
 import { AuthorizationService } from 'src/app/services/authorization/authorization.service';
-import { TranslateService } from '@ngx-translate/core';
 import { FormMode } from 'src/app/models/form-mode.enum';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -32,10 +31,10 @@ export class TaskFormNewComponent implements OnInit {
     priority: Priority.No,
     title: '',
     description: '',
-    assigneeUserId: environment.emptyGuid, //TODO przekazać id użytkownika, do którego ma być przypisany task
-    assignerUserId: environment.emptyGuid, //TODO przekazać id użytkownika, który dodaje taska
+    assigneeUserId: environment.emptyGuid,
+    assignerUserId: environment.emptyGuid,
     createDate: new Date(),
-    listOfTasksId: environment.emptyGuid, //TODO przekazać z urla id listy. do której ma się dodać task
+    listOfTasksId: environment.emptyGuid,
     isComplete: false,
     createBy: ''
   }
@@ -73,7 +72,7 @@ export class TaskFormNewComponent implements OnInit {
                     next: (res) => {
                       this.formMode = FormMode.Edit;
                       this.taskDetails = res;
-                      console.log(res);
+
                       this.updateTaskForm();
                     }
                   });
@@ -95,7 +94,6 @@ export class TaskFormNewComponent implements OnInit {
         })
       }
     })
-   
   }
 
   updateTaskForm() {
@@ -127,7 +125,6 @@ export class TaskFormNewComponent implements OnInit {
     this.taskDetails.listOfTasksId = this.taskForm.controls.listOfTasksId?.value || this.taskListId || undefined
     this.taskDetails.createBy = this.taskDetails.createBy || undefined;
     
-    console.log(this.taskDetails);
   }
 
   onSubmit() {
@@ -165,7 +162,6 @@ export class TaskFormNewComponent implements OnInit {
   
   completeTask() {
     this.taskDetails.isComplete = true;
-    //TODO nie działa zapisywanie i odczyt isComplete
     this.taskService.saveChanges(this.taskDetails).subscribe({
       next: (res) => {
         this.router.navigate(['/task-list', this.taskListId]);

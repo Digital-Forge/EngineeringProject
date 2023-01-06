@@ -113,7 +113,7 @@ export class TaskListFormNewComponent implements OnInit {
     updateTaskListDetails() {
         this.taskListDetails.name = this.taskListForm.controls.name.value || '';
         this.taskListDetails.project = this.taskListForm.controls.project.value || '';
-        this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New); //TODO
+        this.taskListDetails.status = Object.values(TaskListStatus).indexOf(this.taskListForm.controls.status?.value || TaskListStatus.New);
         this.taskListDetails.createBy = this.taskListDetails.createBy || undefined;
 
         let tasksTemp: Task[] = [];
@@ -142,17 +142,6 @@ export class TaskListFormNewComponent implements OnInit {
             })
         }
     }
-
-    //   addListTask() {
-    //     const group = this.fb.group({
-    //       deadline: [''],
-    //       priority: [''],
-    //       title: [''],
-    //       description: [''],
-    //       listOfTasksId:[this.taskListDetails.id||null]
-    //     })
-    //   }
-
 
     addListTask() {
         const group = this.fb.group({
@@ -189,7 +178,6 @@ export class TaskListFormNewComponent implements OnInit {
     }
 
     addTaskList() {
-        console.log(this.taskListDetails)
         this.taskService.addListOfTasks(this.taskListDetails).subscribe({
             next: (res) => {
                 this.router.navigate(['task-list']);
@@ -201,7 +189,6 @@ export class TaskListFormNewComponent implements OnInit {
         this.taskService.saveListOfTasks(this.taskListDetails).subscribe({
             next: (res) => {
                 if (res == true) {
-                    // window.location.reload();
                     this.router.navigate(['task-list', this.taskListDetails.id]);
                 }
             }
@@ -209,7 +196,6 @@ export class TaskListFormNewComponent implements OnInit {
     }
 
     selectRightPriority(control: AbstractControl) {
-        //TODO  temporary hack 
         control.get('priority')?.setValue(control.get('priority')?.value || this.taskPriorities[0])
     }
 }

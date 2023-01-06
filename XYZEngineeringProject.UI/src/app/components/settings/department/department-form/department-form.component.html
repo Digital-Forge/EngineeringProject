@@ -16,7 +16,7 @@
                     <input type="text" class="form-control" id="name" name="name" formControlName="name" required>
                 </div>
             </div>
-            <!-- <div class="row mb-3" *ngIf="!departmentDetails.managerId">
+            <div class="row mb-3" *ngIf="!departmentDetails.managerId">
                 <div class="col">
                     <label for="managerId" class="label-form"> {{'Department.manager' | translate}}</label>
                     <select name="managerId" id="managerId" class="form-select" formControlName="managerId" (change)="selectedManager()">
@@ -25,7 +25,7 @@
                         </option>
                     </select>
                 </div>
-            </div> -->
+            </div>
             <div class="row" *ngIf="availableUsers.length > 0">
                 <div class="col-12">
                     <h3>{{ 'Department.addUserToDepartment' | translate }}</h3>

@@ -33,7 +33,7 @@
         "deleteDepartment": "Czy na pewno chcesz usunąć dział ",
         "deleteUser": "Czy na pewno chcesz usunąć użytownika ",
         "deleteCompany": "Czy na pewno chcesz usunąć całą firmę i wszystkie jej zasoby? Tej operacji nie można odwrócić!",
-        "deleteCompanyConfirm": "POTWIERDŹ USUWANIE FIRMY Z APLIKACJI FRANLY"
+        "deleteCompanyConfirm": "POTWIERDŹ USUWANIE FIRMY Z APLIKACJI FRANKLY"
     },
     "Button": {
         "view": "Zobacz",
